@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>결제 처리 중 - AWAYS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
+  --text: #1A1714; --muted: #8A8178;
+  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
+  --dark: #1A1714; --green: #4A7C59; --red: #B85450;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* 처리 중 화면 */
+.processing { display: block; }
+.processing.hidden { display: none; }
+
+.spinner {
+  width: 48px; height: 48px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent-dark);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.processing-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.processing-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.processing-steps {
+  max-width: 320px;
+  margin: 0 auto;
+  text-align: left;
+}
+.processing-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  font-size: 13px;
+  color: var(--muted);
+  opacity: 0.4;
+  transition: all 0.3s;
+}
+.processing-step.active { opacity: 1; color: var(--text); }
+.processing-step.done { opacity: 1; color: var(--text); }
+.processing-step.done .step-icon { color: var(--green); }
+.step-icon {
+  width: 20px; flex-shrink: 0;
+  font-weight: bold;
+}
+
+/* 성공 화면 */
+.success { display: none; }
+.success.active { display: block; }
+
+.success-icon {
+  width: 80px; height: 80px;
+  background: var(--green);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 36px;
+}
+.success-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.success-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+.success-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.success-row {
+  display: flex; justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 13px;
+}
+.success-row:last-child { border-bottom: none; }
+.success-row-label { color: var(--muted); }
+.success-row-val { font-weight: 500; }
+
+/* 실패 화면 */
+.failed { display: none; }
+.failed.active { display: block; }
+.failed-icon {
+  width: 80px; height: 80px;
+  background: var(--red);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 36px;
+}
+.failed-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.failed-reason {
+  background: #FBF1F0;
+  border: 1px solid rgba(184,84,80,0.2);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 24px auto;
+  max-width: 400px;
+  font-size: 13px;
+  color: var(--red);
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+.btn:hover { opacity: 0.85; }
+.btn.outline {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 처리 중 -->
+  <div class="processing" id="processing">
+    <div class="spinner"></div>
+    <h1 class="processing-title">결제를 확인하고 있어요</h1>
+    <p class="processing-desc">잠시만 기다려주세요. 페이지를 닫으시면 안 돼요.</p>
+
+    <div class="processing-steps">
+      <div class="processing-step active" id="step1">
+        <span class="step-icon">○</span>
+        <span>결제 승인 요청 중</span>
+      </div>
+      <div class="processing-step" id="step2">
+        <span class="step-icon">○</span>
+        <span>결제 정보 검증 중</span>
+      </div>
+      <div class="processing-step" id="step3">
+        <span class="step-icon">○</span>
+        <span>리포트 생성 중</span>
+      </div>
+      <div class="processing-step" id="step4">
+        <span class="step-icon">○</span>
+        <span>이메일 발송 중</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 성공 -->
+  <div class="success" id="success">
+    <div class="success-icon">✓</div>
+    <h1 class="success-title">결제가 완료되었어요</h1>
+    <p class="success-desc">
+      입력하신 이메일로 상세 리포트를 보내드렸습니다.<br>
+      메일이 보이지 않으면 스팸함을 확인해주세요.
+    </p>
+
+    <div class="success-card">
+      <div class="success-row">
+        <span class="success-row-label">주문번호</span>
+        <span class="success-row-val" id="succOrderId">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">상품</span>
+        <span class="success-row-val" id="succProduct">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">결제금액</span>
+        <span class="success-row-val" id="succAmount">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">발송 이메일</span>
+        <span class="success-row-val" id="succEmail">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">결제수단</span>
+        <span class="success-row-val" id="succMethod">-</span>
+      </div>
+    </div>
+
+    <a href="/" class="btn">홈으로 돌아가기</a>
+  </div>
+
+  <!-- 실패 -->
+  <div class="failed" id="failed">
+    <div class="failed-icon">!</div>
+    <h1 class="failed-title">결제에 실패했어요</h1>
+    <p class="processing-desc">
+      걱정하지 마세요. 결제는 진행되지 않았어요.<br>
+      다시 시도하거나 다른 결제수단을 이용해보세요.
+    </p>
+    <div class="failed-reason" id="failedReason"></div>
+    <div style="display: flex; gap: 12px; justify-content: center;">
+      <a href="javascript:history.back()" class="btn">다시 결제하기</a>
+      <a href="/" class="btn outline">홈으로</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// 백엔드 API URL (배포 후 본인 URL로 변경)
+// ============================================================
+const BACKEND_URL = 'https://your-backend.vercel.app';
+
+// URL 파라미터에서 결제 정보 가져오기
+const params = new URLSearchParams(window.location.search);
+const paymentKey = params.get('paymentKey');
+const orderId = params.get('orderId');
+const amount = params.get('amount');
+
+// sessionStorage에서 추가 정보 가져오기 (결제 페이지에서 저장한 값)
+const lastOrder = JSON.parse(sessionStorage.getItem('lastOrder') || '{}');
+
+// 화면 전환 함수
+function showScreen(id) {
+  ['processing', 'success', 'failed'].forEach(s => {
+    document.getElementById(s).classList.remove('active');
+    document.getElementById(s).style.display = 'none';
+  });
+  document.getElementById(id).style.display = 'block';
+  if (id !== 'processing') {
+    document.getElementById(id).classList.add('active');
+  }
+}
+
+// 처리 단계 업데이트
+function updateStep(stepNum, status) {
+  const step = document.getElementById(`step${stepNum}`);
+  if (status === 'active') {
+    step.classList.add('active');
+  } else if (status === 'done') {
+    step.classList.add('done');
+    step.querySelector('.step-icon').textContent = '✓';
+  }
+}
+
+// 실패 처리
+function showFailed(reason) {
+  document.getElementById('failedReason').textContent = reason || '알 수 없는 오류가 발생했어요. 잠시 후 다시 시도해주세요.';
+  showScreen('failed');
+}
+
+// ============================================================
+// 결제 승인 처리 (백엔드 호출)
+// ============================================================
+async function confirmPayment() {
+  // 필수 파라미터 검증
+  if (!paymentKey || !orderId || !amount) {
+    showFailed('결제 정보가 올바르지 않습니다.');
+    return;
+  }
+
+  try {
+    // Step 1: 결제 승인 요청
+    updateStep(1, 'active');
+    await sleep(800);
+    updateStep(1, 'done');
+
+    // Step 2: 백엔드 API 호출
+    updateStep(2, 'active');
+
+    const response = await fetch(`${BACKEND_URL}/api/confirm-payment`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        paymentKey,
+        orderId,
+        amount: Number(amount),
+        email: lastOrder.email,
+        tier: lastOrder.tier,
+        bodyType: lastOrder.bodyType,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || '결제 승인 실패');
+    }
+
+    updateStep(2, 'done');
+
+    // Step 3: 리포트 생성 시뮬레이션
+    updateStep(3, 'active');
+    await sleep(1000);
+    updateStep(3, 'done');
+
+    // Step 4: 이메일 발송
+    updateStep(4, 'active');
+    await sleep(800);
+    updateStep(4, 'done');
+    await sleep(400);
+
+    // 성공 화면 표시
+    document.getElementById('succOrderId').textContent = orderId;
+    document.getElementById('succProduct').textContent = lastOrder.tierName || 'Premium Plan';
+    document.getElementById('succAmount').textContent = `₩${Number(amount).toLocaleString()}`;
+    document.getElementById('succEmail').textContent = lastOrder.email || '-';
+    document.getElementById('succMethod').textContent = data.method || '카드';
+
+    showScreen('success');
+
+  } catch (error) {
+    console.error('[결제 승인 실패]', error);
+    showFailed(error.message);
+  }
+}
+
+// 1초 = 1000ms
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// 페이지 로드 시 결제 승인 시작
+window.addEventListener('DOMContentLoaded', confirmPayment);
+</script>
+
+</body>
+</html>
