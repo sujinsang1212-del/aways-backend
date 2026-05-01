@@ -1210,6 +1210,11 @@ function retakeTest() {
   answers = new Array(questions.length).fill(null);
   startTest();
 }
+
+// URL에 ?start=1 이 있으면 인트로 화면 건너뛰고 바로 첫 질문으로
+if (new URLSearchParams(window.location.search).get('start') === '1') {
+  startTest();
+}
 </script>
 </body>
 </html>
