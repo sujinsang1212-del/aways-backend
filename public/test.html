@@ -482,6 +482,114 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   border-radius: 8px; font-size: 12px; color: var(--muted); cursor: pointer; font-family: inherit; transition: all 0.15s;
 }
 .share-btn:hover { border-color: var(--accent); color: var(--text); }
+
+/* ============================================================ */
+/* 🆕 플로팅 결제 바 (NEW)                                       */
+/* ============================================================ */
+.floating-pay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(247,243,238,0) 0%, var(--bg) 30%);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.floating-pay.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.floating-pay-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--dark);
+  color: white;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 8px 28px rgba(26,23,20,0.25), 0 2px 8px rgba(26,23,20,0.15);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.floating-pay-inner:hover {
+  transform: translateY(-2px);
+}
+.floating-pay-inner:active {
+  transform: translateY(0);
+}
+.fp-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.fp-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+.fp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.fp-price-orig {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: line-through;
+}
+.fp-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: white;
+  line-height: 1;
+}
+.fp-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-dark);
+  color: white;
+  padding: 11px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.floating-pay-inner:hover .fp-right {
+  background: var(--accent);
+}
+.fp-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.floating-pay-inner:hover .fp-arrow {
+  transform: translateX(3px);
+}
+
+@media (max-width: 480px) {
+  .floating-pay { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
+  .floating-pay-inner { padding: 12px 14px; gap: 12px; }
+  .fp-price { font-size: 20px; }
+  .fp-eyebrow { font-size: 9px; }
+  .fp-right { padding: 10px 14px; font-size: 13px; }
+}
+
+/* 화면 전환 */
+.screen { display: none; }
+.screen.active { display: block; }
 </style>
 </head>
 <body>
@@ -626,7 +734,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
         ✓ 결제 후 이메일로 즉시 발송 · ✓ 30일간 다운로드 가능
       </div>
     </div>
-    <div class="cta-card">
+    <div class="cta-card" id="ctaCard">
       <div class="cta-launch-badge">⚡ 런칭 기념 한정</div>
       <div class="cta-price-row">
         <span class="cta-price-orig">₩24,900</span>
@@ -640,6 +748,22 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
         <button class="share-btn" onclick="shareResult()">📤 결과 공유하기</button>
         <button class="share-btn" onclick="retakeTest()">🔄 다시 진단하기</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🆕 플로팅 결제 바 (결과 화면에서만 표시) -->
+<div class="floating-pay" id="floatingPay" onclick="goToPayment()">
+  <div class="floating-pay-inner">
+    <div class="fp-left">
+      <span class="fp-eyebrow">⚡ 런칭 기념 한정</span>
+      <div class="fp-price-row">
+        <span class="fp-price-orig">₩24,900</span>
+        <span class="fp-price">₩19,900</span>
+      </div>
+    </div>
+    <div class="fp-right">
+      리포트 받기 <span class="fp-arrow">→</span>
     </div>
   </div>
 </div>
@@ -1027,6 +1151,7 @@ function startTest() {
   answers = new Array(questions.length).fill(null);
   shuffledOptions = {}; // 새 테스트 시작 시 셔플 초기화
   renderQ(0);
+  hideFloatingPay(); // 🆕 질문 화면에서는 플로팅 바 숨김
 }
 
 function nextQ() {
@@ -1088,12 +1213,20 @@ function showFinalResult() {
 
   document.getElementById('stepLabel').textContent = '진단 완료';
   showScreen('screen-result');
+
+  // 🆕 결과 화면이 표시되면 플로팅 바 관찰 시작
+  setTimeout(initFloatingPayObserver, 600);
 }
 
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // 🆕 결과 화면이 아니면 플로팅 바 숨김
+  if (id !== 'screen-result') {
+    hideFloatingPay();
+  }
 }
 
 function goToPayment() {
@@ -1180,6 +1313,50 @@ function retakeTest() {
   ['lstep1','lstep2','lstep3','lstep4'].forEach(id => document.getElementById(id).classList.remove('done'));
   answers = new Array(questions.length).fill(null);
   startTest();
+}
+
+// ============================================================
+// 🆕 플로팅 결제 바 - 자동 표시/숨김
+// CTA 카드(가격 카드)가 화면에 보이면 플로팅 바를 숨기고,
+// CTA 카드가 화면에서 사라지면(스크롤 위) 플로팅 바를 표시
+// ============================================================
+let floatingPayObserver = null;
+
+function initFloatingPayObserver() {
+  const ctaCard = document.getElementById('ctaCard');
+  const floatingPay = document.getElementById('floatingPay');
+  if (!ctaCard || !floatingPay) return;
+
+  // 기존 observer 제거 (재시작 시 중복 방지)
+  if (floatingPayObserver) {
+    floatingPayObserver.disconnect();
+  }
+
+  floatingPayObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // CTA 카드가 화면에 50% 이상 보이면 플로팅 바 숨김
+      // 아니면 표시
+      if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+        floatingPay.classList.remove('visible');
+      } else {
+        floatingPay.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: [0, 0.3, 0.5, 1],
+    rootMargin: '0px 0px -80px 0px', // 화면 하단 80px 여유
+  });
+
+  floatingPayObserver.observe(ctaCard);
+}
+
+function hideFloatingPay() {
+  const floatingPay = document.getElementById('floatingPay');
+  if (floatingPay) floatingPay.classList.remove('visible');
+  if (floatingPayObserver) {
+    floatingPayObserver.disconnect();
+    floatingPayObserver = null;
+  }
 }
 
 // URL에 ?start=1 이 있으면 인트로 화면 건너뛰고 바로 첫 질문으로
