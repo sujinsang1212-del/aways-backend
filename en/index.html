@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Japanese Body-Type Method · AWAYS</title>
+<meta name="description" content="Why your clothes never fit right — even in your size. The Japanese 6-type body analysis used by stylists in Tokyo and Seoul, now in English.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
+  --text: #1A1714; --muted: #8A8178;
+  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
+  --dark: #1A1714; --tag: #EDE7DE;
+  --green: #4A7C59;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+}
+
+/* ============ Top notice bar ============ */
+.topbar {
+  background: var(--dark);
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.topbar strong { color: var(--accent); font-weight: 600; }
+
+/* ============ Header ============ */
+.header {
+  background: var(--bg);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo { font-family: 'DM Serif Display', serif; font-size: 20px; }
+.header-cta {
+  background: var(--dark);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+/* ============ Hero ============ */
+.hero {
+  padding: 60px 20px 80px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.hero-eyebrow {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(34px, 8vw, 52px);
+  line-height: 1.2;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+.hero-title em { font-style: italic; color: var(--accent-dark); }
+.hero-sub {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 32px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-cta {
+  display: inline-block;
+  background: var(--dark);
+  color: white;
+  padding: 18px 40px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 16px rgba(26,23,20,0.15);
+}
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26,23,20,0.25);
+}
+.hero-trust {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.hero-trust strong { color: var(--accent-dark); }
+
+.hero-illust {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  border: 1px dashed var(--accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--accent-dark);
+}
+.hero-illust-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+}
+.hero-illust-desc {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* ============ Stats bar ============ */
+.stats-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* ============ Problem section ============ */
+.problem {
+  padding: 80px 20px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.3;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+.section-title em { font-style: italic; color: var(--accent-dark); }
+.section-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 540px;
+  margin: 0 auto 40px;
+}
+
+.problem-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.problem-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 22px;
+  text-align: left;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.problem-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.problem-text {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ============ Method (was Solution) ============ */
+.solution {
+  padding: 80px 20px;
+  background: var(--surface);
+}
+.solution-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.solution-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+@media (max-width: 600px) {
+  .solution-features { grid-template-columns: 1fr; }
+}
+.feature-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 22px;
+  text-align: center;
+}
+.feature-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+.feature-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 19px;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.feature-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ============ The 6 types preview ============ */
+.types {
+  padding: 80px 20px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.types-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 32px;
+}
+@media (max-width: 600px) {
+  .types-grid { grid-template-columns: 1fr; }
+}
+.type-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+}
+.type-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: var(--accent-dark);
+}
+.type-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ============ Differentiator section ============ */
+.diff {
+  padding: 80px 20px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.diff-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  margin-bottom: 14px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+@media (max-width: 600px) {
+  .diff-card { flex-direction: column; gap: 12px; padding: 24px 20px; }
+}
+.diff-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px;
+  color: var(--accent);
+  line-height: 1;
+  flex-shrink: 0;
+  font-style: italic;
+}
+.diff-content { flex: 1; }
+.diff-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.diff-title em { font-style: italic; color: var(--accent-dark); }
+.diff-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.diff-desc strong { color: var(--text); font-weight: 600; }
+.diff-tag {
+  display: inline-block;
+  background: var(--tag);
+  color: var(--accent-dark);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ============ FAQ ============ */
+.faq {
+  padding: 80px 20px;
+  background: var(--surface);
+}
+.faq-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  cursor: pointer;
+}
+.faq-q {
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq-toggle {
+  font-size: 20px;
+  color: var(--accent);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-toggle {
+  transform: rotate(45deg);
+}
+.faq-a {
+  margin-top: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.85;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.faq-item.open .faq-a {
+  margin-top: 14px;
+  max-height: 600px;
+}
+
+/* ============ Final CTA ============ */
+.final-cta {
+  background: var(--dark);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: rgba(184,149,106,0.1);
+}
+.final-cta::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(184,149,106,0.06);
+}
+.final-cta-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.final-cta-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.final-cta-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.3;
+  color: white;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.final-cta-title em { font-style: italic; color: var(--accent); }
+.final-cta-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.85;
+  margin-bottom: 32px;
+}
+.final-btn {
+  display: inline-block;
+  background: var(--accent-dark);
+  color: white;
+  padding: 18px 44px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.15s;
+}
+.final-btn:hover { opacity: 0.88; }
+.final-cta-note {
+  margin-top: 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ============ Footer ============ */
+.footer {
+  background: var(--bg);
+  padding: 32px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  border-top: 1px solid var(--border);
+}
+.footer a { color: var(--accent-dark); text-decoration: none; }
+.footer-links {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Floating CTA */
+.floating-cta {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: var(--dark);
+  color: white;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  z-index: 99;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  display: none;
+  letter-spacing: 0.02em;
+}
+.floating-cta.show { display: block; }
+@media (min-width: 720px) {
+  .floating-cta {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    max-width: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  ⚡ <strong>Launch offer</strong> · Reg. $39 → <strong>$29</strong> (limited time)
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">AWAYS</div>
+  <a href="/en/test?start=1" class="header-cta">Start quiz</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">The Japanese Body-Type Method</div>
+
+  <h1 class="hero-title">The reason your clothes never fit right<br><em>isn't your size.</em></h1>
+
+  <p class="hero-sub">It's your body type. In Japan and Korea, stylists use a 6-type system that goes deeper than "pear" or "hourglass" — and it's surprisingly accurate. Find your type in 5 minutes.</p>
+
+  <a href="/en/test?start=1" id="heroCta" class="hero-cta">Take the free quiz →</a>
+  <div class="hero-trust">5 min · No signup · No credit card</div>
+</section>
+
+<!-- Trust bar -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">🔒</div>
+    <div class="stat-label">Secure checkout<br>Stripe & PayPal</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">🛡️</div>
+    <div class="stat-label">Privacy<br>Protected</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">↩️</div>
+    <div class="stat-label">30-day<br>Money-back guarantee</div>
+  </div>
+</div>
+
+<!-- Problem -->
+<section class="problem">
+  <div class="section-eyebrow">Why You Need This</div>
+  <h2 class="section-title">Sound familiar?</h2>
+  <p class="section-desc">A full closet, but nothing to wear. It isn't a styling problem — it's a body-type problem.</p>
+
+  <div class="problem-list">
+    <div class="problem-item">
+      <div class="problem-icon">😩</div>
+      <div class="problem-text">The size fits, but the shoulders sit weirdly every time.</div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">🤔</div>
+      <div class="problem-text">An outfit that looks great on your friend looks off on you.</div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">💸</div>
+      <div class="problem-text">You buy the cute thing — and it never makes it out of the closet.</div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">😶</div>
+      <div class="problem-text">Every online "body type quiz" gives you a different answer.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Solution / Method -->
+<section class="solution">
+  <div class="solution-inner">
+    <div class="section-eyebrow">The Method</div>
+    <h2 class="section-title">Built on <em>kokkaku-shindan</em><br>— Japan's body-type system</h2>
+    <p class="section-desc">Used by stylists across Tokyo and Seoul for over a decade. We adapted it for English speakers, kept the precision, and added a complete styling playbook.</p>
+
+    <div class="solution-features">
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-title">15-question quiz</div>
+        <div class="feature-desc">No "are your shoulders broad?" guesswork. Real questions about how clothes actually behave on you.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✦</div>
+        <div class="feature-title">6 precise types</div>
+        <div class="feature-desc">Wave, Straight, Natural — each split into Soft and Hard for accurate matching.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <div class="feature-title">22-page PDF guide</div>
+        <div class="feature-desc">Your personal styling playbook, delivered to your inbox in minutes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The 6 types preview -->
+<section class="types">
+  <div style="text-align:center; margin-bottom:8px;">
+    <div class="section-eyebrow">The Six Types</div>
+    <h2 class="section-title">Which one are <em>you</em>?</h2>
+    <p class="section-desc">Each type has its own line, fabric, and silhouette logic. Most online quizzes give you one of three. We give you one of six.</p>
+  </div>
+
+  <div class="types-grid">
+    <div class="type-card">
+      <div class="type-name">Soft Wave</div>
+      <div class="type-desc">Feminine curves, delicate frame. Soft fabrics and fitted silhouettes flatter most.</div>
+    </div>
+    <div class="type-card">
+      <div class="type-name">Hard Wave</div>
+      <div class="type-desc">Curves with stronger structure. Defined waistlines and crisp materials work best.</div>
+    </div>
+    <div class="type-card">
+      <div class="type-name">Soft Straight</div>
+      <div class="type-desc">Linear lines, softer presence. Drapey fabrics and clean cuts elevate the look.</div>
+    </div>
+    <div class="type-card">
+      <div class="type-name">Hard Straight</div>
+      <div class="type-desc">Bold, sculpted lines. Sharp tailoring and rich, structured fabrics suit you.</div>
+    </div>
+    <div class="type-card">
+      <div class="type-name">Soft Natural</div>
+      <div class="type-desc">Relaxed frame, gentle edges. Casual layering and natural textures look effortless.</div>
+    </div>
+    <div class="type-card">
+      <div class="type-name">Hard Natural</div>
+      <div class="type-desc">Strong, athletic frame. Bold silhouettes and statement pieces match your energy.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Differentiator -->
+<section class="diff" style="background: var(--surface);">
+  <div style="text-align:center; margin-bottom:40px;">
+    <div class="section-eyebrow">What Makes Us Different</div>
+    <h2 class="section-title">Not your average <em>body-shape quiz.</em></h2>
+  </div>
+
+  <div class="diff-card" style="background: var(--bg);">
+    <div class="diff-num">01</div>
+    <div class="diff-content">
+      <h3 class="diff-title">No "are your shoulders broad?"<br><em>(because nobody actually knows.)</em></h3>
+      <p class="diff-desc">Most quizzes assume you can self-assess your bone structure. Spoiler: you can't. We ask things like <strong>"when you wear a button-down, where does it pull first?"</strong> — measuring your body indirectly through real clothing experiences.</p>
+      <div class="diff-tag">Behavioral diagnostic</div>
+    </div>
+  </div>
+
+  <div class="diff-card" style="background: var(--bg);">
+    <div class="diff-num">02</div>
+    <div class="diff-content">
+      <h3 class="diff-title">Three types isn't enough.<br><em>You need six.</em></h3>
+      <p class="diff-desc">A "Soft Wave" and a "Hard Wave" look completely different in the same dress. The Japanese method splits each type by frame strength — so the recommendations actually fit you, not the average of your category.</p>
+      <div class="diff-tag">6-type precision</div>
+    </div>
+  </div>
+
+  <div class="diff-card" style="background: var(--bg);">
+    <div class="diff-num">03</div>
+    <div class="diff-content">
+      <h3 class="diff-title">Not just "you're a Wave"<br><em>— here's what to wear Monday.</em></h3>
+      <p class="diff-desc">Most tests end at the diagnosis. We give you <strong>5 outfit formulas, recommended fabrics, color guidance, accessory rules, and a 12-item shopping checklist</strong> — all 22 pages, tailored to your type.</p>
+      <div class="diff-tag">Full styling playbook</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-inner">
+    <div style="text-align:center; margin-bottom:32px;">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-title">Common questions</h2>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span>Is the quiz really free?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Yes — the 15-question quiz and your body-type result are 100% free, no signup required. The optional 22-page personalized PDF guide is $29.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span>How do I get the report?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Right after checkout, you'll get an email with your PDF guide attached. Download link stays valid for 30 days. Don't see it? Check your spam folder or email us.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span>What's your refund policy?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <strong>30-day money-back guarantee, no questions asked.</strong><br><br>
+        Just email us at awaysbiz@gmail.com within 30 days of purchase with your order number. We'll process the refund within 3 business days back to your original payment method.<br><br>
+        ⚠️ Refunds may be limited if the report content has been redistributed publicly.
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span>How long does the quiz take?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">About 4–5 minutes for the 15 questions. Don't rush — accurate answers come from actually thinking about your real clothing experiences.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span>Is this Kibbe?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Not exactly. AWAYS is built on <em>kokkaku-shindan</em>, the Japanese body-type system — different methodology, different categories. There's some overlap with Kibbe (both look at frame and line), but our diagnostic asks different questions and gives different recommendations. Many users tell us they got a clearer result here than from Kibbe quizzes.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span>Which payment methods do you accept?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">All major credit and debit cards (Visa, Mastercard, Amex, Discover) via Stripe, plus PayPal. All payments are encrypted and processed securely — we never see your card details.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta" id="test">
+  <div class="final-cta-inner">
+    <div class="final-cta-eyebrow">Start Your Style Journey</div>
+    <h2 class="final-cta-title">Five minutes from now,<br><em>you'll know your type.</em></h2>
+    <p class="final-cta-desc">
+      Stop staring at your closet every morning.<br>
+      Get your personal styling playbook today.
+    </p>
+    <a href="/en/test?start=1" class="final-btn">Take the free quiz →</a>
+    <div class="final-cta-note">No payment · No signup · 5 minutes</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/en/terms">Terms</a>
+    <a href="/en/privacy">Privacy</a>
+    <a href="/en/refund">Refund Policy</a>
+    <a href="mailto:awaysbiz@gmail.com">Contact</a>
+  </div>
+  <div>© 2026 AWAYS · All rights reserved</div>
+</footer>
+
+<!-- Floating CTA -->
+<a href="/en/test?start=1" class="floating-cta" id="floatingCta">⚡ Take the free quiz →</a>
+
+<script>
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+
+const floatingCta = document.getElementById('floatingCta');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 600) {
+    floatingCta.classList.add('show');
+  } else {
+    floatingCta.classList.remove('show');
+  }
+});
+</script>
+
+</body>
+</html>

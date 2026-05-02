@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Type Quiz · AWAYS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #F7F3EE;
+  --surface: #FFFFFF;
+  --border: #E8E2D9;
+  --text: #1A1714;
+  --muted: #8A8178;
+  --accent: #B8956A;
+  --accent-light: #F0E6D6;
+  --accent-dark: #8C6840;
+  --dark: #1A1714;
+  --tag: #EDE7DE;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+}
+
+.top-bar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+.step-indicator { font-size: 12px; color: var(--muted); }
+
+.global-progress { height: 3px; background: var(--border); position: sticky; top: 53px; z-index: 99; }
+.global-fill { height: 100%; background: var(--accent-dark); transition: width 0.4s ease; width: 0%; }
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* Intro */
+.intro { max-width: 600px; margin: 0 auto; padding: 52px 24px 80px; text-align: center; }
+.intro-badge {
+  display: inline-block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent-dark); background: var(--accent-light); padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.intro-title { font-family: 'DM Serif Display', serif; font-size: 34px; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.01em; }
+.intro-title em { font-style: italic; color: var(--accent-dark); }
+.intro-desc { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; }
+.intro-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
+.intro-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 12px; text-align: center; }
+.intro-card-icon { font-size: 24px; margin-bottom: 8px; }
+.intro-card-label { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.start-btn {
+  display: block; width: 100%; max-width: 360px; margin: 0 auto; padding: 18px;
+  background: var(--dark); color: white; border: none; border-radius: 12px;
+  font-size: 16px; font-weight: 500; cursor: pointer; font-family: inherit; transition: opacity 0.2s;
+}
+.start-btn:hover { opacity: 0.85; }
+
+/* Questions */
+.q-screen { max-width: 600px; margin: 0 auto; padding: 32px 20px 100px; }
+.q-progress-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.q-track { height: 2px; background: var(--border); border-radius: 1px; margin-bottom: 28px; }
+.q-fill { height: 100%; background: var(--accent-dark); border-radius: 1px; transition: width 0.3s; }
+
+.q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.q-num { font-size: 10px; letter-spacing: 0.16em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
+.q-text { font-family: 'DM Serif Display', serif; font-size: 19px; line-height: 1.5; margin-bottom: 8px; letter-spacing: -0.01em; }
+.q-subtext { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+.q-hint { font-size: 13px; color: var(--muted); line-height: 1.65; background: var(--tag); border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; border-left: 2px solid var(--accent); }
+
+.opts { display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px;
+  border: 1px solid var(--border); border-radius: 10px; cursor: pointer;
+  background: none; text-align: left; width: 100%; font-family: inherit; transition: all 0.15s;
+}
+.opt:hover { border-color: var(--accent); background: var(--accent-light); }
+.opt.selected { border-color: var(--accent-dark); background: var(--accent-light); }
+.opt-dot {
+  width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--border);
+  flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.opt.selected .opt-dot { background: var(--accent-dark); border-color: var(--accent-dark); }
+.opt.selected .opt-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
+.opt-main { font-size: 15px; line-height: 1.55; }
+.opt-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
+
+.img-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.img-opts.three { grid-template-columns: repeat(3, 1fr); }
+.img-opt { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; cursor: pointer; background: none; transition: all 0.15s; text-align: center; padding: 0; font-family: inherit; }
+.img-opt:hover { border-color: var(--accent); }
+.img-opt.selected { border-color: var(--accent-dark); border-width: 2px; }
+.img-face { padding: 22px 12px 14px; background: var(--tag); display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.img-icon { font-size: 26px; }
+.img-name { font-size: 13px; font-weight: 500; line-height: 1.3; }
+.img-desc { padding: 10px 8px; font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+.nav-row { display: flex; gap: 10px; margin-top: 20px; }
+.btn-prev, .btn-next {
+  flex: 1; padding: 14px; border-radius: 10px; font-size: 14px; font-weight: 500;
+  cursor: pointer; font-family: inherit; transition: all 0.15s;
+}
+.btn-prev { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+.btn-prev:hover { border-color: var(--accent); }
+.btn-next { background: var(--dark); color: white; border: none; flex: 2; }
+.btn-next:hover:not(:disabled) { opacity: 0.85; }
+.btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Loading */
+.loading-screen { max-width: 480px; margin: 0 auto; padding: 80px 24px; text-align: center; }
+.loading-spinner {
+  width: 48px; height: 48px; margin: 0 auto 24px;
+  border: 3px solid var(--border); border-top-color: var(--accent-dark);
+  border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 12px; }
+.loading-sub { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+.loading-steps { text-align: left; max-width: 320px; margin: 0 auto; }
+.loading-step {
+  font-size: 13px; color: var(--muted); padding: 10px 0;
+  display: flex; align-items: center; gap: 10px;
+  opacity: 0.4; transition: opacity 0.4s;
+}
+.loading-step.done { opacity: 1; color: var(--text); }
+.loading-check {
+  width: 18px; height: 18px; border-radius: 50%; background: var(--border);
+  color: white; font-size: 11px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s;
+}
+.loading-step.done .loading-check { background: var(--accent-dark); }
+
+/* Result */
+.result-screen { max-width: 600px; margin: 0 auto; padding: 32px 20px 200px; }
+.result-hero { text-align: center; margin-bottom: 24px; }
+.result-eyebrow { font-size: 12px; letter-spacing: 0.16em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 14px; font-weight: 600; }
+.result-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 8vw, 48px);
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.result-sub { font-size: 15px; color: var(--muted); line-height: 1.8; }
+
+.score-row { display: flex; gap: 10px; margin-bottom: 24px; }
+.score-chip {
+  flex: 1; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px; text-align: center;
+}
+.score-chip-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; font-weight: 500; }
+.score-chip-val { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--accent-dark); }
+
+.preview-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 22px; margin-bottom: 18px;
+}
+.preview-title { font-size: 12px; letter-spacing: 0.1em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 14px; font-weight: 600; }
+.preview-item { display: flex; gap: 10px; padding: 8px 0; align-items: flex-start; }
+.preview-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-top: 9px; flex-shrink: 0; }
+.preview-text { font-size: 14px; line-height: 1.7; }
+
+/* Report preview card */
+.report-preview-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px 24px; margin-bottom: 18px;
+  position: relative; overflow: hidden;
+}
+.report-preview-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light));
+}
+.report-hook { text-align: center; margin-bottom: 24px; }
+.report-hook-eyebrow {
+  display: inline-block; font-size: 11px; letter-spacing: 0.14em; color: var(--accent-dark);
+  background: var(--accent-light); padding: 5px 12px; border-radius: 16px; margin-bottom: 14px;
+  font-weight: 700; text-transform: uppercase;
+}
+.report-hook-title {
+  font-family: 'DM Serif Display', serif; font-size: clamp(20px, 5vw, 26px);
+  line-height: 1.35; margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.report-hook-title em { font-style: italic; color: var(--accent-dark); }
+.report-hook-sub { font-size: 14px; color: var(--muted); line-height: 1.75; }
+.report-hook-sub strong { color: var(--text); font-weight: 600; }
+
+.report-value-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+  background: var(--bg); padding: 18px; border-radius: 12px; margin-bottom: 18px;
+}
+.value-item { display: flex; gap: 10px; align-items: flex-start; }
+.value-icon {
+  font-size: 14px; color: var(--accent-dark); margin-top: 2px;
+  width: 20px; height: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  background: white; border-radius: 50%; font-weight: 700;
+}
+.value-text { font-size: 12px; line-height: 1.5; color: var(--muted); }
+.value-text strong { color: var(--text); display: block; font-weight: 600; font-size: 13px; }
+
+.report-toc { background: var(--bg); padding: 18px 20px; border-radius: 12px; margin-bottom: 16px; }
+.report-toc-title { font-size: 11px; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 12px; font-weight: 700; }
+.report-toc-item {
+  display: flex; gap: 12px; padding: 7px 0; align-items: center;
+  border-bottom: 1px dashed var(--border); font-size: 13px;
+}
+.report-toc-item:last-child { border-bottom: none; }
+.toc-num { font-family: 'DM Serif Display', serif; color: var(--accent-dark); font-size: 14px; min-width: 24px; }
+.toc-text { flex: 1; line-height: 1.5; }
+.toc-pages { font-size: 11px; color: var(--muted); }
+
+.report-footer-note {
+  text-align: center; font-size: 12px; color: var(--accent-dark);
+  background: var(--accent-light); padding: 10px; border-radius: 8px; font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .report-preview-card { padding: 22px 18px; }
+  .report-value-grid { grid-template-columns: 1fr; gap: 10px; }
+  .value-text { font-size: 11px; }
+  .value-text strong { font-size: 12px; }
+  .report-toc { padding: 14px 18px; }
+  .report-toc-item { font-size: 12px; gap: 10px; }
+  .toc-pages { font-size: 10px; }
+}
+
+/* CTA card */
+.cta-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px 24px; text-align: center; }
+.cta-launch-badge {
+  display: inline-block; background: var(--accent-light); color: var(--accent-dark);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  padding: 5px 14px; border-radius: 16px; margin-bottom: 14px;
+}
+.cta-price-row {
+  display: flex; justify-content: center; align-items: baseline;
+  gap: 10px; margin-bottom: 8px; flex-wrap: wrap;
+}
+.cta-price-orig { font-size: 14px; color: var(--muted); text-decoration: line-through; }
+.cta-price { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--accent-dark); }
+.cta-discount {
+  background: #FFE8B0; color: #8B6810; font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 12px; letter-spacing: 0.04em;
+}
+.cta-price-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.cta-btn {
+  display: block; width: 100%; padding: 18px; background: var(--dark); color: white;
+  border: none; border-radius: 10px; font-size: 15px; font-weight: 500;
+  cursor: pointer; font-family: inherit; transition: opacity 0.15s; margin-bottom: 10px;
+}
+.cta-btn:hover { opacity: 0.85; }
+.cta-note { font-size: 12px; color: var(--muted); }
+.share-row { display: flex; gap: 10px; margin-top: 14px; }
+.toast-msg {
+  position: fixed; bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--dark); color: white;
+  padding: 14px 24px; border-radius: 24px;
+  font-size: 14px; font-weight: 500;
+  z-index: 9999; opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.toast-msg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.share-btn {
+  flex: 1; padding: 12px; background: none; border: 1px solid var(--border);
+  border-radius: 8px; font-size: 12px; color: var(--muted); cursor: pointer; font-family: inherit; transition: all 0.15s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--text); }
+
+/* Floating pay bar */
+.floating-pay {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(247,243,238,0) 0%, var(--bg) 30%);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.floating-pay.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.floating-pay-inner {
+  background: var(--dark); color: white;
+  border-radius: 14px; padding: 14px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; cursor: pointer;
+  box-shadow: 0 8px 32px rgba(26,23,20,0.2);
+  max-width: 600px; margin: 0 auto;
+}
+.fp-left { flex: 1; }
+.fp-eyebrow {
+  display: inline-block; font-size: 10px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+  margin-bottom: 4px;
+}
+.fp-price-row { display: flex; align-items: baseline; gap: 8px; }
+.fp-price-orig { font-size: 12px; color: rgba(255,255,255,0.5); text-decoration: line-through; }
+.fp-price { font-family: 'DM Serif Display', serif; font-size: 22px; color: white; }
+.fp-right {
+  background: var(--accent-dark); color: white;
+  padding: 12px 18px; border-radius: 10px;
+  font-size: 14px; font-weight: 500; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.fp-arrow { font-size: 16px; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">AWAYS</div>
+  <div class="step-indicator" id="stepLabel">Intro</div>
+</div>
+<div class="global-progress"><div class="global-fill" id="globalFill"></div></div>
+
+<!-- Intro -->
+<div class="screen active" id="screen-intro">
+  <div class="intro">
+    <div class="intro-badge">Body Type Analysis · 15Q</div>
+    <h1 class="intro-title">It's not your size,<br><em>it's your body type.</em></h1>
+    <p class="intro-desc">No "are your shoulders broad?" guessing.<br>We ask about real shopping moments — and find your true type from 6 precise categories.</p>
+    <div class="intro-cards">
+      <div class="intro-card">
+        <div class="intro-card-icon">🛍️</div>
+        <div class="intro-card-label">Real shopping<br>questions</div>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-icon">✦</div>
+        <div class="intro-card-label">6 precise<br>types</div>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-icon">⏱</div>
+        <div class="intro-card-label">~4 minutes<br>to finish</div>
+      </div>
+    </div>
+    <button class="start-btn" onclick="startTest()">Start the quiz →</button>
+  </div>
+</div>
+
+<!-- Question screen -->
+<div class="screen" id="screen-q">
+  <div class="q-screen">
+    <div class="q-progress-row">
+      <span id="qProgressLabel">1 / 15</span>
+      <span id="qProgressPct">7%</span>
+    </div>
+    <div class="q-track"><div class="q-fill" id="qFill" style="width:7%"></div></div>
+    <div id="qCardWrap"></div>
+    <div class="nav-row">
+      <button class="btn-prev" id="btnPrev" onclick="prevQ()">← Back</button>
+      <button class="btn-next" id="btnNext" onclick="nextQ()" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Loading screen -->
+<div class="screen" id="screen-loading">
+  <div class="loading-screen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Analyzing your answers...</div>
+    <div class="loading-sub">Matching you with the closest of 6 body types<br>based on your responses.</div>
+    <div class="loading-steps">
+      <div class="loading-step" id="lstep1" style="animation-delay:0.2s"><span class="loading-check">✓</span> Reading body direction</div>
+      <div class="loading-step" id="lstep2" style="animation-delay:1.0s"><span class="loading-check">✓</span> Analyzing frame & texture</div>
+      <div class="loading-step" id="lstep3" style="animation-delay:1.8s"><span class="loading-check">✓</span> Matching to 6 types</div>
+      <div class="loading-step" id="lstep4" style="animation-delay:2.5s"><span class="loading-check">✓</span> Preparing your style guide</div>
+    </div>
+  </div>
+</div>
+
+<!-- Result screen -->
+<div class="screen" id="screen-result">
+  <div class="result-screen">
+    <div class="result-hero">
+      <div class="result-eyebrow">✨ Your Body Type</div>
+      <div class="result-name" id="resultName"><span>Soft Wave</span></div>
+      <div class="result-sub" id="resultSub"></div>
+    </div>
+    <div class="score-row">
+      <div class="score-chip"><div class="score-chip-label">Direction</div><div class="score-chip-val" id="scoreDirection">Wave</div></div>
+      <div class="score-chip"><div class="score-chip-label">Texture</div><div class="score-chip-val" id="scoreTexture">Soft</div></div>
+    </div>
+    <div class="preview-card">
+      <div class="preview-title">✦ Your style signature</div>
+      <div id="previewItems"></div>
+    </div>
+    <div class="report-preview-card">
+      <div class="report-hook">
+        <div class="report-hook-eyebrow">📄 Premium Style Report · 22 pages</div>
+        <div class="report-hook-title">
+          A complete playbook,<br>
+          <em>made for <span id="reportHookName">your type</span>.</em>
+        </div>
+        <div class="report-hook-sub">
+          The diagnosis is just the start.<br>
+          Get the <strong>exact answers</strong> for what to wear — every morning.
+        </div>
+      </div>
+
+      <div class="report-value-grid">
+        <div class="value-item">
+          <div class="value-icon">✦</div>
+          <div class="value-text">
+            <strong>5 outfit formulas</strong>
+            tailored to your type
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">✦</div>
+          <div class="value-text">
+            <strong>Avoid list</strong>
+            specific styles to skip
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">✦</div>
+          <div class="value-text">
+            <strong>Brand recs</strong>
+            12 curated picks
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">✦</div>
+          <div class="value-text">
+            <strong>Seasonal guide</strong>
+            year-round essentials
+          </div>
+        </div>
+      </div>
+
+      <div class="report-toc">
+        <div class="report-toc-title">Full table of contents</div>
+        <div class="report-toc-item"><span class="toc-num">01</span><span class="toc-text">Understanding your body type</span><span class="toc-pages">P. 03-05</span></div>
+        <div class="report-toc-item"><span class="toc-num">02</span><span class="toc-text">Silhouette & fit secrets</span><span class="toc-pages">P. 06-08</span></div>
+        <div class="report-toc-item"><span class="toc-num">03</span><span class="toc-text">Right fabrics & colors</span><span class="toc-pages">P. 09-11</span></div>
+        <div class="report-toc-item"><span class="toc-num">04</span><span class="toc-text">5 everyday outfit formulas</span><span class="toc-pages">P. 12-15</span></div>
+        <div class="report-toc-item"><span class="toc-num">05</span><span class="toc-text">Essential shopping checklist</span><span class="toc-pages">P. 16-18</span></div>
+        <div class="report-toc-item"><span class="toc-num">06</span><span class="toc-text">Year-round styling + Q&A</span><span class="toc-pages">P. 19-22</span></div>
+      </div>
+
+      <div class="report-footer-note">
+        ✓ Delivered to your inbox instantly · ✓ Download link valid for 30 days
+      </div>
+    </div>
+    <div class="cta-card" id="ctaCard">
+      <div class="cta-launch-badge">⚡ Launch offer</div>
+      <div class="cta-price-row">
+        <span class="cta-price-orig">$39</span>
+        <span class="cta-price">$29</span>
+        <span class="cta-discount">SAVE $10</span>
+      </div>
+      <div class="cta-price-sub">22-page personalized style guide · instant email delivery</div>
+      <button class="cta-btn" onclick="goToPayment()">Get my full report →</button>
+      <div class="cta-note">🔒 Secure checkout · ↩️ 30-day refund · 📧 Instant delivery</div>
+      <div class="share-row">
+        <button class="share-btn" onclick="shareResult()">📤 Share result</button>
+        <button class="share-btn" onclick="retakeTest()">🔄 Retake quiz</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating pay bar -->
+<div class="floating-pay" id="floatingPay" onclick="goToPayment()">
+  <div class="floating-pay-inner">
+    <div class="fp-left">
+      <span class="fp-eyebrow">⚡ Launch offer</span>
+      <div class="fp-price-row">
+        <span class="fp-price-orig">$39</span>
+        <span class="fp-price">$29</span>
+      </div>
+    </div>
+    <div class="fp-right">
+      Get the report <span class="fp-arrow">→</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// 15 Questions — Indirect measurement + behavior-based
+// ============================================================
+const questions = [
+
+  // ── Direction-focused (S/W/N) — 7 questions ──
+
+  {
+    id: 'q01',
+    text: "When you wear a structured shirt or jacket,\nwhere does it pull or feel off first?",
+    subtext: 'Think of a button-down shirt or a structured blazer.',
+    type: 'text',
+    options: [
+      { label: 'The shoulder seams keep slipping back', sub: 'The seam never sits right', score: {N:3, H:2} },
+      { label: 'The back or chest feels tight', sub: 'Uncomfortable when sitting or raising arms', score: {S:2, Soft:2} },
+      { label: 'It pulls below the waist around the hips', sub: 'The bottom of the top catches', score: {W:3, Soft:1} },
+      { label: 'No specific spot pulls — it just looks oversized', sub: "Nothing fits perfectly", score: {S:3} },
+    ]
+  },
+
+  {
+    id: 'q02',
+    text: "When buying pants, what's the most\nfrustrating thing that keeps happening?",
+    subtext: 'Think about real experiences — in stores or shopping online.',
+    type: 'text',
+    options: [
+      { label: 'If the waist fits, the hips and thighs are too tight', sub: "Top and bottom don't match a single size", score: {W:3, N:1} },
+      { label: 'If the hips fit, the waist gaps by 1–2 inches', sub: "Can't wear them without a belt", score: {W:2, Soft:2} },
+      { label: 'The size fits but the inseam is always too short', sub: 'Ankles often show', score: {S:2, N:2} },
+      { label: 'No size really fits — too big or too small overall', sub: "Standard sizing doesn't work for you", score: {N:2, H:1} },
+    ]
+  },
+
+  {
+    id: 'q03',
+    text: 'When people first meet you,\nwhat do they comment on most?',
+    subtext: "If you're not sure, ask a few friends.",
+    type: 'text',
+    options: [
+      { label: '"Do you work out?" or "You look strong"', sub: 'A solid, athletic impression', score: {N:3, H:2} },
+      { label: '"You look so slim" or "Have you lost weight?"', sub: 'A clean, lean impression', score: {S:3} },
+      { label: '"Your figure is amazing" or "How is your waist that small?"', sub: 'Curves and definition stand out', score: {W:3} },
+      { label: '"You look so tall" or "Like a model"', sub: 'Long, striking proportions', score: {S:2, N:1} },
+    ]
+  },
+
+  {
+    id: 'q04',
+    text: 'When buying matching tops & bottoms\nin the same size, what usually happens?',
+    subtext: 'Think about two-piece sets or buying the same brand top and bottom.',
+    type: 'text',
+    options: [
+      { label: 'Top and bottom need 2+ size difference', sub: "Sets don't work for you", score: {W:3, N:1} },
+      { label: 'Top and bottom are basically the same size', sub: 'Either way, similar measurements', score: {S:3} },
+      { label: 'Always need to size up the top because of shoulders', sub: 'Top is always one size larger', score: {N:3, H:1} },
+      { label: 'Depends entirely on the brand — must try on', sub: "Standard sizes aren't reliable", score: {N:2, W:1} },
+    ]
+  },
+
+  {
+    id: 'q05',
+    text: "If you wear pants without a belt,\nwhat happens?",
+    type: 'text',
+    options: [
+      { label: 'The back slides down when I sit and stand', sub: 'Belt is essential', score: {W:3, Soft:1} },
+      { label: 'They stay put — fit nicely without one', sub: 'They hold their place', score: {S:3} },
+      { label: 'They twist sideways when I walk', sub: 'Seams never stay aligned', score: {N:2, W:1} },
+      { label: 'They slide down overall', sub: 'Loose all over', score: {W:2, S:1} },
+    ]
+  },
+
+  {
+    id: 'q06',
+    text: 'When wearing a tank top,\nwhere do the shoulder seams sit?',
+    hint: '💡 Check in a mirror: does the seam land at the edge of your shoulder, past it, or pulled inward?',
+    type: 'image',
+    cols: 3,
+    options: [
+      { label: 'Past the shoulder edge', icon: '←', desc: 'Seam falls toward the arm', score: {N:3, H:2} },
+      { label: 'Right at the shoulder edge', icon: '↕', desc: 'Sits naturally in place', score: {S:2, W:1} },
+      { label: 'Pulled inward from the edge', icon: '→', desc: 'Seam sits inside the shoulder', score: {W:2, Soft:2} },
+    ]
+  },
+
+  {
+    id: 'q07',
+    text: "What do the clothes you bought but never wear\nhave in common?",
+    subtext: 'Think about pieces sitting unworn in your closet.',
+    type: 'text',
+    options: [
+      { label: 'Loose, oversized, relaxed fits', sub: 'Comfortable but somehow never worn', score: {W:3, Soft:1} },
+      { label: 'Tight or body-hugging styles', sub: 'Restrictive and uncomfortable', score: {N:3, H:1} },
+      { label: 'Defined, cinched-waist pieces', sub: 'The fit feels off', score: {S:3} },
+      { label: 'Plain, basic items with no detail', sub: 'Too boring to bother with', score: {W:1, N:1} },
+    ]
+  },
+
+  // ── Texture-focused (Hard/Soft) + extra direction — 8 questions ──
+
+  {
+    id: 'q08',
+    text: 'Wrap your right thumb and middle finger\naround your left wrist.',
+    hint: "💡 At the narrowest point of your wrist, see whether your fingers overlap, just touch, or don't reach.",
+    type: 'image',
+    cols: 3,
+    options: [
+      { label: 'Fingers overlap', icon: '🔗', desc: 'Wraps with room to spare', score: {Soft:3, W:1} },
+      { label: 'Fingers just touch', icon: '⭕', desc: 'Meet exactly at tips', score: {H:1, Soft:1} },
+      { label: "Fingers don't reach", icon: '↔', desc: 'Gap between them', score: {H:3, N:1} },
+    ]
+  },
+
+  {
+    id: 'q09',
+    text: "When you squeeze your upper arm,\nhow does it feel?",
+    hint: '💡 Use your other hand to grip your upper arm and notice the texture.',
+    type: 'image',
+    cols: 3,
+    options: [
+      { label: 'Firm, muscular feel', icon: '💪', desc: 'Solid underneath', score: {H:3} },
+      { label: 'Soft, fleshy feel', icon: '🫶', desc: 'Pinches easily', score: {Soft:3} },
+      { label: 'Thin — easy to wrap around', icon: '🤏', desc: 'Slim with little to grip', score: {H:1, Soft:1, S:1} },
+    ]
+  },
+
+  {
+    id: 'q10',
+    text: "Even without working out,\ndo people say you look athletic or muscular?",
+    type: 'text',
+    options: [
+      { label: 'Yes, often — my arms or calves look defined', score: {H:3, N:1} },
+      { label: 'Sometimes — people ask if I work out', score: {H:2} },
+      { label: "Rarely — people tell me to 'eat more'", score: {Soft:2, S:1} },
+      { label: 'Less muscle, more soft volume', score: {Soft:3} },
+    ]
+  },
+
+  {
+    id: 'q11',
+    text: "When you lose weight,\nwhere does it come off first?",
+    subtext: 'Or: when you gain, where does it show first?',
+    type: 'text',
+    options: [
+      { label: 'Face, neck, and collarbones first', sub: 'Upper body responds fastest', score: {S:2, H:1} },
+      { label: 'Chest or waist first', sub: 'Middle responds first', score: {W:2, Soft:1} },
+      { label: 'Thighs and hips stay the longest', sub: 'Lower body holds onto it', score: {W:3, Soft:1} },
+      { label: 'Pretty evenly all over', sub: "No specific area stands out", score: {S:2, N:1} },
+    ]
+  },
+
+  {
+    id: 'q12',
+    text: 'Are your collarbones visible day-to-day?',
+    hint: '💡 Look down in the mirror — are your collarbones clearly defined, or barely there?',
+    type: 'image',
+    cols: 3,
+    options: [
+      { label: 'Clearly visible', icon: '👁', desc: 'Sharply defined', score: {H:2, S:1} },
+      { label: 'Barely visible', icon: '〰', desc: 'Subtle outline', score: {H:1, Soft:1} },
+      { label: 'Not really visible', icon: '○', desc: 'Almost no outline', score: {Soft:3} },
+    ]
+  },
+
+  {
+    id: 'q13',
+    text: "When you see your side profile in the mirror,\nwhat stands out first?",
+    subtext: 'Think of how you naturally look at yourself in the morning.',
+    type: 'text',
+    options: [
+      { label: 'A flat, straight side line', sub: 'Drops without curves', score: {S:3} },
+      { label: 'Defined chest and hip curves', sub: 'Front-back curves are obvious', score: {W:3, Soft:1} },
+      { label: 'Broad shoulders and a solid upper body', sub: 'Upper body looks larger', score: {N:3, H:1} },
+      { label: 'Soft, rounded curves all around', sub: 'Curves flow smoothly', score: {Soft:3, W:1} },
+    ]
+  },
+
+  {
+    id: 'q14',
+    text: "When you wear a tank top in summer,\nwhat are you most self-conscious about?",
+    type: 'text',
+    options: [
+      { label: 'Shoulders and back looking too broad', sub: 'Upper body concern', score: {N:3, H:1} },
+      { label: 'Upper arms', sub: 'Arm concern', score: {Soft:3} },
+      { label: 'Waist or stomach area', sub: 'Midsection concern', score: {W:2, Soft:1} },
+      { label: 'Looking too skinny overall', sub: 'Lack of volume', score: {S:2, H:1} },
+    ]
+  },
+
+  {
+    id: 'q15',
+    text: 'What do you most often say when shopping?',
+    type: 'text',
+    options: [
+      { label: '"If the shoulders fit, I can tailor the rest"', sub: 'Choose by upper body', score: {N:3, H:1} },
+      { label: '"As long as it cinches the waist, anything works"', sub: 'Waistline is key', score: {W:3} },
+      { label: '"Straight cuts are just easier to wear"', sub: 'Prefer simple, clean lines', score: {S:3} },
+      { label: '"I need room — fitted feels suffocating"', sub: 'Prefer relaxed fits', score: {N:2, Soft:1} },
+    ]
+  },
+];
+
+// ── Type data (6 types) ──
+const typeMap = {
+  'S-H': {
+    name: 'Hard Straight',
+    sub: 'Linear frame with athletic muscle definition',
+    preview: [
+      'Sharp, modern silhouettes flatter you most',
+      'Minimal tailoring and straight-leg trousers are your weapons',
+      'Long coats lengthen the vertical line — your height advantage',
+    ],
+  },
+  'S-Soft': {
+    name: 'Soft Straight',
+    sub: 'Linear frame with soft, gentle volume',
+    preview: [
+      'Relaxed straight cuts drape most naturally on you',
+      'Loose tailoring brings polish and comfort together',
+      'Soft-fabric shirts and straight-leg pants are your best fit',
+    ],
+  },
+  'W-H': {
+    name: 'Hard Wave',
+    sub: 'Curved frame with sharp, defined structure',
+    preview: [
+      'Defined waistlines and structured details flatter you most',
+      'Curves stay elegant when paired with crisp tailoring',
+      'Fitted blazers and high-waisted pants are your power picks',
+    ],
+  },
+  'W-Soft': {
+    name: 'Soft Wave',
+    sub: 'Curved frame with soft, feminine volume',
+    preview: [
+      'A defined waist and gentle curves are your biggest asset',
+      'A-line and wrap silhouettes highlight the waistline beautifully',
+      'Silk and jersey fabrics drape elegantly on your curves',
+    ],
+  },
+  'N-H': {
+    name: 'Hard Natural',
+    sub: 'Strong, broad-shouldered athletic frame',
+    preview: [
+      'Oversized layering looks effortlessly cool on you',
+      'Natural fabrics like linen and denim are your strengths',
+      'Free-spirited styling shines within relaxed silhouettes',
+    ],
+  },
+  'N-Soft': {
+    name: 'Soft Natural',
+    sub: 'Relaxed frame with soft volume and gentle edges',
+    preview: [
+      'Flowing silhouettes and soft layering work beautifully',
+      'Drape-y fabrics enhance your gentle volume',
+      'Flowy dresses and wide-leg pants are your signature pieces',
+    ],
+  },
+};
+
+const dirLabels = { S: 'Straight', W: 'Wave', N: 'Natural' };
+
+// ── State ──
+let currentQ = 0;
+let answers = new Array(questions.length).fill(null);
+let shuffledOptions = {};
+
+function getScore() {
+  let S=0, W=0, N=0, H=0, Soft=0;
+  answers.forEach((ans, qi) => {
+    if (ans === null) return;
+    const sc = questions[qi].options[ans].score;
+    if (sc.S) S += sc.S; if (sc.W) W += sc.W; if (sc.N) N += sc.N;
+    if (sc.H) H += sc.H; if (sc.Soft) Soft += sc.Soft;
+  });
+  return {S, W, N, H, Soft};
+}
+
+function getDirection(score) {
+  if (score.S >= score.W && score.S >= score.N) return 'S';
+  if (score.W >= score.S && score.W >= score.N) return 'W';
+  return 'N';
+}
+
+function getFinalType(score) {
+  return `${getDirection(score)}-${score.H >= score.Soft ? 'H' : 'Soft'}`;
+}
+
+// ── Render ──
+function renderQ(idx) {
+  const q = questions[idx];
+  const pct = Math.round((idx+1)/15*100);
+
+  // Shuffle once per question and remember
+  if (!shuffledOptions[idx]) {
+    const indices = q.options.map((_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    shuffledOptions[idx] = indices;
+  }
+  const order = shuffledOptions[idx];
+
+  // Encouragement messages
+  let progressLabel = `${idx+1} / 15`;
+  if (idx === 4) progressLabel = `5 / 15 · You're doing great 👍`;
+  else if (idx === 9) progressLabel = `10 / 15 · Almost there!`;
+  else if (idx === 12) progressLabel = `13 / 15 · So close ✨`;
+  else if (idx === 14) progressLabel = `15 / 15 · Last one!`;
+
+  document.getElementById('qProgressLabel').textContent = progressLabel;
+  document.getElementById('qProgressPct').textContent = `${pct}%`;
+  document.getElementById('qFill').style.width = pct + '%';
+  document.getElementById('globalFill').style.width = pct + '%';
+  document.getElementById('stepLabel').textContent = `${idx+1} / 15`;
+  document.getElementById('btnPrev').style.display = idx === 0 ? 'none' : '';
+  document.getElementById('btnNext').disabled = answers[idx] === null;
+  document.getElementById('btnNext').textContent = idx === 14 ? 'See result →' : 'Next →';
+
+  const textFormatted = q.text.replace(/\n/g, '<br>');
+  let html = `<div class="q-card">
+    <div class="q-num">Q ${String(idx+1).padStart(2,'0')}</div>
+    <div class="q-text">${textFormatted}</div>
+    ${q.subtext ? `<div class="q-subtext">${q.subtext}</div>` : ''}
+    ${q.hint ? `<div class="q-hint">${q.hint}</div>` : ''}`;
+
+  if (q.type === 'text') {
+    html += '<div class="opts">';
+    order.forEach((origIdx) => {
+      const o = q.options[origIdx];
+      const sel = answers[idx] === origIdx ? ' selected' : '';
+      html += `<button class="opt${sel}" onclick="selectOpt(${origIdx})">
+        <span class="opt-dot"></span>
+        <span><div class="opt-main">${o.label}</div>${o.sub ? `<div class="opt-sub">${o.sub}</div>` : ''}</span>
+      </button>`;
+    });
+    html += '</div>';
+  } else {
+    const cols = q.cols === 3 ? ' three' : '';
+    html += `<div class="img-opts${cols}">`;
+    order.forEach((origIdx) => {
+      const o = q.options[origIdx];
+      const sel = answers[idx] === origIdx ? ' selected' : '';
+      html += `<button class="img-opt${sel}" onclick="selectOpt(${origIdx})">
+        <div class="img-face"><div class="img-icon">${o.icon}</div><div class="img-name">${o.label}</div></div>
+        <div class="img-desc">${o.desc}</div>
+      </button>`;
+    });
+    html += '</div>';
+  }
+  html += '</div>';
+  document.getElementById('qCardWrap').innerHTML = html;
+}
+
+function selectOpt(origIdx) {
+  answers[currentQ] = origIdx;
+  document.getElementById('btnNext').disabled = false;
+  const q = questions[currentQ];
+  const order = shuffledOptions[currentQ];
+  const selector = q.type === 'text' ? '.opt' : '.img-opt';
+  document.querySelectorAll(selector).forEach((el, displayIdx) => {
+    el.classList.toggle('selected', order[displayIdx] === origIdx);
+  });
+}
+
+function startTest() {
+  showScreen('screen-q');
+  currentQ = 0;
+  answers = new Array(questions.length).fill(null);
+  shuffledOptions = {};
+  renderQ(0);
+  hideFloatingPay();
+}
+
+function nextQ() {
+  if (answers[currentQ] === null) return;
+  if (currentQ === 14) {
+    showLoading();
+    return;
+  }
+  currentQ++;
+  renderQ(currentQ);
+}
+
+function prevQ() {
+  if (currentQ === 0) return;
+  currentQ--;
+  renderQ(currentQ);
+}
+
+function showLoading() {
+  showScreen('screen-loading');
+  document.getElementById('globalFill').style.width = '100%';
+  document.getElementById('stepLabel').textContent = 'Analyzing';
+  setTimeout(() => document.getElementById('lstep1').classList.add('done'), 200);
+  setTimeout(() => document.getElementById('lstep2').classList.add('done'), 1000);
+  setTimeout(() => document.getElementById('lstep3').classList.add('done'), 1800);
+  setTimeout(() => document.getElementById('lstep4').classList.add('done'), 2500);
+  setTimeout(showFinalResult, 3200);
+}
+
+function showFinalResult() {
+  const score = getScore();
+  const typeKey = getFinalType(score);
+  const type = typeMap[typeKey];
+  const dir = getDirection(score);
+
+  document.getElementById('resultName').innerHTML = `<span>${type.name}</span>`;
+  document.getElementById('resultSub').textContent = type.sub;
+  document.getElementById('scoreDirection').textContent = dirLabels[dir];
+  document.getElementById('scoreTexture').textContent = score.H >= score.Soft ? 'Hard' : 'Soft';
+
+  // Save to sessionStorage for the payment page
+  sessionStorage.setItem('bodyTypeResult', JSON.stringify({
+    typeKey: typeKey,
+    typeName: type.name,
+    direction: dirLabels[dir],
+    texture: score.H >= score.Soft ? 'Hard' : 'Soft',
+  }));
+
+  let previewHtml = '';
+  type.preview.forEach(p => {
+    previewHtml += `<div class="preview-item"><div class="preview-dot"></div><div class="preview-text">${p}</div></div>`;
+  });
+  document.getElementById('previewItems').innerHTML = previewHtml;
+
+  const hookEl = document.getElementById('reportHookName');
+  if (hookEl) hookEl.textContent = type.name;
+
+  document.getElementById('stepLabel').textContent = 'Complete';
+  showScreen('screen-result');
+
+  setTimeout(initFloatingPayObserver, 600);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (id !== 'screen-result') {
+    hideFloatingPay();
+  }
+}
+
+function goToPayment() {
+  const result = JSON.parse(sessionStorage.getItem('bodyTypeResult') || '{}');
+  const params = new URLSearchParams({
+    bodyType: result.typeKey || '',
+    typeName: result.typeName || '',
+  });
+  window.location.href = `/en/payment.html?${params.toString()}`;
+}
+
+function shareResult() {
+  const name = document.getElementById('resultName').textContent.trim();
+  const sub = document.getElementById('resultSub').textContent.trim();
+
+  const shareText = `🔍 My body type is "${name}"!\n\n${sub}\n\nFind your type in 5 minutes ✨\n`;
+  const shareUrl = window.location.origin + '/en/test';
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'AWAYS Body Type Quiz · 6 precise types',
+      text: shareText,
+      url: shareUrl,
+    }).catch(err => {
+      if (err.name !== 'AbortError') {
+        console.error('Share failed:', err);
+        fallbackCopy(shareText + '\n' + shareUrl);
+      }
+    });
+  } else {
+    fallbackCopy(shareText + '\n' + shareUrl);
+  }
+}
+
+function fallbackCopy(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('🔗 Link copied!');
+    }).catch(() => {
+      legacyCopy(text);
+    });
+  } else {
+    legacyCopy(text);
+  }
+}
+
+function legacyCopy(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    showToast('🔗 Link copied!');
+  } catch (e) {
+    alert('Could not copy. Please try again.');
+  }
+  document.body.removeChild(textarea);
+}
+
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.className = 'toast-msg';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 10);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 2000);
+}
+
+function retakeTest() {
+  ['lstep1','lstep2','lstep3','lstep4'].forEach(id => document.getElementById(id).classList.remove('done'));
+  answers = new Array(questions.length).fill(null);
+  startTest();
+}
+
+// Floating payment bar
+let floatingPayObserver = null;
+
+function initFloatingPayObserver() {
+  const ctaCard = document.getElementById('ctaCard');
+  const floatingPay = document.getElementById('floatingPay');
+  if (!ctaCard || !floatingPay) return;
+
+  if (floatingPayObserver) {
+    floatingPayObserver.disconnect();
+  }
+
+  floatingPayObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+        floatingPay.classList.remove('visible');
+      } else {
+        floatingPay.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: [0, 0.3, 0.5, 1],
+    rootMargin: '0px 0px -80px 0px',
+  });
+
+  floatingPayObserver.observe(ctaCard);
+}
+
+function hideFloatingPay() {
+  const floatingPay = document.getElementById('floatingPay');
+  if (floatingPay) floatingPay.classList.remove('visible');
+  if (floatingPayObserver) {
+    floatingPayObserver.disconnect();
+    floatingPayObserver = null;
+  }
+}
+
+// Skip intro if ?start=1
+if (new URLSearchParams(window.location.search).get('start') === '1') {
+  startTest();
+}
+</script>
+</body>
+</html>

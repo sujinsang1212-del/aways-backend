@@ -4,12 +4,27 @@
     "api/confirm-payment.js": {
       "memory": 1024,
       "maxDuration": 30
+    },
+    "api/confirm-payment-en.js": {
+      "memory": 1024,
+      "maxDuration": 30
+    },
+    "api/create-checkout-session.js": {
+      "memory": 512,
+      "maxDuration": 10
     }
   },
   "rewrites": [
     { "source": "/test", "destination": "/test.html" },
     { "source": "/terms", "destination": "/terms.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/refund", "destination": "/refund.html" }
+    { "source": "/refund", "destination": "/refund.html" },
+
+    { "source": "/en", "destination": "/en/index.html" },
+    { "source": "/en/", "destination": "/en/index.html" },
+    { "source": "/en/test", "destination": "/en/test.html" },
+    { "source": "/en/terms", "destination": "/en/terms.html" },
+    { "source": "/en/privacy", "destination": "/en/privacy.html" },
+    { "source": "/en/refund", "destination": "/en/refund.html" }
   ]
 }

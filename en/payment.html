@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout · AWAYS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE;
+  --surface: #FFFFFF;
+  --border: #E8E2D9;
+  --text: #1A1714;
+  --muted: #8A8178;
+  --accent: #B8956A;
+  --accent-light: #F0E6D6;
+  --accent-dark: #8C6840;
+  --dark: #1A1714;
+  --tag: #EDE7DE;
+  --green: #4A7C59;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+}
+
+.top-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { font-family: 'DM Serif Display', serif; font-size: 18px; }
+.step-bar {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.step-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+.step-dot.active { background: var(--accent-dark); }
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px 20px 100px;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.section-title em { font-style: italic; color: var(--accent-dark); }
+.section-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+/* Order summary */
+.order-summary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 16px;
+}
+.early-bird-badge {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px 14px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+.trust-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.trust-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 8px;
+  text-align: center;
+}
+.trust-icon { font-size: 22px; margin-bottom: 6px; }
+.trust-text {
+  font-size: 12px; color: var(--text);
+  font-weight: 600; line-height: 1.4;
+}
+.trust-text span { font-weight: 400; color: var(--muted); font-size: 11px; }
+
+.order-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+}
+.order-product { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 4px; }
+.order-product-tag {
+  font-size: 12px; color: var(--muted);
+  display: inline-block; background: var(--tag); padding: 3px 8px; border-radius: 10px;
+}
+.order-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.order-price .price-orig { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+.order-price .price-now {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px; color: var(--accent-dark); line-height: 1;
+}
+.order-features { font-size: 13px; color: var(--muted); line-height: 1.75; }
+.order-features-title {
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text); font-weight: 600; margin-bottom: 8px;
+}
+.order-features li {
+  list-style: none; display: flex; gap: 6px; align-items: flex-start; padding: 2px 0;
+}
+.order-features li::before {
+  content: '✓'; color: var(--accent-dark); font-weight: bold; flex-shrink: 0;
+}
+
+/* Email input */
+.input-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+.input-label {
+  display: block; font-size: 14px; font-weight: 600;
+  margin-bottom: 10px; color: var(--text);
+}
+.input-required { color: var(--accent-dark); margin-left: 4px; }
+.input-field {
+  width: 100%; padding: 15px 16px;
+  border: 1px solid var(--border); border-radius: 10px;
+  font-size: 15px; font-family: inherit; background: var(--bg);
+  transition: all 0.15s;
+}
+.input-field:focus {
+  outline: none; border-color: var(--accent-dark); background: var(--surface);
+}
+.input-hint { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+.input-error {
+  font-size: 13px; color: #C0392B; margin-top: 8px; display: none;
+}
+.input-error.show { display: block; }
+
+/* Payment methods preview */
+.payment-methods-preview {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.pmp-label { font-size: 13px; color: var(--muted); }
+.pmp-icons { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.pmp-icon {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+/* Pay button */
+.pay-btn {
+  display: block; width: 100%; padding: 18px;
+  background: var(--dark); color: white;
+  border: none; border-radius: 12px;
+  font-size: 16px; font-weight: 500;
+  cursor: pointer; font-family: inherit;
+  letter-spacing: 0.02em; transition: opacity 0.2s;
+}
+.pay-btn:hover:not(:disabled) { opacity: 0.85; }
+.pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.pay-btn .btn-spinner {
+  display: none;
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.pay-btn.loading .btn-spinner { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.payment-notice {
+  margin-top: 16px; padding: 14px 18px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; font-size: 12px; color: var(--muted); line-height: 1.7;
+}
+.payment-notice-line { margin-bottom: 8px; }
+.payment-notice-line:last-child { margin-bottom: 0; }
+.payment-notice a { color: var(--accent-dark); text-decoration: underline; }
+
+/* Test mode banner */
+.test-banner {
+  background: #FFF8E1;
+  border: 1px solid #F0D080;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: 12px;
+  color: #8A6810;
+  line-height: 1.6;
+}
+.test-banner strong { color: #6A5008; }
+
+.stripe-note {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; margin-top: 12px;
+  font-size: 11px; color: var(--muted); letter-spacing: 0.02em;
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">AWAYS</div>
+  <div class="step-bar">
+    <span class="step-dot"></span>
+    <span class="step-dot"></span>
+    <span class="step-dot active"></span>
+    <span style="margin-left:6px;">Checkout</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Test mode banner — REMOVE WHEN GOING LIVE -->
+  <div class="test-banner" id="testBanner">
+    🧪 <strong>Test mode</strong> · No real charges will be made.<br>
+    Use card: <strong>4242 4242 4242 4242</strong> · any future date · any CVC
+  </div>
+
+  <div class="section-eyebrow">Order Confirmation</div>
+  <h1 class="section-title">Almost <em>there.</em></h1>
+  <p class="section-desc">Review your order, enter your email, and you're set.</p>
+
+  <!-- Order summary -->
+  <div class="order-summary">
+    <div class="early-bird-badge">⚡ LAUNCH OFFER · SAVE $10</div>
+    <div class="order-head">
+      <div>
+        <div class="order-product" id="orderProduct">Personalized Style Guide</div>
+        <div class="order-product-tag" id="orderTag">Premium Report</div>
+      </div>
+      <div class="order-price">
+        <span class="price-orig">$39</span>
+        <span class="price-now">$29</span>
+      </div>
+    </div>
+    <div class="order-features">
+      <div class="order-features-title">What's Included</div>
+      <ul>
+        <li>22-page personalized PDF report</li>
+        <li>Silhouette & fit formulas</li>
+        <li>Fabric, color & pattern guide</li>
+        <li>5 everyday outfit formulas</li>
+        <li>Shopping checklist (12 brands)</li>
+        <li>Year-round styling guide</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Trust cards -->
+  <div class="trust-section">
+    <div class="trust-card">
+      <div class="trust-icon">🔒</div>
+      <div class="trust-text">Secure<br><span>Stripe checkout</span></div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">↩️</div>
+      <div class="trust-text">30-day<br><span>Money-back</span></div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">📧</div>
+      <div class="trust-text">Instant<br><span>Email delivery</span></div>
+    </div>
+  </div>
+
+  <!-- Email input -->
+  <div class="input-section">
+    <label class="input-label" for="emailInput">
+      Email address<span class="input-required">*</span>
+    </label>
+    <input type="email" id="emailInput" class="input-field" placeholder="you@example.com" autocomplete="email" />
+    <div class="input-hint">Your PDF report will be sent here right after checkout.</div>
+    <div class="input-error" id="emailError">Please enter a valid email address.</div>
+  </div>
+
+  <!-- Payment methods preview -->
+  <div class="payment-methods-preview">
+    <span class="pmp-label">Pay with:</span>
+    <div class="pmp-icons">
+      <span class="pmp-icon">💳 Card</span>
+      <span class="pmp-icon">PayPal</span>
+      <span class="pmp-icon">Apple Pay</span>
+      <span class="pmp-icon">Google Pay</span>
+    </div>
+  </div>
+
+  <!-- Pay button -->
+  <button class="pay-btn" id="payBtn" onclick="startCheckout()">
+    <span class="btn-spinner"></span>
+    <span class="btn-text" id="payBtnText">Pay $29 →</span>
+  </button>
+
+  <div class="payment-notice">
+    <div class="payment-notice-line">
+      By proceeding, you agree to our <a href="/en/terms" target="_blank">Terms</a> and <a href="/en/privacy" target="_blank">Privacy Policy</a>.
+    </div>
+    <div class="payment-notice-line">
+      ✓ Your PDF report is delivered instantly after payment<br>
+      ✓ 30-day money-back guarantee · awaysbiz@gmail.com
+    </div>
+  </div>
+
+  <div class="stripe-note">
+    🔒 Payments securely processed by Stripe
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// Backend API URL
+// ============================================================
+const BACKEND_URL = window.location.origin;
+
+// ============================================================
+// Product info
+// ============================================================
+const PRODUCT = {
+  name: 'Personalized Style Guide',
+  originalPrice: 39,
+  price: 29,
+  currency: 'USD',
+};
+
+// Body type from URL
+const urlParams = new URLSearchParams(window.location.search);
+const bodyType = urlParams.get('bodyType') || '';
+const typeName = urlParams.get('typeName') || '';
+
+if (typeName) {
+  document.getElementById('orderTag').textContent = `${typeName} · Premium Report`;
+}
+
+function generateOrderId() {
+  return `BT_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// ============================================================
+// Start Stripe Checkout
+// ============================================================
+async function startCheckout() {
+  const emailEl = document.getElementById('emailInput');
+  const errEl = document.getElementById('emailError');
+  const email = emailEl.value.trim();
+
+  if (!isValidEmail(email)) {
+    errEl.classList.add('show');
+    emailEl.focus();
+    return;
+  }
+  errEl.classList.remove('show');
+
+  const orderId = generateOrderId();
+
+  // Save order info to sessionStorage (read on success page)
+  sessionStorage.setItem('lastOrder', JSON.stringify({
+    orderId,
+    email,
+    bodyType,
+    typeName,
+    productName: PRODUCT.name,
+    amount: PRODUCT.price,
+    currency: PRODUCT.currency,
+  }));
+
+  const payBtn = document.getElementById('payBtn');
+  const payBtnText = document.getElementById('payBtnText');
+  payBtn.disabled = true;
+  payBtn.classList.add('loading');
+  payBtnText.textContent = 'Redirecting to checkout...';
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/create-checkout-session`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        orderId,
+        bodyType,
+        typeName,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.url) {
+      throw new Error(data.error || 'Failed to create checkout session');
+    }
+
+    // Redirect to Stripe-hosted Checkout page
+    window.location.href = data.url;
+
+  } catch (error) {
+    console.error('[Checkout error]', error);
+    alert(`Something went wrong: ${error.message}\n\nPlease try again or contact awaysbiz@gmail.com`);
+
+    payBtn.disabled = false;
+    payBtn.classList.remove('loading');
+    payBtnText.textContent = `Pay $${PRODUCT.price} →`;
+  }
+}
+
+// Enter key triggers checkout
+document.getElementById('emailInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') startCheckout();
+});
+
+// Hide test banner once you go live
+if (window.STRIPE_LIVE === true) {
+  document.getElementById('testBanner').style.display = 'none';
+}
+</script>
+
+</body>
+</html>

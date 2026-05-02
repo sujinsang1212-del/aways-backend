@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Processing Payment · AWAYS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
+  --text: #1A1714; --muted: #8A8178;
+  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
+  --dark: #1A1714; --green: #4A7C59; --red: #B85450;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.processing { display: block; }
+.processing.hidden { display: none; }
+
+.spinner {
+  width: 48px; height: 48px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent-dark);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.processing-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.processing-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.processing-steps {
+  max-width: 320px;
+  margin: 0 auto;
+  text-align: left;
+}
+.processing-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0;
+  font-size: 13px;
+  color: var(--muted);
+  opacity: 0.4;
+  transition: all 0.3s;
+}
+.processing-step.active { opacity: 1; color: var(--text); }
+.processing-step.done { opacity: 1; color: var(--text); }
+.processing-step.done .step-icon { color: var(--green); }
+.step-icon { width: 20px; flex-shrink: 0; font-weight: bold; }
+
+.success { display: none; }
+.success.active { display: block; }
+
+.success-icon {
+  width: 80px; height: 80px;
+  background: var(--green);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 36px;
+}
+.success-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.success-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+.success-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.success-row {
+  display: flex; justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 13px;
+  gap: 12px;
+}
+.success-row:last-child { border-bottom: none; }
+.success-row-label { color: var(--muted); flex-shrink: 0; }
+.success-row-val {
+  font-weight: 500;
+  text-align: right;
+  word-break: break-all;
+}
+
+.failed { display: none; }
+.failed.active { display: block; }
+.failed-icon {
+  width: 80px; height: 80px;
+  background: var(--red);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 36px;
+}
+.failed-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.failed-reason {
+  background: #FBF1F0;
+  border: 1px solid rgba(184,84,80,0.2);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 24px auto;
+  max-width: 400px;
+  font-size: 13px;
+  color: var(--red);
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+.btn:hover { opacity: 0.85; }
+.btn.outline {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="processing" id="processing">
+    <div class="spinner"></div>
+    <h1 class="processing-title">Confirming your payment</h1>
+    <p class="processing-desc">Hang tight — please don't close this page.</p>
+
+    <div class="processing-steps">
+      <div class="processing-step active" id="step1">
+        <span class="step-icon">○</span>
+        <span>Verifying payment</span>
+      </div>
+      <div class="processing-step" id="step2">
+        <span class="step-icon">○</span>
+        <span>Validating details</span>
+      </div>
+      <div class="processing-step" id="step3">
+        <span class="step-icon">○</span>
+        <span>Generating your report</span>
+      </div>
+      <div class="processing-step" id="step4">
+        <span class="step-icon">○</span>
+        <span>Sending email</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="success" id="success">
+    <div class="success-icon">✓</div>
+    <h1 class="success-title">Payment complete</h1>
+    <p class="success-desc">
+      Your detailed report has been sent to your email.<br>
+      Don't see it? Please check your spam folder.
+    </p>
+
+    <div class="success-card">
+      <div class="success-row">
+        <span class="success-row-label">Order ID</span>
+        <span class="success-row-val" id="succOrderId">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">Product</span>
+        <span class="success-row-val" id="succProduct">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">Amount</span>
+        <span class="success-row-val" id="succAmount">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">Email</span>
+        <span class="success-row-val" id="succEmail">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">Payment method</span>
+        <span class="success-row-val" id="succMethod">Card</span>
+      </div>
+    </div>
+
+    <a href="/en/" class="btn">Back to home</a>
+  </div>
+
+  <div class="failed" id="failed">
+    <div class="failed-icon">!</div>
+    <h1 class="failed-title">Payment didn't go through</h1>
+    <p class="processing-desc">
+      Don't worry — you weren't charged.<br>
+      Try again, or use a different payment method.
+    </p>
+    <div class="failed-reason" id="failedReason"></div>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="javascript:history.back()" class="btn">Try again</a>
+      <a href="/en/" class="btn outline">Back to home</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const BACKEND_URL = window.location.origin;
+
+const params = new URLSearchParams(window.location.search);
+const sessionId = params.get('session_id');
+const isCanceled = params.get('canceled') === 'true';
+
+const lastOrder = JSON.parse(sessionStorage.getItem('lastOrder') || '{}');
+
+function showScreen(id) {
+  ['processing', 'success', 'failed'].forEach(s => {
+    document.getElementById(s).classList.remove('active');
+    document.getElementById(s).style.display = 'none';
+  });
+  document.getElementById(id).style.display = 'block';
+  if (id !== 'processing') {
+    document.getElementById(id).classList.add('active');
+  }
+}
+
+function updateStep(stepNum, status) {
+  const step = document.getElementById(`step${stepNum}`);
+  if (status === 'active') {
+    step.classList.add('active');
+  } else if (status === 'done') {
+    step.classList.add('done');
+    step.querySelector('.step-icon').textContent = '✓';
+  }
+}
+
+function showFailed(reason) {
+  document.getElementById('failedReason').textContent = reason || 'Something went wrong. Please try again.';
+  showScreen('failed');
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function confirmPayment() {
+  if (isCanceled) {
+    showFailed("Payment was canceled. You can try again whenever you're ready.");
+    return;
+  }
+
+  if (!sessionId) {
+    showFailed('Payment information is missing. If you were charged, please contact awaysbiz@gmail.com.');
+    return;
+  }
+
+  try {
+    updateStep(1, 'active');
+    await sleep(500);
+    updateStep(1, 'done');
+
+    updateStep(2, 'active');
+
+    const response = await fetch(`${BACKEND_URL}/api/confirm-payment-en`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId,
+        bodyType: lastOrder.bodyType,
+        typeName: lastOrder.typeName,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || data.message || 'Payment confirmation failed');
+    }
+
+    updateStep(2, 'done');
+
+    updateStep(3, 'active');
+    await sleep(800);
+    updateStep(3, 'done');
+
+    updateStep(4, 'active');
+    await sleep(600);
+    updateStep(4, 'done');
+    await sleep(400);
+
+    document.getElementById('succOrderId').textContent = data.orderId || lastOrder.orderId || '-';
+    document.getElementById('succProduct').textContent = data.typeName || lastOrder.typeName || lastOrder.productName || 'Personalized Style Guide';
+    document.getElementById('succAmount').textContent = data.amount ? `$${data.amount}` : `$${lastOrder.amount || 29}`;
+    document.getElementById('succEmail').textContent = data.email || lastOrder.email || '-';
+    document.getElementById('succMethod').textContent = data.paymentMethod || 'Card';
+
+    showScreen('success');
+
+  } catch (error) {
+    console.error('[Payment confirmation failed]', error);
+    showFailed(error.message);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', confirmPayment);
+</script>
+
+</body>
+</html>
