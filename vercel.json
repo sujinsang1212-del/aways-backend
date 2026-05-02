@@ -5,12 +5,12 @@
       "memory": 1024,
       "maxDuration": 30
     },
-    "api/confirm-payment-en.js": {
-      "memory": 1024,
-      "maxDuration": 30
-    },
     "api/create-checkout-session.js": {
-      "memory": 512,
+      "memory": 256,
+      "maxDuration": 10
+    },
+    "api/lemon-webhook.js": {
+      "memory": 256,
       "maxDuration": 10
     }
   },
