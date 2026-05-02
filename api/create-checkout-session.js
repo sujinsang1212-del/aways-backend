@@ -1,40 +1,39 @@
 // ============================================================
-// Create Stripe Checkout Session
+// Lemon Squeezy Checkout Creation
 // Path: api/create-checkout-session.js
 // Deploy: Vercel Serverless Function
 // ============================================================
 
-import Stripe from 'stripe';
+// Variant ID mapping (frontend type key → Lemon Squeezy variant_id)
+const VARIANT_MAP = {
+  // Frontend keys (from test.html)
+  'W-Soft': 1602239,  // Soft Wave
+  'W-H':    1602271,  // Hard Wave
+  'N-Soft': 1602265,  // Soft Natural
+  'N-H':    1602275,  // Hard Natural
+  'S-Soft': 1602266,  // Soft Straight
+  'S-H':    1602278,  // Hard Straight
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2024-06-20',
-});
-
-// Body type → English name mapping
-const BODY_TYPE_EN = {
-  'soft-wave':     'Soft Wave',
-  'soft-natural':  'Soft Natural',
-  'hard-wave':     'Hard Wave',
-  'hard-natural':  'Hard Natural',
-  'soft-straight': 'Soft Straight',
-  'hard-straight': 'Hard Straight',
-  'S-Soft':        'Soft Straight',
-  'S-H':           'Hard Straight',
-  'W-Soft':        'Soft Wave',
-  'W-H':           'Hard Wave',
-  'N-Soft':        'Soft Natural',
-  'N-H':           'Hard Natural',
+  // Also support backend keys (in case bodyType comes pre-normalized)
+  'soft-wave':     1602239,
+  'hard-wave':     1602271,
+  'soft-natural':  1602265,
+  'hard-natural':  1602275,
+  'soft-straight': 1602266,
+  'hard-straight': 1602278,
 };
 
-// Convert frontend type key to backend file key
-const TYPE_KEY_MAP = {
-  'S-Soft': 'soft-straight',
-  'S-H':    'hard-straight',
-  'W-Soft': 'soft-wave',
-  'W-H':    'hard-wave',
-  'N-Soft': 'soft-natural',
-  'N-H':    'hard-natural',
+const TYPE_NAME_MAP = {
+  'W-Soft': 'Soft Wave',     'soft-wave':     'Soft Wave',
+  'W-H':    'Hard Wave',     'hard-wave':     'Hard Wave',
+  'N-Soft': 'Soft Natural',  'soft-natural':  'Soft Natural',
+  'N-H':    'Hard Natural',  'hard-natural':  'Hard Natural',
+  'S-Soft': 'Soft Straight', 'soft-straight': 'Soft Straight',
+  'S-H':    'Hard Straight', 'hard-straight': 'Hard Straight',
 };
+
+const STORE_ID = process.env.LEMONSQUEEZY_STORE_ID;
+const API_KEY = process.env.LEMONSQUEEZY_API_KEY;
 
 export default async function handler(req, res) {
   // CORS
@@ -45,87 +44,111 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
+  if (!API_KEY || !STORE_ID) {
+    console.error('[Config error] Missing LEMONSQUEEZY_API_KEY or LEMONSQUEEZY_STORE_ID');
+    return res.status(500).json({ error: 'Server configuration incomplete' });
+  }
+
   const { email, orderId, bodyType, typeName } = req.body;
 
-  // Validation
   if (!email || !orderId) {
     return res.status(400).json({ error: 'Email and order ID are required' });
   }
 
-  // Normalize body type to backend file key
-  const normalizedBodyType = TYPE_KEY_MAP[bodyType] || bodyType;
-  const displayName = typeName || BODY_TYPE_EN[bodyType] || 'Personalized Style';
+  const variantId = VARIANT_MAP[bodyType];
+  if (!variantId) {
+    return res.status(400).json({ error: `Unknown body type: ${bodyType}` });
+  }
 
-  // Build the success/cancel URLs
+  const displayName = typeName || TYPE_NAME_MAP[bodyType] || 'Personalized Style Guide';
+
+  // Build success/cancel URLs
   const protocol = req.headers['x-forwarded-proto'] || 'https';
   const host = req.headers.host;
   const baseUrl = `${protocol}://${host}`;
 
   try {
-    const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      payment_method_types: ['card', 'paypal'],
-
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            unit_amount: 2900, // $29.00 in cents
-            product_data: {
-              name: `AWAYS ${displayName} Style Guide`,
-              description: '22-page personalized PDF style guide based on your body type',
-              // Optional: add image URL if you have a public product image
-              // images: ['https://your-domain.com/product-thumb.jpg'],
+    // Lemon Squeezy Checkout API
+    // Docs: https://docs.lemonsqueezy.com/api/checkouts
+    const lemonResponse = await fetch('https://api.lemonsqueezy.com/v1/checkouts', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/vnd.api+json',
+        'Content-Type': 'application/vnd.api+json',
+        'Authorization': `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'checkouts',
+          attributes: {
+            // Pre-fill customer info
+            checkout_data: {
+              email,
+              custom: {
+                order_id: orderId,
+                body_type: bodyType,
+                type_name: displayName,
+              },
             },
+
+            // Customize checkout experience
+            checkout_options: {
+              embed: false,
+              media: false,
+              logo: true,
+              desc: false,
+              discount: true,
+              dark: false,
+              subscription_preview: false,
+              button_color: '#1A1714',
+            },
+
+            // Product options (override per-checkout)
+            product_options: {
+              name: `AWAYS ${displayName} Style Guide`,
+              description: '22-page personalized PDF style guide for your body type',
+              redirect_url: `${baseUrl}/en/payment-success.html?order_id=${orderId}`,
+              receipt_button_text: 'Download Your Report',
+              receipt_link_url: `${baseUrl}/en/`,
+              receipt_thank_you_note: 'Your style guide is on the way to your inbox! ✨',
+              enabled_variants: [variantId],
+            },
+
+            expires_at: null,
           },
-          quantity: 1,
+          relationships: {
+            store:   { data: { type: 'stores',   id: String(STORE_ID) } },
+            variant: { data: { type: 'variants', id: String(variantId) } },
+          },
         },
-      ],
-
-      // Pre-fill email so user doesn't re-type it on Stripe page
-      customer_email: email,
-
-      // Pass order metadata so we can retrieve it after payment
-      metadata: {
-        orderId,
-        bodyType: normalizedBodyType,
-        typeName: displayName,
-        email,
-      },
-
-      // Pass to PaymentIntent metadata as well (for reconciliation)
-      payment_intent_data: {
-        metadata: {
-          orderId,
-          bodyType: normalizedBodyType,
-          typeName: displayName,
-        },
-      },
-
-      // Where to send user after payment
-      success_url: `${baseUrl}/en/payment-success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/en/payment-success.html?canceled=true`,
-
-      // Auto tax can be enabled later in Stripe dashboard
-      // automatic_tax: { enabled: true },
-
-      // Allow promotion codes
-      allow_promotion_codes: true,
-
-      // Locale — let Stripe auto-detect from browser
-      locale: 'auto',
+      }),
     });
+
+    const data = await lemonResponse.json();
+
+    if (!lemonResponse.ok) {
+      console.error('[Lemon Squeezy error]', data);
+      return res.status(lemonResponse.status).json({
+        error: 'Failed to create checkout',
+        details: data.errors?.[0]?.detail || 'Unknown error',
+      });
+    }
+
+    const checkoutUrl = data?.data?.attributes?.url;
+    if (!checkoutUrl) {
+      return res.status(500).json({ error: 'No checkout URL returned' });
+    }
 
     return res.status(200).json({
       success: true,
-      url: session.url,
-      sessionId: session.id,
+      url: checkoutUrl,
+      checkoutId: data.data.id,
     });
 
   } catch (err) {
-    console.error('[Stripe session creation failed]', err);
+    console.error('[Checkout creation failed]', err);
     return res.status(500).json({
-      error: 'Failed to create checkout session',
+      error: 'Server error',
       message: err.message,
     });
   }
