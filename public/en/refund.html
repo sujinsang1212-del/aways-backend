@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund Policy · AWAYS</title>
+<meta name="description" content="AWAYS Body Type Diagnosis Service - Refund Policy. 7-day money-back guarantee.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
+  --text: #1A1714; --muted: #8A8178;
+  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
+  --dark: #1A1714;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.header {
+  background: var(--bg);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text);
+}
+.lang-switch {
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+}
+.lang-switch a {
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--muted);
+}
+.lang-switch a.active {
+  background: var(--dark);
+  color: white;
+}
+
+.page-hero {
+  padding: 60px 20px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.page-eyebrow {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px, 6vw, 42px);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.page-title em { font-style: italic; color: var(--accent-dark); }
+.page-meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 36px;
+}
+@media (max-width: 600px) {
+  .content-card { padding: 28px 22px; }
+}
+
+.notice-box {
+  background: #FFF8EE;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 0 0 24px 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.notice-box strong { color: var(--accent-dark); }
+
+.guarantee-box {
+  background: linear-gradient(135deg, var(--accent-light) 0%, #F7E8D0 100%);
+  border-radius: 14px;
+  padding: 28px 26px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.guarantee-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.guarantee-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--accent-dark);
+  margin-bottom: 8px;
+}
+.guarantee-desc {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.content h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.content h2:first-child { margin-top: 0; }
+
+.content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--accent-dark);
+}
+
+.content p {
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.content ol, .content ul {
+  margin: 12px 0 16px 22px;
+}
+.content li {
+  margin-bottom: 8px;
+}
+
+.content strong {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 24px 0;
+}
+.step-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.step-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 36px;
+}
+.step-content { flex: 1; }
+.step-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+.step-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+table th, table td {
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+table th {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.warning-box {
+  background: #FFF4E6;
+  border-left: 4px solid #E89A3A;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.warning-box strong { color: #C27414; }
+
+.info-box {
+  background: var(--accent-light);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.info-box strong { color: var(--accent-dark); }
+
+.cta-block {
+  text-align: center;
+  margin-top: 32px;
+  padding: 28px 20px;
+  background: var(--bg);
+  border-radius: 14px;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--dark);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-top: 8px;
+}
+
+.footer {
+  background: var(--bg);
+  padding: 32px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  border-top: 1px solid var(--border);
+}
+.footer a { color: var(--accent-dark); text-decoration: none; }
+.footer-links {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="logo">AWAYS</a>
+  <div class="lang-switch">
+    <a href="/refund">KO</a>
+    <a href="/en/refund" class="active">EN</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="page-eyebrow">Refund Policy</div>
+  <h1 class="page-title"><em>7-Day</em> Money-Back Guarantee</h1>
+  <div class="page-meta">Effective Date: January 1, 2026</div>
+</section>
+
+<section class="content">
+  <div class="content-card">
+
+    <div class="notice-box">
+      <strong>Notice:</strong> This English version is provided for convenience only. In the event of any discrepancy between the Korean and English versions, the <strong>Korean version shall prevail</strong>. This policy is governed by the laws of the Republic of Korea.
+    </div>
+
+    <div class="guarantee-box">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-title">Full Refund Within 7 Days, No Questions Asked</div>
+      <div class="guarantee-desc">
+        If you're not happy with your Report, we'll refund you — no reason needed.<br>
+        AWAYS prioritizes your satisfaction above all else.
+      </div>
+    </div>
+
+    <h2>1. Refund Guarantee</h2>
+    <p>The Company guarantees withdrawal rights under the Act on the Consumer Protection in Electronic Commerce of the Republic of Korea, and additionally provides the following refund guarantee as a matter of internal policy:</p>
+    <ol>
+      <li>You may request a refund <strong>within 7 days from the date of payment</strong>.</li>
+      <li>We <strong>do not ask for a reason</strong>. Simple change of mind is acceptable.</li>
+      <li>Refunds are available even after downloading the Report (subject to limitations below).</li>
+    </ol>
+
+    <h2>2. How to Request a Refund</h2>
+    <p>You can receive a refund easily by following these simple steps:</p>
+
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Send an Email</div>
+          <div class="step-desc">Email your refund request to awaysbiz@gmail.com.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Include Required Information</div>
+          <div class="step-desc">Provide the email address used at payment and your order number. Stating a reason is optional.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Refund Processing (within 3 business days)</div>
+          <div class="step-desc">After confirmation, we'll process your refund within 3 business days.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-title">Automatic Refund to Original Payment Method</div>
+          <div class="step-desc">Refunds are automatically issued to the original payment method. Card company processing may add 5–7 days.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>3. Refund Amount</h2>
+    <p>Report prices may vary, and <strong>we will refund the exact amount you paid at the time of purchase</strong>.</p>
+
+    <div class="info-box">
+      <strong>Examples</strong><br>
+      · Paid ₩24,900 (regular price) → Refunded ₩24,900<br>
+      · Paid ₩19,900 (discounted price) → Refunded ₩19,900<br>
+      · Paid promotional price → Refunded the exact amount paid
+    </div>
+
+    <h2>4. Refund Limitations</h2>
+    <p>Refunds may be limited in the following cases:</p>
+
+    <div class="warning-box">
+      <strong>⚠️ Refund Restrictions</strong><br><br>
+      ① More than <strong>7 days have passed</strong> since payment<br>
+      ② The Report content has been <strong>shared, distributed, or copied</strong> externally<br>
+      ③ Report content has been <strong>posted without authorization</strong> on social media, blogs, etc.<br>
+      ④ Content has been damaged due to the User's <strong>intentional or grossly negligent</strong> conduct<br>
+      ⑤ The refund system has been <strong>abused</strong> through repeated payment and refund attempts by the same User
+    </div>
+
+    <p>Even in such cases, the Company may decide on partial or full refunds after reviewing the severity of the matter.</p>
+
+    <h2>5. Processing Timeline</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Time Required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Refund request received</td>
+          <td>Confirmed within 1 business day of email receipt</td>
+        </tr>
+        <tr>
+          <td>Refund approval and processing</td>
+          <td>Within 3 business days of confirmation</td>
+        </tr>
+        <tr>
+          <td>Actual deposit/refund</td>
+          <td>Additional 5–7 days possible per card/bank policies</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>6. Refunds for Payment Errors</h2>
+    <p>The following cases will be refunded immediately, regardless of the 7-day limit:</p>
+    <ol>
+      <li>Duplicate payments</li>
+      <li>Payment completed but Report not delivered</li>
+      <li>Incorrect amount charged due to system error</li>
+      <li>Defective Report file that cannot be used normally</li>
+    </ol>
+
+    <h2>7. Frequently Asked Questions</h2>
+
+    <h3>Q. Can I get a refund after downloading the Report?</h3>
+    <p>Yes. Within 7 days, refunds are available regardless of whether you've downloaded the Report. However, we ask that you delete the downloaded file upon refund.</p>
+
+    <h3>Q. Do I have to provide a reason for the refund?</h3>
+    <p>No, providing a reason is <strong>optional</strong>. Simple change of mind is acceptable. However, your feedback would greatly help us improve our service.</p>
+
+    <h3>Q. How can I check the refund status?</h3>
+    <p>We'll send a confirmation email when your refund request is received and another notification when processing is complete.</p>
+
+    <h3>Q. Are refunds really impossible after 7 days?</h3>
+    <p>In principle, refunds after 7 days are difficult. However, if there's a defect in the Report itself or the issue is the Company's fault, refunds are available regardless of the time period. Please contact us by email first.</p>
+
+    <hr class="divider">
+
+    <div class="info-box">
+      <strong>📧 Refund Inquiries</strong><br>
+      Email: awaysbiz@gmail.com<br>
+      Hours: Weekdays 10:00 ~ 18:00 KST (closed on weekends and Korean public holidays)<br><br>
+      ※ Email submissions accepted 24/7. Responses are handled in order during business days.
+    </div>
+
+    <div class="cta-block">
+      <p style="font-size:14px; color:var(--muted); margin-bottom:6px;">Haven't taken the diagnosis yet?</p>
+      <a href="/" class="cta-btn">Back to Home →</a>
+    </div>
+
+    <p style="font-size:13px; color:var(--muted); margin-top:24px; text-align:center;">
+      This Refund Policy takes effect on January 1, 2026.<br>
+      Any changes will be announced through site notices at least 7 days before the effective date.
+    </p>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/en/terms">Terms</a>
+    <a href="/en/privacy">Privacy</a>
+    <a href="/en/refund">Refund</a>
+    <a href="mailto:awaysbiz@gmail.com">Support</a>
+  </div>
+  <div>© 2026 AWAYS · Business Registration No. 201-33-01726 · 40, Yeouidaebang-ro 24da-gil, Dongjak-gu, Seoul, Republic of Korea<br>
+  CEO: Park Soojin · Mail-Order Sales Registration: [Pending]</div>
+</footer>
+
+</body>
+</html>
