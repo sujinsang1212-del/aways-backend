@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy · AWAYS</title>
+<meta name="description" content="AWAYS Body Type Diagnosis Service - Privacy Policy">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
+  --text: #1A1714; --muted: #8A8178;
+  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
+  --dark: #1A1714;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.header {
+  background: var(--bg);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text);
+}
+.lang-switch {
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+}
+.lang-switch a {
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--muted);
+}
+.lang-switch a.active {
+  background: var(--dark);
+  color: white;
+}
+
+.page-hero {
+  padding: 60px 20px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.page-eyebrow {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px, 6vw, 42px);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.page-meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 36px;
+}
+@media (max-width: 600px) {
+  .content-card { padding: 28px 22px; }
+}
+
+.intro {
+  background: var(--accent-light);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 32px;
+  font-size: 14px;
+  line-height: 1.85;
+}
+.intro strong { color: var(--accent-dark); }
+
+.notice-box {
+  background: #FFF8EE;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.content h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.content h2:first-child { margin-top: 0; }
+
+.content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--accent-dark);
+}
+
+.content p {
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.content ol, .content ul {
+  margin: 12px 0 16px 22px;
+}
+.content li {
+  margin-bottom: 8px;
+}
+
+.content strong {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+table th, table td {
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+table th {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.info-box {
+  background: var(--accent-light);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.info-box strong { color: var(--accent-dark); }
+
+.footer {
+  background: var(--bg);
+  padding: 32px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  border-top: 1px solid var(--border);
+}
+.footer a { color: var(--accent-dark); text-decoration: none; }
+.footer-links {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="logo">AWAYS</a>
+  <div class="lang-switch">
+    <a href="/privacy">KO</a>
+    <a href="/en/privacy" class="active">EN</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="page-eyebrow">Privacy Policy</div>
+  <h1 class="page-title">Privacy Policy</h1>
+  <div class="page-meta">Effective Date: January 1, 2026</div>
+</section>
+
+<section class="content">
+  <div class="content-card">
+
+    <div class="notice-box">
+      <strong>Notice:</strong> This English version is provided for convenience only. In the event of any discrepancy between the Korean and English versions, the <strong>Korean version shall prevail</strong>. This policy is governed by the laws of the Republic of Korea, including the Personal Information Protection Act (PIPA).
+    </div>
+
+    <div class="intro">
+      AWAYS ("Company") values the personal information of its Users and complies with the <strong>Personal Information Protection Act</strong>, the <strong>Act on Promotion of Information and Communications Network Utilization and Information Protection</strong>, and other relevant laws of the Republic of Korea.<br><br>
+      Through this policy, the Company transparently discloses <strong>what information is collected, why, and how long it is retained</strong>.
+    </div>
+
+    <h2>1. Personal Information We Collect</h2>
+    <p>The Company collects only the <strong>minimum personal information necessary</strong> to provide the Service.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Items Collected</th>
+          <th>When Collected</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Required</td>
+          <td>Email address</td>
+          <td>At Report purchase</td>
+        </tr>
+        <tr>
+          <td>Auto-collected</td>
+          <td>IP address, cookies, access logs, device info, browser type</td>
+          <td>During service use</td>
+        </tr>
+        <tr>
+          <td>Payment</td>
+          <td>Payment method information (handled directly by PG provider)</td>
+          <td>At payment</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>Important:</strong> The Company does <strong>not collect personal information beyond email address</strong>, such as name, phone number, address, or resident registration number. Payment information (card numbers, etc.) is processed directly by payment service providers including Toss Payments and is not stored by the Company.
+    </div>
+
+    <h2>2. Purpose of Collection and Use</h2>
+    <p>Collected personal information is used only for the following purposes:</p>
+    <ol>
+      <li><strong>Service Provision:</strong> PDF Report delivery, sending download links</li>
+      <li><strong>Payment and Refund Processing:</strong> Payment confirmation, refund request processing, transaction record management</li>
+      <li><strong>Customer Support:</strong> Responding to inquiries, sending notices</li>
+      <li><strong>Service Improvement:</strong> Access statistics analysis, service quality enhancement (used in non-identifiable form)</li>
+    </ol>
+
+    <h2>3. Retention and Use Period</h2>
+    <p>The Company destroys personal information without delay after the purpose of collection and use is achieved. However, the following information is retained for the period prescribed by law:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item Retained</th>
+          <th>Legal Basis</th>
+          <th>Retention Period</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Records on contracts or withdrawal of subscriptions</td>
+          <td>Act on the Consumer Protection in Electronic Commerce</td>
+          <td>5 years</td>
+        </tr>
+        <tr>
+          <td>Records on payment and supply of goods</td>
+          <td>Act on the Consumer Protection in Electronic Commerce</td>
+          <td>5 years</td>
+        </tr>
+        <tr>
+          <td>Records on consumer complaints or dispute resolution</td>
+          <td>Act on the Consumer Protection in Electronic Commerce</td>
+          <td>3 years</td>
+        </tr>
+        <tr>
+          <td>Access logs</td>
+          <td>Protection of Communications Secrets Act</td>
+          <td>3 months</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. Provision to Third Parties</h2>
+    <p>The Company <strong>does not provide Users' personal information to external parties</strong> as a general rule. However, the following are exceptions:</p>
+    <ol>
+      <li>When the User has consented in advance</li>
+      <li>When required by law or by investigative authorities through procedures and methods prescribed by law for investigative purposes</li>
+    </ol>
+
+    <h2>5. Outsourcing of Personal Information Processing</h2>
+    <p>The Company outsources personal information processing as follows for smooth service provision:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Outsourcee</th>
+          <th>Outsourced Tasks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Toss Payments Co., Ltd.</td>
+          <td>Electronic payment processing</td>
+        </tr>
+        <tr>
+          <td>Google LLC (Gmail)</td>
+          <td>Email delivery and customer support</td>
+        </tr>
+        <tr>
+          <td>Hosting service provider</td>
+          <td>Website operation and data storage</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>6. User Rights and How to Exercise Them</h2>
+    <p>Users may exercise the following rights at any time:</p>
+    <ol>
+      <li><strong>Right to Access:</strong> Confirm how personal information is being processed</li>
+      <li><strong>Right to Rectification or Erasure:</strong> Correct or delete inaccurate information</li>
+      <li><strong>Right to Suspension of Processing:</strong> Temporarily or permanently suspend personal information processing</li>
+      <li><strong>Right to Withdraw Consent:</strong> Withdraw consent to collection and use</li>
+    </ol>
+    <p>These rights can be exercised by emailing <strong>awaysbiz@gmail.com</strong>, and the Company will take action without delay.</p>
+
+    <h2>7. Destruction Procedures and Methods</h2>
+    <ol>
+      <li><strong>Destruction Procedure:</strong> Personal information whose purpose has been achieved is moved to a separate database and stored for a certain period in accordance with internal policies and relevant laws before being destroyed.</li>
+      <li><strong>Destruction Method:</strong>
+        <ul>
+          <li>Electronic files: Permanently deleted using methods that prevent recovery</li>
+          <li>Paper documents: Shredded or incinerated</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>8. Cookie Operation and Refusal</h2>
+    <p>The Company uses cookies to provide customized services to Users.</p>
+    <ol>
+      <li><strong>Purpose of Cookies:</strong> Access frequency analysis, service improvement</li>
+      <li><strong>How to Refuse Cookies:</strong> You can refuse cookie storage in your browser settings.
+        <ul>
+          <li>Chrome: Settings → Privacy and security → Cookies</li>
+          <li>Safari: Preferences → Privacy</li>
+          <li>Edge: Settings → Cookies and site permissions</li>
+        </ul>
+      </li>
+      <li>Refusing cookie storage may cause difficulties in using some services.</li>
+    </ol>
+
+    <h2>9. Security Measures</h2>
+    <p>The Company takes the following measures to protect personal information:</p>
+    <ol>
+      <li>Encrypted storage and transmission of personal information (HTTPS applied)</li>
+      <li>Minimization and access control of personal information access privileges</li>
+      <li>Operation of security systems against hacking</li>
+      <li>Minimization and regular training of personnel handling personal information</li>
+    </ol>
+
+    <h2>10. Data Protection Officer</h2>
+    <div class="info-box">
+      <strong>Data Protection Officer</strong><br>
+      Name: Park Soojin (CEO)<br>
+      Email: awaysbiz@gmail.com<br><br>
+      For inquiries, complaints, or remedies related to personal information, please contact the address above.
+    </div>
+
+    <h2>11. Remedies for Rights Infringement</h2>
+    <p>For reports or consultations regarding personal information infringement in Korea, please contact the following agencies:</p>
+    <ul>
+      <li><strong>Personal Information Infringement Report Center:</strong> 118 (privacy.kisa.or.kr)</li>
+      <li><strong>Personal Information Dispute Mediation Committee:</strong> 1833-6972 (kopico.go.kr)</li>
+      <li><strong>Supreme Prosecutors' Office Cybercrime Investigation:</strong> 1301 (spo.go.kr)</li>
+      <li><strong>National Police Agency Cybercrime Investigation Bureau:</strong> 182 (ecrm.cyber.go.kr)</li>
+    </ul>
+
+    <h2>12. Changes to This Policy</h2>
+    <p>This policy takes effect on January 1, 2026. The contents may change in accordance with laws or service policy changes, and any changes will be announced through notices at least 7 days before the effective date.</p>
+
+    <hr class="divider">
+
+    <p style="font-size:13px; color:var(--muted);">
+      <strong>Notice Date:</strong> January 1, 2026<br>
+      <strong>Effective Date:</strong> January 1, 2026
+    </p>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/en/terms">Terms</a>
+    <a href="/en/privacy">Privacy</a>
+    <a href="/en/refund">Refund</a>
+    <a href="mailto:awaysbiz@gmail.com">Support</a>
+  </div>
+  <div>© 2026 AWAYS · Business Registration No. 201-33-01726 · 40, Yeouidaebang-ro 24da-gil, Dongjak-gu, Seoul, Republic of Korea<br>
+  CEO: Park Soojin · Mail-Order Sales Registration: [Pending]</div>
+</footer>
+
+</body>
+</html>
