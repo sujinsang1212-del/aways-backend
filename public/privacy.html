@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>개인정보처리방침 · AWAYS</title>
+<meta name="description" content="AWAYS 체형진단 서비스 개인정보처리방침">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
+  --text: #1A1714; --muted: #8A8178;
+  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
+  --dark: #1A1714;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.header {
+  background: var(--bg);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text);
+}
+.header-back {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.page-hero {
+  padding: 60px 20px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.page-eyebrow {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px, 6vw, 42px);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.page-meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 36px;
+}
+@media (max-width: 600px) {
+  .content-card { padding: 28px 22px; }
+}
+
+.intro {
+  background: var(--accent-light);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 32px;
+  font-size: 14px;
+  line-height: 1.85;
+}
+.intro strong { color: var(--accent-dark); }
+
+.content h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.content h2:first-child { margin-top: 0; }
+
+.content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--accent-dark);
+}
+
+.content p {
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.content ol, .content ul {
+  margin: 12px 0 16px 22px;
+}
+.content li {
+  margin-bottom: 8px;
+}
+
+.content strong {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+table th, table td {
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+table th {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.info-box {
+  background: var(--accent-light);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.info-box strong { color: var(--accent-dark); }
+
+.footer {
+  background: var(--bg);
+  padding: 32px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  border-top: 1px solid var(--border);
+}
+.footer a { color: var(--accent-dark); text-decoration: none; }
+.footer-links {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="logo">체형진단</a>
+  <a href="/" class="header-back">← 홈으로</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-eyebrow">Privacy Policy</div>
+  <h1 class="page-title">개인정보처리방침</h1>
+  <div class="page-meta">시행일: 2026년 1월 1일</div>
+</section>
+
+<section class="content">
+  <div class="content-card">
+
+    <div class="intro">
+      AWAYS(이하 "회사")는 이용자의 개인정보를 소중히 여기며, 「개인정보 보호법」 및 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 등 관련 법령을 준수합니다.<br><br>
+      회사는 본 방침을 통해 <strong>어떤 정보를, 왜, 얼마나 오래 보관하는지</strong>를 투명하게 공개합니다.
+    </div>
+
+    <h2>1. 수집하는 개인정보 항목</h2>
+    <p>회사는 서비스 제공을 위해 <strong>최소한의 개인정보만 수집</strong>합니다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>수집 항목</th>
+          <th>수집 시점</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>필수</td>
+          <td>이메일 주소</td>
+          <td>리포트 결제 시</td>
+        </tr>
+        <tr>
+          <td>자동수집</td>
+          <td>접속 IP, 쿠키, 접속 로그, 기기정보, 브라우저 종류</td>
+          <td>서비스 이용 시</td>
+        </tr>
+        <tr>
+          <td>결제정보</td>
+          <td>결제수단 정보 (PG사 직접 처리)</td>
+          <td>결제 시</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>중요</strong> 회사는 이름, 전화번호, 주소, 주민등록번호 등 <strong>이메일 외 개인정보를 수집하지 않습니다</strong>. 결제정보(카드번호 등)는 토스페이먼츠 등 PG사가 직접 처리하며, 회사는 보관하지 않습니다.
+    </div>
+
+    <h2>2. 개인정보의 수집 및 이용 목적</h2>
+    <p>수집된 개인정보는 다음 목적으로만 사용됩니다.</p>
+    <ol>
+      <li><strong>서비스 제공:</strong> PDF 리포트 발송, 다운로드 링크 전달</li>
+      <li><strong>결제 및 환불 처리:</strong> 결제 확인, 환불 요청 처리, 거래 내역 관리</li>
+      <li><strong>고객 지원:</strong> 문의 응대, 공지사항 전달</li>
+      <li><strong>서비스 개선:</strong> 접속 통계 분석, 서비스 품질 향상 (개인 식별 불가능한 형태로 활용)</li>
+    </ol>
+
+    <h2>3. 개인정보의 보유 및 이용 기간</h2>
+    <p>회사는 개인정보 수집 및 이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 경우 법령이 정한 기간 동안 보관합니다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>보존 항목</th>
+          <th>근거 법령</th>
+          <th>보존 기간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>계약 또는 청약철회 등에 관한 기록</td>
+          <td>전자상거래법</td>
+          <td>5년</td>
+        </tr>
+        <tr>
+          <td>대금결제 및 재화 등의 공급에 관한 기록</td>
+          <td>전자상거래법</td>
+          <td>5년</td>
+        </tr>
+        <tr>
+          <td>소비자 불만 또는 분쟁처리에 관한 기록</td>
+          <td>전자상거래법</td>
+          <td>3년</td>
+        </tr>
+        <tr>
+          <td>접속 로그</td>
+          <td>통신비밀보호법</td>
+          <td>3개월</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. 개인정보의 제3자 제공</h2>
+    <p>회사는 이용자의 개인정보를 <strong>원칙적으로 외부에 제공하지 않습니다</strong>. 다만, 다음의 경우는 예외로 합니다.</p>
+    <ol>
+      <li>이용자가 사전에 동의한 경우</li>
+      <li>법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
+    </ol>
+
+    <h2>5. 개인정보 처리의 위탁</h2>
+    <p>회사는 원활한 서비스 제공을 위해 다음과 같이 개인정보 처리를 위탁하고 있습니다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>수탁자</th>
+          <th>위탁 업무</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>토스페이먼츠(주)</td>
+          <td>전자결제 처리</td>
+        </tr>
+        <tr>
+          <td>Google LLC (Gmail)</td>
+          <td>이메일 발송 및 고객 응대</td>
+        </tr>
+        <tr>
+          <td>호스팅 서비스 제공자</td>
+          <td>웹사이트 운영 및 데이터 보관</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>6. 이용자의 권리와 행사 방법</h2>
+    <p>이용자는 언제든지 다음의 권리를 행사할 수 있습니다.</p>
+    <ol>
+      <li><strong>열람 요구:</strong> 본인의 개인정보 처리 현황 확인</li>
+      <li><strong>정정·삭제 요구:</strong> 잘못된 정보의 수정 또는 삭제</li>
+      <li><strong>처리정지 요구:</strong> 개인정보 처리의 일시 또는 영구 중단</li>
+      <li><strong>동의 철회:</strong> 수집·이용 동의의 철회</li>
+    </ol>
+    <p>위 권리는 <strong>awaysbiz@gmail.com</strong>으로 이메일을 보내 행사할 수 있으며, 회사는 지체 없이 조치하겠습니다.</p>
+
+    <h2>7. 개인정보의 파기 절차 및 방법</h2>
+    <ol>
+      <li><strong>파기 절차:</strong> 이용 목적이 달성된 개인정보는 별도의 DB로 옮겨져 내부 방침 및 관련 법령에 따라 일정 기간 저장된 후 파기됩니다.</li>
+      <li><strong>파기 방법:</strong>
+        <ul>
+          <li>전자적 파일: 복구할 수 없는 방법으로 영구 삭제</li>
+          <li>종이 문서: 분쇄 또는 소각</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>8. 쿠키(Cookie)의 운영 및 거부</h2>
+    <p>회사는 이용자에게 맞춤형 서비스를 제공하기 위해 쿠키를 사용합니다.</p>
+    <ol>
+      <li><strong>쿠키 사용 목적:</strong> 접속 빈도 분석, 서비스 개선</li>
+      <li><strong>쿠키 거부 방법:</strong> 웹브라우저 설정에서 쿠키 저장을 거부할 수 있습니다.
+        <ul>
+          <li>Chrome: 설정 → 개인정보 및 보안 → 쿠키</li>
+          <li>Safari: 환경설정 → 개인정보 보호</li>
+          <li>Edge: 설정 → 쿠키 및 사이트 권한</li>
+        </ul>
+      </li>
+      <li>쿠키 저장을 거부할 경우 일부 서비스 이용에 어려움이 있을 수 있습니다.</li>
+    </ol>
+
+    <h2>9. 개인정보의 안전성 확보 조치</h2>
+    <p>회사는 개인정보 보호를 위해 다음과 같은 조치를 취하고 있습니다.</p>
+    <ol>
+      <li>개인정보 암호화 저장 및 전송 (HTTPS 적용)</li>
+      <li>개인정보 접근 권한 최소화 및 접근 통제</li>
+      <li>해킹 등에 대비한 보안 시스템 운영</li>
+      <li>개인정보 처리 직원의 최소화 및 정기 교육</li>
+    </ol>
+
+    <h2>10. 개인정보 보호책임자</h2>
+    <div class="info-box">
+      <strong>개인정보 보호책임자</strong><br>
+      성명: 박수진 (대표)<br>
+      이메일: awaysbiz@gmail.com<br><br>
+      개인정보와 관련된 문의, 불만, 피해구제 등에 관한 사항은 위 연락처로 문의해주시기 바랍니다.
+    </div>
+
+    <h2>11. 권익침해 구제방법</h2>
+    <p>개인정보 침해로 인한 신고나 상담이 필요한 경우 아래 기관에 문의하시기 바랍니다.</p>
+    <ul>
+      <li><strong>개인정보 침해신고센터:</strong> 국번없이 118 (privacy.kisa.or.kr)</li>
+      <li><strong>개인정보분쟁조정위원회:</strong> 1833-6972 (kopico.go.kr)</li>
+      <li><strong>대검찰청 사이버수사과:</strong> 국번없이 1301 (spo.go.kr)</li>
+      <li><strong>경찰청 사이버수사국:</strong> 국번없이 182 (ecrm.cyber.go.kr)</li>
+    </ul>
+
+    <h2>12. 개인정보처리방침의 변경</h2>
+    <p>본 방침은 2026년 1월 1일부터 시행됩니다. 법령 또는 서비스 정책 변경에 따라 내용이 변경될 수 있으며, 변경 시 시행 7일 전부터 공지사항을 통해 알려드립니다.</p>
+
+    <hr class="divider">
+
+    <p style="font-size:13px; color:var(--muted);">
+      <strong>공고일:</strong> 2026년 1월 1일<br>
+      <strong>시행일:</strong> 2026년 1월 1일
+    </p>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/terms">이용약관</a>
+    <a href="/privacy">개인정보처리방침</a>
+    <a href="/refund">환불정책</a>
+    <a href="mailto:awaysbiz@gmail.com">고객센터</a>
+  </div>
+  <div>© 2026 AWAYS · 사업자등록번호 201-33-01726 · 서울시 동작구 여의대방로24다길40<br>
+  대표 박수진 · 통신판매업 신고 [신청 중]</div>
+</footer>
+
+</body>
+</html>
