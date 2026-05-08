@@ -938,13 +938,28 @@ function showScreen(id) {
   }
 }
 
+// Payhip product URL mapping (body type → Payhip URL)
+const PAYHIP_URLS = {
+  'W-Soft': 'https://payhip.com/b/6MKux',  // Soft Wave
+  'W-H':    'https://payhip.com/b/9Qqkj',  // Hard Wave
+  'N-Soft': 'https://payhip.com/b/HydUs',  // Soft Natural
+  'N-H':    'https://payhip.com/b/81Xml',  // Hard Natural
+  'S-Soft': 'https://payhip.com/b/y0MPn',  // Soft Straight
+  'S-H':    'https://payhip.com/b/viAlC',  // Hard Straight
+};
+
 function goToPayment() {
   const result = JSON.parse(sessionStorage.getItem('bodyTypeResult') || '{}');
-  const params = new URLSearchParams({
-    bodyType: result.typeKey || '',
-    typeName: result.typeName || '',
-  });
-  window.location.href = `/en/payment.html?${params.toString()}`;
+  const typeKey = result.typeKey || '';
+  const payhipUrl = PAYHIP_URLS[typeKey];
+
+  if (!payhipUrl) {
+    alert('Something went wrong. Please retake the quiz.');
+    return;
+  }
+
+  // Redirect to Payhip product page
+  window.location.href = payhipUrl;
 }
 
 function shareResult() {
