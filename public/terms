@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이용약관 · AWAYS</title>
+<meta name="description" content="AWAYS 체형진단 서비스 이용약관">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
+  --text: #1A1714; --muted: #8A8178;
+  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
+  --dark: #1A1714;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.header {
+  background: var(--bg);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text);
+}
+.header-back {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.page-hero {
+  padding: 60px 20px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.page-eyebrow {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px, 6vw, 42px);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.page-meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 36px;
+}
+@media (max-width: 600px) {
+  .content-card { padding: 28px 22px; }
+}
+
+.content h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.content h2:first-child { margin-top: 0; }
+
+.content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--accent-dark);
+}
+
+.content p {
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.content ol, .content ul {
+  margin: 12px 0 16px 22px;
+}
+.content li {
+  margin-bottom: 8px;
+}
+
+.content strong {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+.info-box {
+  background: var(--accent-light);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.info-box strong { color: var(--accent-dark); }
+
+.footer {
+  background: var(--bg);
+  padding: 32px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  border-top: 1px solid var(--border);
+}
+.footer a { color: var(--accent-dark); text-decoration: none; }
+.footer-links {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="logo">체형진단</a>
+  <a href="/" class="header-back">← 홈으로</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-eyebrow">Terms of Service</div>
+  <h1 class="page-title">이용약관</h1>
+  <div class="page-meta">시행일: 2026년 1월 1일</div>
+</section>
+
+<section class="content">
+  <div class="content-card">
+
+    <h2>제1조 (목적)</h2>
+    <p>본 약관은 AWAYS(이하 "회사")가 제공하는 체형진단 및 스타일 가이드 서비스(이하 "서비스")의 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+
+    <h2>제2조 (용어의 정의)</h2>
+    <ol>
+      <li><strong>"서비스"</strong>란 회사가 운영하는 웹사이트를 통해 제공하는 체형진단 테스트, PDF 리포트 발송 및 관련 부가 서비스를 의미합니다.</li>
+      <li><strong>"이용자"</strong>란 본 약관에 따라 회사가 제공하는 서비스를 이용하는 자를 말합니다.</li>
+      <li><strong>"리포트"</strong>란 이용자의 진단 결과를 바탕으로 제공되는 PDF 형식의 스타일 가이드 콘텐츠를 의미합니다.</li>
+    </ol>
+
+    <h2>제3조 (약관의 게시와 개정)</h2>
+    <ol>
+      <li>회사는 본 약관의 내용을 이용자가 쉽게 알 수 있도록 서비스 초기 화면에 게시합니다.</li>
+      <li>회사는 「전자상거래 등에서의 소비자보호에 관한 법률」, 「약관의 규제에 관한 법률」 등 관련 법령을 위배하지 않는 범위에서 본 약관을 개정할 수 있습니다.</li>
+      <li>회사가 약관을 개정할 경우, 적용일자 및 개정사유를 명시하여 현행 약관과 함께 적용일자 7일 전부터 공지합니다. 단, 이용자에게 불리한 개정의 경우 30일 전부터 공지합니다.</li>
+    </ol>
+
+    <h2>제4조 (서비스의 제공)</h2>
+    <ol>
+      <li>회사는 다음과 같은 서비스를 제공합니다.
+        <ul>
+          <li>15문항 체형진단 테스트 (무료)</li>
+          <li>진단 결과 기반 PDF 스타일 리포트 (유료)</li>
+          <li>기타 회사가 정하는 부가 서비스</li>
+        </ul>
+      </li>
+      <li>서비스의 내용 및 가격은 회사의 정책에 따라 변경될 수 있으며, 변경 시 사전 공지합니다.</li>
+      <li>서비스는 연중무휴 24시간 제공함을 원칙으로 하나, 시스템 점검·교체·고장, 통신두절 등 부득이한 사유가 발생한 경우 일시 중단될 수 있습니다.</li>
+    </ol>
+
+    <h2>제5조 (서비스 이용계약의 성립)</h2>
+    <ol>
+      <li>이용계약은 이용자가 본 약관에 동의하고 결제를 완료한 시점에 성립합니다.</li>
+      <li>회사는 다음 각 호에 해당하는 신청에 대해서는 승낙하지 않거나 사후에 이용계약을 해지할 수 있습니다.
+        <ul>
+          <li>허위 정보를 기재하거나 타인의 정보를 도용한 경우</li>
+          <li>서비스의 정상적인 운영을 방해할 목적으로 신청한 경우</li>
+          <li>관련 법령을 위반하거나 부정한 용도로 서비스를 이용하고자 하는 경우</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>제6조 (결제 및 가격)</h2>
+    <ol>
+      <li>리포트 가격은 서비스 페이지에 명시된 금액으로 하며, <strong>회사의 정책에 따라 변경될 수 있습니다</strong>.</li>
+      <li>가격 변경 시 변경 전 결제를 완료한 이용자에게는 결제 당시의 가격이 적용됩니다.</li>
+      <li>결제는 토스페이먼츠 등 회사가 제공하는 결제수단을 통해 이루어지며, 결제 정보는 회사가 직접 보관하지 않습니다.</li>
+    </ol>
+
+    <h2>제7조 (청약철회 및 환불)</h2>
+    <ol>
+      <li>이용자는 결제일로부터 <strong>7일 이내</strong> 청약철회를 요청할 수 있습니다.</li>
+      <li>「전자상거래 등에서의 소비자보호에 관한 법률」 제17조에 따라, 디지털 콘텐츠의 경우 콘텐츠를 다운로드하거나 사용한 시점부터 청약철회권이 제한될 수 있으나, <strong>회사는 자체 정책으로 7일 이내 무조건 환불을 보장</strong>합니다.</li>
+      <li>단, 다음의 경우에는 환불이 제한될 수 있습니다.
+        <ul>
+          <li>리포트를 외부에 공유, 배포, 복제한 사실이 확인된 경우</li>
+          <li>이용자의 고의 또는 과실로 인해 콘텐츠가 훼손된 경우</li>
+        </ul>
+      </li>
+      <li>환불의 구체적인 절차와 방법은 별도의 <a href="/refund" style="color:var(--accent-dark);">환불정책</a>에서 정합니다.</li>
+    </ol>
+
+    <h2>제8조 (이용자의 의무)</h2>
+    <ol>
+      <li>이용자는 다음 행위를 하여서는 안 됩니다.
+        <ul>
+          <li>리포트의 무단 복제, 배포, 전송, 공유</li>
+          <li>리포트를 상업적 목적으로 사용하는 행위</li>
+          <li>회사의 서비스 운영을 방해하는 행위</li>
+          <li>타인의 정보를 도용하거나 허위 정보를 입력하는 행위</li>
+        </ul>
+      </li>
+      <li>이용자가 본 조의 의무를 위반한 경우, 회사는 서비스 이용을 제한하거나 환불을 거부할 수 있습니다.</li>
+    </ol>
+
+    <h2>제9조 (지식재산권)</h2>
+    <ol>
+      <li>회사가 제공하는 서비스 및 리포트의 저작권 및 지식재산권은 회사에 귀속됩니다.</li>
+      <li>이용자는 리포트를 개인적·비상업적 용도로만 사용할 수 있으며, 회사의 사전 서면 동의 없이 복제·배포·전송·공유할 수 없습니다.</li>
+    </ol>
+
+    <h2>제10조 (면책조항)</h2>
+    <ol>
+      <li>리포트는 스타일 참고를 위한 가이드이며, 개인의 만족도는 주관적 요소에 따라 달라질 수 있습니다.</li>
+      <li>회사는 천재지변, 전쟁, 통신 두절 등 불가항력으로 인하여 서비스를 제공할 수 없는 경우 책임이 면제됩니다.</li>
+      <li>회사는 이용자의 귀책사유로 인한 서비스 이용 장애에 대하여 책임을 지지 않습니다.</li>
+    </ol>
+
+    <h2>제11조 (분쟁해결)</h2>
+    <ol>
+      <li>회사와 이용자 간 발생한 분쟁은 상호 협의하여 해결함을 원칙으로 합니다.</li>
+      <li>협의가 이루어지지 않을 경우, 「전자상거래 등에서의 소비자보호에 관한 법률」 및 관련 법령에 따라 해결합니다.</li>
+      <li>본 약관과 관련된 소송의 관할 법원은 민사소송법상의 관할 법원으로 합니다.</li>
+    </ol>
+
+    <hr class="divider">
+
+    <div class="info-box">
+      <strong>고객센터 문의</strong><br>
+      이메일: awaysbiz@gmail.com<br>
+      운영시간: 평일 10:00 ~ 18:00 (주말·공휴일 제외)
+    </div>
+
+    <p style="font-size:13px; color:var(--muted); margin-top:24px;">
+      <strong>부칙</strong><br>
+      본 약관은 2026년 1월 1일부터 시행됩니다.
+    </p>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/terms">이용약관</a>
+    <a href="/privacy">개인정보처리방침</a>
+    <a href="/refund">환불정책</a>
+    <a href="mailto:awaysbiz@gmail.com">고객센터</a>
+  </div>
+  <div>© 2026 AWAYS · 사업자등록번호 201-33-01726 · 서울시 동작구 여의대방로24다길40<br>
+  대표 박수진 · 통신판매업 신고 [신청 중]</div>
+</footer>
+
+</body>
+</html>
