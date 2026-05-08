@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>환불정책 · AWAYS</title>
+<meta name="description" content="AWAYS 체형진단 서비스 환불정책 - 7일 이내 무조건 환불 보장">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
+  --text: #1A1714; --muted: #8A8178;
+  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
+  --dark: #1A1714;
+  --green: #4A7C59;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.header {
+  background: var(--bg);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text);
+}
+.header-back {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.page-hero {
+  padding: 60px 20px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.page-eyebrow {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px, 6vw, 42px);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.page-title em { font-style: italic; color: var(--accent-dark); }
+.page-meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 36px;
+}
+@media (max-width: 600px) {
+  .content-card { padding: 28px 22px; }
+}
+
+.guarantee-box {
+  background: linear-gradient(135deg, var(--accent-light) 0%, #F7E8D0 100%);
+  border-radius: 14px;
+  padding: 28px 26px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.guarantee-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.guarantee-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--accent-dark);
+  margin-bottom: 8px;
+}
+.guarantee-desc {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.content h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.content h2:first-child { margin-top: 0; }
+
+.content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--accent-dark);
+}
+
+.content p {
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.content ol, .content ul {
+  margin: 12px 0 16px 22px;
+}
+.content li {
+  margin-bottom: 8px;
+}
+
+.content strong {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 24px 0;
+}
+.step-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.step-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 36px;
+}
+.step-content {
+  flex: 1;
+}
+.step-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+.step-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+table th, table td {
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+table th {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.warning-box {
+  background: #FFF4E6;
+  border-left: 4px solid #E89A3A;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.warning-box strong { color: #C27414; }
+
+.info-box {
+  background: var(--accent-light);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.info-box strong { color: var(--accent-dark); }
+
+.cta-block {
+  text-align: center;
+  margin-top: 32px;
+  padding: 28px 20px;
+  background: var(--bg);
+  border-radius: 14px;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--dark);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-top: 8px;
+}
+
+.footer {
+  background: var(--bg);
+  padding: 32px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  border-top: 1px solid var(--border);
+}
+.footer a { color: var(--accent-dark); text-decoration: none; }
+.footer-links {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="logo">체형진단</a>
+  <a href="/" class="header-back">← 홈으로</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-eyebrow">Refund Policy</div>
+  <h1 class="page-title"><em>7일 이내</em> 무조건 환불</h1>
+  <div class="page-meta">시행일: 2026년 1월 1일</div>
+</section>
+
+<section class="content">
+  <div class="content-card">
+
+    <div class="guarantee-box">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-title">결제 후 7일 이내, 사유 무관 환불</div>
+      <div class="guarantee-desc">
+        리포트가 마음에 들지 않으셨다면 이유 없이 환불해드립니다.<br>
+        AWAYS는 고객의 만족을 최우선으로 생각합니다.
+      </div>
+    </div>
+
+    <h2>1. 환불 보장 정책</h2>
+    <p>회사는 「전자상거래 등에서의 소비자보호에 관한 법률」에 따른 청약철회권을 보장하며, 이에 더해 자체 정책으로 다음과 같은 환불 보장을 제공합니다.</p>
+    <ol>
+      <li><strong>결제일로부터 7일 이내</strong> 환불을 요청할 수 있습니다.</li>
+      <li>환불 사유는 <strong>묻지 않습니다</strong>. 단순 변심도 가능합니다.</li>
+      <li>리포트를 이미 다운로드하셨더라도 환불 가능합니다 (단, 아래 제한사항 참조).</li>
+    </ol>
+
+    <h2>2. 환불 신청 방법</h2>
+    <p>아래 절차에 따라 간단하게 환불을 받으실 수 있습니다.</p>
+
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">이메일 발송</div>
+          <div class="step-desc">awaysbiz@gmail.com으로 환불 요청 메일을 보내주세요.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">필수 정보 기재</div>
+          <div class="step-desc">결제 시 사용한 이메일 주소와 주문번호를 함께 보내주세요. 환불 사유 작성은 선택입니다.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">환불 처리 (영업일 3일 이내)</div>
+          <div class="step-desc">접수 확인 후 영업일 기준 3일 이내에 환불 처리를 완료합니다.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-title">결제수단으로 자동 환불</div>
+          <div class="step-desc">결제 시 사용하신 카드 또는 계좌로 자동 환불되며, 카드사 정책에 따라 5~7일 정도 소요될 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>3. 환불 가능 금액</h2>
+    <p>리포트 가격은 변동될 수 있으며, <strong>환불 시에는 결제 당시 실제 결제하신 금액을 그대로 환불</strong>해드립니다.</p>
+
+    <div class="info-box">
+      <strong>예시</strong><br>
+      · 정가 24,900원 시점에 결제 → 24,900원 환불<br>
+      · 할인가 19,900원 시점에 결제 → 19,900원 환불<br>
+      · 프로모션 가격으로 결제 → 결제하신 금액 그대로 환불
+    </div>
+
+    <h2>4. 환불 제한 사항</h2>
+    <p>아래의 경우에는 환불이 제한될 수 있습니다.</p>
+
+    <div class="warning-box">
+      <strong>⚠️ 환불 제한 사유</strong><br><br>
+      ① 결제일로부터 <strong>7일이 경과</strong>한 경우<br>
+      ② 리포트 콘텐츠를 <strong>외부에 공유, 배포, 복제</strong>한 사실이 확인된 경우<br>
+      ③ 리포트 내용을 <strong>SNS, 블로그 등에 무단 게시</strong>한 경우<br>
+      ④ 이용자의 <strong>고의 또는 중대한 과실</strong>로 콘텐츠가 훼손된 경우<br>
+      ⑤ 동일 이용자가 반복적으로 결제·환불을 시도하는 등 <strong>제도를 악용</strong>한 정황이 있는 경우
+    </div>
+
+    <p>위 사유에 해당하더라도, 회사는 사안의 경중을 검토하여 부분 환불 또는 전액 환불을 결정할 수 있습니다.</p>
+
+    <h2>5. 처리 기간</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>단계</th>
+          <th>소요 시간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>환불 요청 접수</td>
+          <td>이메일 수신 후 영업일 기준 1일 이내 확인</td>
+        </tr>
+        <tr>
+          <td>환불 승인 및 처리</td>
+          <td>접수 확인 후 영업일 기준 3일 이내</td>
+        </tr>
+        <tr>
+          <td>실제 입금/환급</td>
+          <td>카드사·은행 정책에 따라 5~7일 추가 소요 가능</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>6. 결제 오류로 인한 환불</h2>
+    <p>다음의 경우는 7일 제한과 무관하게 즉시 환불해드립니다.</p>
+    <ol>
+      <li>중복 결제가 발생한 경우</li>
+      <li>결제는 완료되었으나 리포트가 발송되지 않은 경우</li>
+      <li>시스템 오류로 인해 잘못된 금액이 결제된 경우</li>
+      <li>리포트 파일에 결함이 있어 정상 사용이 불가능한 경우</li>
+    </ol>
+
+    <h2>7. 자주 묻는 질문</h2>
+
+    <h3>Q. 리포트를 이미 다운로드했는데 환불이 가능한가요?</h3>
+    <p>네, 가능합니다. 7일 이내라면 다운로드 여부와 관계없이 환불해드립니다. 다만 환불 시 다운로드한 파일은 폐기해주시기 바랍니다.</p>
+
+    <h3>Q. 환불 사유를 꼭 적어야 하나요?</h3>
+    <p>아니요, 환불 사유 작성은 <strong>선택사항</strong>입니다. 단순 변심이라고 적으셔도 환불해드립니다. 다만 서비스 개선을 위해 의견을 주신다면 큰 도움이 됩니다.</p>
+
+    <h3>Q. 환불 처리 상태는 어떻게 확인하나요?</h3>
+    <p>환불 접수 시 회신 메일로 알려드리며, 처리 완료 시에도 별도로 안내 메일을 발송해드립니다.</p>
+
+    <h3>Q. 7일이 지나면 정말 환불이 안 되나요?</h3>
+    <p>원칙적으로 7일 이후의 환불은 어렵습니다. 다만 리포트 자체에 결함이 있거나 회사의 귀책사유가 있는 경우는 기간과 관계없이 환불해드립니다. 먼저 이메일로 문의해주세요.</p>
+
+    <hr class="divider">
+
+    <div class="info-box">
+      <strong>📧 환불 문의처</strong><br>
+      이메일: awaysbiz@gmail.com<br>
+      운영시간: 평일 10:00 ~ 18:00 (주말·공휴일 제외)<br><br>
+      ※ 메일 접수는 24시간 가능하며, 영업일 기준으로 순차 응대해드립니다.
+    </div>
+
+    <div class="cta-block">
+      <p style="font-size:14px; color:var(--muted); margin-bottom:6px;">아직 진단 전이신가요?</p>
+      <a href="/" class="cta-btn">홈으로 돌아가기 →</a>
+    </div>
+
+    <p style="font-size:13px; color:var(--muted); margin-top:24px; text-align:center;">
+      본 환불정책은 2026년 1월 1일부터 시행됩니다.<br>
+      변경 시 시행 7일 전부터 사이트 내 공지사항을 통해 안내해드립니다.
+    </p>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/terms">이용약관</a>
+    <a href="/privacy">개인정보처리방침</a>
+    <a href="/refund">환불정책</a>
+    <a href="mailto:awaysbiz@gmail.com">고객센터</a>
+  </div>
+  <div>© 2026 AWAYS · 사업자등록번호 201-33-01726 · 서울시 동작구 여의대방로24다길40<br>
+  대표 박수진 · 통신판매업 신고 [신청 중]</div>
+</footer>
+
+</body>
+</html>
