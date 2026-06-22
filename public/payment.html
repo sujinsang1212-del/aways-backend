@@ -398,11 +398,6 @@ body {
 <div class="screen active" id="screen-payment">
   <div class="container">
 
-    <div class="test-banner">
-      🧪 <strong>테스트 모드</strong> · 실제 결제가 진행되지 않습니다.<br>
-      카드번호: <strong>4330-1234-1234-1234</strong> / 유효기간 아무거나 / CVC 아무거나
-    </div>
-
     <div class="section-eyebrow">Order Confirmation</div>
     <h1 class="section-title">주문 <em>확인</em></h1>
     <p class="section-desc">선택하신 플랜과 정보를 확인한 후 결제를 진행해주세요.</p>
@@ -527,10 +522,11 @@ body {
 
 <script>
 // ============================================================
-// 토스페이먼츠 테스트 클라이언트 키 (공개 키)
-// 실제 운영 시에는 사업자등록 후 발급받은 키로 교체
+// 토스페이먼츠 결제위젯 연동 키 (클라이언트 키 · 공개되어도 되는 키)
+// AWAYS 본인 계정의 결제위젯 연동 키 (gck = 위젯 연동 키)
+// 시크릿 키(gsk)는 절대 여기 넣지 말 것 → Vercel 환경변수 TOSS_SECRET_KEY
 // ============================================================
-const TOSS_CLIENT_KEY = 'test_ck_5OWRapdA8dWwEkDkMlnBro1zEqZK';
+const TOSS_CLIENT_KEY = 'test_gck_EP59LybZ8BlOdvnv2ZWbV6GYo7pR';
 const TOSS_CUSTOMER_KEY = generateCustomerKey();
 
 // ============================================================
@@ -654,9 +650,9 @@ async function requestPayment() {
       customerEmail: email,
       customerName: email.split('@')[0],
       // 결제 성공/실패 시 리다이렉트 URL
-      // 실제 운영 시에는 백엔드의 결제 승인 API URL로 변경
-      successUrl: `${window.location.origin}/payment-success.html`,
-      failUrl: `${window.location.origin}${window.location.pathname}?status=fail`,
+      // bodyType을 함께 실어 보내 승인 단계에서 PDF를 안정적으로 생성
+      successUrl: `${window.location.origin}/payment-success.html?bodyType=${encodeURIComponent(bodyType)}`,
+      failUrl: `${window.location.origin}/payment-success.html?status=fail`,
     });
   } catch (error) {
     // 사용자가 결제창을 닫은 경우 또는 에러
