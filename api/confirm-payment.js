@@ -33,6 +33,33 @@ const BODY_TYPE_KR = {
 };
 
 // ============================================================
+// 체형 값 정규화
+// 진단 페이지가 어떤 형식으로 보내도 REPORT_MAP 키로 맞춰준다.
+//   'S-Soft' → 'soft-straight'   (S=스트레이트, W=웨이브, N=내추럴)
+//   'W-Hard' → 'hard-wave'
+//   'soft-straight', 'Soft Straight', 'STRAIGHT_SOFT' 등도 모두 인식
+// ============================================================
+function normalizeBodyType(raw) {
+  if (!raw) return null;
+  const s = String(raw).trim().toLowerCase();
+  if (REPORT_MAP[s]) return s;
+
+  const parts = s.split(/[^a-z]+/).filter(Boolean);
+  const LINE = {
+    s: 'straight', straight: 'straight',
+    w: 'wave',     wave: 'wave',
+    n: 'natural',  natural: 'natural',
+  };
+
+  const tone = parts.find(p => p === 'soft' || p === 'hard');
+  const line = parts.map(p => LINE[p]).find(Boolean);
+  if (!tone || !line) return null;
+
+  const key = `${tone}-${line}`;
+  return REPORT_MAP[key] ? key : null;
+}
+
+// ============================================================
 // HTML → PDF 변환 (Puppeteer + @sparticuz/chromium)
 // ============================================================
 async function generatePDF(bodyType) {
@@ -161,6 +188,9 @@ export default async function handler(req, res) {
 
   const { paymentKey, orderId, amount, email, bodyType } = req.body;
 
+  // 진단 페이지에서 온 체형 값을 리포트 키로 변환 (예: 'S-Soft' → 'soft-straight')
+  const bodyTypeKey = normalizeBodyType(bodyType);
+
   // ========================================
   // 0. 결제 승인에 필요한 필수값만 검증
   //    (이메일·체형은 리포트 발송용이라 승인 단계에서는 막지 않는다)
@@ -177,7 +207,7 @@ export default async function handler(req, res) {
 
   try {
     // ========================================
-    // 1. 토스페이먼츠 결제 승인 (가장 먼저, 이것만 성공하면 심사 통과 조건 충족)
+    // 1. 토스페이먼츠 결제 승인
     // ========================================
     const encryptedSecretKey = Buffer.from(TOSS_SECRET_KEY + ':').toString('base64');
 
@@ -209,29 +239,30 @@ export default async function handler(req, res) {
     // ========================================
     // 2. 리포트 생성 + 이메일 발송 (승인 성공 후 부가 단계)
     //    여기서 실패해도 결제는 이미 승인됐으므로 200을 돌려준다.
-    //    (실패 시 reportSent=false 로 알려 수동 재발송 가능)
     // ========================================
     let reportSent = false;
     let emailId = null;
 
-    if (email && REPORT_MAP[bodyType]) {
+    if (email && bodyTypeKey) {
       try {
-        console.log(`[PDF 생성 시작] bodyType: ${bodyType}`);
+        console.log(`[PDF 생성 시작] bodyType: ${bodyType} → ${bodyTypeKey}`);
         const startTime = Date.now();
-        const pdfBuffer = await generatePDF(bodyType);
+        const pdfBuffer = await generatePDF(bodyTypeKey);
         console.log(`[PDF 생성 완료] ${(pdfBuffer.length / 1024 / 1024).toFixed(1)}MB, ${Date.now() - startTime}ms`);
 
         console.log(`[이메일 발송] to: ${email}`);
-        const emailResult = await sendEmail(email, bodyType, pdfBuffer);
+        const emailResult = await sendEmail(email, bodyTypeKey, pdfBuffer);
         emailId = emailResult?.id;
         reportSent = true;
         console.log(`[이메일 발송 완료] id: ${emailId}`);
       } catch (reportErr) {
         // 결제는 성공했지만 리포트 단계만 실패 — 결제를 깨지 않는다
-        console.error('[리포트 발송 실패 · 결제는 승인됨]', reportErr.message);
+        console.error(`[리포트 발송 실패 · 결제는 승인됨] orderId: ${orderId}, email: ${email}, bodyType: ${bodyType}`, reportErr.message);
       }
+    } else if (!email) {
+      console.warn(`[리포트 건너뜀] 이메일 없음 (orderId: ${orderId}, bodyType: ${bodyType})`);
     } else {
-      console.warn(`[리포트 건너뜀] email 또는 bodyType 누락 (email=${!!email}, bodyType=${bodyType})`);
+      console.warn(`[리포트 건너뜀] 인식할 수 없는 체형 값 (orderId: ${orderId}, email: ${email}, bodyType: ${bodyType})`);
     }
 
     // ========================================
@@ -241,7 +272,7 @@ export default async function handler(req, res) {
       success: true,
       message: reportSent ? '결제 완료 및 리포트 발송 완료' : '결제 승인 완료 (리포트 발송은 별도 확인 필요)',
       orderId,
-      bodyType,
+      bodyType: bodyTypeKey || bodyType,
       method: methodLabel,
       reportSent,
       emailId,
