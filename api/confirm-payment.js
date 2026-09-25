@@ -48,9 +48,18 @@ function normalizeBodyType(raw) {
     w: 'wave',     wave: 'wave',
     n: 'natural',  natural: 'natural',
   };
+  const TONE = { soft: 'soft', s: 'soft', hard: 'hard', h: 'hard' };
 
-  const tone = parts.find(p => p === 'soft' || p === 'hard');
-  const line = parts.map(p => LINE[p]).find(Boolean);
+  let tone, line;
+  if (parts.length === 2 && LINE[parts[0]] && TONE[parts[1]]) {
+    // 'S-H', 'S-Soft', 'N-S', 'W-Hard' 형식: 앞=라인, 뒤=톤
+    line = LINE[parts[0]];
+    tone = TONE[parts[1]];
+  } else {
+    // 'soft-straight', 'Hard Wave' 등 풀네임 형식
+    tone = parts.find(p => p === 'soft' || p === 'hard');
+    line = parts.map(p => LINE[p]).find(Boolean);
+  }
   if (!tone || !line) return null;
 
   const key = `${tone}-${line}`;
