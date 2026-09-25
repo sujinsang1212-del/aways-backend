@@ -1,25 +1,23 @@
 // ============================================================
-// 결제 승인 + PDF 자동 생성 + 이메일 발송
+// 결제 승인 + 미리 만든 PDF 첨부 + 이메일 발송
 // 경로: api/confirm-payment.js
 // 배포: Vercel Serverless Function
 // ============================================================
 
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
 import { Resend } from 'resend';
 import fs from 'fs';
 import path from 'path';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// 체형별 HTML 파일 매핑
+// 체형별 PDF 파일 매핑 (reports 폴더에 미리 만들어 둔 PDF)
 const REPORT_MAP = {
-  'soft-wave':     'report-soft-wave.html',
-  'soft-natural':  'report-soft-natural.html',
-  'hard-wave':     'report-hard-wave.html',
-  'hard-natural':  'report-hard-natural.html',
-  'soft-straight': 'report-soft-straight.html',
-  'hard-straight': 'report-hard-straight.html',
+  'soft-wave':     'report-soft-wave.pdf',
+  'soft-natural':  'report-soft-natural.pdf',
+  'hard-wave':     'report-hard-wave.pdf',
+  'hard-natural':  'report-hard-natural.pdf',
+  'soft-straight': 'report-soft-straight.pdf',
+  'hard-straight': 'report-hard-straight.pdf',
 };
 
 // 체형 한글명 매핑
@@ -60,46 +58,16 @@ function normalizeBodyType(raw) {
 }
 
 // ============================================================
-// HTML → PDF 변환 (Puppeteer + @sparticuz/chromium)
+// 미리 만들어 둔 PDF 읽기
 // ============================================================
-async function generatePDF(bodyType) {
+function loadPDF(bodyType) {
   const reportFile = REPORT_MAP[bodyType];
   if (!reportFile) throw new Error(`알 수 없는 체형: ${bodyType}`);
 
-  // HTML 파일 읽기
-  const htmlPath = path.join(process.cwd(), 'reports', reportFile);
-  const htmlContent = fs.readFileSync(htmlPath, 'utf-8');
+  const pdfPath = path.join(process.cwd(), 'reports', reportFile);
+  if (!fs.existsSync(pdfPath)) throw new Error(`PDF 파일 없음: reports/${reportFile}`);
 
-  // Chromium 실행
-  const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
-  });
-
-  const page = await browser.newPage();
-
-  // HTML 로드 (base64 이미지 + 인라인 CSS 포함)
-  await page.setContent(htmlContent, {
-    waitUntil: 'networkidle0',
-    timeout: 15000,
-  });
-
-  // 폰트 로딩 완료 대기
-  await page.evaluateHandle('document.fonts.ready');
-
-  // PDF 생성
-  const pdfBuffer = await page.pdf({
-    format: 'A4',
-    printBackground: true,
-    margin: { top: 0, right: 0, bottom: 0, left: 0 },
-    preferCSSPageSize: true,
-  });
-
-  await browser.close();
-
-  return pdfBuffer;
+  return fs.readFileSync(pdfPath);
 }
 
 // ============================================================
@@ -245,10 +213,9 @@ export default async function handler(req, res) {
 
     if (email && bodyTypeKey) {
       try {
-        console.log(`[PDF 생성 시작] bodyType: ${bodyType} → ${bodyTypeKey}`);
-        const startTime = Date.now();
-        const pdfBuffer = await generatePDF(bodyTypeKey);
-        console.log(`[PDF 생성 완료] ${(pdfBuffer.length / 1024 / 1024).toFixed(1)}MB, ${Date.now() - startTime}ms`);
+        console.log(`[PDF 준비] bodyType: ${bodyType} → ${bodyTypeKey}`);
+        const pdfBuffer = loadPDF(bodyTypeKey);
+        console.log(`[PDF 준비 완료] ${(pdfBuffer.length / 1024 / 1024).toFixed(1)}MB`);
 
         console.log(`[이메일 발송] to: ${email}`);
         const emailResult = await sendEmail(email, bodyTypeKey, pdfBuffer);
