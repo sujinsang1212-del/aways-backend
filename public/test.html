@@ -1226,7 +1226,7 @@ function showFinalResult() {
   // 리포트 미리보기 후킹에 체형명 삽입
   const hookEl = document.getElementById('reportHookName');
   if (hookEl) hookEl.textContent = type.name;
-  if (window.fbq) fbq('track', 'CompleteRegistration', { content_name: typeKey });
+   if (window.fbq) fbq('track', 'CompleteRegistration', { content_name: typeKey }, { eventID: 'cr_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8) });
   document.getElementById('stepLabel').textContent = '진단 완료';
   showScreen('screen-result');
 
