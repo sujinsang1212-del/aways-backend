@@ -3,17 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>결제 처리 중 - AWAYS</title>
+<title>결제 - AWAYS</title>
+<script src="https://js.tosspayments.com/v2/standard"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
-  --text: #1A1714; --muted: #8A8178;
-  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
-  --dark: #1A1714; --green: #4A7C59; --red: #B85450;
+  --bg: #F7F3EE;
+  --surface: #FFFFFF;
+  --border: #E8E2D9;
+  --text: #1A1714;
+  --muted: #8A8178;
+  --accent: #B8956A;
+  --accent-light: #F0E6D6;
+  --accent-dark: #8C6840;
+  --dark: #1A1714;
+  --tag: #EDE7DE;
+  --green: #4A7C59;
 }
 
 body {
@@ -21,75 +29,323 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  font-size: 16px;
 }
 
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+}
+
+/* 상단바 */
+.top-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { font-family: 'DM Serif Display', serif; font-size: 18px; }
+.step-bar {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.step-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.step-dot.active { background: var(--accent-dark); }
+
+/* 메인 컨테이너 */
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 80px 20px;
-  text-align: center;
+  padding: 32px 20px 100px;
 }
 
-/* 처리 중 화면 */
-.processing { display: block; }
-.processing.hidden { display: none; }
-
-.spinner {
-  width: 48px; height: 48px;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent-dark);
-  border-radius: 50%;
-  margin: 0 auto 24px;
-  animation: spin 0.8s linear infinite;
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+  font-weight: 600;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.processing-title {
+.section-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 24px;
-  margin-bottom: 12px;
+  font-size: 28px;
+  line-height: 1.3;
+  margin-bottom: 10px;
 }
-.processing-desc {
+.section-title em { font-style: italic; color: var(--accent-dark); }
+.section-desc {
   font-size: 14px;
   color: var(--muted);
-  line-height: 1.7;
-  margin-bottom: 32px;
+  line-height: 1.75;
+  margin-bottom: 28px;
 }
 
-.processing-steps {
-  max-width: 320px;
-  margin: 0 auto;
-  text-align: left;
+/* 주문 요약 카드 */
+.order-summary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 16px;
 }
-.processing-step {
+.early-bird-badge {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px 14px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+/* 신뢰 요소 카드 */
+.trust-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.trust-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 8px;
+  text-align: center;
+}
+.trust-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.trust-text {
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.trust-text span {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 11px;
+}
+.order-head {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.order-product {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.order-product-tag {
+  font-size: 12px;
+  color: var(--muted);
+  display: inline-block;
+  background: var(--tag);
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+.order-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.order-price .price-orig {
   font-size: 13px;
   color: var(--muted);
-  opacity: 0.4;
-  transition: all 0.3s;
+  text-decoration: line-through;
+  font-family: 'Noto Sans KR', sans-serif;
 }
-.processing-step.active { opacity: 1; color: var(--text); }
-.processing-step.done { opacity: 1; color: var(--text); }
-.processing-step.done .step-icon { color: var(--green); }
-.step-icon {
-  width: 20px; flex-shrink: 0;
+.order-price .price-now {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  color: var(--accent-dark);
+  line-height: 1;
+}
+.order-features {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.order-features-title {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.order-features li {
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  padding: 2px 0;
+}
+.order-features li::before {
+  content: '✓';
+  color: var(--accent-dark);
   font-weight: bold;
+  flex-shrink: 0;
 }
 
-/* 성공 화면 */
-.success { display: none; }
-.success.active { display: block; }
+/* 이메일 입력 */
+.input-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+.input-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.input-required {
+  color: var(--accent-dark);
+  margin-left: 4px;
+}
+.input-field {
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  background: var(--bg);
+  transition: all 0.15s;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-dark);
+  background: var(--surface);
+}
+.input-hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.6;
+}
 
+/* 결제수단 영역 */
+.payment-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+.payment-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+#payment-method, #agreement {
+  margin: 0 -10px;
+}
+
+/* 약관 */
+.terms-box {
+  background: var(--tag);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* CTA 버튼 */
+.pay-btn {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+}
+.pay-btn:hover { opacity: 0.85; }
+.pay-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.payment-notice {
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.payment-notice-line {
+  margin-bottom: 8px;
+}
+.payment-notice-line:last-child { margin-bottom: 0; }
+.payment-notice a {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+
+/* 테스트 모드 배너 */
+.test-banner {
+  background: #FFF8E1;
+  border: 1px solid #F0D080;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: 12px;
+  color: #8A6810;
+  line-height: 1.6;
+}
+.test-banner strong { color: #6A5008; }
+
+/* 성공 페이지 */
+.success-screen {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+.success-screen.active { display: block; }
 .success-icon {
   width: 80px; height: 80px;
   background: var(--green);
   border-radius: 50%;
   margin: 0 auto 24px;
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 36px;
 }
 .success-title {
   font-family: 'DM Serif Display', serif;
@@ -111,7 +367,8 @@ body {
   text-align: left;
 }
 .success-row {
-  display: flex; justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px dashed var(--border);
   font-size: 13px;
@@ -120,54 +377,9 @@ body {
 .success-row-label { color: var(--muted); }
 .success-row-val { font-weight: 500; }
 
-/* 실패 화면 */
-.failed { display: none; }
-.failed.active { display: block; }
-.failed-icon {
-  width: 80px; height: 80px;
-  background: var(--red);
-  border-radius: 50%;
-  margin: 0 auto 24px;
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-size: 36px;
-}
-.failed-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 28px;
-  margin-bottom: 12px;
-}
-.failed-reason {
-  background: #FBF1F0;
-  border: 1px solid rgba(184,84,80,0.2);
-  border-radius: 10px;
-  padding: 16px;
-  margin: 24px auto;
-  max-width: 400px;
-  font-size: 13px;
-  color: var(--red);
-  line-height: 1.7;
-}
-
-.btn {
-  display: inline-block;
-  padding: 16px 32px;
-  background: var(--dark);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: inherit;
-  transition: opacity 0.2s;
-}
-.btn:hover { opacity: 0.85; }
-.btn.outline {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text);
-}
+/* 화면 전환 */
+.screen { display: none; }
+.screen.active { display: block; }
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -188,40 +400,112 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code --></head>
 <body>
 
-<div class="container">
+<div class="top-bar">
+  <div class="logo">체형진단</div>
+  <div class="step-bar">
+    <span class="step-dot"></span>
+    <span class="step-dot"></span>
+    <span class="step-dot active"></span>
+    <span style="margin-left:6px;">결제</span>
+  </div>
+</div>
 
-  <!-- 처리 중 -->
-  <div class="processing" id="processing">
-    <div class="spinner"></div>
-    <h1 class="processing-title">결제를 확인하고 있어요</h1>
-    <p class="processing-desc">잠시만 기다려주세요. 페이지를 닫으시면 안 돼요.</p>
+<!-- ================ 결제 페이지 ================ -->
+<div class="screen active" id="screen-payment">
+  <div class="container">
 
-    <div class="processing-steps">
-      <div class="processing-step active" id="step1">
-        <span class="step-icon">○</span>
-        <span>결제 승인 요청 중</span>
+    <div class="section-eyebrow">Order Confirmation</div>
+    <h1 class="section-title">주문 <em>확인</em></h1>
+    <p class="section-desc">선택하신 플랜과 정보를 확인한 후 결제를 진행해주세요.</p>
+
+    <!-- 주문 요약 -->
+    <div class="order-summary">
+      <div class="early-bird-badge">⚡ 런칭 기념 한정 · ₩5,000 할인</div>
+      <div class="order-head">
+        <div>
+          <div class="order-product" id="orderProduct">맞춤 스타일 가이드</div>
+          <div class="order-product-tag" id="orderTag">프리미엄 리포트</div>
+        </div>
+        <div class="order-price" id="orderPrice">
+          <span class="price-orig">₩24,900</span>
+          <span class="price-now">₩19,900</span>
+        </div>
       </div>
-      <div class="processing-step" id="step2">
-        <span class="step-icon">○</span>
-        <span>결제 정보 검증 중</span>
-      </div>
-      <div class="processing-step" id="step3">
-        <span class="step-icon">○</span>
-        <span>리포트 생성 중</span>
-      </div>
-      <div class="processing-step" id="step4">
-        <span class="step-icon">○</span>
-        <span>이메일 발송 중</span>
+      <div class="order-features">
+        <div class="order-features-title">포함 사항</div>
+        <ul id="orderFeatures">
+          <li>체형 분석 리포트 (PDF, 22페이지)</li>
+          <li>실루엣과 핏의 황금 공식</li>
+          <li>소재·컬러·패턴 가이드</li>
+          <li>직장인 코디 공식 5가지</li>
+          <li>쇼핑 체크리스트 (브랜드 12가지)</li>
+          <li>사계절 스타일링 가이드</li>
+        </ul>
       </div>
     </div>
-  </div>
 
-  <!-- 성공 -->
-  <div class="success" id="success">
+    <!-- 신뢰 요소 -->
+    <div class="trust-section">
+      <div class="trust-card">
+        <div class="trust-icon">🔒</div>
+        <div class="trust-text">안전결제<br><span>토스페이먼츠</span></div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">📅</div>
+        <div class="trust-text">7일 환불<br><span>무조건 보장</span></div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">📧</div>
+        <div class="trust-text">즉시 발송<br><span>이메일 자동</span></div>
+      </div>
+    </div>
+
+    <!-- 이메일 입력 -->
+    <div class="input-section">
+      <label class="input-label">
+        리포트를 받을 이메일<span class="input-required">*</span>
+      </label>
+      <input type="email" id="emailInput" class="input-field" placeholder="example@gmail.com" />
+      <div class="input-hint">결제 완료 후 입력하신 이메일로 PDF 리포트가 즉시 발송됩니다.</div>
+    </div>
+
+    <!-- 결제수단 영역 (토스페이먼츠 위젯이 여기에 렌더링됨) -->
+    <div class="payment-section">
+      <div class="payment-section-title">결제수단</div>
+      <div id="payment-method"></div>
+    </div>
+
+    <!-- 이용약관 영역 -->
+    <div class="payment-section">
+      <div class="payment-section-title">약관 동의</div>
+      <div id="agreement"></div>
+    </div>
+
+    <!-- 결제 버튼 -->
+    <button class="pay-btn" id="payBtn" onclick="requestPayment()">
+      <span id="payBtnText">₩19,900 결제하기</span>
+    </button>
+
+    <div class="payment-notice">
+      <div class="payment-notice-line">
+        결제 진행 시 <a href="/terms" target="_blank">이용약관</a> 및 <a href="/privacy" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주합니다.
+      </div>
+      <div class="payment-notice-line">
+        ✓ 결제 후 입력한 이메일로 PDF 리포트가 즉시 발송됩니다<br>
+        ✓ 7일 이내 환불 신청 가능 · awaysbiz@gmail.com
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================ 성공 페이지 ================ -->
+<div class="screen" id="screen-success">
+  <div class="success-screen active">
     <div class="success-icon">✓</div>
     <h1 class="success-title">결제가 완료되었어요</h1>
     <p class="success-desc">
-      입력하신 이메일로 상세 리포트를 보내드렸습니다.<br>
+      입력하신 이메일로 상세 리포트가 발송되었습니다.<br>
       메일이 보이지 않으면 스팸함을 확인해주세요.
     </p>
 
@@ -232,11 +516,11 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
       </div>
       <div class="success-row">
         <span class="success-row-label">상품</span>
-        <span class="success-row-val" id="succProduct">-</span>
+        <span class="success-row-val" id="succProduct">Premium Plan</span>
       </div>
       <div class="success-row">
         <span class="success-row-label">결제금액</span>
-        <span class="success-row-val" id="succAmount">-</span>
+        <span class="success-row-val" id="succAmount">₩19,900</span>
       </div>
       <div class="success-row">
         <span class="success-row-label">발송 이메일</span>
@@ -244,165 +528,199 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
       </div>
       <div class="success-row">
         <span class="success-row-label">결제수단</span>
-        <span class="success-row-val" id="succMethod">-</span>
+        <span class="success-row-val" id="succMethod">카드</span>
       </div>
     </div>
 
-    <a href="/" class="btn">홈으로 돌아가기</a>
+    <button class="pay-btn" onclick="window.location.href='/'">홈으로 돌아가기</button>
   </div>
-
-  <!-- 실패 -->
-  <div class="failed" id="failed">
-    <div class="failed-icon">!</div>
-    <h1 class="failed-title">결제에 실패했어요</h1>
-    <p class="processing-desc">
-      걱정하지 마세요. 결제는 진행되지 않았어요.<br>
-      다시 시도하거나 다른 결제수단을 이용해보세요.
-    </p>
-    <div class="failed-reason" id="failedReason"></div>
-    <div style="display: flex; gap: 12px; justify-content: center;">
-      <a href="javascript:history.back()" class="btn">다시 결제하기</a>
-      <a href="/" class="btn outline">홈으로</a>
-    </div>
-  </div>
-
 </div>
 
 <script>
 // ============================================================
-// 백엔드 API URL
-// 프론트엔드와 API가 같은 Vercel 프로젝트(awaysbiz.com)에 있으므로
-// 상대경로를 사용한다. 별도 도메인이 아니라 같은 출처라 '' 로 둔다.
+// 토스페이먼츠 결제위젯 연동 키 (클라이언트 키 · 공개되어도 되는 키)
+// AWAYS 본인 계정의 결제위젯 연동 키 (gck = 위젯 연동 키)
+// 시크릿 키(gsk)는 절대 여기 넣지 말 것 → Vercel 환경변수 TOSS_SECRET_KEY
 // ============================================================
-const BACKEND_URL = '';   // 같은 출처 → /api/confirm-payment 로 호출됨
-
-// URL 파라미터에서 결제 정보 가져오기 (토스가 successUrl에 붙여서 보냄)
-const params = new URLSearchParams(window.location.search);
-const paymentKey = params.get('paymentKey');
-const orderId = params.get('orderId');
-const amount = params.get('amount');
-const bodyTypeFromUrl = params.get('bodyType');   // successUrl에 함께 실어 보낸 값
-
-// sessionStorage에서 추가 정보 가져오기 (결제 페이지에서 저장한 값)
-const lastOrder = JSON.parse(sessionStorage.getItem('lastOrder') || '{}');
-
-// bodyType은 URL 우선, 없으면 sessionStorage 백업
-const bodyType = bodyTypeFromUrl || lastOrder.bodyType || '';
-
-// 화면 전환 함수
-function showScreen(id) {
-  ['processing', 'success', 'failed'].forEach(s => {
-    document.getElementById(s).classList.remove('active');
-    document.getElementById(s).style.display = 'none';
-  });
-  document.getElementById(id).style.display = 'block';
-  if (id !== 'processing') {
-    document.getElementById(id).classList.add('active');
-  }
-}
-
-// 처리 단계 업데이트
-function updateStep(stepNum, status) {
-  const step = document.getElementById(`step${stepNum}`);
-  if (status === 'active') {
-    step.classList.add('active');
-  } else if (status === 'done') {
-    step.classList.add('done');
-    step.querySelector('.step-icon').textContent = '✓';
-  }
-}
-
-// 실패 처리
-function showFailed(reason) {
-  document.getElementById('failedReason').textContent = reason || '알 수 없는 오류가 발생했어요. 잠시 후 다시 시도해주세요.';
-  showScreen('failed');
-}
+const TOSS_CLIENT_KEY = 'live_gck_DnyRpQWGrN6jm5LREydlrKwv1M9E';
+const TOSS_CUSTOMER_KEY = generateCustomerKey();
 
 // ============================================================
-// 결제 승인 처리 (백엔드 호출)
+// 상품 정보 (단일 가격 · 얼리버드 19,900원)
 // ============================================================
-async function confirmPayment() {
-  // 토스 failUrl로 돌아온 경우: 에러 코드/메시지를 그대로 보여준다
-  if (params.get('status') === 'fail' || params.get('code')) {
-    const failMessage = params.get('message');
-    showFailed(failMessage || '결제가 취소되었거나 실패했어요.');
-    return;
-  }
+const PRODUCT = {
+  name: '맞춤 스타일 가이드',
+  originalPrice: 24900,
+  price: 19900,
+  features: [
+    '체형 분석 리포트 (PDF, 22페이지)',
+    '실루엣과 핏의 황금 공식',
+    '소재·컬러·패턴 가이드',
+    '직장인 코디 공식 5가지',
+    '쇼핑 체크리스트 (브랜드 12가지)',
+    '사계절 스타일링 가이드',
+  ]
+};
 
-  // 필수 파라미터 검증
-  if (!paymentKey || !orderId || !amount) {
-    showFailed('결제 정보가 올바르지 않습니다.');
-    return;
-  }
+// URL 파라미터에서 체형 정보 가져오기
+const urlParams = new URLSearchParams(window.location.search);
+const bodyType = urlParams.get('bodyType') || '';
+const typeName = urlParams.get('typeName') || '';
 
+// 체형명에 따른 상품 태그 생성
+const productTag = typeName ? `${typeName} · 프리미엄 리포트` : '프리미엄 리포트';
+
+// 주문 요약 표시
+document.getElementById('orderProduct').textContent = PRODUCT.name;
+document.getElementById('orderTag').textContent = productTag;
+document.getElementById('orderPrice').innerHTML = `
+  <span class="price-orig">₩${PRODUCT.originalPrice.toLocaleString()}</span>
+  <span class="price-now">₩${PRODUCT.price.toLocaleString()}</span>
+`;
+document.getElementById('payBtnText').textContent = `₩${PRODUCT.price.toLocaleString()} 결제하기`;
+const featuresEl = document.getElementById('orderFeatures');
+featuresEl.innerHTML = PRODUCT.features.map(f => `<li>${f}</li>`).join('');
+
+// 고유 주문번호 생성
+function generateOrderId() {
+  return `BT_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+// 고유 customerKey 생성 (토스페이먼츠 식별용)
+function generateCustomerKey() {
+  return `customer_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+// ============================================================
+// 토스페이먼츠 위젯 초기화
+// ============================================================
+let widgets;
+
+async function initTossWidget() {
   try {
-    // Step 1: 결제 승인 요청
-    updateStep(1, 'active');
-    await sleep(800);
-    updateStep(1, 'done');
+    const tossPayments = TossPayments(TOSS_CLIENT_KEY);
+    widgets = tossPayments.widgets({ customerKey: TOSS_CUSTOMER_KEY });
 
-    // Step 2: 백엔드 API 호출
-    updateStep(2, 'active');
-
-    const response = await fetch(`${BACKEND_URL}/api/confirm-payment`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        paymentKey,
-        orderId,
-        amount: Number(amount),
-        email: lastOrder.email,
-        bodyType: bodyType,
-      }),
+    // 결제 금액 설정
+    await widgets.setAmount({
+      currency: 'KRW',
+      value: PRODUCT.price,
     });
 
-    const data = await response.json();
+    // 결제수단 위젯 렌더링
+    await widgets.renderPaymentMethods({
+      selector: '#payment-method',
+      variantKey: 'DEFAULT',
+    });
 
-    if (!response.ok || !data.success) {
-      throw new Error(data.error || '결제 승인 실패');
-    }
+    // 이용약관 위젯 렌더링
+    await widgets.renderAgreement({
+      selector: '#agreement',
+      variantKey: 'AGREEMENT',
+    });
 
-    updateStep(2, 'done');
-
-    // Meta 픽셀 구매 이벤트 (승인 성공 시에만)
-    if (window.fbq && !sessionStorage.getItem('px_' + orderId)) {
-      fbq('track', 'Purchase', { value: Number(amount), currency: 'KRW' }, { eventID: orderId });
-      sessionStorage.setItem('px_' + orderId, '1');
-    }
-
-    // Step 3: 리포트 생성 시뮬레이션
-    updateStep(3, 'active');
-    await sleep(1000);
-    updateStep(3, 'done');
-
-    // Step 4: 이메일 발송
-    updateStep(4, 'active');
-    await sleep(800);
-    updateStep(4, 'done');
-    await sleep(400);
-
-    // 성공 화면 표시
-    document.getElementById('succOrderId').textContent = orderId;
-    document.getElementById('succProduct').textContent = lastOrder.tierName || 'Premium Plan';
-    document.getElementById('succAmount').textContent = `₩${Number(amount).toLocaleString()}`;
-    document.getElementById('succEmail').textContent = lastOrder.email || '-';
-    document.getElementById('succMethod').textContent = data.method || '카드';
-
-    showScreen('success');
-
+    console.log('✅ 토스페이먼츠 위젯 로드 완료');
   } catch (error) {
-    console.error('[결제 승인 실패]', error);
-    showFailed(error.message);
+    console.error('위젯 초기화 실패:', error);
+    alert('결제 위젯을 불러오는 데 실패했어요. 페이지를 새로고침해주세요.');
   }
 }
 
-// 1초 = 1000ms
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+// 페이지 로드 시 위젯 초기화
+window.addEventListener('DOMContentLoaded', initTossWidget);
+
+// ============================================================
+// 결제 요청
+// ============================================================
+async function requestPayment() {
+  const email = document.getElementById('emailInput').value.trim();
+
+  // 이메일 검증
+  if (!email || !email.includes('@')) {
+    alert('이메일을 정확히 입력해주세요.');
+    document.getElementById('emailInput').focus();
+    return;
+  }
+
+  if (!widgets) {
+    alert('결제 위젯이 아직 로드되지 않았어요. 잠시 후 다시 시도해주세요.');
+    return;
+  }
+
+  const orderId = generateOrderId();
+
+  // 주문 정보를 sessionStorage에 임시 저장 (성공 페이지에서 사용)
+  sessionStorage.setItem('lastOrder', JSON.stringify({
+    orderId,
+    email,
+    bodyType,
+    typeName,
+    productName: PRODUCT.name,
+    amount: PRODUCT.price,
+  }));
+
+  try {
+    await widgets.requestPayment({
+      orderId: orderId,
+      orderName: typeName ? `AWAYS - ${typeName} 리포트` : `AWAYS - ${PRODUCT.name}`,
+      customerEmail: email,
+      customerName: email.split('@')[0],
+      // 결제 성공/실패 시 리다이렉트 URL
+      // bodyType을 함께 실어 보내 승인 단계에서 PDF를 안정적으로 생성
+      successUrl: `${window.location.origin}/payment-success.html?bodyType=${encodeURIComponent(bodyType)}`,
+      failUrl: `${window.location.origin}/payment-success.html?status=fail`,
+    });
+  } catch (error) {
+    // 사용자가 결제창을 닫은 경우 또는 에러
+    if (error.code === 'USER_CANCEL') {
+      console.log('사용자가 결제를 취소했어요.');
+    } else {
+      console.error('결제 에러:', error);
+      alert(`결제 중 오류가 발생했어요: ${error.message}`);
+    }
+  }
 }
 
-// 페이지 로드 시 결제 승인 시작
-window.addEventListener('DOMContentLoaded', confirmPayment);
+// ============================================================
+// 결제 결과 처리 (리다이렉트 후 페이지 로드 시 실행)
+// ============================================================
+function handlePaymentResult() {
+  const status = urlParams.get('status');
+  const paymentKey = urlParams.get('paymentKey');
+  const successOrderId = urlParams.get('orderId');
+  const amount = urlParams.get('amount');
+
+  if (status === 'success') {
+    // 실제 운영에서는 여기서 백엔드 API에 결제 승인 요청을 보내야 함
+    // POST /api/confirm-payment { paymentKey, orderId, amount }
+    // 백엔드에서 토스페이먼츠 시크릿 키로 승인 처리 후 응답
+
+    showSuccessScreen();
+  } else if (status === 'fail') {
+    const failCode = urlParams.get('code');
+    const failMessage = urlParams.get('message');
+    alert(`결제 실패: ${failMessage || '알 수 없는 오류'}\n코드: ${failCode}`);
+  }
+}
+
+function showSuccessScreen() {
+  const lastOrder = JSON.parse(sessionStorage.getItem('lastOrder') || '{}');
+
+  document.getElementById('succOrderId').textContent = lastOrder.orderId || '-';
+  document.getElementById('succProduct').textContent = lastOrder.tierName || '-';
+  document.getElementById('succAmount').textContent = `₩${(lastOrder.amount || 0).toLocaleString()}`;
+  document.getElementById('succEmail').textContent = lastOrder.email || '-';
+
+  document.getElementById('screen-payment').classList.remove('active');
+  document.getElementById('screen-success').classList.add('active');
+
+  // 실제 운영 시: 여기서 백엔드 API에 이메일 발송 요청
+  // POST /api/send-report { email, tier, orderId }
+  console.log('📧 이메일 발송 트리거:', lastOrder);
+}
+
+// 페이지 로드 시 결제 결과 확인
+window.addEventListener('DOMContentLoaded', handlePaymentResult);
 </script>
 
 </body>
