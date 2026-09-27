@@ -364,6 +364,12 @@ async function confirmPayment() {
 
     updateStep(2, 'done');
 
+    // Meta 픽셀 구매 이벤트 (승인 성공 시에만)
+    if (window.fbq && !sessionStorage.getItem('px_' + orderId)) {
+      fbq('track', 'Purchase', { value: Number(amount), currency: 'KRW' }, { eventID: orderId });
+      sessionStorage.setItem('px_' + orderId, '1');
+    }
+
     // Step 3: 리포트 생성 시뮬레이션
     updateStep(3, 'active');
     await sleep(1000);
