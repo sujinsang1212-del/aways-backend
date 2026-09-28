@@ -185,8 +185,6 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
 .mood-label { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
 .mood-name { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
 .mood-desc { font-size: 14px; color: var(--muted); line-height: 1.6; word-break: keep-all; }
-.share-perks { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: -4px 0 16px; }
-.share-perks span { font-size: 12px; font-weight: 600; color: var(--wine); background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 5px 11px; }
 .share-legend { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); display: grid; gap: 8px; text-align: left; }
 .share-legend div { display: grid; gap: 1px; }
 .share-legend b { font-size: 13px; color: var(--wine); }
@@ -382,41 +380,6 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
   background: var(--accent-dark);
 }
 
-/* 가치 강조 박스 */
-.report-value-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 24px 20px 16px;
-}
-.value-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 12px 14px;
-  background: var(--bg);
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
-.value-icon {
-  color: var(--accent-dark);
-  font-size: 14px;
-  font-weight: bold;
-  flex-shrink: 0;
-}
-.value-text {
-  font-size: 12px;
-  line-height: 1.55;
-  color: var(--text);
-}
-.value-text strong {
-  color: var(--accent-dark);
-  font-weight: 600;
-  display: block;
-  margin-bottom: 1px;
-  font-size: 13px;
-}
-
 /* 목차 */
 .report-toc {
   padding: 16px 24px;
@@ -424,9 +387,9 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
   background: var(--surface);
 }
 .report-toc-title {
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--muted);
   font-weight: 600;
   margin-bottom: 12px;
@@ -434,7 +397,7 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
 }
 .report-toc-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   padding: 7px 0;
   font-size: 13px;
@@ -449,7 +412,9 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
   width: 24px;
   flex-shrink: 0;
 }
-.toc-text { flex: 1; color: var(--text); }
+.toc-text { flex: 1; color: var(--text); text-align: left; }
+.toc-text b { display: block; font-weight: 600; font-size: 14px; }
+.toc-text em { display: block; font-style: normal; font-size: 12px; color: var(--muted); line-height: 1.55; margin-top: 2px; word-break: keep-all; }
 .toc-pages {
   font-size: 11px;
   color: var(--muted);
@@ -473,10 +438,6 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
   .report-thumbs { padding: 22px 14px 18px; gap: 6px; }
   .report-thumb { padding: 10px 8px; }
   .thumb-label { font-size: 8px; padding: 2px 6px; }
-  .report-value-grid { padding: 20px 16px 12px; gap: 8px; }
-  .value-item { padding: 10px 12px; }
-  .value-text { font-size: 11px; }
-  .value-text strong { font-size: 12px; }
   .report-toc { padding: 14px 18px; }
   .report-toc-item { font-size: 12px; gap: 10px; }
   .toc-pages { font-size: 10px; }
@@ -515,8 +476,6 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
   text-decoration: line-through;
 }
 .cta-price small, .fp-price small { font-family: 'IBM Plex Sans KR', sans-serif; font-size: 0.5em; margin-left: 2px; }
-.cta-value { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 4px 0 14px; }
-.cta-value span { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; font-size: 12px; padding: 4px 10px; color: var(--text); }
 .cta-anchor { font-size: 13px; color: var(--accent-dark); margin-bottom: 18px; word-break: keep-all; }
 .cta-price { font-family: 'Gowun Batang', serif; font-size: 32px; color: var(--accent-dark); }
 .cta-discount {
@@ -855,7 +814,6 @@ function track(name, params) {
     <div class="share-block" id="shareBlock">
       <div class="share-title">같은 타입 친구는 내 옷장 메이트예요 👯</div>
       <div class="share-sub">카드를 스토리에 올리거나 친구에게 보내보세요.<br>친구가 진단하면 옷장 메이트인지 결과 화면에서 바로 비교돼요.</div>
-      <div class="share-perks"><span>옷 바꿔 입기</span><span>믿고 따라 사기</span><span>같이 쇼핑하기</span></div>
       <div id="friendCompare"></div>
       <img class="share-preview" id="sharePreview" alt="내 체형 결과 카드">
       <div class="share-actions">
@@ -865,7 +823,7 @@ function track(name, params) {
       <div class="share-legend">
         <div><b>옷장 메이트</b><span>타입까지 같을 때 · 핏도 소재도 같아요</span></div>
         <div><b>반쪽 옷장 메이트</b><span>체형 방향만 같을 때 · 실루엣을 같이 입어요</span></div>
-        <div><b>스타일 교환 친구</b><span>방향이 다를 때 · 서로 없는 코디를 추천해요</span></div>
+        <div><b>스타일 교환 친구</b><span>방향이 다를 때 · 서로의 스타일을 구경하는 재미</span></div>
       </div>
     </div>
     <div class="report-preview-card">
@@ -885,46 +843,15 @@ function track(name, params) {
       <!-- PDF 썸네일 콜라주 (제거됨) -->
 
       <!-- 가치 강조 박스 -->
-      <div class="report-value-grid">
-        <div class="value-item">
-          <div class="value-icon">✦</div>
-          <div class="value-text">
-            <strong>당신 체형에 맞는</strong><br>
-            코디 공식 5가지
-          </div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">✦</div>
-          <div class="value-text">
-            <strong>피해야 할 옷</strong><br>
-            구체적인 리스트
-          </div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">✦</div>
-          <div class="value-text">
-            <strong>쇼핑 체크리스트</strong><br>
-            핵심 아이템 12가지 · 추천 브랜드
-          </div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">✦</div>
-          <div class="value-text">
-            <strong>사계절 가이드</strong><br>
-            계절별 핵심 아이템
-          </div>
-        </div>
-      </div>
-
       <!-- 챕터 목차 -->
       <div class="report-toc">
-        <div class="report-toc-title">전체 구성</div>
-        <div class="report-toc-item"><span class="toc-num">01</span><span class="toc-text">당신의 체형 이해하기</span></div>
-        <div class="report-toc-item"><span class="toc-num">02</span><span class="toc-text">실루엣과 핏의 비밀</span></div>
-        <div class="report-toc-item"><span class="toc-num">03</span><span class="toc-text">소재와 컬러의 정답</span></div>
-        <div class="report-toc-item"><span class="toc-num">04</span><span class="toc-text">직장인 코디 공식 5가지</span></div>
-        <div class="report-toc-item"><span class="toc-num">05</span><span class="toc-text">필수 쇼핑 체크리스트</span></div>
-        <div class="report-toc-item"><span class="toc-num">06</span><span class="toc-text">사계절 스타일링 + Q&A</span></div>
+        <div class="report-toc-title">리포트 전체 구성</div>
+        <div class="report-toc-item"><span class="toc-num">01</span><span class="toc-text"><b>당신의 체형 이해하기</b><em>내 타입의 시그니처 3가지, 결과 읽는 법, 다른 타입과 비교</em></span></div>
+        <div class="report-toc-item"><span class="toc-num">02</span><span class="toc-text"><b>실루엣과 핏의 비밀</b><em>핏의 황금 공식, 어울리는 핏과 피해야 할 핏, 네크라인 가이드</em></span></div>
+        <div class="report-toc-item"><span class="toc-num">03</span><span class="toc-text"><b>소재와 컬러의 정답</b><em>어울리는 소재 7가지와 피해야 할 소재 5가지, 패턴, 베이스 컬러</em></span></div>
+        <div class="report-toc-item"><span class="toc-num">04</span><span class="toc-text"><b>직장인 코디 공식 5가지</b><em>상황별 출근룩 조합 공식과 액세서리 가이드</em></span></div>
+        <div class="report-toc-item"><span class="toc-num">05</span><span class="toc-text"><b>필수 쇼핑 체크리스트</b><em>핵심 아이템 12가지와 아이템별 추천 브랜드</em></span></div>
+        <div class="report-toc-item"><span class="toc-num">06</span><span class="toc-text"><b>사계절 스타일링 + Q&amp;A</b><em>계절별 핵심 아이템, 자주 묻는 질문, 내 옷장 자가진단</em></span></div>
       </div>
 
       <div class="report-footer-note">
@@ -935,10 +862,6 @@ function track(name, params) {
       <div class="cta-launch-badge">약 30페이지 맞춤 스타일 가이드</div>
       <div class="cta-price-row">
         <span class="cta-price">9,800<small>원</small></span>
-      </div>
-      <div class="cta-value">
-        <span>체형 분석</span><span>핏 공식 · 피해야 할 핏</span><span>네크라인 가이드</span><span>소재·컬러·패턴</span>
-        <span>직장인 코디 공식 5가지</span><span>액세서리 가이드</span><span>핵심 아이템 12가지 · 추천 브랜드</span><span>사계절 가이드 · Q&amp;A</span>
       </div>
       <div class="cta-anchor">안 맞아서 안 입는 옷 한 벌보다 저렴해요</div>
       <button class="cta-btn" id="ctaBtn" onclick="goToPayment()">내 타입 리포트 받기 →</button>
@@ -997,7 +920,7 @@ const questions = [
       { label: '하의를 상의보다 크게 산다', sub: '상체보다 하체 사이즈가 큼', score: {W:3} },
       { label: '상의가 더 크다 — 가슴·등 두께 때문에', sub: '상체가 도톰해서', score: {S:3} },
       { label: '상의가 더 크다 — 어깨 너비 때문에', sub: '어깨가 넓어서', score: {N:3} },
-      { label: '비슷하거나 잘 모르겠어요', score: {}, fixed: true },
+      { label: '상의와 하의를 같은 사이즈로 입어요', score: {mid:0}, fixed: true },
     ]
   },
 
@@ -1009,7 +932,7 @@ const questions = [
       { label: '엉덩이·허벅지가 끼어서 결국 한 치수 크게 산다', sub: '허리는 남고 아래는 딱 맞음', score: {W:3} },
       { label: '배나 허벅지 앞쪽이 먼저 끼인다', sub: '앞쪽 볼륨이 기준이 됨', score: {S:3} },
       { label: '허리·엉덩이가 대체로 같이 맞는다', sub: '허리와 엉덩이 차이가 크지 않음', score: {N:3} },
-      { label: '잘 모르겠어요', score: {}, fixed: true },
+      { label: '주로 밴딩이나 와이드 바지를 입어서 모르겠어요', score: {}, fixed: true },
     ]
   },
 
@@ -1021,7 +944,7 @@ const questions = [
       { label: '배·등·팔 윗부분 같은 상체', sub: '윗몸이 먼저 두꺼워짐', score: {S:3} },
       { label: '엉덩이·허벅지 같은 하체', sub: '아랫몸이 먼저 두꺼워짐', score: {W:3} },
       { label: '특정 부위 없이 전체적으로', sub: '고르게 티가 남', score: {N:3} },
-      { label: '잘 모르겠어요', score: {}, fixed: true },
+      { label: '체중 변화가 거의 없어서 모르겠어요', score: {}, fixed: true },
     ]
   },
 
@@ -1071,7 +994,7 @@ const questions = [
       { label: '몸에 딱 맞는 기본 셔츠, 일자 슬랙스', sub: '군더더기 없는 정핏', score: {S:3} },
       { label: '허리를 잡아주는 원피스, 짧은 상의', sub: '허리선이 드러나는 핏', score: {W:3} },
       { label: '여유 있는 오버핏, 와이드 팬츠', sub: '넉넉하게 떨어지는 핏', score: {N:3} },
-      { label: '잘 모르겠어요', score: {}, fixed: true },
+      { label: '핏에 대한 말을 들어본 적이 없어요', score: {}, fixed: true },
     ]
   },
 
@@ -1083,11 +1006,11 @@ const questions = [
       { label: '오버핏 — 체격이 더 커 보인다', sub: '부해 보이는 느낌', score: {S:3} },
       { label: '오버핏 — 옷에 파묻혀 보인다', sub: '옷이 나를 먹는 느낌', score: {W:3} },
       { label: '몸에 딱 붙는 옷 — 뼈대가 부각된다', sub: '각진 느낌이 강조됨', score: {N:3} },
-      { label: '잘 모르겠어요', score: {}, fixed: true },
+      { label: '딱히 어색했던 옷이 떠오르지 않아요', score: {}, fixed: true },
     ]
   },
 
-  // ── 텍스처 (하드/소프트) - 9문항 ──
+  // ── 텍스처 (하드/소프트) - 9문항, 4단계 선택지 ──
   // 원칙: 이 구간의 선택지는 텍스처 점수만 준다.
 
   {
@@ -1095,36 +1018,40 @@ const questions = [
     text: '오른손 엄지와 중지로\n왼쪽 손목을 감싸보세요.',
     hint: '손목 가장 가는 부분을 감싸서 확인해보세요.',
     type: 'image',
-    cols: 3,
+    cols: 2,
+    ordered: true,
     options: [
-      { label: '손가락이 겹친다', icon: '◎', desc: '여유 있게 감싸짐', score: {Soft:2} },
-      { label: '딱 닿는다', icon: '⭕', desc: '정확히 맞닿음', score: {} },
-      { label: '닿지 않는다', icon: '↔', desc: '간격이 남음', score: {H:2} },
+      { label: '여유 있게 겹친다', icon: '◎', desc: '손가락 한 마디 이상 겹침', score: {Soft:2} },
+      { label: '살짝 겹친다', icon: '○', desc: '손톱 끝 정도 겹침', score: {mid:0} },
+      { label: '딱 닿는다', icon: '◯', desc: '끝이 정확히 맞닿음', score: {mid:0} },
+      { label: '닿지 않는다', icon: '↔', desc: '손가락 사이가 뜸', score: {H:2} },
     ]
   },
 
   {
     id: 'q11',
-    text: '팔 윗부분 바깥쪽을\n가볍게 잡아보면 어떤 느낌인가요?',
-    hint: '힘을 빼고 반대쪽 손으로 살짝 쥐어보세요.',
-    type: 'image',
-    cols: 3,
+    text: '잘 어울린다는 말을\n자주 듣는 액세서리는?',
+    subtext: '평소 착용하거나 어울린다는 말을 들었던 걸 떠올려보세요.',
+    type: 'text',
+    ordered: true,
     options: [
-      { label: '탄탄하다', icon: '◆', desc: '눌렀을 때 단단한 느낌', score: {H:3} },
-      { label: '말랑하다', icon: '●', desc: '부드럽게 눌리는 느낌', score: {Soft:3} },
-      { label: '얇다', icon: '│', desc: '얇아서 뼈가 먼저 잡힘', score: {H:1, Soft:1} },
+      { label: '굵은 체인, 볼드한 시계처럼 존재감 있는 것', score: {H:3} },
+      { label: '심플한 실버 링처럼 깔끔하고 선이 분명한 것', score: {H:1} },
+      { label: '작은 진주 귀걸이처럼 은은한 것', score: {Soft:1} },
+      { label: '얇은 체인에 리본·꽃 모티프처럼 섬세한 것', score: {Soft:3} },
     ]
   },
 
   {
     id: 'q12',
-    text: '전신 사진 속 내 몸의\n윤곽은 어떻게 보이나요?',
-    subtext: '최근에 찍힌 전신 사진을 떠올려보세요.',
+    text: '입었을 때 잘 어울린다는\n말을 더 많이 듣는 소재는?',
     type: 'text',
+    ordered: true,
     options: [
-      { label: '선이 또렷하고 각이 있어 보인다', sub: '어깨·팔·다리 라인이 선명함', score: {H:3} },
-      { label: '선이 둥글고 부드러워 보인다', sub: '라인이 매끄럽게 이어짐', score: {Soft:3} },
-      { label: '잘 모르겠어요', score: {}, fixed: true },
+      { label: '빳빳한 코튼 셔츠, 각 잡힌 재킷', score: {H:3} },
+      { label: '탄탄한 데님, 도톰한 울', score: {H:1} },
+      { label: '부드러운 니트, 저지 티셔츠', score: {Soft:1} },
+      { label: '하늘하늘한 쉬폰, 실크 블라우스', score: {Soft:3} },
     ]
   },
 
@@ -1133,32 +1060,38 @@ const questions = [
     text: '처음 만난 사람이 나를\n주로 어떻게 표현하나요?',
     subtext: '성격보다는 분위기와 인상에 가까운 말을 떠올려보세요.',
     type: 'text',
+    ordered: true,
     options: [
-      { label: '"시크하다", "도시적이다", "또렷하다"', sub: '선명하고 차가운 쪽', score: {H:3} },
-      { label: '"포근하다", "부드럽다", "귀엽다"', sub: '둥글고 따뜻한 쪽', score: {Soft:3} },
-      { label: '둘 다 들어서 잘 모르겠어요', score: {}, fixed: true },
+      { label: '"세련됐다", "시크하다"', score: {H:3} },
+      { label: '"똑부러진다", "단정하다"', score: {H:1} },
+      { label: '"부드럽다", "온화하다"', score: {Soft:1} },
+      { label: '"귀엽다", "사랑스럽다"', score: {Soft:3} },
     ]
   },
 
   {
     id: 'q14',
-    text: '살이 빠졌을 때\n몸은 어떻게 달라지나요?',
+    text: '살이 빠졌을 때\n가장 먼저 느끼는 변화는?',
     type: 'text',
+    ordered: true,
     options: [
-      { label: '뼈나 몸의 라인이 금방 선명하게 드러난다', sub: '윤곽이 빨리 생김', score: {H:3} },
-      { label: '빠져도 전체적으로 부드러운 느낌은 남는다', sub: '말랑한 인상이 유지됨', score: {Soft:3} },
-      { label: '잘 모르겠어요', score: {}, fixed: true },
+      { label: '광대·턱선·쇄골 같은 뼈 라인이 먼저 드러난다', score: {H:3} },
+      { label: '얼굴선이 조금 더 날렵해진다', score: {H:1} },
+      { label: '전체적으로 작아지지만 둥근 느낌은 남는다', score: {Soft:1} },
+      { label: '빠져도 볼이나 팔 라인은 부드럽게 남는다', score: {Soft:3} },
     ]
   },
 
   {
     id: 'q15',
-    text: '가볍게 운동을 시작하면\n몸이 어떻게 반응하나요?',
+    text: '입었을 때 잘 어울린다는\n말을 듣는 무늬는?',
     type: 'text',
+    ordered: true,
     options: [
-      { label: '금방 라인이 단단하게 잡힌다', sub: '팔·다리가 빨리 탄탄해짐', score: {H:3} },
-      { label: '꾸준히 해도 부드러운 느낌이 남는다', sub: '단단해지기까지 오래 걸림', score: {Soft:3} },
-      { label: '운동을 거의 안 해서 모르겠어요', score: {}, fixed: true },
+      { label: '굵은 스트라이프, 큰 체크', score: {H:3} },
+      { label: '얇은 스트라이프, 헤링본', score: {H:1} },
+      { label: '작은 도트, 잔잔한 무늬', score: {Soft:1} },
+      { label: '잔꽃, 레이스', score: {Soft:3} },
     ]
   },
 
@@ -1167,11 +1100,13 @@ const questions = [
     text: '무릎이나 팔꿈치 같은\n관절은 어떻게 보이나요?',
     hint: '거울로 무릎과 팔꿈치 모양을 확인해보세요.',
     type: 'image',
-    cols: 3,
+    cols: 2,
+    ordered: true,
     options: [
-      { label: '각져 보인다', icon: '◇', desc: '뼈의 윤곽이 또렷함', score: {H:3} },
-      { label: '중간이다', icon: '◎', desc: '딱히 눈에 띄지 않음', score: {} },
-      { label: '둥글다', icon: '○', desc: '매끈하고 부드러움', score: {Soft:3} },
+      { label: '각져 보인다', icon: '◇', desc: '뼈 윤곽이 도드라짐', score: {H:3} },
+      { label: '살짝 드러난다', icon: '◈', desc: '뼈가 은은하게 보임', score: {H:1} },
+      { label: '매끈하다', icon: '○', desc: '윤곽이 부드러움', score: {Soft:1} },
+      { label: '둥글다', icon: '●', desc: '뼈가 거의 안 보임', score: {Soft:3} },
     ]
   },
 
@@ -1180,10 +1115,12 @@ const questions = [
     text: '거울 속 얼굴 윤곽은\n어떤 편인가요?',
     subtext: '화장이나 헤어스타일보다 얼굴 선 자체를 떠올려보세요.',
     type: 'text',
+    ordered: true,
     options: [
-      { label: '턱선과 광대가 또렷한 편', sub: '선이 분명하고 입체적', score: {H:3} },
-      { label: '볼과 턱선이 둥글고 부드러운 편', sub: '선이 매끄럽게 이어짐', score: {Soft:3} },
-      { label: '잘 모르겠어요', score: {}, fixed: true },
+      { label: '턱선과 광대가 또렷하고 각이 있다', score: {H:3} },
+      { label: '갸름하지만 선이 분명하다', score: {H:1} },
+      { label: '계란형으로 부드럽다', score: {Soft:1} },
+      { label: '볼이 도톰하고 둥글다', score: {Soft:3} },
     ]
   },
 
@@ -1192,10 +1129,12 @@ const questions = [
     text: '얇은 니트나 티셔츠를 입으면\n어깨와 팔 라인이 어떻게 보이나요?',
     subtext: '몸에 적당히 맞는 얇은 상의를 떠올려보세요.',
     type: 'text',
+    ordered: true,
     options: [
-      { label: '어깨 끝과 팔꿈치 윤곽이 옷 위로 또렷하게 드러난다', sub: '라인이 선명하게 보임', score: {H:3} },
-      { label: '옷이 둥글게 감싸서 라인이 부드럽게 이어진다', sub: '윤곽이 매끄럽게 보임', score: {Soft:3} },
-      { label: '잘 모르겠어요', score: {}, fixed: true },
+      { label: '어깨 끝과 팔꿈치가 각지게 드러난다', score: {H:3} },
+      { label: '어깨선이 깔끔하게 떨어진다', score: {H:1} },
+      { label: '라인이 부드럽게 이어진다', score: {Soft:1} },
+      { label: '전체적으로 둥글고 포근하게 감싸진다', score: {Soft:3} },
     ]
   },
 ];
@@ -1378,10 +1317,15 @@ function renderQ(idx) {
     // '잘 모르겠어요'처럼 fixed 표시된 옵션은 셔플하지 않고 맨 뒤에 둔다
     const indices = q.options.map((_, i) => i).filter(i => !q.options[i].fixed);
     const fixedIdx = q.options.map((_, i) => i).filter(i => q.options[i].fixed);
-    // Fisher-Yates 셔플
-    for (let i = indices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [indices[i], indices[j]] = [indices[j], indices[i]];
+    if (q.ordered) {
+      // 단계형 선택지(강한 하드 → 강한 소프트)는 순서를 지키고, 방향만 무작위로 뒤집는다
+      if (Math.random() < 0.5) indices.reverse();
+    } else {
+      // Fisher-Yates 셔플
+      for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+      }
     }
     shuffledOptions[idx] = indices.concat(fixedIdx);
   }
@@ -1966,7 +1910,7 @@ function renderFriendCompare(myKey) {
   } else if (sameDir) {
     el.innerHTML = `<div class="friend-compare"><strong>반쪽 옷장 메이트</strong> · 친구는 ${fr.name}, 나는 ${me.name}.<br>실루엣은 같이 입어도 되고, 어울리는 소재만 달라요.</div>`;
   } else {
-    el.innerHTML = `<div class="friend-compare"><strong>스타일 교환 친구</strong> · 친구는 ${fr.name}, 나는 ${me.name}.<br>어울리는 옷이 달라서 서로에게 없는 코디를 추천해줄 수 있어요. 다른 친구 중에 옷장 메이트가 있을지도 몰라요.</div>`;
+    el.innerHTML = `<div class="friend-compare"><strong>스타일 교환 친구</strong> · 친구는 ${fr.name}, 나는 ${me.name}.<br>어울리는 옷이 달라서 서로의 스타일을 구경하는 재미가 있어요. 다른 친구 중에 옷장 메이트가 있을지도 몰라요.</div>`;
   }
 }
 
