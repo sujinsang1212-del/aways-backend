@@ -1,6 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta name="facebook-domain-verification" content="ga06fy1ufqlw4mc5lxdc2hqq1nahof" /><!-- Meta Pixel Code -->
+<html lang="ko">
+<head><meta name="facebook-domain-verification" content="ga06fy1ufqlw4mc5lxdc2hqq1nahof" />
+<meta charset="UTF-8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AWAYS">
+<meta property="og:title" content="나는 6가지 체형 중 어떤 타입일까? · AWAYS">
+<meta property="og:description" content="18문항으로 보는 무료 체형 진단. 옷이 안 맞는 이유를 체형에서 찾아보세요.">
+<meta property="og:image" content="https://awaysbiz.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://awaysbiz.com/">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWAYS · 내 체형부터 알고 쇼핑하세요</title>
+<meta name="description" content="옷이 자꾸 안 맞는 이유, 체형 때문이었어요. 18개 질문으로 6가지 체형 타입 중 내 타입을 찾아드려요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --wine:#4A1C26; --wine-2:#66303B; --ink:#2B1217; --text:#2B1217; --body:#533A3F; --muted:#6E4A51;
+  --blush:#E8D2D5; --sand:#EBDCC7; --paper:#F6EFEC; --line:#E6D9D5; --white:#FFFFFF;
+  --t-sh:#2F3A4A; --t-ss:#5A6E8C; --t-hw:#7A2E3A; --t-sw:#9A5266; --t-hn:#4E5B3A; --t-sn:#5F6F58;
+  --serif:'Gowun Batang',serif; --sans:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--white);line-height:1.7;font-size:16px;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--sand);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:26px;font-weight:700;font-size:16px;text-decoration:none;border:none;cursor:pointer;font-family:inherit}
+.btn-sand{background:var(--sand);color:var(--ink)}
+.btn-wine{background:var(--wine);color:#fff}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.h2{font-family:var(--serif);font-weight:700;font-size:clamp(26px,5.4vw,36px);line-height:1.35;letter-spacing:-0.01em}
+.lead{color:var(--body);font-size:16px;line-height:1.8;margin-top:12px;max-width:560px}
+.sec{padding:72px 0}
+.sec-paper{background:var(--paper)}
+
+/* 헤더 */
+.header{background:var(--wine);position:sticky;top:0;z-index:50}
+.header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{color:#fff;font-weight:700;font-size:20px;letter-spacing:0.06em;text-decoration:none}
+.header .btn{min-height:40px;padding:0 16px;font-size:14px}
+
+/* 히어로 */
+.hero{background:var(--wine);color:#fff;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);grid-template-areas:"head head" "action action" "facts photo";column-gap:18px;padding-top:36px}
+.hero-head{grid-area:head}
+.hero h1{font-size:clamp(38px,8.6vw,60px);line-height:1.18;font-weight:700;letter-spacing:-0.02em;margin:0 0 14px}
+.hero-sub{color:var(--blush);font-size:15px;line-height:1.75;max-width:480px}
+.hero-sub strong{color:var(--sand);font-weight:600}
+.hero-action{grid-area:action;margin-top:24px}
+.hero-action .btn{width:100%;max-width:360px}
+.hero-photo{grid-area:photo;align-self:end;margin-top:28px;margin-right:-20px;aspect-ratio:3/4.4;border-radius:999px 999px 0 0;overflow:hidden;background:var(--wine-2)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-facts{grid-area:facts;align-self:end;list-style:none;display:grid;margin:28px 0 30px;border-top:1px solid rgba(235,220,199,0.28)}
+.hero-facts li{display:flex;flex-direction:column;gap:3px;padding:14px 0;border-bottom:1px solid rgba(235,220,199,0.28)}
+.hero-facts b{font-size:28px;line-height:1;color:var(--sand);font-weight:700}
+.hero-facts span{font-size:13px;font-weight:600;color:#fff;line-height:1.4}
+.hero-facts em{display:block;font-style:normal;font-weight:400;font-size:11px;color:var(--blush);margin-top:1px}
+@media(min-width:900px){
+  .hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);grid-template-areas:"head photo" "action photo" "facts photo";column-gap:48px;padding-top:72px}
+  .hero-sub{font-size:17px}
+  .hero-action{margin-top:32px}
+  .hero-action .btn{width:auto;padding:0 38px}
+  .hero-photo{margin:0;max-width:400px;justify-self:end;width:100%}
+  .hero-facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:560px;margin:44px 0 48px;border-top:1px solid rgba(235,220,199,0.28)}
+  .hero-facts li{border-bottom:none;padding:18px 0 0}
+  .hero-facts b{font-size:30px}
+}
+
+
+/* 친구 공유 링크 배너 */
+.friend-hero{background:var(--paper);border-bottom:1px solid var(--line)}
+.friend-hero[hidden]{display:none}
+.friend-inner{display:flex;gap:16px;align-items:center;padding-top:22px;padding-bottom:22px}
+.friend-photo{flex-shrink:0;width:96px;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--blush)}
+.friend-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.friend-label{font-size:12px;color:var(--muted)}
+.friend-title{font-size:18px;font-weight:700;line-height:1.4;margin-top:2px}
+.friend-title b{color:var(--friend-color,var(--wine))}
+.friend-nick{font-size:13px;color:var(--body);margin-top:2px}
+.friend-ask{font-size:13px;color:var(--ink);margin-top:8px;line-height:1.5}
+.friend-btn{min-height:44px;padding:0 20px;font-size:14px;margin-top:10px}
+@media(min-width:900px){.friend-photo{width:110px}.friend-title{font-size:22px}}
+
+/* 신뢰 바 */
+.trust{border-bottom:1px solid var(--line)}
+.trust .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding-top:22px;padding-bottom:22px;text-align:center}
+.trust b{display:block;font-size:14px;color:var(--ink)}
+.trust span{font-size:12px;color:var(--muted)}
+
+/* 문제 제기 */
+
+/* 6컬러 */
+.types{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:28px}
+@media(min-width:900px){.types{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.type{border-radius:18px;color:#fff;padding:16px;min-height:120px;display:flex;flex-direction:column;justify-content:space-between}
+.type span{font-size:12px;opacity:0.88;line-height:1.5}
+.type b{font-size:18px;font-weight:700}
+
+/* 분석 원리 */
+.axes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:28px}
+.axis{background:#fff;border-radius:16px;padding:18px 16px}
+.axis small{font-size:13px;color:var(--muted)}
+.axis b{display:block;font-size:18px;margin:6px 0}
+.axis p{font-size:13px;line-height:1.65;color:var(--body)}
+.axis em{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.sub-h{font-family:var(--serif);font-weight:700;font-size:22px;line-height:1.4;margin:44px 0 10px}
+.infer-list{display:grid;gap:10px;margin-top:16px}
+.infer{background:#fff;border-radius:14px;padding:16px 18px;display:grid;gap:6px}
+.infer-q{font-size:15px;line-height:1.6}
+.infer-q small{display:block;font-size:12px;color:var(--muted)}
+.infer-arrow{display:none}
+.infer-a{font-size:14px;line-height:1.6;color:var(--wine);font-weight:600}
+.note{background:var(--blush);color:var(--ink);border-radius:14px;padding:16px 18px;font-size:14px;line-height:1.75;margin-top:24px}
+
+/* 결과 카드 · 옷장 메이트 */
+
+
+.types-sec{padding-bottom:28px}
+.mate-sec{padding-top:28px}
+
+/* 옷장 메이트 */
+.mate-top{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.mate-top{grid-template-columns:1fr 1fr;gap:56px}}
+.mate-perks{list-style:none;display:grid;gap:10px;margin-top:22px}
+.mate-perks li{background:var(--paper);border-radius:14px;padding:14px 16px;display:grid;gap:2px}
+.mate-perks b{font-size:15px;color:var(--wine)}
+.mate-perks span{font-size:14px;color:var(--body);line-height:1.6}
+.mate-visual{position:relative;height:430px;max-width:360px;width:100%;margin:0 auto}
+.mv-card{position:absolute;left:0;top:0;width:200px;border-radius:22px;background:#F8ECEF;padding:14px 14px 16px;box-shadow:0 18px 44px rgba(43,18,23,0.18);transform:rotate(-4deg);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.mv-photo{width:100%;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--blush)}
+.mv-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.mv-name{font-size:19px;font-weight:700;margin-top:6px}
+.mv-nick{font-size:11px;font-weight:600;color:var(--body)}
+.mv-pill{margin-top:6px;font-size:10px;font-weight:700;color:#fff;background:var(--t-sw);padding:6px 10px;border-radius:12px}
+.mv-chat{position:absolute;right:0;bottom:6px;width:230px;background:#fff;border-radius:18px;padding:12px;box-shadow:0 14px 36px rgba(43,18,23,0.16);transform:rotate(2deg)}
+.mv-chat-from{font-size:11px;color:var(--muted);margin-bottom:8px}
+.mv-link{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.mv-link img{width:100%;aspect-ratio:1200/630;object-fit:cover;display:block}
+.mv-link-text{padding:8px 10px;display:grid;gap:2px}
+.mv-link-text b{font-size:12px}
+.mv-link-text span{font-size:11px;color:var(--muted)}
+.mv-badge{position:absolute;right:18px;top:40px;background:var(--wine);color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:22px;box-shadow:0 10px 24px rgba(43,18,23,0.25)}
+.mate-sub{margin-top:52px}
+.mate-levels{display:grid;gap:10px;margin-top:16px}
+@media(min-width:900px){.mate-levels{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.level{background:#fff;border-radius:16px;padding:18px;border:1px solid var(--line)}
+.level-best{border:2px solid var(--wine)}
+.level-pair{display:flex;margin-bottom:12px}
+.level-pair i{width:26px;height:26px;border-radius:50%;border:2px solid #fff}
+.level-pair i+i{margin-left:-8px}
+.level-name{font-size:17px;font-weight:700}
+.level-best .level-name{color:var(--wine)}
+.level-case{font-size:12px;color:var(--muted);margin:2px 0 8px}
+.level p{font-size:14px;color:var(--body);line-height:1.65}
+.mate-steps{list-style:none;display:grid;gap:10px;margin-top:40px;counter-reset:none}
+@media(min-width:900px){.mate-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mate-steps li{display:flex;gap:12px;align-items:flex-start}
+.mate-steps span{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--wine);color:var(--sand);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.mate-steps b{display:block;font-size:15px}
+.mate-steps em{display:block;font-style:normal;font-size:13px;color:var(--muted);margin-top:2px}
+
+/* 리포트 */
+.samples{display:flex;gap:12px;justify-content:center;margin:32px 0}
+.sample{width:30%;max-width:150px;aspect-ratio:1/1.414;background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 10px;box-shadow:0 6px 20px rgba(43,18,23,0.08);position:relative;overflow:hidden}
+.sample:nth-child(2){transform:translateY(-8px)}
+.sample img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sp-ch{font-size:9px;color:var(--wine);font-weight:600}
+.sp-t{font-family:var(--serif);font-size:12px;line-height:1.3;margin:4px 0 8px;font-weight:700}
+.sp-b{filter:blur(2.5px)}
+.sp-l{height:5px;background:var(--line);border-radius:3px;margin-bottom:6px}
+.sp-k{height:40px;background:var(--blush);border-radius:4px;margin:8px 0}
+.toc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px 22px}
+.toc-item{display:grid;grid-template-columns:28px 1fr auto;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.toc-item:last-child{border-bottom:none}
+.toc-no{font-family:var(--serif);color:var(--wine);font-size:18px;font-weight:700}
+.toc-title{font-size:15px;font-weight:600}
+.toc-desc{font-size:13px;color:var(--muted);line-height:1.65}
+.toc-page{font-size:12px;color:var(--muted);white-space:nowrap}
+.price{background:var(--wine);color:#fff;border-radius:22px;padding:28px 24px;margin-top:24px;display:grid;gap:8px}
+.price small{color:var(--sand);font-size:14px;font-weight:600}
+.price .num{display:flex;align-items:baseline;gap:6px}
+.price .num b{font-size:48px;letter-spacing:-0.02em;line-height:1.1}
+.price p{color:var(--blush);font-size:14px;line-height:1.7}
+.price .btn{margin-top:10px;justify-self:start}
+
+/* 베타 */
+.beta-card{background:#fff;border:1px solid var(--wine);border-radius:18px;padding:32px 24px;text-align:center;max-width:680px;margin:0 auto}
+.beta-title{font-family:var(--serif);font-size:clamp(22px,4.6vw,28px);line-height:1.4;font-weight:700;margin-bottom:10px}
+.beta-desc{font-size:15px;color:var(--body);line-height:1.8;margin-bottom:18px}
+.beta-steps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.beta-step{background:var(--paper);color:var(--ink);font-size:13px;padding:7px 14px;border-radius:16px}
+.beta-note{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.7}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--line);padding:20px 0;cursor:pointer}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;justify-content:space-between;gap:16px;font-weight:600;font-size:16px;line-height:1.5}
+.faq-toggle{color:var(--wine);font-size:22px;transition:transform .2s;flex-shrink:0}
+.faq-item.open .faq-toggle{transform:rotate(45deg)}
+.faq-a{font-size:14px;color:var(--body);line-height:1.85;max-height:0;overflow:hidden;transition:max-height .3s,margin-top .3s}
+.faq-item.open .faq-a{max-height:700px;margin-top:12px}
+
+/* 최종 CTA */
+.final{background:var(--wine);color:#fff;text-align:center;padding:72px 0}
+.final .h2{color:#fff}
+.final p{color:var(--blush);margin:12px 0 26px;font-size:15px}
+.final small{display:block;color:var(--blush);font-size:12px;margin-top:14px}
+
+/* 푸터 */
+.footer{background:var(--paper);padding:32px 20px;text-align:center;font-size:12px;color:var(--muted);line-height:1.8}
+.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.footer a{color:var(--wine);text-decoration:none}
+
+/* 플로팅 CTA */
+.floating-cta{position:fixed;left:16px;right:16px;bottom:16px;background:var(--wine);color:#fff;min-height:56px;border-radius:28px;display:none;align-items:center;justify-content:center;font-weight:700;font-size:15px;text-decoration:none;z-index:60;box-shadow:0 8px 24px rgba(43,18,23,0.3)}
+.floating-cta.show{display:flex}
+@media(min-width:900px){.floating-cta{left:auto;right:24px;bottom:24px;width:260px}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.faq-a,.faq-toggle{transition:none}}
+</style>
+<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -10,814 +235,262 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1018812814154877');
+fbq('init', '1416204774046914');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1018812814154877&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Japanese Body-Type Method · AWAYS</title>
-<meta name="description" content="Why your clothes never fit right — even in your size. The Japanese 6-type body analysis used by stylists in Tokyo and Seoul, now in English.">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
-  --text: #1A1714; --muted: #8A8178;
-  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
-  --dark: #1A1714; --tag: #EDE7DE;
-  --green: #4A7C59;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-}
-
-@media (max-width: 600px) {
-  body { font-size: 17px; }
-}
-
-/* ============ Top notice bar ============ */
-.topbar {
-  background: var(--dark);
-  color: white;
-  padding: 12px 20px;
-  text-align: center;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-}
-.topbar strong { color: var(--accent); font-weight: 600; }
-
-/* ============ Header ============ */
-.header {
-  background: var(--bg);
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.logo { font-family: 'DM Serif Display', serif; font-size: 20px; }
-.header-cta {
-  background: var(--dark);
-  color: white;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  letter-spacing: 0.02em;
-}
-
-/* ============ Hero ============ */
-.hero {
-  padding: 60px 20px 80px;
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-}
-.hero-eyebrow {
-  display: inline-block;
-  background: var(--accent-light);
-  color: var(--accent-dark);
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-.hero-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(34px, 8vw, 52px);
-  line-height: 1.2;
-  margin-bottom: 18px;
-  letter-spacing: -0.01em;
-}
-.hero-title em { font-style: italic; color: var(--accent-dark); }
-.hero-sub {
-  font-size: 16px;
-  color: var(--muted);
-  line-height: 1.85;
-  margin-bottom: 32px;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.hero-cta {
-  display: inline-block;
-  background: var(--dark);
-  color: white;
-  padding: 18px 40px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 500;
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 4px 16px rgba(26,23,20,0.15);
-}
-.hero-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(26,23,20,0.25);
-}
-.hero-trust {
-  margin-top: 16px;
-  font-size: 13px;
-  color: var(--muted);
-}
-.hero-trust strong { color: var(--accent-dark); }
-
-.hero-illust {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 32px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.6);
-  border: 1px dashed var(--accent);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  color: var(--accent-dark);
-}
-.hero-illust-label {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-}
-.hero-illust-desc {
-  font-size: 10px;
-  color: var(--muted);
-}
-
-/* ============ Stats bar ============ */
-.stats-bar {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 28px 20px;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-.stat-item { text-align: center; }
-.stat-num {
-  font-size: 32px;
-  margin-bottom: 8px;
-}
-.stat-label {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  text-transform: uppercase;
-  line-height: 1.6;
-  font-weight: 500;
-}
-
-/* ============ Problem section ============ */
-.problem {
-  padding: 80px 20px;
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-}
-.section-eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent-dark);
-  margin-bottom: 14px;
-  font-weight: 600;
-}
-.section-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(28px, 5vw, 36px);
-  line-height: 1.3;
-  margin-bottom: 18px;
-  letter-spacing: -0.01em;
-}
-.section-title em { font-style: italic; color: var(--accent-dark); }
-.section-desc {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.85;
-  max-width: 540px;
-  margin: 0 auto 40px;
-}
-
-.problem-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  max-width: 520px;
-  margin: 0 auto;
-}
-.problem-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px 22px;
-  text-align: left;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-.problem-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-}
-.problem-text {
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-/* ============ Method (was Solution) ============ */
-.solution {
-  padding: 80px 20px;
-  background: var(--surface);
-}
-.solution-inner {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-}
-.solution-features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 32px;
-}
-@media (max-width: 600px) {
-  .solution-features { grid-template-columns: 1fr; }
-}
-.feature-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 28px 22px;
-  text-align: center;
-}
-.feature-icon {
-  font-size: 32px;
-  margin-bottom: 14px;
-}
-.feature-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 19px;
-  margin-bottom: 8px;
-  letter-spacing: -0.01em;
-}
-.feature-desc {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-/* ============ The 6 types preview ============ */
-.types {
-  padding: 80px 20px;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.types-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 32px;
-}
-@media (max-width: 600px) {
-  .types-grid { grid-template-columns: 1fr; }
-}
-.type-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  text-align: left;
-}
-.type-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: 18px;
-  margin-bottom: 6px;
-  color: var(--accent-dark);
-}
-.type-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-/* ============ Differentiator section ============ */
-.diff {
-  padding: 80px 20px;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.diff-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 32px 28px;
-  margin-bottom: 14px;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-@media (max-width: 600px) {
-  .diff-card { flex-direction: column; gap: 12px; padding: 24px 20px; }
-}
-.diff-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 36px;
-  color: var(--accent);
-  line-height: 1;
-  flex-shrink: 0;
-  font-style: italic;
-}
-.diff-content { flex: 1; }
-.diff-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 22px;
-  margin-bottom: 10px;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-}
-.diff-title em { font-style: italic; color: var(--accent-dark); }
-.diff-desc {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.8;
-  margin-bottom: 12px;
-}
-.diff-desc strong { color: var(--text); font-weight: 600; }
-.diff-tag {
-  display: inline-block;
-  background: var(--tag);
-  color: var(--accent-dark);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-/* ============ FAQ ============ */
-.faq {
-  padding: 80px 20px;
-  background: var(--surface);
-}
-.faq-inner {
-  max-width: 640px;
-  margin: 0 auto;
-}
-.faq-item {
-  border-bottom: 1px solid var(--border);
-  padding: 20px 0;
-  cursor: pointer;
-}
-.faq-q {
-  font-size: 15px;
-  font-weight: 500;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
-.faq-toggle {
-  font-size: 20px;
-  color: var(--accent);
-  transition: transform 0.2s;
-  flex-shrink: 0;
-}
-.faq-item.open .faq-toggle {
-  transform: rotate(45deg);
-}
-.faq-a {
-  margin-top: 0;
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.85;
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.3s;
-}
-.faq-item.open .faq-a {
-  margin-top: 14px;
-  max-height: 600px;
-}
-
-/* ============ Final CTA ============ */
-.final-cta {
-  background: var(--dark);
-  color: white;
-  padding: 80px 20px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.final-cta::before {
-  content: '';
-  position: absolute;
-  top: -100px; right: -100px;
-  width: 240px; height: 240px;
-  border-radius: 50%;
-  background: rgba(184,149,106,0.1);
-}
-.final-cta::after {
-  content: '';
-  position: absolute;
-  bottom: -80px; left: -80px;
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: rgba(184,149,106,0.06);
-}
-.final-cta-inner {
-  max-width: 560px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-.final-cta-eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-  font-weight: 600;
-}
-.final-cta-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(28px, 5vw, 40px);
-  line-height: 1.3;
-  color: white;
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
-}
-.final-cta-title em { font-style: italic; color: var(--accent); }
-.final-cta-desc {
-  font-size: 15px;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.85;
-  margin-bottom: 32px;
-}
-.final-btn {
-  display: inline-block;
-  background: var(--accent-dark);
-  color: white;
-  padding: 18px 44px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 500;
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: opacity 0.15s;
-}
-.final-btn:hover { opacity: 0.88; }
-.final-cta-note {
-  margin-top: 16px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.5);
-}
-
-/* ============ Footer ============ */
-.footer {
-  background: var(--bg);
-  padding: 32px 20px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.8;
-  border-top: 1px solid var(--border);
-}
-.footer a { color: var(--accent-dark); text-decoration: none; }
-.footer-links {
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-/* Floating CTA */
-.floating-cta {
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  background: var(--dark);
-  color: white;
-  padding: 18px;
-  border-radius: 12px;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  z-index: 99;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
-  display: none;
-  letter-spacing: 0.02em;
-}
-.floating-cta.show { display: block; }
-@media (min-width: 720px) {
-  .floating-cta {
-    left: auto;
-    right: 24px;
-    bottom: 24px;
-    max-width: 280px;
-  }
-}
-</style>
+<!-- End Meta Pixel Code --><!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKT4ZNNWVB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-SKT4ZNNWVB');
+</script>
 </head>
 <body>
+<header class="header">
+  <div class="wrap">
+    <a href="/" class="logo">AWAYS</a>
+    <a href="/test?start=1" class="btn btn-sand">무료 진단</a>
+  </div>
+</header>
 
-<!-- Top bar -->
-<div class="topbar">
-  ⚡ <strong>Launch offer</strong> · Reg. $39 → <strong>$29</strong> (limited time)
-</div>
+<!-- 친구 공유 링크(/r/타입)로 들어왔을 때만 보이는 배너 -->
+<section class="friend-hero" id="friendHero" hidden>
+  <div class="wrap friend-inner">
+    <div class="friend-photo"><img id="friendImg" alt=""></div>
+    <div class="friend-text">
+      <div class="friend-label">친구의 체형 결과</div>
+      <div class="friend-title">친구는 <b id="friendName"></b> 나왔어요</div>
+      <div class="friend-nick" id="friendNick"></div>
+      <div class="friend-ask">나도 같은 타입이면 옷장 메이트! 확인해볼까요? 👯</div>
+      <a href="/test?start=1" class="btn btn-wine friend-btn" id="friendCta">나도 진단하기</a>
+    </div>
+  </div>
+</section>
 
-<!-- Header -->
-<div class="header">
-  <div class="logo">AWAYS</div>
-  <a href="/en/test?start=1" class="header-cta">Start quiz</a>
-</div>
-
-<!-- Hero -->
 <section class="hero">
-  <div class="hero-eyebrow">The Japanese Body-Type Method</div>
-
-  <h1 class="hero-title">The reason your clothes never fit right<br><em>isn't your size.</em></h1>
-
-  <p class="hero-sub">It's your body type. In Japan and Korea, stylists use a 6-type system that goes deeper than "pear" or "hourglass" — and it's surprisingly accurate. Find your type in 5 minutes.</p>
-
-  <a href="/en/test?start=1" id="heroCta" class="hero-cta">Take the free quiz →</a>
-  <div class="hero-trust">5 min · No signup · No credit card</div>
-</section>
-
-<!-- Trust bar -->
-<div class="stats-bar">
-  <div class="stat-item">
-    <div class="stat-num">🔒</div>
-    <div class="stat-label">Secure checkout<br>Stripe & PayPal</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">🛡️</div>
-    <div class="stat-label">Privacy<br>Protected</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">↩️</div>
-    <div class="stat-label">30-day<br>Money-back guarantee</div>
-  </div>
-</div>
-
-<!-- Problem -->
-<section class="problem">
-  <div class="section-eyebrow">Why You Need This</div>
-  <h2 class="section-title">Sound familiar?</h2>
-  <p class="section-desc">A full closet, but nothing to wear. It isn't a styling problem — it's a body-type problem.</p>
-
-  <div class="problem-list">
-    <div class="problem-item">
-      <div class="problem-icon">😩</div>
-      <div class="problem-text">The size fits, but the shoulders sit weirdly every time.</div>
+  <div class="wrap hero-grid">
+    <div class="hero-head">
+      <h1>내 체형부터<br>알고 쇼핑하세요</h1>
+      <p class="hero-sub">같은 사이즈인데 안 맞는 이유, 체형에 있어요.<br><strong>내 몸에 대한 경험으로 체형 타입을 찾아드려요.</strong></p>
     </div>
-    <div class="problem-item">
-      <div class="problem-icon">🤔</div>
-      <div class="problem-text">An outfit that looks great on your friend looks off on you.</div>
+    <div class="hero-action">
+      <a href="/test?start=1" id="heroCta" class="btn btn-sand">무료 진단 시작</a>
     </div>
-    <div class="problem-item">
-      <div class="problem-icon">💸</div>
-      <div class="problem-text">You buy the cute thing — and it never makes it out of the closet.</div>
-    </div>
-    <div class="problem-item">
-      <div class="problem-icon">😶</div>
-      <div class="problem-text">Every online "body type quiz" gives you a different answer.</div>
-    </div>
+    <div class="hero-photo"><img src="/images/model.jpg" alt="AWAYS 브랜드 모델" width="900" height="900"></div>
+    <ul class="hero-facts">
+      <li><b>18</b><span>문항</span></li>
+      <li><b>6</b><span>체형 타입</span></li>
+      <li><b>30</b><span>페이지 리포트</span></li>
+    </ul>
   </div>
 </section>
 
-<!-- Solution / Method -->
-<section class="solution">
-  <div class="solution-inner">
-    <div class="section-eyebrow">The Method</div>
-    <h2 class="section-title">Built on <em>kokkaku-shindan</em><br>— Japan's body-type system</h2>
-    <p class="section-desc">Used by stylists across Tokyo and Seoul for over a decade. We adapted it for English speakers, kept the precision, and added a complete styling playbook.</p>
 
-    <div class="solution-features">
-      <div class="feature-card">
-        <div class="feature-icon">🔍</div>
-        <div class="feature-title">15-question quiz</div>
-        <div class="feature-desc">No "are your shoulders broad?" guesswork. Real questions about how clothes actually behave on you.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">✦</div>
-        <div class="feature-title">6 precise types</div>
-        <div class="feature-desc">Wave, Straight, Natural — each split into Soft and Hard for accurate matching.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📄</div>
-        <div class="feature-title">22-page PDF guide</div>
-        <div class="feature-desc">Your personal styling playbook, delivered to your inbox in minutes.</div>
-      </div>
+<section class="trust">
+  <div class="wrap">
+    <div><b>안전결제</b><span>토스페이먼츠</span></div>
+    <div><b>이메일 외</b><span>개인정보 수집 없음</span></div>
+    <div><b>7일 이내</b><span>환불 보장</span></div>
+  </div>
+</section>
+
+<section class="sec sec-paper" id="method">
+  <div class="wrap">
+    <h2 class="h2">체형 스타일 진단에서<br>보는 두 가지 기준</h2>
+    <div class="axes">
+      <div class="axis"><small>기준 1</small><b>체형 방향</b><p>스트레이트 · 웨이브 · 내추럴. 뼈대의 모양과 살이 붙는 위치를 봐요.</p><em>일본 골격진단 3분류 기반</em></div>
+      <div class="axis"><small>기준 2</small><b>텍스처</b><p>하드 · 소프트. 몸의 라인이 선명한지, 부드러운지를 봐요.</p><em>McJimsey·Kibbe의 직선·곡선 이론 참고</em></div>
+    </div>
+
+    <h3 class="sub-h">직접적인 질문은 오히려 정확하지 않아요</h3>
+    <p class="lead">자기 체형을 정확히 아는 사람은 드물어요.<br>그래서 내 몸에 대한 경험, 옷을 입었을 때 나타나는 특징들로 측정하는 것이 더 정확해요.</p>
+    <div class="infer-list">
+      <div class="infer"><div class="infer-q"><small>질문 예시</small>셔츠를 입으면 가슴·등 쪽이 먼저 팽팽해져서 단추 사이가 벌어진다</div><div class="infer-a">상체에 두께감이 있는 편 · 스트레이트 쪽 점수가 올라가요</div></div>
+      <div class="infer"><div class="infer-q"><small>질문 예시</small>바지 허리 사이즈를 맞추면 엉덩이·허벅지가 끼인다</div><div class="infer-a">허리 대비 하체에 볼륨이 실리는 편 · 웨이브 쪽 점수가 올라가요</div></div>
+      <div class="infer"><div class="infer-q"><small>질문 예시</small>손을 펴서 보면 손가락 마디와 손목뼈가 크고 눈에 띈다</div><div class="infer-a">뼈대가 두드러지는 편 · 내추럴 쪽 점수가 올라가요</div></div>
+    </div>
+
+    <h3 class="sub-h">키와 몸무게를 묻지 않아요</h3>
+    <p class="lead">골격 타입은 체중이 아니라 뼈대의 모양과 살이 붙는 방식으로 결정돼요. 살이 빠져도 웨이브는 웨이브예요. 그래서 숫자 대신 옷을 입을 때의 경험으로 판단해요.</p>
+
+    <div class="note">자가응답 기반 진단이라 전문가의 대면 진단을 대체하지는 않아요. 두 타입의 점수가 비슷하게 나오면 결과 화면에서 점수 분포를 함께 보여드리니, 두 타입 가이드를 같이 참고해보세요.</div>
+  </div>
+</section>
+
+
+<section class="sec types-sec">
+  <div class="wrap">
+    <h2 class="h2">나는 6가지 체형 중<br>어떤 타입일까?</h2>
+    <p class="lead">체형 방향과 텍스처를 조합해 6가지 타입으로 나눠요. 타입마다 어울리는 옷의 공식이 달라요.</p>
+    <div class="types">
+      <div class="type" style="background:var(--t-sh)"><span>셋업이 교복인 사람</span><b>하드 스트레이트</b></div>
+      <div class="type" style="background:var(--t-ss)"><span>기본템이 제일 비싸 보이는 사람</span><b>소프트 스트레이트</b></div>
+      <div class="type" style="background:var(--t-hw)"><span>허리선 하나로 완성하는 사람</span><b>하드 웨이브</b></div>
+      <div class="type" style="background:var(--t-sw)"><span>원피스가 제일 잘 받는 사람</span><b>소프트 웨이브</b></div>
+      <div class="type" style="background:var(--t-hn)"><span>오버핏이 멋이 되는 사람</span><b>하드 내추럴</b></div>
+      <div class="type" style="background:var(--t-sn)"><span>린넨이 제일 잘 어울리는 사람</span><b>소프트 내추럴</b></div>
     </div>
   </div>
 </section>
 
-<!-- The 6 types preview -->
-<section class="types">
-  <div style="text-align:center; margin-bottom:8px;">
-    <div class="section-eyebrow">The Six Types</div>
-    <h2 class="section-title">Which one are <em>you</em>?</h2>
-    <p class="section-desc">Each type has its own line, fabric, and silhouette logic. Most online quizzes give you one of three. We give you one of six.</p>
-  </div>
+<section class="sec mate-sec" id="mate">
+  <div class="wrap">
+    <div class="mate-top">
+      <div class="mate-copy">
+        <h2 class="h2">같은 타입 친구는<br>내 옷장 메이트예요</h2>
+        <p class="lead">체형 타입이 같으면 어울리는 핏과 소재도 같아요. 친구가 "이거 진짜 잘 샀다" 싶은 옷이 나에게도 잘 맞을 확률이 높고, 서로 옷을 바꿔 입어도 어색하지 않아요.</p>
+        <ul class="mate-perks">
+          <li><b>옷 바꿔 입기</b><span>같은 핏 공식이라 빌려 입어도 내 옷처럼 맞아요</span></li>
+          <li><b>믿고 따라 사기</b><span>친구의 성공템이 곧 나의 성공템이 돼요</span></li>
+          <li><b>같이 쇼핑하기</b><span>서로에게 어울리는 옷을 바로 골라줄 수 있어요</span></li>
+        </ul>
+      </div>
+      <div class="mate-visual" aria-hidden="true">
+        <div class="mv-card">
+          <div class="mv-photo"><img src="/images/mood/W-Soft.jpg" alt=""></div>
+          <div class="mv-name">소프트 웨이브</div>
+          <div class="mv-nick">"원피스가 제일 잘 받는 사람"</div>
+          <div class="mv-pill">나랑 같은 체형이면 옷 바꿔 입자</div>
+        </div>
+        <div class="mv-chat">
+          <div class="mv-chat-from">친구에게 받은 링크</div>
+          <div class="mv-link">
+            <img src="/images/og/W-Soft.png" alt="">
+            <div class="mv-link-text"><b>친구는 소프트 웨이브래요</b><span>나는 어떤 체형일까?</span></div>
+          </div>
+        </div>
+        <div class="mv-badge">옷장 메이트 인증</div>
+      </div>
+    </div>
 
-  <div class="types-grid">
-    <div class="type-card">
-      <div class="type-name">Soft Wave</div>
-      <div class="type-desc">Feminine curves, delicate frame. Soft fabrics and fitted silhouettes flatter most.</div>
+    <h3 class="sub-h mate-sub">친구와 결과를 비교하면 이렇게 나와요</h3>
+    <div class="mate-levels">
+      <div class="level level-best">
+        <div class="level-pair"><i style="background:var(--t-sw)"></i><i style="background:var(--t-sw)"></i></div>
+        <div class="level-name">옷장 메이트</div>
+        <div class="level-case">타입까지 같을 때</div>
+        <p>핏도 소재도 같아요. 옷장을 공유해도 되는 사이예요.</p>
+      </div>
+      <div class="level">
+        <div class="level-pair"><i style="background:var(--t-sw)"></i><i style="background:var(--t-hw)"></i></div>
+        <div class="level-name">반쪽 옷장 메이트</div>
+        <div class="level-case">체형 방향만 같을 때</div>
+        <p>실루엣은 같이 입어도 되고, 어울리는 소재만 달라요.</p>
+      </div>
+      <div class="level">
+        <div class="level-pair"><i style="background:var(--t-sw)"></i><i style="background:var(--t-sh)"></i></div>
+        <div class="level-name">스타일 교환 친구</div>
+        <div class="level-case">체형 방향이 다를 때</div>
+        <p>어울리는 옷이 달라서, 서로의 스타일을 구경하는 재미가 있어요.</p>
+      </div>
     </div>
-    <div class="type-card">
-      <div class="type-name">Hard Wave</div>
-      <div class="type-desc">Curves with stronger structure. Defined waistlines and crisp materials work best.</div>
+
+    <ol class="mate-steps">
+      <li><span>1</span><div><b>무료 진단으로 내 타입 카드 받기</b><em>결과가 나오면 내 타입 카드가 만들어져요</em></div></li>
+      <li><span>2</span><div><b>스토리나 카톡으로 공유하기</b><em>링크에는 내 결과가 미리보기로 떠요</em></div></li>
+      <li><span>3</span><div><b>친구가 진단하면 자동으로 비교</b><em>옷장 메이트인지 결과 화면에서 바로 알려줘요</em></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec sec-paper" id="report">
+  <div class="wrap">
+    <h2 class="h2">진단 후 받는<br>약 30페이지 스타일 가이드</h2>
+    <p class="lead">내 타입에 맞춘 PDF 리포트예요. 결제 후 이메일로 바로 받아요.</p>
+    <!-- 샘플 페이지: 실제 리포트 캡처가 준비되면 각 .sample 안에 <img src="/images/sample-1.jpg" alt="리포트 샘플"> 을 넣으면 목업 위에 덮여요 -->
+    <div class="samples" aria-hidden="true">
+      <div class="sample"><div class="sp-ch">Chapter 02</div><div class="sp-t">실루엣과 핏의 비밀</div><div class="sp-b"><div class="sp-l"></div><div class="sp-l" style="width:80%"></div><div class="sp-k"></div><div class="sp-l"></div></div></div>
+      <div class="sample"><div class="sp-ch">Chapter 04</div><div class="sp-t">직장인 코디 공식</div><div class="sp-b"><div class="sp-k"></div><div class="sp-l"></div><div class="sp-l" style="width:70%"></div><div class="sp-k"></div></div></div>
+      <div class="sample"><div class="sp-ch">Chapter 05</div><div class="sp-t">쇼핑 체크리스트</div><div class="sp-b"><div class="sp-l"></div><div class="sp-l"></div><div class="sp-l" style="width:85%"></div><div class="sp-l"></div></div></div>
     </div>
-    <div class="type-card">
-      <div class="type-name">Soft Straight</div>
-      <div class="type-desc">Linear lines, softer presence. Drapey fabrics and clean cuts elevate the look.</div>
+    <div class="toc">
+      <div class="toc-item"><div class="toc-no">1</div><div><div class="toc-title">내 체형 이해하기</div><div class="toc-desc">내 타입의 시그니처 3가지, 결과 읽는 법, 다른 타입과 비교</div></div></div>
+      <div class="toc-item"><div class="toc-no">2</div><div><div class="toc-title">실루엣과 핏의 비밀</div><div class="toc-desc">핏의 황금 공식, 어울리는 핏과 피해야 할 핏, 네크라인 가이드</div></div></div>
+      <div class="toc-item"><div class="toc-no">3</div><div><div class="toc-title">소재와 컬러의 정답</div><div class="toc-desc">어울리는 소재 7가지와 피해야 할 소재 5가지, 패턴, 베이스 컬러</div></div></div>
+      <div class="toc-item"><div class="toc-no">4</div><div><div class="toc-title">직장인 코디 공식 5가지</div><div class="toc-desc">상황별 출근룩 조합 공식과 액세서리 가이드</div></div></div>
+      <div class="toc-item"><div class="toc-no">5</div><div><div class="toc-title">필수 쇼핑 체크리스트</div><div class="toc-desc">핵심 아이템 12가지와 아이템별 추천 브랜드</div></div></div>
+      <div class="toc-item"><div class="toc-no">6</div><div><div class="toc-title">사계절 스타일링 + Q&amp;A</div><div class="toc-desc">계절별 핵심 아이템, 자주 묻는 질문, 내 옷장 자가진단</div></div></div>
     </div>
-    <div class="type-card">
-      <div class="type-name">Hard Straight</div>
-      <div class="type-desc">Bold, sculpted lines. Sharp tailoring and rich, structured fabrics suit you.</div>
-    </div>
-    <div class="type-card">
-      <div class="type-name">Soft Natural</div>
-      <div class="type-desc">Relaxed frame, gentle edges. Casual layering and natural textures look effortless.</div>
-    </div>
-    <div class="type-card">
-      <div class="type-name">Hard Natural</div>
-      <div class="type-desc">Strong, athletic frame. Bold silhouettes and statement pieces match your energy.</div>
+    <div class="price">
+      <small>맞춤 스타일 리포트</small>
+      <div class="num"><b>9,800</b><span>원</span></div>
+      <p>안 맞아서 안 입는 옷 한 벌보다 저렴해요<br>7일 이내 환불 보장 · 결제 후 이메일 즉시 발송</p>
+      <a href="/test?start=1" class="btn btn-sand">무료 진단부터 시작</a>
     </div>
   </div>
 </section>
 
-<!-- Differentiator -->
-<section class="diff" style="background: var(--surface);">
-  <div style="text-align:center; margin-bottom:40px;">
-    <div class="section-eyebrow">What Makes Us Different</div>
-    <h2 class="section-title">Not your average <em>body-shape quiz.</em></h2>
-  </div>
 
-  <div class="diff-card" style="background: var(--bg);">
-    <div class="diff-num">01</div>
-    <div class="diff-content">
-      <h3 class="diff-title">No "are your shoulders broad?"<br><em>(because nobody actually knows.)</em></h3>
-      <p class="diff-desc">Most quizzes assume you can self-assess your bone structure. Spoiler: you can't. We ask things like <strong>"when you wear a button-down, where does it pull first?"</strong> — measuring your body indirectly through real clothing experiences.</p>
-      <div class="diff-tag">Behavioral diagnostic</div>
-    </div>
-  </div>
-
-  <div class="diff-card" style="background: var(--bg);">
-    <div class="diff-num">02</div>
-    <div class="diff-content">
-      <h3 class="diff-title">Three types isn't enough.<br><em>You need six.</em></h3>
-      <p class="diff-desc">A "Soft Wave" and a "Hard Wave" look completely different in the same dress. The Japanese method splits each type by frame strength — so the recommendations actually fit you, not the average of your category.</p>
-      <div class="diff-tag">6-type precision</div>
-    </div>
-  </div>
-
-  <div class="diff-card" style="background: var(--bg);">
-    <div class="diff-num">03</div>
-    <div class="diff-content">
-      <h3 class="diff-title">Not just "you're a Wave"<br><em>— here's what to wear Monday.</em></h3>
-      <p class="diff-desc">Most tests end at the diagnosis. We give you <strong>5 outfit formulas, recommended fabrics, color guidance, accessory rules, and a 12-item shopping checklist</strong> — all 22 pages, tailored to your type.</p>
-      <div class="diff-tag">Full styling playbook</div>
-    </div>
+<section class="sec" id="faq">
+  <div class="wrap" style="max-width:720px">
+    <h2 class="h2" style="margin-bottom:12px">자주 묻는 질문</h2>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><span>리포트는 어떻게 받나요?</span><span class="faq-toggle" aria-hidden="true">+</span></div><div class="faq-a">결제 완료 후 입력하신 이메일로 PDF 다운로드 링크가 즉시 발송됩니다. 다운로드 링크는 30일간 유효해요. 안 보이면 스팸함을 확인해주세요.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><span>환불은 어떻게 받을 수 있나요?</span><span class="faq-toggle" aria-hidden="true">+</span></div><div class="faq-a"><strong>결제 후 7일 이내라면 환불 보장</strong>해드려요.<br><br>① 결제일로부터 <strong>7일 이내</strong> 이메일(awaysbiz@gmail.com)로 환불 요청<br>② 주문번호와 환불 사유 작성 (이유 무관)<br>③ 영업일 기준 <strong>3일 이내 환불 처리</strong> 완료<br>④ 결제 수단으로 자동 환불<br><br>단, 리포트 다운로드 후 콘텐츠를 외부 공유한 사실이 확인된 경우 환불이 제한될 수 있어요. 「전자상거래법」에 따른 청약철회권을 보장합니다.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><span>어떤 이론을 바탕으로 하나요?</span><span class="faq-toggle" aria-hidden="true">+</span></div><div class="faq-a">체형 방향(스트레이트·웨이브·내추럴)은 일본 골격진단 3분류를, 텍스처(하드·소프트)는 Harriet McJimsey와 David Kibbe의 직선·곡선 이미지 이론을 참고했어요. 18문항 질문지와 점수 방식은 이 두 축을 일상 경험으로 측정할 수 있도록 AWAYS가 직접 설계했어요.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><span>결과가 애매하게 나오면 어떡하나요?</span><span class="faq-toggle" aria-hidden="true">+</span></div><div class="faq-a">결과 화면에서 타입별 점수 분포를 확인할 수 있어요. 두 타입이 비슷하게 나왔다면 경계에 있는 체형이라는 뜻이라, 두 타입의 특징을 함께 참고하는 게 좋아요. 답이 헷갈렸던 문항이 있다면 천천히 다시 진단해보세요.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><span>어떻게 답하면 더 정확하게 나오나요?</span><span class="faq-toggle" aria-hidden="true">+</span></div><div class="faq-a">손목, 쇄골, 손가락 마디처럼 직접 확인하는 문항은 거울 앞에서 실제로 확인해보면서 답해주세요. 옷을 입었을 때의 경험을 묻는 문항은 최근에 자주 입은 옷을 떠올리면 돼요. 잘 모르겠는 문항은 억지로 고르지 말고 "잘 모르겠어요"를 선택하는 게 결과가 더 정확해요.</div></div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq">
-  <div class="faq-inner">
-    <div style="text-align:center; margin-bottom:32px;">
-      <div class="section-eyebrow">FAQ</div>
-      <h2 class="section-title">Common questions</h2>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        <span>Is the quiz really free?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-a">Yes — the 15-question quiz and your body-type result are 100% free, no signup required. The optional 22-page personalized PDF guide is $29.</div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        <span>How do I get the report?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-a">Right after checkout, you'll get an email with your PDF guide attached. Download link stays valid for 30 days. Don't see it? Check your spam folder or email us.</div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        <span>What's your refund policy?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-a">
-        <strong>30-day money-back guarantee, no questions asked.</strong><br><br>
-        Just email us at awaysbiz@gmail.com within 30 days of purchase with your order number. We'll process the refund within 3 business days back to your original payment method.<br><br>
-        ⚠️ Refunds may be limited if the report content has been redistributed publicly.
-      </div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        <span>How long does the quiz take?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-a">About 4–5 minutes for the 15 questions. Don't rush — accurate answers come from actually thinking about your real clothing experiences.</div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        <span>Is this Kibbe?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-a">Not exactly. AWAYS is built on <em>kokkaku-shindan</em>, the Japanese body-type system — different methodology, different categories. There's some overlap with Kibbe (both look at frame and line), but our diagnostic asks different questions and gives different recommendations. Many users tell us they got a clearer result here than from Kibbe quizzes.</div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        <span>Which payment methods do you accept?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-a">All major credit and debit cards (Visa, Mastercard, Amex, Discover) via Stripe, plus PayPal. All payments are encrypted and processed securely — we never see your card details.</div>
-    </div>
+<section class="final" id="test">
+  <div class="wrap">
+    <h2 class="h2">오늘 입을 옷,<br>체형에서 답을 찾아요</h2>
+    <p>18문항으로 내 체형 타입과 어울리는 옷의 공식을 확인해보세요.</p>
+    <a href="/test?start=1" class="btn btn-sand">무료 진단 시작</a>
+    <small>진단은 무료 · 가입 없이 바로</small>
   </div>
 </section>
 
-<!-- Final CTA -->
-<section class="final-cta" id="test">
-  <div class="final-cta-inner">
-    <div class="final-cta-eyebrow">Start Your Style Journey</div>
-    <h2 class="final-cta-title">Five minutes from now,<br><em>you'll know your type.</em></h2>
-    <p class="final-cta-desc">
-      Stop staring at your closet every morning.<br>
-      Get your personal styling playbook today.
-    </p>
-    <a href="/en/test?start=1" class="final-btn">Take the free quiz →</a>
-    <div class="final-cta-note">No payment · No signup · 5 minutes</div>
-  </div>
-</section>
-
-<!-- Footer -->
 <footer class="footer">
   <div class="footer-links">
-    <a href="/en/terms">Terms</a>
-    <a href="/en/privacy">Privacy</a>
-    <a href="/en/refund">Refund Policy</a>
-    <a href="mailto:awaysbiz@gmail.com">Contact</a>
+    <a href="/terms">이용약관</a>
+    <a href="/privacy">개인정보처리방침</a>
+    <a href="/refund">환불정책</a>
+    <a href="mailto:awaysbiz@gmail.com">고객센터</a>
   </div>
-  <div>© 2026 어웨이즈 · Business Registration No. 201-33-01726 · 102-1001, 40, Yeouidaebang-ro 24da-gil, Dongjak-gu, Seoul, Republic of Korea<br>
-  CEO: Park Soojin · 010-5679-1161 · awaysbiz@gmail.com · Mail-Order Sales Registration: 2026-seouldongjak-0643 </div>
+  <div>© 2026 어웨이즈(AWAYS) · 사업자등록번호 201-33-01726 · 서울시 동작구 여의대방로24다길40 102동 1001호<br>
+  대표 박수진 · 통신판매업 신고 제2026-서울동작-0643호 · 고객문의 010-5679-1161</div>
 </footer>
 
-<!-- Floating CTA -->
-<a href="/en/test?start=1" class="floating-cta" id="floatingCta">⚡ Take the free quiz →</a>
+<a href="/test?start=1" class="floating-cta" id="floatingCta">무료 체형 진단 시작</a>
 
 <script>
-function toggleFaq(el) {
-  el.classList.toggle('open');
-}
-
+function toggleFaq(el) { el.classList.toggle('open'); }
 const floatingCta = document.getElementById('floatingCta');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 600) {
-    floatingCta.classList.add('show');
-  } else {
-    floatingCta.classList.remove('show');
-  }
+  floatingCta.classList.toggle('show', window.scrollY > 600);
 });
-</script>
 
+// 친구 공유 링크로 들어온 경우: /?from=W-Soft
+(function () {
+  const TYPES = {
+    'S-H': { name: '하드 스트레이트', nick: '셋업이 교복인 사람', color: '#2F3A4A' },
+    'S-Soft': { name: '소프트 스트레이트', nick: '기본템이 제일 비싸 보이는 사람', color: '#5A6E8C' },
+    'W-H': { name: '하드 웨이브', nick: '허리선 하나로 완성하는 사람', color: '#7A2E3A' },
+    'W-Soft': { name: '소프트 웨이브', nick: '원피스가 제일 잘 받는 사람', color: '#9A5266' },
+    'N-H': { name: '하드 내추럴', nick: '오버핏이 멋이 되는 사람', color: '#4E5B3A' },
+    'N-Soft': { name: '소프트 내추럴', nick: '린넨이 제일 잘 어울리는 사람', color: '#5F6F58' },
+  };
+  const from = new URLSearchParams(location.search).get('from');
+  const t = TYPES[from];
+  if (!t) return;
+  try { sessionStorage.setItem('friendType', from); } catch (e) {}
+  const c = t.name.charCodeAt(t.name.length - 1) - 0xAC00;
+  const withJosa = t.name + ((c >= 0 && c <= 11171 && c % 28) ? '이' : '가');
+  const box = document.getElementById('friendHero');
+  document.getElementById('friendName').textContent = withJosa;
+  document.getElementById('friendNick').textContent = '"' + t.nick + '"';
+  document.getElementById('friendImg').src = '/images/mood/' + from + '.jpg';
+  document.getElementById('friendImg').alt = t.name + ' 스타일 예시';
+  box.style.setProperty('--friend-color', t.color);
+  box.hidden = false;
+  if (window.gtag) gtag('event', 'friend_landing', { friend_type: from });
+})();
+</script>
 </body>
 </html>
