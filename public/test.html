@@ -185,6 +185,12 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
 .mood-label { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
 .mood-name { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
 .mood-desc { font-size: 14px; color: var(--muted); line-height: 1.6; word-break: keep-all; }
+.share-perks { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: -4px 0 16px; }
+.share-perks span { font-size: 12px; font-weight: 600; color: var(--wine); background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 5px 11px; }
+.share-legend { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); display: grid; gap: 8px; text-align: left; }
+.share-legend div { display: grid; gap: 1px; }
+.share-legend b { font-size: 13px; color: var(--wine); }
+.share-legend span { font-size: 12px; color: var(--muted); line-height: 1.5; }
 .share-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; margin: 0 0 16px; text-align: center; }
 .share-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; word-break: keep-all; }
 .share-sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; word-break: keep-all; }
@@ -847,13 +853,19 @@ function track(name, params) {
       <div id="previewItems"></div>
     </div>
     <div class="share-block" id="shareBlock">
-      <div class="share-title">내 옷장 메이트를 찾아보세요 👯</div>
-      <div class="share-sub">같은 체형이면 서로 옷을 바꿔 입어도 잘 어울려요.<br>카드를 올리고 나랑 같은 타입 친구를 찾아보세요.</div>
+      <div class="share-title">같은 타입 친구는 내 옷장 메이트예요 👯</div>
+      <div class="share-sub">카드를 스토리에 올리거나 친구에게 보내보세요.<br>친구가 진단하면 옷장 메이트인지 결과 화면에서 바로 비교돼요.</div>
+      <div class="share-perks"><span>옷 바꿔 입기</span><span>믿고 따라 사기</span><span>같이 쇼핑하기</span></div>
       <div id="friendCompare"></div>
       <img class="share-preview" id="sharePreview" alt="내 체형 결과 카드">
       <div class="share-actions">
         <button class="share-main" onclick="shareCardImage()">이미지 저장 · 스토리 공유</button>
         <button class="share-link" onclick="shareResult()">친구에게 보내서 옷장 메이트 찾기</button>
+      </div>
+      <div class="share-legend">
+        <div><b>옷장 메이트</b><span>타입까지 같을 때 · 핏도 소재도 같아요</span></div>
+        <div><b>반쪽 옷장 메이트</b><span>체형 방향만 같을 때 · 실루엣을 같이 입어요</span></div>
+        <div><b>스타일 교환 친구</b><span>방향이 다를 때 · 서로 없는 코디를 추천해요</span></div>
       </div>
     </div>
     <div class="report-preview-card">
@@ -1954,14 +1966,14 @@ function renderFriendCompare(myKey) {
 
   if (friend === myKey) {
     el.innerHTML = `<div class="mate-hit" style="--mate-color:${me.color}">
-      <div class="mate-hit-badge">👯 옷장 메이트 성공</div>
+      <div class="mate-hit-badge">👯 옷장 메이트예요</div>
       <div class="mate-hit-title">친구와 같은<br>${josa(me.name, '이에요', '예요')}!</div>
-      <div class="mate-hit-desc">어울리는 핏과 소재가 같아서 서로 옷을 바꿔 입어도 잘 어울려요. 인증 카드를 스토리에 올려보세요.</div>
+      <div class="mate-hit-desc">핏도 소재도 같아서 옷장을 공유해도 되는 사이예요. 인증 카드를 스토리에 올려보세요.</div>
     </div>`;
   } else if (sameDir) {
-    el.innerHTML = `<div class="friend-compare"><strong>반쪽 옷장 메이트</strong> · 친구는 ${fr.name}, 나는 ${me.name}.<br>실루엣은 같이 입어도 되지만, 어울리는 소재는 달라요.</div>`;
+    el.innerHTML = `<div class="friend-compare"><strong>반쪽 옷장 메이트</strong> · 친구는 ${fr.name}, 나는 ${me.name}.<br>실루엣은 같이 입어도 되고, 어울리는 소재만 달라요.</div>`;
   } else {
-    el.innerHTML = `<div class="friend-compare">친구는 <strong>${fr.name}</strong>, 나는 <strong>${me.name}</strong>. 어울리는 옷이 완전히 달라요!<br>다른 친구 중에 내 옷장 메이트가 있을지도 몰라요</div>`;
+    el.innerHTML = `<div class="friend-compare"><strong>스타일 교환 친구</strong> · 친구는 ${fr.name}, 나는 ${me.name}.<br>어울리는 옷이 달라서 서로에게 없는 코디를 추천해줄 수 있어요. 다른 친구 중에 옷장 메이트가 있을지도 몰라요.</div>`;
   }
 }
 
