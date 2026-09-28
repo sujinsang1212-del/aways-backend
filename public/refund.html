@@ -6,22 +6,22 @@
 <title>환불정책 · AWAYS</title>
 <meta name="description" content="AWAYS 체형진단 서비스 환불정책 - 7일 이내 불만족 시 환불 보장">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
-  --text: #1A1714; --muted: #8A8178;
-  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
-  --dark: #1A1714;
+  --bg: #F6EFEC; --surface: #FFFFFF; --border: #E6D9D5;
+  --text: #2B1217; --muted: #6E4A51;
+  --accent: #7A2E3A; --accent-light: #EBDCC7; --accent-dark: #4A1C26;
+  --dark: #2B1217;
   --green: #4A7C59;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'IBM Plex Sans KR', sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.8;
@@ -40,7 +40,7 @@ body {
   justify-content: space-between;
 }
 .logo {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 20px;
   text-decoration: none;
   color: var(--text);
@@ -70,12 +70,12 @@ body {
   font-weight: 600;
 }
 .page-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: clamp(30px, 6vw, 42px);
   line-height: 1.3;
   margin-bottom: 12px;
 }
-.page-title em { font-style: italic; color: var(--accent-dark); }
+.page-title em { font-style: normal; color: var(--accent-dark); }
 .page-meta {
   font-size: 13px;
   color: var(--muted);
@@ -97,7 +97,7 @@ body {
 }
 
 .guarantee-box {
-  background: linear-gradient(135deg, var(--accent-light) 0%, #F7E8D0 100%);
+  background: linear-gradient(135deg, var(--accent-light) 0%, #E8D2D5 100%);
   border-radius: 14px;
   padding: 28px 26px;
   margin-bottom: 32px;
@@ -108,7 +108,7 @@ body {
   margin-bottom: 10px;
 }
 .guarantee-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 22px;
   color: var(--accent-dark);
   margin-bottom: 8px;
@@ -120,7 +120,7 @@ body {
 }
 
 .content h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 22px;
   margin-top: 36px;
   margin-bottom: 16px;
@@ -176,9 +176,9 @@ body {
   align-items: flex-start;
 }
 .step-num {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 28px;
-  font-style: italic;
+  font-style: normal;
   color: var(--accent);
   line-height: 1;
   flex-shrink: 0;
@@ -218,15 +218,15 @@ table th {
 }
 
 .warning-box {
-  background: #FFF4E6;
-  border-left: 4px solid #E89A3A;
+  background: #F6EFEC;
+  border-left: 4px solid #9A5266;
   border-radius: 8px;
   padding: 18px 20px;
   margin: 20px 0;
   font-size: 14px;
   line-height: 1.8;
 }
-.warning-box strong { color: #C27414; }
+.warning-box strong { color: #7A2E3A; }
 
 .info-box {
   background: var(--accent-light);
@@ -275,18 +275,40 @@ table th {
   gap: 16px;
   flex-wrap: wrap;
 }
+
+.section-eyebrow,.page-eyebrow,.fp-eyebrow,.cta-launch-badge{text-transform:none!important;letter-spacing:0.02em!important;}
+/* ===== AWAYS 버건디 디자인 통일 ===== */
+:root{--text:#2B1217;--dark:#4A1C26;--wine:#4A1C26;--sand:#EBDCC7;--blush:#E8D2D5;}
+body{font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;word-break:keep-all;}
+em{font-style:normal;}
+
+.top-bar,.header{background:var(--wine)!important;border-bottom:none!important;}
+.top-bar .logo,.header .logo{font-family:'IBM Plex Sans KR',sans-serif!important;font-weight:700!important;letter-spacing:.06em;color:#fff!important;font-size:20px!important;}
+.step-indicator,.header-back{color:var(--blush)!important;}
+.start-btn,.btn-next,.btn-prev,.cta-btn,.pay-btn,.share-main,.share-link,.share-btn,.retry-btn,.home-btn{border-radius:28px!important;}
+.feel-btn{border-radius:22px!important;}
+h1,h2,.section-title,.page-title,.intro-title,.result-name,.success-title{letter-spacing:-0.01em;}
+
 </style>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKT4ZNNWVB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-SKT4ZNNWVB');
+</script>
 </head>
 <body>
 
 <div class="header">
-  <a href="/" class="logo">체형진단</a>
+  <a href="/" class="logo">AWAYS</a>
   <a href="/" class="header-back">← 홈으로</a>
 </div>
 
 <section class="page-hero">
-  <div class="page-eyebrow">Refund Policy</div>
-  <h1 class="page-title"><em>7일 이내</em> 무조건 환불</h1>
+  <div class="page-eyebrow">환불 정책</div>
+  <h1 class="page-title"><em>7일 이내</em> 환불 보장</h1>
   <div class="page-meta">시행일: 2026년 1월 1일</div>
 </section>
 
@@ -294,7 +316,7 @@ table th {
   <div class="content-card">
 
     <div class="guarantee-box">
-      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#4A1C26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
       <div class="guarantee-title">결제 후 7일 이내, 사유 무관 환불</div>
       <div class="guarantee-desc">
         리포트가 마음에 들지 않으셨다면 이유 없이 환불해드립니다.<br>
@@ -349,8 +371,7 @@ table th {
 
     <div class="info-box">
       <strong>예시</strong><br>
-      · 정가 24,900원 시점에 결제 → 24,900원 환불<br>
-      · 할인가 19,900원 시점에 결제 → 19,900원 환불<br>
+      · 9,800원에 결제 → 9,800원 환불<br>
       · 프로모션 가격으로 결제 → 결제하신 금액 그대로 환불
     </div>
 
@@ -358,7 +379,7 @@ table th {
     <p>아래의 경우에는 환불이 제한될 수 있습니다.</p>
 
     <div class="warning-box">
-      <strong>⚠️ 환불 제한 사유</strong><br><br>
+      <strong>환불 제한 사유</strong><br><br>
       ① 결제일로부터 <strong>7일이 경과</strong>한 경우<br>
       ② 리포트 콘텐츠를 <strong>외부에 공유, 배포, 복제</strong>한 사실이 확인된 경우<br>
       ③ 리포트 내용을 <strong>SNS, 블로그 등에 무단 게시</strong>한 경우<br>
@@ -419,7 +440,7 @@ table th {
     <hr class="divider">
 
     <div class="info-box">
-      <strong>📧 환불 문의처</strong><br>
+      <strong>환불 문의처</strong><br>
       이메일: awaysbiz@gmail.com<br>
       운영시간: 평일 10:00 ~ 18:00 (주말·공휴일 제외)<br><br>
       ※ 메일 접수는 24시간 가능하며, 영업일 기준으로 순차 응대해드립니다.
