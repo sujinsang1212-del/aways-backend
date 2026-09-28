@@ -74,6 +74,21 @@ img{max-width:100%;display:block}
   .hero-facts b{font-size:30px}
 }
 
+
+/* 친구 공유 링크 배너 */
+.friend-hero{background:var(--paper);border-bottom:1px solid var(--line)}
+.friend-hero[hidden]{display:none}
+.friend-inner{display:flex;gap:16px;align-items:center;padding-top:22px;padding-bottom:22px}
+.friend-photo{flex-shrink:0;width:96px;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--blush)}
+.friend-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.friend-label{font-size:12px;color:var(--muted)}
+.friend-title{font-size:18px;font-weight:700;line-height:1.4;margin-top:2px}
+.friend-title b{color:var(--friend-color,var(--wine))}
+.friend-nick{font-size:13px;color:var(--body);margin-top:2px}
+.friend-ask{font-size:13px;color:var(--ink);margin-top:8px;line-height:1.5}
+.friend-btn{min-height:44px;padding:0 20px;font-size:14px;margin-top:10px}
+@media(min-width:900px){.friend-photo{width:110px}.friend-title{font-size:22px}}
+
 /* 신뢰 바 */
 .trust{border-bottom:1px solid var(--line)}
 .trust .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding-top:22px;padding-bottom:22px;text-align:center}
@@ -243,6 +258,20 @@ gtag('config', 'G-SKT4ZNNWVB');
   </div>
 </header>
 
+<!-- 친구 공유 링크(/r/타입)로 들어왔을 때만 보이는 배너 -->
+<section class="friend-hero" id="friendHero" hidden>
+  <div class="wrap friend-inner">
+    <div class="friend-photo"><img id="friendImg" alt=""></div>
+    <div class="friend-text">
+      <div class="friend-label">친구의 체형 결과</div>
+      <div class="friend-title">친구는 <b id="friendName"></b> 나왔어요</div>
+      <div class="friend-nick" id="friendNick"></div>
+      <div class="friend-ask">나도 같은 타입이면 옷장 메이트! 확인해볼까요? 👯</div>
+      <a href="/test?start=1" class="btn btn-wine friend-btn" id="friendCta">나도 진단하기</a>
+    </div>
+  </div>
+</section>
+
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-head">
@@ -384,9 +413,9 @@ gtag('config', 'G-SKT4ZNNWVB');
       <div class="toc-item"><div class="toc-no">1</div><div><div class="toc-title">내 체형 이해하기</div><div class="toc-desc">내 타입의 뼈대·볼륨 특징과 왜 그런 옷이 어울리는지</div></div></div>
       <div class="toc-item"><div class="toc-no">2</div><div><div class="toc-title">실루엣과 핏의 비밀</div><div class="toc-desc">어울리는 라인·기장·네크라인, 피해야 할 핏</div></div></div>
       <div class="toc-item"><div class="toc-no">3</div><div><div class="toc-title">소재와 컬러의 정답</div><div class="toc-desc">어울리는 원단 질감과 컬러·패턴 고르는 법</div></div></div>
-      <div class="toc-item"><div class="toc-no">4</div><div><div class="toc-title">직장인 코디 공식 5가지</div><div class="toc-desc">출근룩에 바로 쓰는 조합 공식</div></div></div>
-      <div class="toc-item"><div class="toc-no">5</div><div><div class="toc-title">필수 쇼핑 체크리스트</div><div class="toc-desc">사야 할 아이템, 피해야 할 옷, 추천 브랜드 12곳</div></div></div>
-      <div class="toc-item"><div class="toc-no">6</div><div><div class="toc-title">사계절 스타일링 + Q&amp;A</div><div class="toc-desc">계절별 핵심 아이템과 자주 묻는 질문</div></div></div>
+      <div class="toc-item"><div class="toc-no">4</div><div><div class="toc-title">직장인 코디 공식 5가지</div><div class="toc-desc">출근룩에 바로 쓰는 조합 공식과 액세서리 가이드</div></div></div>
+      <div class="toc-item"><div class="toc-no">5</div><div><div class="toc-title">필수 쇼핑 체크리스트</div><div class="toc-desc">꼭 필요한 핵심 아이템 12가지와 아이템별 추천 브랜드</div></div></div>
+      <div class="toc-item"><div class="toc-no">6</div><div><div class="toc-title">사계절 스타일링 + Q&amp;A</div><div class="toc-desc">계절별 핵심 아이템, 자주 묻는 질문, 내 옷장 자가진단</div></div></div>
     </div>
     <div class="price">
       <small>맞춤 스타일 리포트</small>
@@ -437,6 +466,32 @@ const floatingCta = document.getElementById('floatingCta');
 window.addEventListener('scroll', () => {
   floatingCta.classList.toggle('show', window.scrollY > 600);
 });
+
+// 친구 공유 링크로 들어온 경우: /?from=W-Soft
+(function () {
+  const TYPES = {
+    'S-H': { name: '하드 스트레이트', nick: '셋업이 교복인 사람', color: '#2F3A4A' },
+    'S-Soft': { name: '소프트 스트레이트', nick: '기본템이 제일 비싸 보이는 사람', color: '#5A6E8C' },
+    'W-H': { name: '하드 웨이브', nick: '허리선 하나로 완성하는 사람', color: '#7A2E3A' },
+    'W-Soft': { name: '소프트 웨이브', nick: '원피스가 제일 잘 받는 사람', color: '#9A5266' },
+    'N-H': { name: '하드 내추럴', nick: '오버핏이 멋이 되는 사람', color: '#4E5B3A' },
+    'N-Soft': { name: '소프트 내추럴', nick: '린넨이 제일 잘 어울리는 사람', color: '#5F6F58' },
+  };
+  const from = new URLSearchParams(location.search).get('from');
+  const t = TYPES[from];
+  if (!t) return;
+  try { sessionStorage.setItem('friendType', from); } catch (e) {}
+  const c = t.name.charCodeAt(t.name.length - 1) - 0xAC00;
+  const withJosa = t.name + ((c >= 0 && c <= 11171 && c % 28) ? '이' : '가');
+  const box = document.getElementById('friendHero');
+  document.getElementById('friendName').textContent = withJosa;
+  document.getElementById('friendNick').textContent = '"' + t.nick + '"';
+  document.getElementById('friendImg').src = '/images/mood/' + from + '.jpg';
+  document.getElementById('friendImg').alt = t.name + ' 스타일 예시';
+  box.style.setProperty('--friend-color', t.color);
+  box.hidden = false;
+  if (window.gtag) gtag('event', 'friend_landing', { friend_type: from });
+})();
 </script>
 </body>
 </html>
