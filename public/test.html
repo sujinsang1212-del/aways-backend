@@ -2,26 +2,36 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AWAYS">
+<meta property="og:title" content="나는 6가지 체형 중 어떤 타입일까? · AWAYS">
+<meta property="og:description" content="18문항으로 보는 무료 체형 진단. 친구와 결과를 비교해보세요.">
+<meta property="og:image" content="https://awaysbiz.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://awaysbiz.com/test">
+<meta name="twitter:card" content="summary_large_image">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>체형 진단</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap');
 
 :root {
-  --bg: #F7F3EE;
+  --bg: #F6EFEC;
   --surface: #FFFFFF;
-  --border: #E8E2D9;
-  --text: #1A1714;
-  --muted: #8A8178;
-  --accent: #B8956A;
-  --accent-light: #F0E6D6;
-  --accent-dark: #8C6840;
-  --dark: #1A1714;
-  --tag: #EDE7DE;
+  --border: #E6D9D5;
+  --text: #2B1217;
+  --muted: #6E4A51;
+  --accent: #7A2E3A;
+  --accent-light: #EBDCC7;
+  --accent-dark: #4A1C26;
+  --dark: #2B1217;
+  --tag: #F1E7E3;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 16px; }
+body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 16px; }
 
 @media (max-width: 600px) {
   body { font-size: 17px; }
@@ -32,7 +42,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;
   position: sticky; top: 0; z-index: 100;
 }
-.logo { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+.logo { font-family: 'Gowun Batang', serif; font-size: 18px; color: var(--text); }
 .step-indicator { font-size: 12px; color: var(--muted); }
 
 .global-progress { height: 3px; background: var(--border); position: sticky; top: 53px; z-index: 99; }
@@ -47,8 +57,8 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   display: inline-block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--accent-dark); background: var(--accent-light); padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
 }
-.intro-title { font-family: 'DM Serif Display', serif; font-size: 34px; line-height: 1.3; margin-bottom: 16px; }
-.intro-title em { font-style: italic; color: var(--accent-dark); }
+.intro-title { font-family: 'Gowun Batang', serif; font-size: 34px; line-height: 1.3; margin-bottom: 16px; }
+.intro-title em { font-style: normal; color: var(--accent-dark); }
 .intro-desc { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; }
 .intro-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
 .intro-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 12px; text-align: center; }
@@ -70,7 +80,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
 .q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; animation: fadeUp 0.3s ease; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 .q-num { font-size: 10px; letter-spacing: 0.16em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
-.q-text { font-family: 'DM Serif Display', serif; font-size: 19px; line-height: 1.5; margin-bottom: 8px; }
+.q-text { font-family: 'Gowun Batang', serif; font-size: 19px; line-height: 1.5; margin-bottom: 8px; }
 .q-subtext { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
 .q-hint { font-size: 13px; color: var(--muted); line-height: 1.65; background: var(--tag); border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; border-left: 2px solid var(--accent); }
 
@@ -128,7 +138,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   animation: spin 0.8s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.loading-text { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 10px; }
+.loading-text { font-family: 'Gowun Batang', serif; font-size: 20px; margin-bottom: 10px; }
 .loading-sub { font-size: 13px; color: var(--muted); line-height: 1.7; }
 .loading-steps {
   max-width: 280px; margin: 32px auto 0;
@@ -152,17 +162,79 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   background: var(--dark); border-radius: 20px; padding: 44px 28px 36px; text-align: center;
   margin-bottom: 16px; position: relative; overflow: hidden;
 }
-.result-hero::before { content: ''; position: absolute; top: -50px; right: -50px; width: 180px; height: 180px; border-radius: 50%; background: rgba(184,149,106,0.12); }
-.result-hero::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 140px; height: 140px; border-radius: 50%; background: rgba(184,149,106,0.07); }
+.result-hero::before { content: ''; position: absolute; top: -50px; right: -50px; width: 180px; height: 180px; border-radius: 50%; background: rgba(122,46,58,0.12); }
+.result-hero::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 140px; height: 140px; border-radius: 50%; background: rgba(122,46,58,0.07); }
 .result-eyebrow { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-.result-name { font-family: 'DM Serif Display', serif; font-size: 34px; color: white; margin-bottom: 8px; line-height: 1.2; }
-.result-name span { color: var(--accent); font-style: italic; }
+.result-name { font-family: 'Gowun Batang', serif; font-size: 34px; color: white; margin-bottom: 8px; line-height: 1.2; }
+.result-name span { color: var(--accent); font-style: normal; }
 .result-sub { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; position: relative; z-index: 1; }
 
+
+
+/* ============ 결과 카드 공유 ============ */
+.result-hero { transition: background 0.4s; }
+.result-hero .result-name span { color: #fff; font-style: normal; font-family: 'IBM Plex Sans KR', sans-serif; font-weight: 700; }
+.result-hero .result-eyebrow { color: rgba(255,255,255,0.75); }
+.result-hero .result-sub { color: rgba(255,255,255,0.8); word-break: keep-all; }
+.result-en { font-family: 'Gowun Batang', serif; font-style: normal; font-size: 17px; color: rgba(255,255,255,0.7); margin-bottom: 10px; position: relative; z-index: 1; }
+.result-nick { display: inline-block; font-size: 15px; font-weight: 600; color: #fff; background: rgba(255,255,255,0.14); border-radius: 20px; padding: 7px 16px; margin-bottom: 12px; position: relative; z-index: 1; word-break: keep-all; }
+
+.mood-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 0 0 16px; display: grid; grid-template-columns: 42% 1fr; align-items: center; }
+.mood-card img { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+.mood-body { padding: 16px 18px; }
+.mood-label { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+.mood-name { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+.mood-desc { font-size: 14px; color: var(--muted); line-height: 1.6; word-break: keep-all; }
+.share-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; margin: 0 0 16px; text-align: center; }
+.share-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; word-break: keep-all; }
+.share-sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; word-break: keep-all; }
+.share-preview { display: block; width: 62%; max-width: 260px; margin: 0 auto 18px; border-radius: 14px; box-shadow: 0 10px 30px rgba(43,18,23,0.16); aspect-ratio: 9 / 16; background: var(--bg); }
+.share-actions { display: grid; gap: 8px; }
+.share-main { width: 100%; padding: 16px; border: none; border-radius: 10px; background: var(--dark); color: #fff; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; }
+.share-link { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); color: var(--text); font-size: 14px; cursor: pointer; font-family: inherit; }
+.share-main:focus-visible, .share-link:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
+.mate-hit { background: var(--mate-color, var(--dark)); color: #fff; border-radius: 14px; padding: 20px 18px; margin-bottom: 16px; word-break: keep-all; }
+.mate-hit-badge { font-size: 13px; font-weight: 700; letter-spacing: 0.02em; opacity: 0.85; margin-bottom: 6px; }
+.mate-hit-title { font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 6px; }
+.mate-hit-desc { font-size: 14px; line-height: 1.7; opacity: 0.9; }
+.friend-compare { font-size: 13px; line-height: 1.7; color: var(--accent-dark); background: var(--accent-light); border-radius: 10px; padding: 10px 12px; margin-bottom: 14px; word-break: keep-all; }
+
+.friend-banner { background: var(--accent-light); color: var(--accent-dark); border-radius: 12px; padding: 12px 16px; font-size: 14px; line-height: 1.6; margin-bottom: 20px; word-break: keep-all; }
+.friend-banner strong { font-weight: 700; }
+.friend-banner.with-photo { display: flex; gap: 14px; align-items: center; text-align: left; }
+.friend-banner img { width: 64px; height: 80px; object-fit: cover; object-position: center top; border-radius: 10px; flex-shrink: 0; }
+.friend-banner .fb-nick { display: block; font-size: 13px; opacity: 0.85; margin-top: 2px; }
+
+.img-modal { position: fixed; inset: 0; background: rgba(43,18,23,0.86); z-index: 1000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 24px; gap: 14px; }
+.img-modal.show { display: flex; }
+.img-modal img { max-height: 72vh; max-width: 100%; border-radius: 12px; -webkit-touch-callout: default; user-select: auto; }
+.img-modal-guide { color: #fff; font-size: 15px; text-align: center; line-height: 1.6; }
+.img-modal-close { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; padding: 10px 24px; font-size: 14px; cursor: pointer; font-family: inherit; }
+
+.feel-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin: 0 0 16px; text-align: center; }
+.feel-q { font-size: 14px; font-weight: 600; margin-bottom: 12px; word-break: keep-all; }
+.feel-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.feel-btns.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.feel-btn { min-height: 44px; border: 1px solid var(--border); background: var(--bg); border-radius: 10px; font-family: inherit; font-size: 14px; color: var(--text); cursor: pointer; }
+.feel-btn:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
+.feel-thanks { font-size: 13px; color: var(--accent-dark); line-height: 1.7; word-break: keep-all; }
+.breakdown { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 18px 14px; margin: 0 0 16px; }
+.bd-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.bd-group + .bd-group { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+.bd-row { display: grid; grid-template-columns: 64px 1fr 40px; gap: 10px; align-items: center; margin-bottom: 8px; font-size: 13px; }
+.bd-bar { height: 8px; background: var(--tag); border-radius: 4px; overflow: hidden; }
+.bd-fill { height: 100%; background: var(--accent); border-radius: 4px; width: 0; transition: width 0.8s ease; }
+.bd-row.top .bd-fill { background: var(--accent-dark); }
+.bd-row.top .bd-label { font-weight: 600; }
+.bd-pct { text-align: right; color: var(--muted); font-size: 12px; }
+.bd-note { font-size: 12px; line-height: 1.7; color: var(--accent-dark); background: var(--accent-light); border-radius: 8px; padding: 10px 12px; margin-top: 12px; }
+.bd-foot { font-size: 11px; color: var(--muted); line-height: 1.6; margin-top: 10px; }
+@media (prefers-reduced-motion: reduce) { .bd-fill { transition: none; } }
+.opt-main, .opt-sub, .img-name, .img-desc, .q-text { word-break: keep-all; }
 .score-row { display: flex; gap: 8px; margin: 16px 0; }
 .score-chip { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 8px; text-align: center; }
 .score-chip-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.score-chip-val { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--accent-dark); }
+.score-chip-val { font-family: 'Gowun Batang', serif; font-size: 20px; color: var(--accent-dark); }
 
 .preview-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 16px; }
 .preview-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 14px; font-weight: 600; }
@@ -194,19 +266,19 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   margin-bottom: 12px;
 }
 .report-hook-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 24px;
   line-height: 1.35;
   margin-bottom: 12px;
   color: var(--text);
 }
 .report-hook-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent-dark);
 }
 #reportHookName {
   color: var(--accent-dark);
-  font-style: italic;
+  font-style: normal;
 }
 .report-hook-sub {
   font-size: 14px;
@@ -364,8 +436,8 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
 }
 .report-toc-item:last-child { border-bottom: none; }
 .toc-num {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
+  font-family: 'Gowun Batang', serif;
+  font-style: normal;
   color: var(--accent-dark);
   font-size: 14px;
   width: 24px;
@@ -407,7 +479,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
 .blur-head-title { font-size: 12px; letter-spacing: 0.1em; color: var(--accent-dark); font-weight: 700; }
 .blur-body { position: relative; }
 .blur-content { filter: blur(4px); user-select: none; pointer-events: none; font-size: 14px; color: var(--text); line-height: 2.1; padding: 24px; background: var(--tag); }
-.blur-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(247,243,238,0.4); }
+.blur-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(246,239,236,0.4); }
 .blur-pill { background: var(--dark); color: white; font-size: 13px; font-weight: 500; padding: 11px 22px; border-radius: 24px; letter-spacing: 0.04em; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
 .blur-footer { padding: 14px 20px; background: var(--accent-light); font-size: 12px; color: var(--accent-dark); font-weight: 500; text-align: center; letter-spacing: 0.02em; }
 
@@ -436,10 +508,14 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   color: var(--muted);
   text-decoration: line-through;
 }
-.cta-price { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--accent-dark); }
+.cta-price small, .fp-price small { font-family: 'IBM Plex Sans KR', sans-serif; font-size: 0.5em; margin-left: 2px; }
+.cta-value { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 4px 0 14px; }
+.cta-value span { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; font-size: 12px; padding: 4px 10px; color: var(--text); }
+.cta-anchor { font-size: 13px; color: var(--accent-dark); margin-bottom: 18px; word-break: keep-all; }
+.cta-price { font-family: 'Gowun Batang', serif; font-size: 32px; color: var(--accent-dark); }
 .cta-discount {
-  background: #FFE8B0;
-  color: #8B6810;
+  background: #EBDCC7;
+  color: #4A1C26;
   font-size: 11px;
   font-weight: 700;
   padding: 3px 10px;
@@ -493,7 +569,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   right: 0;
   z-index: 200;
   padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-  background: linear-gradient(180deg, rgba(247,243,238,0) 0%, var(--bg) 30%);
+  background: linear-gradient(180deg, rgba(246,239,236,0) 0%, var(--bg) 30%);
   pointer-events: none;
   opacity: 0;
   transform: translateY(100%);
@@ -515,7 +591,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  box-shadow: 0 8px 28px rgba(26,23,20,0.25), 0 2px 8px rgba(26,23,20,0.15);
+  box-shadow: 0 8px 28px rgba(43,18,23,0.25), 0 2px 8px rgba(43,18,23,0.15);
   cursor: pointer;
   transition: transform 0.15s ease;
 }
@@ -549,7 +625,7 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
   text-decoration: line-through;
 }
 .fp-price {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 22px;
   color: white;
   line-height: 1;
@@ -590,6 +666,25 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: va
 /* 화면 전환 */
 .screen { display: none; }
 .screen.active { display: block; }
+
+.section-eyebrow,.page-eyebrow,.fp-eyebrow,.cta-launch-badge{text-transform:none!important;letter-spacing:0.02em!important;}
+/* ===== AWAYS 버건디 디자인 통일 ===== */
+:root{--text:#2B1217;--dark:#4A1C26;--wine:#4A1C26;--sand:#EBDCC7;--blush:#E8D2D5;}
+body{font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;word-break:keep-all;}
+em{font-style:normal;}
+
+.top-bar,.header{background:var(--wine)!important;border-bottom:none!important;}
+.top-bar .logo,.header .logo{font-family:'IBM Plex Sans KR',sans-serif!important;font-weight:700!important;letter-spacing:.06em;color:#fff!important;font-size:20px!important;}
+.step-indicator,.header-back{color:var(--blush)!important;}
+.start-btn,.btn-next,.btn-prev,.cta-btn,.pay-btn,.share-main,.share-link,.share-btn,.retry-btn,.home-btn{border-radius:28px!important;}
+.feel-btn{border-radius:22px!important;}
+h1,h2,.section-title,.page-title,.intro-title,.result-name,.success-title{letter-spacing:-0.01em;}
+
+.intro-badge{text-transform:none!important;letter-spacing:0.02em!important;font-weight:600;}
+.intro-card-icon{color:var(--wine);font-size:20px!important;}
+.result-eyebrow{text-transform:none!important;letter-spacing:0.02em!important;}
+.report-hook-eyebrow{text-transform:none!important;letter-spacing:0.02em!important;}
+
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -607,11 +702,30 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code --></head>
+<!-- End Meta Pixel Code -->
+<!-- GA4: 측정 ID를 받으면 아래 GA_MEASUREMENT_ID 값만 바꾸면 된다 -->
+<script>
+const GA_MEASUREMENT_ID = 'G-SKT4ZNNWVB';
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+if (!GA_MEASUREMENT_ID.includes('XXXX')) {
+  const ga = document.createElement('script');
+  ga.async = true;
+  ga.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+  document.head.appendChild(ga);
+  gtag('js', new Date());
+  gtag('config', GA_MEASUREMENT_ID);
+}
+// 이벤트 전송 헬퍼 (ID가 없으면 조용히 무시)
+function track(name, params) {
+  try { if (!GA_MEASUREMENT_ID.includes('XXXX')) gtag('event', name, params || {}); } catch (e) {}
+}
+</script>
+</head>
 <body>
 
 <div class="top-bar">
-  <div class="logo">체형진단</div>
+  <div class="logo">AWAYS</div>
   <div class="step-indicator" id="stepLabel">체형 진단</div>
 </div>
 <div class="global-progress"><div class="global-fill" id="globalFill"></div></div>
@@ -619,32 +733,40 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 <!-- 인트로 -->
 <div class="screen active" id="screen-intro">
   <div class="intro">
-    <div class="intro-badge">Body Type Analysis · 15Q</div>
+    <div class="friend-banner" id="friendBanner" style="display:none"></div>
+    <div class="intro-badge">체형 스타일 진단 · 18문항</div>
     <h1 class="intro-title">옷이 안 맞는 게<br><em>체형 탓이 아니었어요</em></h1>
-    <p class="intro-desc">"어깨가 넓어요?" 같은 뻔한 질문 말고,<br>실제 쇼핑 경험과 일상 행동으로 분석해요.<br>6가지 정밀 유형 중 진짜 내 체형을 찾아드립니다.</p>
+    <p class="intro-desc">"어깨가 넓어요?" 같은 뻔한 질문 말고,<br>실제 쇼핑 경험과 일상 행동으로 분석해요.<br>6가지 타입 중 내 체형을 찾아드려요.</p>
     <div class="intro-cards">
       <div class="intro-card">
-        <div class="intro-card-icon">🛍️</div>
+        <div class="intro-card-icon">◇</div>
         <div class="intro-card-label">쇼핑 경험<br>기반 질문</div>
       </div>
       <div class="intro-card">
         <div class="intro-card-icon">✦</div>
-        <div class="intro-card-label">6가지<br>정밀 유형</div>
+        <div class="intro-card-label">6가지<br>체형 타입</div>
       </div>
       <div class="intro-card">
-        <div class="intro-card-icon">⏱</div>
-        <div class="intro-card-label">약 4분<br>소요</div>
+        <div class="intro-card-icon">✓</div>
+        <div class="intro-card-label">18문항<br>2가지 기준</div>
       </div>
     </div>
     <button class="start-btn" onclick="startTest()">진단 시작하기 →</button>
   </div>
 </div>
 
+<!-- 결과 카드 이미지 모달 (인앱 브라우저 등 파일 공유가 안 될 때) -->
+<div class="img-modal" id="imgModal" onclick="if(event.target===this)closeImgModal()">
+  <img id="imgModalImg" alt="내 체형 결과 카드">
+  <div class="img-modal-guide">이미지를 길게 눌러 저장한 뒤<br>스토리에 올려보세요</div>
+  <button class="img-modal-close" onclick="closeImgModal()">닫기</button>
+</div>
+
 <!-- 질문 화면 -->
 <div class="screen" id="screen-q">
   <div class="q-screen">
     <div class="q-progress-row">
-      <span id="qProgressLabel">1 / 15</span>
+      <span id="qProgressLabel">1 / 18</span>
       <span id="qProgressPct">7%</span>
     </div>
     <div class="q-track"><div class="q-fill" id="qFill" style="width:7%"></div></div>
@@ -661,11 +783,11 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
   <div class="loading-screen">
     <div class="loading-spinner"></div>
     <div class="loading-text">분석하는 중...</div>
-    <div class="loading-sub">답변하신 내용을 바탕으로<br>6가지 유형 중 가장 일치하는 체형을 찾고 있어요.</div>
+    <div class="loading-sub">답변하신 내용을 바탕으로<br>6가지 타입 중 가장 일치하는 체형을 찾고 있어요.</div>
     <div class="loading-steps">
       <div class="loading-step" id="lstep1" style="animation-delay:0.2s"><span class="loading-check">✓</span> 체형 방향 분석 중</div>
       <div class="loading-step" id="lstep2" style="animation-delay:1.0s"><span class="loading-check">✓</span> 뼈대·텍스처 분석 중</div>
-      <div class="loading-step" id="lstep3" style="animation-delay:1.8s"><span class="loading-check">✓</span> 6가지 유형과 매칭 중</div>
+      <div class="loading-step" id="lstep3" style="animation-delay:1.8s"><span class="loading-check">✓</span> 6가지 타입과 매칭 중</div>
       <div class="loading-step" id="lstep4" style="animation-delay:2.5s"><span class="loading-check">✓</span> 맞춤 스타일 가이드 준비 중</div>
     </div>
   </div>
@@ -675,22 +797,69 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 <div class="screen" id="screen-result">
   <div class="result-screen">
     <div class="result-hero">
-      <div class="result-eyebrow">✨ Your Body Type</div>
+      <div class="result-eyebrow">나의 체형 타입</div>
       <div class="result-name" id="resultName"><span>소프트 웨이브</span></div>
+      <div class="result-en" id="resultEn"></div>
+      <div class="result-nick" id="resultNick"></div>
       <div class="result-sub" id="resultSub"></div>
     </div>
     <div class="score-row">
       <div class="score-chip"><div class="score-chip-label">체형 방향</div><div class="score-chip-val" id="scoreDirection">웨이브</div></div>
       <div class="score-chip"><div class="score-chip-label">텍스처</div><div class="score-chip-val" id="scoreTexture">소프트</div></div>
     </div>
+    <div class="breakdown" id="breakdown">
+      <div class="bd-title">내 답변의 점수 분포</div>
+      <div class="bd-group" id="bdDirection"></div>
+      <div class="bd-group" id="bdTexture"></div>
+      <div id="bdNote"></div>
+      <div class="bd-foot">체형 방향 9문항, 텍스처 9문항의 점수를 비율로 보여드려요. 자가응답 기반이라 전문가 대면 진단을 대체하지는 않아요.</div>
+    </div>
+    <div class="feel-box" id="feelBox">
+      <div id="feelStep1">
+        <div class="feel-q">이 결과, 나랑 맞는 것 같나요?</div>
+        <div class="feel-btns">
+          <button class="feel-btn" onclick="sendFeel('match')">맞아요</button>
+          <button class="feel-btn" onclick="sendFeel('unsure')">애매해요</button>
+          <button class="feel-btn" onclick="sendFeel('mismatch')">아니에요</button>
+        </div>
+      </div>
+      <div id="feelStep2" style="display:none">
+        <div class="feel-q">그럼 어느 쪽에 더 가까운 것 같나요?</div>
+        <div class="feel-btns four">
+          <button class="feel-btn" onclick="sendGuess('S')">스트레이트</button>
+          <button class="feel-btn" onclick="sendGuess('W')">웨이브</button>
+          <button class="feel-btn" onclick="sendGuess('N')">내추럴</button>
+          <button class="feel-btn" onclick="sendGuess('unknown')">잘 모르겠어요</button>
+        </div>
+      </div>
+      <div id="feelThanks" class="feel-thanks" style="display:none"></div>
+    </div>
+    <div class="mood-card" id="moodCard" style="display:none">
+      <img id="moodImg" alt="">
+      <div class="mood-body">
+        <div class="mood-label">나에게 어울리는 스타일 무드</div>
+        <div class="mood-name" id="moodName"></div>
+        <div class="mood-desc" id="moodDesc"></div>
+      </div>
+    </div>
     <div class="preview-card">
       <div class="preview-title">✦ 당신의 체형 시그니처</div>
       <div id="previewItems"></div>
     </div>
+    <div class="share-block" id="shareBlock">
+      <div class="share-title">내 옷장 메이트를 찾아보세요 👯</div>
+      <div class="share-sub">같은 체형이면 서로 옷을 바꿔 입어도 잘 어울려요.<br>카드를 올리고 나랑 같은 타입 친구를 찾아보세요.</div>
+      <div id="friendCompare"></div>
+      <img class="share-preview" id="sharePreview" alt="내 체형 결과 카드">
+      <div class="share-actions">
+        <button class="share-main" onclick="shareCardImage()">이미지 저장 · 스토리 공유</button>
+        <button class="share-link" onclick="shareResult()">친구에게 보내서 옷장 메이트 찾기</button>
+      </div>
+    </div>
     <div class="report-preview-card">
       <!-- 후킹 헤드라인 -->
       <div class="report-hook">
-        <div class="report-hook-eyebrow">📄 Premium Style Report · 22페이지</div>
+        <div class="report-hook-eyebrow">프리미엄 스타일 리포트 · 약 30페이지</div>
         <div class="report-hook-title">
           <span id="reportHookName">당신</span>만을 위한<br>
           <em>맞춤 스타일 가이드</em>
@@ -738,31 +907,33 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
       <!-- 챕터 목차 -->
       <div class="report-toc">
         <div class="report-toc-title">전체 구성</div>
-        <div class="report-toc-item"><span class="toc-num">01</span><span class="toc-text">당신의 체형 이해하기</span><span class="toc-pages">P. 03-05</span></div>
-        <div class="report-toc-item"><span class="toc-num">02</span><span class="toc-text">실루엣과 핏의 비밀</span><span class="toc-pages">P. 06-08</span></div>
-        <div class="report-toc-item"><span class="toc-num">03</span><span class="toc-text">소재와 컬러의 정답</span><span class="toc-pages">P. 09-11</span></div>
-        <div class="report-toc-item"><span class="toc-num">04</span><span class="toc-text">직장인 코디 공식 5가지</span><span class="toc-pages">P. 12-15</span></div>
-        <div class="report-toc-item"><span class="toc-num">05</span><span class="toc-text">필수 쇼핑 체크리스트</span><span class="toc-pages">P. 16-18</span></div>
-        <div class="report-toc-item"><span class="toc-num">06</span><span class="toc-text">사계절 스타일링 + Q&A</span><span class="toc-pages">P. 19-22</span></div>
+        <div class="report-toc-item"><span class="toc-num">01</span><span class="toc-text">당신의 체형 이해하기</span></div>
+        <div class="report-toc-item"><span class="toc-num">02</span><span class="toc-text">실루엣과 핏의 비밀</span></div>
+        <div class="report-toc-item"><span class="toc-num">03</span><span class="toc-text">소재와 컬러의 정답</span></div>
+        <div class="report-toc-item"><span class="toc-num">04</span><span class="toc-text">직장인 코디 공식 5가지</span></div>
+        <div class="report-toc-item"><span class="toc-num">05</span><span class="toc-text">필수 쇼핑 체크리스트</span></div>
+        <div class="report-toc-item"><span class="toc-num">06</span><span class="toc-text">사계절 스타일링 + Q&A</span></div>
       </div>
 
       <div class="report-footer-note">
-        ✓ 결제 후 이메일로 즉시 발송 · ✓ 30일간 다운로드 가능
+        결제 후 이메일로 즉시 발송 · 30일간 다운로드 가능
       </div>
     </div>
     <div class="cta-card" id="ctaCard">
-      <div class="cta-launch-badge">⚡ 런칭 기념 한정</div>
+      <div class="cta-launch-badge">약 30페이지 맞춤 스타일 가이드</div>
       <div class="cta-price-row">
-        <span class="cta-price-orig">₩24,900</span>
-        <span class="cta-price">₩19,900</span>
-        <span class="cta-discount">-₩5,000</span>
+        <span class="cta-price">9,800<small>원</small></span>
       </div>
-      <div class="cta-price-sub">22페이지 맞춤 스타일 가이드 · 이메일 즉시 발송</div>
-      <button class="cta-btn" onclick="goToPayment()">나만의 상세 리포트 받기 →</button>
-      <div class="cta-note">🔒 안전결제 · 📅 7일 환불 보장 · 📧 즉시 발송</div>
+      <div class="cta-value">
+        <span>체형 분석</span><span>핏·실루엣 공식</span><span>소재·컬러 가이드</span>
+        <span>직장인 코디 공식 5가지</span><span>추천 브랜드 12곳</span><span>사계절 가이드</span>
+      </div>
+      <div class="cta-anchor">안 맞아서 안 입는 옷 한 벌보다 저렴해요</div>
+      <button class="cta-btn" id="ctaBtn" onclick="goToPayment()">내 타입 리포트 받기 →</button>
+      <div class="cta-note">7일 이내 환불 보장 · 안전결제 · 이메일 즉시 발송</div>
       <div class="share-row">
-        <button class="share-btn" onclick="shareResult()">📤 결과 공유하기</button>
-        <button class="share-btn" onclick="retakeTest()">🔄 다시 진단하기</button>
+        <button class="share-btn" onclick="shareResult()">결과 공유하기</button>
+        <button class="share-btn" onclick="retakeTest()">다시 진단하기</button>
       </div>
     </div>
   </div>
@@ -772,10 +943,9 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 <div class="floating-pay" id="floatingPay" onclick="goToPayment()">
   <div class="floating-pay-inner">
     <div class="fp-left">
-      <span class="fp-eyebrow">⚡ 런칭 기념 한정</span>
+      <span class="fp-eyebrow">30p 맞춤 리포트 · 7일 환불 보장</span>
       <div class="fp-price-row">
-        <span class="fp-price-orig">₩24,900</span>
-        <span class="fp-price">₩19,900</span>
+        <span class="fp-price">9,800<small>원</small></span>
       </div>
     </div>
     <div class="fp-right">
@@ -786,211 +956,251 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 
 <script>
 // ============================================================
-// 15문항 - 엄선된 간접측정 + 행동/경험 기반 질문
+// 18문항 - 방향 9문항(S/W/N) + 텍스처 9문항(H/Soft), 문항마다 한 축만 측정
 // ============================================================
 const questions = [
 
-  // ── 방향 중심 (S/W/N) - 7문항 ──
+  // ── 체형 방향 (S/W/N) - 9문항 ──
+  // 원칙: 이 구간의 선택지는 방향 점수만 준다. 텍스처 점수와 섞지 않는다.
 
   {
     id: 'q01',
-    text: '셔츠나 재킷을 입을 때\n가장 먼저 당기거나 불편한 부위는?',
-    subtext: '단추가 있는 셔츠나 구조적인 재킷을 입었을 때를 떠올려보세요.',
+    text: '단추 있는 셔츠를 입었을 때\n가장 먼저 느껴지는 건?',
+    subtext: '몸에 맞는 사이즈의 기본 셔츠를 떠올려보세요.',
     type: 'text',
     options: [
-      { label: '어깨 솔기가 자꾸 뒤로 밀린다', sub: '솔기가 제자리에 안 맞는 느낌', score: {N:3, H:2} },
-      { label: '등판이나 가슴 부분이 팽팽하게 당긴다', sub: '앉거나 팔 올릴 때 불편함', score: {S:2, Soft:2} },
-      { label: '허리 아래부터 엉덩이 쪽이 당긴다', sub: '상의가 아래쪽에서 걸림', score: {W:3, Soft:1} },
-      { label: '특별히 당기는 곳 없이 전체적으로 크다', sub: '딱 맞는 사이즈가 없음', score: {S:3} },
+      { label: '가슴·등 쪽이 팽팽해서 단추 사이가 벌어진다', sub: '상체에 두께감이 있는 편', score: {S:3} },
+      { label: '어깨가 끼어서 한 치수 크게 사게 된다', sub: '어깨 너비가 기준이 됨', score: {N:3} },
+      { label: '상체 품은 남는데 밑단이 엉덩이에 걸린다', sub: '위는 헐렁, 아래는 딱 맞음', score: {W:3} },
+      { label: '셔츠를 잘 안 입어서 모르겠어요', score: {}, fixed: true },
     ]
   },
 
   {
     id: 'q02',
-    text: '바지를 살 때 가장 자주 겪는\n황당한 경험은?',
-    subtext: '옷 가게나 온라인 쇼핑에서 실제로 겪어본 상황을 골라주세요.',
+    text: '상의와 하의 사이즈를\n비교하면 어떤가요?',
+    subtext: '같은 브랜드 기준으로 떠올려보세요.',
     type: 'text',
     options: [
-      { label: '허리 사이즈 맞추면 엉덩이·허벅지가 빵빵하다', sub: '위아래가 한 사이즈로 안 맞음', score: {W:3, N:1} },
-      { label: '엉덩이 맞추면 허리가 3~4cm 남는다', sub: '벨트 없이는 못 입음', score: {W:2, Soft:2} },
-      { label: '사이즈는 맞는데 기장이 항상 짧다', sub: '발목이 드러나는 경우가 많음', score: {S:2, N:2} },
-      { label: '어느 사이즈를 사도 전체적으로 크거나 작다', sub: '표준 핏이 잘 맞지 않음', score: {N:2, H:1} },
+      { label: '하의를 상의보다 크게 산다', sub: '상체보다 하체 사이즈가 큼', score: {W:3} },
+      { label: '상의가 더 크다 — 가슴·등 두께 때문에', sub: '상체가 도톰해서', score: {S:3} },
+      { label: '상의가 더 크다 — 어깨 너비 때문에', sub: '어깨가 넓어서', score: {N:3} },
+      { label: '비슷하거나 잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 
   {
     id: 'q03',
-    text: '처음 만난 사람이 나에게\n자주 하는 말은?',
-    subtext: '첫인상에 대한 이야기예요. 친구들한테 물어봐도 좋아요.',
+    text: '허리에 맞춰 바지를 사면\n어떻게 되나요?',
     type: 'text',
     options: [
-      { label: '"어깨 넓어서 옷 잘 받겠다" 또는 "운동해?"', sub: '든든하거나 체격 있다는 인상', score: {N:3, H:2} },
-      { label: '"날씬해 보인다" 또는 "다이어트 했어?"', sub: '깔끔하고 군더더기 없는 인상', score: {S:3} },
-      { label: '"몸매 좋다" 또는 "허리가 어떻게 그래?"', sub: '굴곡이 있고 볼륨감 있는 인상', score: {W:3} },
-      { label: '"키가 커 보인다" 또는 "모델 같다"', sub: '길고 시원시원한 인상', score: {S:2, N:1} },
+      { label: '엉덩이·허벅지가 끼어서 결국 한 치수 크게 산다', sub: '허리는 남고 아래는 딱 맞음', score: {W:3} },
+      { label: '배나 허벅지 앞쪽이 먼저 끼인다', sub: '앞쪽 볼륨이 기준이 됨', score: {S:3} },
+      { label: '허리·엉덩이가 대체로 같이 맞는다', sub: '허리와 엉덩이 차이가 크지 않음', score: {N:3} },
+      { label: '잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 
   {
     id: 'q04',
-    text: '같은 브랜드 상·하의를\n동시에 살 때 주로 어떻게 되나요?',
-    subtext: '세트로 파는 투피스나 같은 브랜드 상하의를 맞출 때를 생각해보세요.',
+    text: '체중이 조금 늘었을 때\n가장 먼저 티 나는 곳은?',
     type: 'text',
     options: [
-      { label: '상의와 하의 사이즈가 2단계 이상 차이난다', sub: '세트로 사기 어려움', score: {W:3, N:1} },
-      { label: '상의와 하의 사이즈가 거의 같다', sub: '어느 쪽이든 비슷한 치수', score: {S:3} },
-      { label: '어깨 때문에 상의 사이즈를 항상 크게 산다', sub: '상의는 한 치수 위가 기본', score: {N:3, H:1} },
-      { label: '브랜드마다 달라서 항상 입어봐야 안다', sub: '표준 사이즈 판정이 어려움', score: {N:2, W:1} },
+      { label: '배·등·팔 윗부분 같은 상체', sub: '윗몸이 먼저 두꺼워짐', score: {S:3} },
+      { label: '엉덩이·허벅지 같은 하체', sub: '아랫몸이 먼저 두꺼워짐', score: {W:3} },
+      { label: '특정 부위 없이 전체적으로', sub: '고르게 티가 남', score: {N:3} },
+      { label: '잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 
   {
     id: 'q05',
-    text: '벨트 없이 바지를 입으면\n어떤 일이 생기나요?',
+    text: '거울로 옆모습을 봤을 때\n상체는 어떤가요?',
+    subtext: '얇은 티셔츠를 입고 옆으로 서서 확인해보세요.',
     type: 'text',
     options: [
-      { label: '앉았다 일어서면 뒤가 내려간다 (허리가 남음)', sub: '벨트가 꼭 필요함', score: {W:3, Soft:1} },
-      { label: '딱 맞거나 앞뒤로 잘 안 내려간다', sub: '고정이 잘 되는 편', score: {S:3} },
-      { label: '걸으면 옆으로 돌아간다 (앞뒤가 뒤틀림)', sub: '봉제선이 제자리에 안 있음', score: {N:2, W:1} },
-      { label: '전체적으로 내려오는 편이다', sub: '헐렁하게 흘러내림', score: {W:2, S:1} },
+      { label: '가슴·등이 도톰해서 상체에 두께감이 있다', sub: '옆에서 봐도 입체적', score: {S:3} },
+      { label: '상체는 얇은 편이고, 엉덩이 아래쪽에 볼륨이 있다', sub: '위는 얇고 아래가 도톰', score: {W:3} },
+      { label: '두께보다 어깨·등의 뼈대가 넓고 평평하게 느껴진다', sub: '프레임이 먼저 보임', score: {N:3} },
     ]
   },
 
   {
     id: 'q06',
-    text: '민소매나 나시를 입었을 때\n어깨 솔기는 어디에 위치하나요?',
-    hint: '💡 어깨 봉제선이 어깨 끝에 딱 오는지, 안쪽으로 들어오는지 직접 확인해보세요.',
+    text: '손을 펴서 보면\n손가락 마디와 손목뼈는?',
+    hint: '손등을 위로 하고 손가락을 쫙 펴서 확인해보세요.',
     type: 'image',
     cols: 3,
     options: [
-      { label: '어깨 끝을 넘어간다', icon: '←', desc: '솔기가 팔 쪽으로 흘러감', score: {N:3, H:2} },
-      { label: '어깨 끝에 딱 맞는다', icon: '↕', desc: '솔기가 자연스럽게 제자리', score: {S:2, W:1} },
-      { label: '어깨 안쪽으로 들어온다', icon: '→', desc: '솔기가 안쪽으로 치우침', score: {W:2, Soft:2} },
+      { label: '도톰하다', icon: '●', desc: '손에 두께가 있고 마디가 잘 안 보임', score: {S:3} },
+      { label: '얇고 작다', icon: '│', desc: '손이 얇고 뼈가 가늘게 보임', score: {W:3} },
+      { label: '마디가 크다', icon: '◇', desc: '마디·손목뼈가 크고 눈에 띔', score: {N:3} },
     ]
   },
 
   {
     id: 'q07',
-    text: '옷장에서 가장 손이 안 가는 옷의\n공통점은 뭔가요?',
-    subtext: '사놓고 거의 안 입는 옷들을 떠올려보세요.',
-    type: 'text',
-    options: [
-      { label: '여유 있고 헐렁한 핏의 옷', sub: '편하지만 어쩐지 안 입게 됨', score: {W:3, Soft:1} },
-      { label: '꽉 끼거나 몸에 붙는 옷', sub: '답답하고 불편함', score: {N:3, H:1} },
-      { label: '허리가 잘록하게 들어가는 옷', sub: '핏감이 어색함', score: {S:3} },
-      { label: '특별한 디테일 없는 무난한 옷', sub: '심심해서 안 입게 됨', score: {W:1, N:1} },
-    ]
-  },
-
-  // ── 텍스처 중심 (Hard/Soft) + 추가 방향 - 8문항 ──
-
-  {
-    id: 'q08',
-    text: '오른손 엄지와 중지로\n왼쪽 손목을 감싸보세요.',
-    hint: '💡 손목 가장 가는 부분을 엄지와 중지로 감싸서 손가락이 어떻게 되는지 직접 확인해보세요.',
+    text: '거울 앞에서 쇄골은\n어떻게 보이나요?',
+    hint: '어깨 힘을 빼고 정면에서 확인해보세요.',
     type: 'image',
     cols: 3,
     options: [
-      { label: '손가락이 겹친다', icon: '🔗', desc: '여유있게 감싸짐', score: {Soft:3, W:1} },
-      { label: '딱 닿는다', icon: '⭕', desc: '정확히 맞닿음', score: {H:1, Soft:1} },
-      { label: '닿지 않는다', icon: '↔', desc: '간격이 남음', score: {H:3, N:1} },
+      { label: '잘 안 보인다', icon: '○', desc: '목 아래가 도톰하고 매끈함', score: {S:3} },
+      { label: '가늘게 보인다', icon: '〰', desc: '얇은 쇄골이 은은하게 보임', score: {W:3} },
+      { label: '굵고 뚜렷하다', icon: '━', desc: '어깨 쪽까지 뼈가 도드라짐', score: {N:3} },
+    ]
+  },
+
+  {
+    id: 'q08',
+    text: '입었을 때 가장 잘 어울린다는\n말을 듣는 핏은?',
+    type: 'text',
+    options: [
+      { label: '몸에 딱 맞는 기본 셔츠, 일자 슬랙스', sub: '군더더기 없는 정핏', score: {S:3} },
+      { label: '허리를 잡아주는 원피스, 짧은 상의', sub: '허리선이 드러나는 핏', score: {W:3} },
+      { label: '여유 있는 오버핏, 와이드 팬츠', sub: '넉넉하게 떨어지는 핏', score: {N:3} },
+      { label: '잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 
   {
     id: 'q09',
-    text: '팔짱을 꼈을 때\n내 팔뚝의 느낌은?',
-    hint: '💡 반대편 손으로 팔뚝을 감싸쥐었을 때 느낌을 확인해보세요.',
-    type: 'image',
-    cols: 3,
+    text: '입으면 어색하게 느껴지는 옷은?',
+    type: 'text',
     options: [
-      { label: '근육이 잡힌다', icon: '💪', desc: '단단한 느낌', score: {H:3} },
-      { label: '살이 잡힌다', icon: '🫶', desc: '말랑한 느낌', score: {Soft:3} },
-      { label: '얇아서 편하다', icon: '🤏', desc: '여유롭게 감싸짐', score: {H:1, Soft:1, S:1} },
+      { label: '오버핏 — 체격이 더 커 보인다', sub: '부해 보이는 느낌', score: {S:3} },
+      { label: '오버핏 — 옷에 파묻혀 보인다', sub: '옷이 나를 먹는 느낌', score: {W:3} },
+      { label: '몸에 딱 붙는 옷 — 뼈대가 부각된다', sub: '각진 느낌이 강조됨', score: {N:3} },
+      { label: '잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 
+  // ── 텍스처 (하드/소프트) - 9문항 ──
+  // 원칙: 이 구간의 선택지는 텍스처 점수만 준다.
+
   {
     id: 'q10',
-    text: '운동을 전혀 안 해도\n근육이 있어 보인다는 말을 듣나요?',
-    type: 'text',
+    text: '오른손 엄지와 중지로\n왼쪽 손목을 감싸보세요.',
+    hint: '손목 가장 가는 부분을 감싸서 확인해보세요.',
+    type: 'image',
+    cols: 3,
     options: [
-      { label: '자주 듣는다. 팔뚝이나 종아리가 발달해 보인다', score: {H:3, N:1} },
-      { label: '가끔 듣는다. 운동하냐는 말을 종종 듣는다', score: {H:2} },
-      { label: '거의 못 들어봤다. 오히려 더 먹으라는 말을 듣는다', score: {Soft:2, S:1} },
-      { label: '근육보다는 볼륨감(살)이 있어 보인다는 말을 듣는다', score: {Soft:3} },
+      { label: '손가락이 겹친다', icon: '◎', desc: '여유 있게 감싸짐', score: {Soft:2} },
+      { label: '딱 닿는다', icon: '⭕', desc: '정확히 맞닿음', score: {} },
+      { label: '닿지 않는다', icon: '↔', desc: '간격이 남음', score: {H:2} },
     ]
   },
 
   {
     id: 'q11',
-    text: '다이어트로 살이 빠졌을 때\n가장 먼저 빠지는 부위는?',
-    subtext: '또는 살이 쪘을 때 가장 먼저 티나는 부위도 같이 생각해보세요.',
-    type: 'text',
+    text: '팔 윗부분 바깥쪽을\n가볍게 잡아보면 어떤 느낌인가요?',
+    hint: '힘을 빼고 반대쪽 손으로 살짝 쥐어보세요.',
+    type: 'image',
+    cols: 3,
     options: [
-      { label: '얼굴·목·쇄골 쪽이 먼저 빠진다', sub: '윗부분이 먼저 반응', score: {S:2, H:1} },
-      { label: '가슴이나 허리가 먼저 빠진다', sub: '가운데 부분이 먼저 반응', score: {W:2, Soft:1} },
-      { label: '허벅지·엉덩이가 마지막까지 남는다', sub: '아랫부분이 가장 오래 남음', score: {W:3, Soft:1} },
-      { label: '전체적으로 고르게 빠지는 편이다', sub: '특정 부위 차이가 적음', score: {S:2, N:1} },
+      { label: '탄탄하다', icon: '◆', desc: '눌렀을 때 단단한 느낌', score: {H:3} },
+      { label: '말랑하다', icon: '●', desc: '부드럽게 눌리는 느낌', score: {Soft:3} },
+      { label: '얇다', icon: '│', desc: '얇아서 뼈가 먼저 잡힘', score: {H:1, Soft:1} },
     ]
   },
 
   {
     id: 'q12',
-    text: '쇄골이 평소에 눈에 띄나요?',
-    hint: '💡 거울 앞에서 목을 살짝 내려다봤을 때 쇄골이 뚜렷하게 보이는지 확인해보세요.',
-    type: 'image',
-    cols: 3,
+    text: '전신 사진 속 내 몸의\n윤곽은 어떻게 보이나요?',
+    subtext: '최근에 찍힌 전신 사진을 떠올려보세요.',
+    type: 'text',
     options: [
-      { label: '뚜렷하게 보인다', icon: '👁', desc: '윤곽이 선명함', score: {H:2, S:1} },
-      { label: '도드라지지 않는다', icon: '〰', desc: '은은하게 보임', score: {H:1, Soft:1} },
-      { label: '거의 보이지 않는다', icon: '○', desc: '윤곽이 거의 없음', score: {Soft:3} },
+      { label: '선이 또렷하고 각이 있어 보인다', sub: '어깨·팔·다리 라인이 선명함', score: {H:3} },
+      { label: '선이 둥글고 부드러워 보인다', sub: '라인이 매끄럽게 이어짐', score: {Soft:3} },
+      { label: '잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 
   {
     id: 'q13',
-    text: '화장실 거울에서 옆모습을 봤을 때\n가장 먼저 보이는 부분은?',
-    subtext: '아침에 거울 앞에 섰을 때 자연스럽게 시선이 가는 곳을 떠올려보세요.',
+    text: '처음 만난 사람이 나를\n주로 어떻게 표현하나요?',
+    subtext: '성격보다는 분위기와 인상에 가까운 말을 떠올려보세요.',
     type: 'text',
     options: [
-      { label: '편평하게 떨어지는 옆선', sub: '굴곡 없이 곧게 떨어짐', score: {S:3} },
-      { label: '도드라진 가슴과 엉덩이 라인', sub: '앞뒤 굴곡이 또렷함', score: {W:3, Soft:1} },
-      { label: '넓은 어깨와 단단한 상반신', sub: '상체가 시각적으로 크게 보임', score: {N:3, H:1} },
-      { label: '부드럽게 둥근 옆 라인', sub: '곡선이 자연스럽게 흐름', score: {Soft:3, W:1} },
+      { label: '"시크하다", "도시적이다", "또렷하다"', sub: '선명하고 차가운 쪽', score: {H:3} },
+      { label: '"포근하다", "부드럽다", "귀엽다"', sub: '둥글고 따뜻한 쪽', score: {Soft:3} },
+      { label: '둘 다 들어서 잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 
   {
     id: 'q14',
-    text: '여름에 민소매를 입을 때\n어느 부위가 가장 신경 쓰이나요?',
+    text: '살이 빠졌을 때\n몸은 어떻게 달라지나요?',
     type: 'text',
     options: [
-      { label: '어깨와 등이 너무 넓어 보이는 것', sub: '윗부분이 신경 쓰임', score: {N:3, H:1} },
-      { label: '팔뚝 살', sub: '팔이 신경 쓰임', score: {Soft:3} },
-      { label: '배나 허리 라인', sub: '가운데 부분이 신경 쓰임', score: {W:2, Soft:1} },
-      { label: '전체적으로 너무 말라 보이는 것', sub: '볼륨이 없어 보임', score: {S:2, H:1} },
+      { label: '뼈나 몸의 라인이 금방 선명하게 드러난다', sub: '윤곽이 빨리 생김', score: {H:3} },
+      { label: '빠져도 전체적으로 부드러운 느낌은 남는다', sub: '말랑한 인상이 유지됨', score: {Soft:3} },
+      { label: '잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 
   {
     id: 'q15',
-    text: '옷 쇼핑할 때 가장 자주 하는 말은?',
+    text: '가볍게 운동을 시작하면\n몸이 어떻게 반응하나요?',
     type: 'text',
     options: [
-      { label: '"어깨만 맞으면 나머지는 수선하면 되지"', sub: '윗부분 기준으로 선택', score: {N:3, H:1} },
-      { label: '"허리만 잡아주면 뭐든 잘 어울려"', sub: '가운데 라인이 중요', score: {W:3} },
-      { label: '"그냥 일자로 떨어지는 게 제일 편해"', sub: '단순하고 깔끔한 선호', score: {S:3} },
-      { label: '"여유 있게 입어야 답답하지 않아"', sub: '편안한 핏 선호', score: {N:2, Soft:1} },
+      { label: '금방 라인이 단단하게 잡힌다', sub: '팔·다리가 빨리 탄탄해짐', score: {H:3} },
+      { label: '꾸준히 해도 부드러운 느낌이 남는다', sub: '단단해지기까지 오래 걸림', score: {Soft:3} },
+      { label: '운동을 거의 안 해서 모르겠어요', score: {}, fixed: true },
+    ]
+  },
+
+  {
+    id: 'q16',
+    text: '무릎이나 팔꿈치 같은\n관절은 어떻게 보이나요?',
+    hint: '거울로 무릎과 팔꿈치 모양을 확인해보세요.',
+    type: 'image',
+    cols: 3,
+    options: [
+      { label: '각져 보인다', icon: '◇', desc: '뼈의 윤곽이 또렷함', score: {H:3} },
+      { label: '중간이다', icon: '◎', desc: '딱히 눈에 띄지 않음', score: {} },
+      { label: '둥글다', icon: '○', desc: '매끈하고 부드러움', score: {Soft:3} },
+    ]
+  },
+
+  {
+    id: 'q17',
+    text: '거울 속 얼굴 윤곽은\n어떤 편인가요?',
+    subtext: '화장이나 헤어스타일보다 얼굴 선 자체를 떠올려보세요.',
+    type: 'text',
+    options: [
+      { label: '턱선과 광대가 또렷한 편', sub: '선이 분명하고 입체적', score: {H:3} },
+      { label: '볼과 턱선이 둥글고 부드러운 편', sub: '선이 매끄럽게 이어짐', score: {Soft:3} },
+      { label: '잘 모르겠어요', score: {}, fixed: true },
+    ]
+  },
+
+  {
+    id: 'q18',
+    text: '얇은 니트나 티셔츠를 입으면\n어깨와 팔 라인이 어떻게 보이나요?',
+    subtext: '몸에 적당히 맞는 얇은 상의를 떠올려보세요.',
+    type: 'text',
+    options: [
+      { label: '어깨 끝과 팔꿈치 윤곽이 옷 위로 또렷하게 드러난다', sub: '라인이 선명하게 보임', score: {H:3} },
+      { label: '옷이 둥글게 감싸서 라인이 부드럽게 이어진다', sub: '윤곽이 매끄럽게 보임', score: {Soft:3} },
+      { label: '잘 모르겠어요', score: {}, fixed: true },
     ]
   },
 ];
 
-// ── 유형 데이터 (6가지) ──
+// ── 타입 데이터 (6가지) ──
 const typeMap = {
   'S-H': {
+    en: 'Hard Straight',
+    nickname: '셋업이 교복인 사람',
+    tags: ['미니멀','테일러드','시크'],
+    items: ['블레이저', '화이트 티', '스트레이트 진'],
+    color: '#2F3A4A',
+    tint: '#E8EBEE',
+    mood: '클린 시티 미니멀',
+    moodDesc: '블레이저와 데님으로 완성하는 깔끔한 도시룩',
     name: '하드 스트레이트',
-    sub: '직선적인 뼈대와 탄탄한 근육감이 매력인 체형',
+    sub: '선이 또렷하고 입체감이 살아 있는, 도시적인 인상의 체형',
     preview: [
       '시크하고 모던한 실루엣이 가장 잘 어울려요',
       '미니멀 테일러드와 일자 슬랙스가 당신의 무기예요',
@@ -998,8 +1208,16 @@ const typeMap = {
     ],
   },
   'S-Soft': {
+    en: 'Soft Straight',
+    nickname: '기본템이 제일 비싸 보이는 사람',
+    tags: ['클래식','단정함','고급스러움'],
+    items: ['셔츠', '일자 슬랙스', '캐시미어 니트'],
+    color: '#5A6E8C',
+    tint: '#EAEEF4',
+    mood: '프레피 클래식',
+    moodDesc: '셔츠와 슬랙스에 니트 한 장으로 완성하는 단정한 룩',
     name: '소프트 스트레이트',
-    sub: '직선적이지만 살집이 있어 부드러운 인상의 체형',
+    sub: '단정한 직선 라인에 부드러운 볼륨이 더해진, 고급스러운 인상의 체형',
     preview: [
       '여유 있는 직선핏이 가장 자연스럽게 떨어져요',
       '루즈한 테일러드로 단정함과 편안함을 동시에',
@@ -1007,8 +1225,16 @@ const typeMap = {
     ],
   },
   'W-H': {
+    en: 'Hard Wave',
+    nickname: '허리선 하나로 완성하는 사람',
+    tags: ['선명함','페미닌','구조적'],
+    items: ['트위드 재킷', '하이웨이스트 팬츠', '포인티드 플랫'],
+    color: '#7A2E3A',
+    tint: '#F4E8EA',
+    mood: '모던 트위드',
+    moodDesc: '짧은 트위드 재킷과 하이웨이스트로 살린 허리선',
     name: '하드 웨이브',
-    sub: '곡선과 탄탄함이 조화로운 샤프한 인상의 체형',
+    sub: '곡선에 선명함이 더해져 세련되고 샤프한 인상의 체형',
     preview: [
       '허리 강조와 구조적인 디테일이 가장 잘 어울려요',
       '곡선을 살리면서도 탄탄한 인상을 줄 수 있는 체형',
@@ -1016,8 +1242,16 @@ const typeMap = {
     ],
   },
   'W-Soft': {
+    en: 'Soft Wave',
+    nickname: '원피스가 제일 잘 받는 사람',
+    tags: ['러블리','우아함','곡선미'],
+    items: ['니트 카디건', '플레어 스커트', '랩 원피스'],
+    color: '#9A5266',
+    tint: '#F8ECEF',
+    mood: '소프트 로맨틱',
+    moodDesc: '카디건과 플레어 스커트로 완성하는 여리여리한 무드',
     name: '소프트 웨이브',
-    sub: '곡선과 부드러운 볼륨이 매력적인 여성스러운 체형',
+    sub: '부드러운 곡선이 매력적인, 우아하고 여성스러운 인상의 체형',
     preview: [
       '잘록한 허리와 부드러운 곡선이 가장 큰 강점이에요',
       'A라인과 랩 스타일로 허리 라인을 강조해보세요',
@@ -1025,8 +1259,16 @@ const typeMap = {
     ],
   },
   'N-H': {
+    en: 'Hard Natural',
+    nickname: '오버핏이 멋이 되는 사람',
+    tags: ['내추럴','쿨함','자유로움'],
+    items: ['롱 트렌치 코트', '오버사이즈 셔츠', '와이드 팬츠'],
+    color: '#4E5B3A',
+    tint: '#EDEFE6',
+    mood: '롱 트렌치 시크',
+    moodDesc: '길게 떨어지는 트렌치와 와이드 팬츠의 여유로운 핏',
     name: '하드 내추럴',
-    sub: '넓은 어깨와 탄탄한 뼈대가 건장한 인상의 체형',
+    sub: '시원한 프레임 덕분에 자연스러운 멋이 사는, 쿨한 인상의 체형',
     preview: [
       '오버사이즈와 레이어링이 가장 멋있게 떨어져요',
       '린넨이나 데님 같은 자연스러운 소재가 강점',
@@ -1034,8 +1276,16 @@ const typeMap = {
     ],
   },
   'N-Soft': {
+    en: 'Soft Natural',
+    nickname: '린넨이 제일 잘 어울리는 사람',
+    tags: ['포근함','여유','편안함'],
+    items: ['린넨 원피스', '니트 카디건', '와이드 팬츠'],
+    color: '#5F6F58',
+    tint: '#EEF1EB',
+    mood: '린넨 내추럴',
+    moodDesc: '린넨 원피스에 니트를 걸친 편안하고 부드러운 무드',
     name: '소프트 내추럴',
-    sub: '풍성한 볼륨과 부드러운 프레임이 포근한 인상의 체형',
+    sub: '넉넉한 프레임에 부드러움이 더해진, 포근하고 여유로운 인상의 체형',
     preview: [
       '흐르는 실루엣과 부드러운 레이어링이 가장 잘 어울려요',
       '드레이프감 있는 소재로 여유로운 볼륨을 살려보세요',
@@ -1062,14 +1312,37 @@ function getScore() {
   return {S, W, N, H, Soft};
 }
 
+// 동점일 때는 직접 몸을 확인하는 문항(옆모습·쇄골·손, 팔 촉감·윤곽)의 답을 우선한다
+const DIR_TIEBREAK = ['q05', 'q07', 'q06', 'q04'];
+const TEX_TIEBREAK = ['q11', 'q16', 'q12', 'q14'];
+
+function answerKeysFor(qid) {
+  const qi = questions.findIndex(q => q.id === qid);
+  if (qi < 0 || answers[qi] === null) return [];
+  return Object.keys(questions[qi].options[answers[qi]].score);
+}
+
+function breakTie(tied, order) {
+  for (const qid of order) {
+    const hit = answerKeysFor(qid).find(k => tied.includes(k));
+    if (hit) return hit;
+  }
+  return tied[0];
+}
+
 function getDirection(score) {
-  if (score.S >= score.W && score.S >= score.N) return 'S';
-  if (score.W >= score.S && score.W >= score.N) return 'W';
-  return 'N';
+  const top = Math.max(score.S, score.W, score.N);
+  const tied = ['S', 'W', 'N'].filter(k => score[k] === top);
+  return tied.length === 1 ? tied[0] : breakTie(tied, DIR_TIEBREAK);
+}
+
+function getTexture(score) {
+  if (score.H !== score.Soft) return score.H > score.Soft ? 'H' : 'Soft';
+  return breakTie(['H', 'Soft'], TEX_TIEBREAK);
 }
 
 function getFinalType(score) {
-  return `${getDirection(score)}-${score.H >= score.Soft ? 'H' : 'Soft'}`;
+  return `${getDirection(score)}-${getTexture(score)}`;
 }
 
 function getConfidence(score) {
@@ -1083,36 +1356,40 @@ function getConfidence(score) {
 
 // ── 렌더 ──
 function renderQ(idx) {
+  qShownAt = Date.now();
   const q = questions[idx];
-  const pct = Math.round((idx+1)/15*100);
+  const total = questions.length;
+  const pct = Math.round((idx+1)/total*100);
 
   // 옵션 순서를 매 질문마다 셔플 (한 번만 셔플하고 저장)
   if (!shuffledOptions[idx]) {
-    const indices = q.options.map((_, i) => i);
+    // '잘 모르겠어요'처럼 fixed 표시된 옵션은 셔플하지 않고 맨 뒤에 둔다
+    const indices = q.options.map((_, i) => i).filter(i => !q.options[i].fixed);
+    const fixedIdx = q.options.map((_, i) => i).filter(i => q.options[i].fixed);
     // Fisher-Yates 셔플
     for (let i = indices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [indices[i], indices[j]] = [indices[j], indices[i]];
     }
-    shuffledOptions[idx] = indices;
+    shuffledOptions[idx] = indices.concat(fixedIdx);
   }
   const order = shuffledOptions[idx];
 
   // 격려 메시지 (5, 10, 13번 문항에서 표시)
-  let progressLabel = `${idx+1} / 15`;
-  if (idx === 4) progressLabel = `5 / 15 · 잘하고 있어요 👍`;
-  else if (idx === 9) progressLabel = `10 / 15 · 곧 끝나요!`;
-  else if (idx === 12) progressLabel = `13 / 15 · 거의 다 왔어요 ✨`;
-  else if (idx === 14) progressLabel = `15 / 15 · 마지막 질문!`;
+  let progressLabel = `${idx+1} / ${total}`;
+  if (idx === 4) progressLabel = `5 / ${total} · 잘하고 있어요`;
+  else if (idx === 9) progressLabel = `10 / ${total} · 곧 끝나요!`;
+  else if (idx === total - 3) progressLabel = `${total - 2} / ${total} · 거의 다 왔어요`;
+  else if (idx === total - 1) progressLabel = `${total} / ${total} · 마지막 질문!`;
 
   document.getElementById('qProgressLabel').textContent = progressLabel;
   document.getElementById('qProgressPct').textContent = `${pct}%`;
   document.getElementById('qFill').style.width = pct + '%';
   document.getElementById('globalFill').style.width = pct + '%';
-  document.getElementById('stepLabel').textContent = `${idx+1} / 15`;
+  document.getElementById('stepLabel').textContent = `${idx+1} / ${total}`;
   document.getElementById('btnPrev').style.display = idx === 0 ? 'none' : '';
   document.getElementById('btnNext').disabled = answers[idx] === null;
-  document.getElementById('btnNext').textContent = idx === 14 ? '결과 보기 →' : '다음 →';
+  document.getElementById('btnNext').textContent = idx === total - 1 ? '결과 보기 →' : '다음 →';
 
   const textFormatted = q.text.replace(/\n/g, '<br>');
   let html = `<div class="q-card">
@@ -1161,7 +1438,53 @@ function selectOpt(origIdx) {
   });
 }
 
+// ============================================================
+// 검증용 트래킹 (GA4) · 개인 식별 정보 없이 응답과 결과만 기록
+// ============================================================
+let qShownAt = 0;
+let testStartedAt = 0;
+let feelSent = false;
+
+function answerMeta(qi) {
+  const q = questions[qi];
+  const ans = answers[qi];
+  const opt = q.options[ans];
+  return {
+    question_id: q.id,
+    answer_index: ans,
+    answer_label: opt.label.slice(0, 90),
+    is_unsure: Object.keys(opt.score).length === 0 ? 1 : 0,
+  };
+}
+
+function sendFeel(feel) {
+  if (feelSent || !currentResult) return;
+  track('result_feedback', { feel, result_type: currentResult.typeKey });
+  if (feel === 'mismatch') {
+    document.getElementById('feelStep1').style.display = 'none';
+    document.getElementById('feelStep2').style.display = '';
+    return;
+  }
+  finishFeel(feel === 'match' ? '알려주셔서 고마워요!' : '알려주셔서 고마워요. 점수 분포에서 2위 타입도 함께 참고해보세요.');
+}
+
+function sendGuess(dir) {
+  if (feelSent || !currentResult) return;
+  track('result_self_guess', { guess: dir, result_type: currentResult.typeKey });
+  finishFeel('알려주셔서 고마워요. 진단을 더 정확하게 만드는 데 쓸게요.');
+}
+
+function finishFeel(msg) {
+  feelSent = true;
+  document.getElementById('feelStep1').style.display = 'none';
+  document.getElementById('feelStep2').style.display = 'none';
+  const t = document.getElementById('feelThanks');
+  t.textContent = msg; t.style.display = '';
+}
+
 function startTest() {
+  testStartedAt = Date.now();
+  track('test_start', {});
   showScreen('screen-q');
   currentQ = 0;
   answers = new Array(questions.length).fill(null);
@@ -1172,7 +1495,11 @@ function startTest() {
 
 function nextQ() {
   if (answers[currentQ] === null) return;
-  if (currentQ === 14) {
+  track('question_answer', Object.assign(answerMeta(currentQ), {
+    question_no: currentQ + 1,
+    time_sec: Math.round((Date.now() - qShownAt) / 1000),
+  }));
+  if (currentQ === questions.length - 1) {
     showLoading();
     return;
   }
@@ -1198,6 +1525,47 @@ function showLoading() {
   setTimeout(showFinalResult, 3200);
 }
 
+
+function renderBreakdown(score) {
+  const texLabels = { H: '하드', Soft: '소프트' };
+  const row = (label, val, total, isTop) => {
+    const pct = total > 0 ? Math.round(val / total * 100) : 0;
+    return `<div class="bd-row${isTop ? ' top' : ''}"><div class="bd-label">${label}</div><div class="bd-bar"><div class="bd-fill" data-w="${pct}"></div></div><div class="bd-pct">${pct}%</div></div>`;
+  };
+  const dir = getDirection(score);
+  const dTotal = score.S + score.W + score.N;
+  const dirs = ['S', 'W', 'N'].sort((a, b) => score[b] - score[a]);
+  document.getElementById('bdDirection').innerHTML =
+    dirs.map(k => row(dirLabels[k], score[k], dTotal, k === dir)).join('');
+
+  const tex = getTexture(score);
+  const tTotal = score.H + score.Soft;
+  const texs = ['H', 'Soft'].sort((a, b) => score[b] - score[a]);
+  document.getElementById('bdTexture').innerHTML =
+    texs.map(k => row(texLabels[k], score[k], tTotal, k === tex)).join('');
+
+  // 경계 타입 안내: 2위가 1위의 80% 이상이면 표시
+  const notes = [];
+  const second = dirs.find(k => k !== dir);
+  if (score[dir] > 0 && score[second] / score[dir] >= 0.8) {
+    notes.push(`${dirLabels[second]} 성향도 강하게 나왔어요. ${dirLabels[dir]}와 ${dirLabels[second]}의 경계에 있는 체형일 수 있으니 두 타입의 특징을 함께 참고해보세요.`);
+  }
+  const otherTex = tex === 'H' ? 'Soft' : 'H';
+  if (score[tex] > 0 && score[otherTex] / score[tex] >= 0.8) {
+    notes.push(`하드와 소프트 점수가 비슷해요. 소재는 너무 딱딱하거나 너무 흐르는 것보다 중간 두께부터 시도해보세요.`);
+  }
+  // '잘 모르겠어요'가 많으면 결과 신뢰도가 낮다고 알린다
+  const unsure = answers.filter((ans, qi) => ans !== null && Object.keys(questions[qi].options[ans].score).length === 0).length;
+  if (unsure >= 5) {
+    notes.unshift(`'잘 모르겠어요'로 답한 문항이 ${unsure}개예요. 판단 근거가 적어서 결과가 정확하지 않을 수 있어요. 옷을 입어보거나 거울로 확인한 뒤 다시 진단해보세요.`);
+  }
+  document.getElementById('bdNote').innerHTML = notes.map(n => `<div class="bd-note">${n}</div>`).join('');
+
+  requestAnimationFrame(() => {
+    document.querySelectorAll('#breakdown .bd-fill').forEach(el => { el.style.width = el.dataset.w + '%'; });
+  });
+}
+
 function showFinalResult() {
   const score = getScore();
   const typeKey = getFinalType(score);
@@ -1206,15 +1574,38 @@ function showFinalResult() {
 
   document.getElementById('resultName').innerHTML = `<span>${type.name}</span>`;
   document.getElementById('resultSub').textContent = type.sub;
+  document.getElementById('resultEn').textContent = type.en;
+  document.getElementById('resultNick').textContent = `"${type.nickname}"`;
+  document.querySelector('#screen-result .result-hero').style.background = type.color;
+  currentResult = { typeKey, type, score };
+  // 검증용: 결과 타입, 1·2위 점수 차, '잘 모르겠어요' 수
+  (function () {
+    const dirs = [score.S, score.W, score.N].sort((a, b) => b - a);
+    const unsure = answers.filter((a, qi) => a !== null && Object.keys(questions[qi].options[a].score).length === 0).length;
+    track('test_complete', {
+      result_type: typeKey,
+      dir_margin: dirs[0] - dirs[1],
+      tex_margin: Math.abs(score.H - score.Soft),
+      unsure_count: unsure,
+      duration_sec: Math.round((Date.now() - testStartedAt) / 1000),
+    });
+  })();
+  feelSent = false;
+  ['feelStep1'].forEach(id => document.getElementById(id).style.display = '');
+  ['feelStep2', 'feelThanks'].forEach(id => document.getElementById(id).style.display = 'none');
+  renderShareCard();
+  renderMoodCard(typeKey, type);
+  renderFriendCompare(typeKey);
   document.getElementById('scoreDirection').textContent = dirLabels[dir];
-  document.getElementById('scoreTexture').textContent = score.H >= score.Soft ? '하드' : '소프트';
+  document.getElementById('scoreTexture').textContent = (getTexture(score) === 'H' ? '하드' : '소프트');
+  renderBreakdown(score);
 
   // 체형 정보를 sessionStorage에 저장 (결제 페이지에서 사용)
   sessionStorage.setItem('bodyTypeResult', JSON.stringify({
     typeKey: typeKey,
     typeName: type.name,
     direction: dirLabels[dir],
-    texture: score.H >= score.Soft ? '하드' : '소프트',
+    texture: (getTexture(score) === 'H' ? '하드' : '소프트'),
   }));
 
   let previewHtml = '';
@@ -1226,6 +1617,8 @@ function showFinalResult() {
   // 리포트 미리보기 후킹에 체형명 삽입
   const hookEl = document.getElementById('reportHookName');
   if (hookEl) hookEl.textContent = type.name;
+  const ctaBtn = document.getElementById('ctaBtn');
+  if (ctaBtn) ctaBtn.textContent = `${type.name} 리포트 받기 →`;
    if (window.fbq) fbq('track', 'CompleteRegistration', { content_name: typeKey }, { eventID: 'cr_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8) });
   document.getElementById('stepLabel').textContent = '진단 완료';
   showScreen('screen-result');
@@ -1247,6 +1640,7 @@ function showScreen(id) {
 
 function goToPayment() {
   const result = JSON.parse(sessionStorage.getItem('bodyTypeResult') || '{}');
+  track('begin_checkout', { result_type: result.typeKey || '', value: 9800, currency: 'KRW' });
   // 결제 페이지로 체형 정보 전달
   const params = new URLSearchParams({
     bodyType: result.typeKey || '',
@@ -1255,18 +1649,338 @@ function goToPayment() {
   window.location.href = `/payment.html?${params.toString()}`;
 }
 
-function shareResult() {
-  const name = document.getElementById('resultName').textContent.trim();
-  const sub = document.getElementById('resultSub').textContent.trim();
 
-  // 공유할 메시지 (이모지 + 호기심 자극)
-  const shareText = `🔍 내 체형은 "${name}"!\n\n${sub}\n\n너도 5분이면 돼 ✨\n진짜 내 체형 찾기 →`;
-  const shareUrl = window.location.origin + '/test'; // 결과 페이지가 아닌 테스트 시작 페이지로
+// ============================================================
+// 결과 카드 (인스타 스토리 1080x1920) 생성 · 공유
+// ============================================================
+let currentResult = null;
+let shareCanvas = null;
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+// 체형 방향별 상징 그래픽: 스트레이트=세로 직선, 웨이브=곡선, 내추럴=겹친 프레임
+// 하드=선(stroke)과 각진 모서리, 소프트=면(fill)과 둥근 모서리
+function drawMotif(ctx, dir, hard, color, cx, cy) {
+  ctx.save();
+  ctx.strokeStyle = color; ctx.fillStyle = color;
+  ctx.lineWidth = hard ? 14 : 0;
+  ctx.lineCap = hard ? 'butt' : 'round';
+  if (dir === 'S') {
+    const bars = [[-150, 300], [-50, 440], [50, 380], [150, 260]];
+    bars.forEach(([dx, h], i) => {
+      ctx.globalAlpha = hard ? 1 : 0.28 + i * 0.14;
+      const x = cx + dx - 34, y = cy - h / 2;
+      roundRect(ctx, x, y, 68, h, hard ? 4 : 34);
+      hard ? ctx.stroke() : ctx.fill();
+    });
+  } else if (dir === 'W') {
+    for (let i = 0; i < 3; i++) {
+      ctx.globalAlpha = hard ? 1 - i * 0.25 : 0.35 + i * 0.2;
+      ctx.lineWidth = hard ? 14 : 34;
+      ctx.beginPath();
+      for (let x = -260; x <= 260; x += 4) {
+        const y = Math.sin((x / 260) * Math.PI * 1.5) * 90;
+        const px = cx + x, py = cy - 110 + i * 110 + y;
+        x === -260 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+    }
+  } else {
+    const frames = [[-40, -30, -0.12], [40, 30, 0.1]];
+    frames.forEach(([dx, dy, rot], i) => {
+      ctx.save();
+      ctx.translate(cx + dx, cy + dy); ctx.rotate(rot);
+      ctx.globalAlpha = hard ? 1 : 0.35 + i * 0.25;
+      roundRect(ctx, -190, -190, 380, 380, hard ? 6 : 90);
+      hard ? ctx.stroke() : ctx.fill();
+      ctx.restore();
+    });
+  }
+  ctx.restore();
+}
+
+function drawChips(ctx, labels, cy, color) {
+  ctx.font = '600 38px "IBM Plex Sans KR", sans-serif';
+  const padX = 30, gap = 18, h = 72;
+  const widths = labels.map(t => ctx.measureText('#' + t).width + padX * 2);
+  const total = widths.reduce((a, b) => a + b, 0) + gap * (labels.length - 1);
+  let x = 540 - total / 2;
+  labels.forEach((t, i) => {
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#FFFFFF';
+    roundRect(ctx, x, cy - h / 2, widths[i], h, h / 2); ctx.fill();
+    ctx.fillStyle = color; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('#' + t, x + widths[i] / 2, cy + 2);
+    x += widths[i] + gap;
+  });
+}
+
+// 무드 이미지: /images/mood/{타입키}.jpg (예: /images/mood/W-Soft.jpg)
+const moodImageCache = {};
+function loadMoodImage(typeKey) {
+  if (moodImageCache[typeKey] !== undefined) return Promise.resolve(moodImageCache[typeKey]);
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => { moodImageCache[typeKey] = img; resolve(img); };
+    img.onerror = () => { moodImageCache[typeKey] = null; resolve(null); };
+    img.src = `/images/mood/${typeKey}.jpg`;
+  });
+}
+
+async function renderMoodCard(typeKey, type) {
+  const card = document.getElementById('moodCard');
+  const img = await loadMoodImage(typeKey);
+  if (!img) { card.style.display = 'none'; return; }
+  document.getElementById('moodImg').src = img.src;
+  document.getElementById('moodImg').alt = `${type.mood} 스타일 예시`;
+  document.getElementById('moodName').textContent = type.mood;
+  document.getElementById('moodDesc').textContent = type.moodDesc;
+  card.style.display = '';
+}
+
+// 사진을 지정 영역에 꽉 차게(cover, 위쪽 기준) 그린다
+function drawCover(ctx, img, x, y, w, h, r) {
+  ctx.save();
+  roundRect(ctx, x, y, w, h, r); ctx.clip();
+  const scale = Math.max(w / img.width, h / img.height);
+  const sw = w / scale, sh = h / scale;
+  const sx = (img.width - sw) / 2, sy = 0;
+  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+  ctx.restore();
+}
+
+async function renderShareCard() {
+  if (!currentResult) return;
+  const { typeKey, type, score } = currentResult;
+  try {
+    await Promise.all([
+      document.fonts.load('700 100px "IBM Plex Sans KR"'),
+      document.fonts.load('600 40px "IBM Plex Sans KR"'),
+      document.fonts.load('400 40px "IBM Plex Sans KR"'),
+      document.fonts.load('700 60px "Gowun Batang"'),
+    ]);
+  } catch (e) { /* 폰트 로드 실패 시 기본 폰트로 그린다 */ }
+
+  const W = 1080, H = 1920;
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  const dir = typeKey.split('-')[0];
+  const hard = typeKey.endsWith('-H');
+
+  ctx.fillStyle = type.tint; ctx.fillRect(0, 0, W, H);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+
+  // 상단 (스토리 상단 UI 영역을 피해 260px 아래부터)
+  ctx.fillStyle = '#2B1217';
+  ctx.font = '700 34px "IBM Plex Sans KR", sans-serif';
+  ctx.fillText('AWAYS', W / 2, 300);
+  ctx.fillStyle = '#6E4A51';
+  ctx.font = '400 30px "IBM Plex Sans KR", sans-serif';
+  ctx.fillText('나의 체형 타입', W / 2, 350);
+
+  // 무드 사진이 있으면 사진 + 무드 태그, 없으면 타입 그래픽
+  const moodImg = await loadMoodImage(typeKey);
+  const hasPhoto = !!moodImg;
+  if (hasPhoto) {
+    // 전신 코디가 보이도록 세로형(3:4) 사진 칸
+    const px = 300, py = 360, pw = 480, ph = 640;
+    drawCover(ctx, moodImg, px, py, pw, ph, 28);
+    ctx.font = '600 28px "IBM Plex Sans KR", sans-serif';
+    const tag = `${type.mood} 무드`;
+    const tw = ctx.measureText(tag).width + 44;
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    roundRect(ctx, px + 18, py + ph - 18 - 56, tw, 56, 28); ctx.fill();
+    ctx.fillStyle = type.color; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText(tag, px + 18 + 22, py + ph - 18 - 28 + 2);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  } else {
+    drawMotif(ctx, dir, hard, type.color, W / 2, 620);
+  }
+  // 사진이 있으면 아래 요소를 조금씩 내린다
+  const Y = hasPhoto
+    ? { name: 1108, en: 1178, nick: 1262, chips: 1342, box: 1400, boxH: 124, boxLabel: 1442, boxText: 1495, bar: 0, dist: 0 }
+    : { name: 990, en: 1068, nick: 1165, chips: 1250, box: 1320, boxH: 140, boxLabel: 1368, boxText: 1424, bar: 1498, dist: 1556 };
+
+  // 타입명
+  ctx.fillStyle = '#2B1217';
+  ctx.font = '700 112px "IBM Plex Sans KR", sans-serif';
+  ctx.fillText(type.name, W / 2, Y.name);
+  ctx.fillStyle = type.color;
+  ctx.font = '700 62px "Gowun Batang", serif';
+  ctx.fillText(type.en, W / 2, Y.en);
+
+  // 별명
+  ctx.fillStyle = '#2B1217';
+  ctx.font = '600 50px "IBM Plex Sans KR", sans-serif';
+  ctx.fillText(`"${type.nickname}"`, W / 2, Y.nick);
+
+  drawChips(ctx, type.tags, Y.chips, type.color);
+
+  // 베스트 아이템
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = '#FFFFFF';
+  roundRect(ctx, 110, Y.box, W - 220, Y.boxH, 28); ctx.fill();
+  ctx.fillStyle = type.color;
+  ctx.font = '600 28px "IBM Plex Sans KR", sans-serif';
+  ctx.fillText('베스트 아이템', W / 2, Y.boxLabel);
+  ctx.fillStyle = '#2B1217';
+  ctx.font = '400 36px "IBM Plex Sans KR", sans-serif';
+  ctx.fillText(type.items.join('  ·  '), W / 2, Y.boxText);
+
+  if (!hasPhoto) {
+  // 체형 방향 분포 막대
+  const total = (score.S + score.W + score.N) || 1;
+  const order = ['S', 'W', 'N'].sort((a, b) => score[b] - score[a]);
+  const barX = 160, barW = W - 320, barY = Y.bar, barH = 18;
+  let x = barX;
+  order.forEach((k, i) => {
+    const w = barW * score[k] / total;
+    ctx.globalAlpha = i === 0 ? 1 : (i === 1 ? 0.45 : 0.2);
+    ctx.fillStyle = type.color;
+    ctx.fillRect(x, barY, w, barH);
+    x += w;
+  });
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = '#533A3F';
+  ctx.font = '400 28px "IBM Plex Sans KR", sans-serif';
+  ctx.fillText(order.filter(k => score[k] > 0).map(k => `${dirLabels[k]} ${Math.round(score[k] / total * 100)}%`).join('   '), W / 2, Y.dist);
+  }
+
+  // 옷장 메이트 문구 (친구와 같은 타입이면 인증 문구로)
+  const friend = sessionStorage.getItem('friendType');
+  const mateLine = friend === typeKey
+    ? '👯 친구와 옷장 메이트 인증!'
+    : `나랑 같은 ${josa(type.name, '이면', '면')} 옷 바꿔 입자 👯`;
+  ctx.fillStyle = type.color;
+  roundRect(ctx, 150, 1600, W - 300, 88, 44); ctx.fill();
+  ctx.fillStyle = '#FFFFFF';
+  let fs = 38;
+  do { ctx.font = `700 ${fs}px "IBM Plex Sans KR", sans-serif`; fs -= 2; }
+  while (ctx.measureText(mateLine).width > W - 300 - 70 && fs > 24);
+  ctx.fillText(mateLine, W / 2, 1657);
+
+  // 하단
+  ctx.fillStyle = '#6E4A51';
+  ctx.font = '400 28px "IBM Plex Sans KR", sans-serif';
+  ctx.fillText('무료 체형 진단 · awaysbiz.com', W / 2, 1735);
+
+  shareCanvas = c;
+  document.getElementById('sharePreview').src = c.toDataURL('image/png');
+}
+
+function isInAppBrowser() {
+  return /Instagram|FBAN|FBAV|KAKAOTALK|NAVER|Line\//i.test(navigator.userAgent);
+}
+function isMobile() {
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+function openImgModal() {
+  document.getElementById('imgModalImg').src = shareCanvas.toDataURL('image/png');
+  document.getElementById('imgModal').classList.add('show');
+}
+function closeImgModal() {
+  document.getElementById('imgModal').classList.remove('show');
+}
+
+async function shareCardImage() {
+  if (!shareCanvas) await renderShareCard();
+  if (!shareCanvas) return;
+  const { typeKey, type } = currentResult;
+  if (window.fbq) fbq('trackCustom', 'ShareResult', { method: 'image', content_name: typeKey });
+  track('share', { method: 'image', result_type: typeKey });
+
+  // 인스타·카카오 인앱 브라우저는 파일 공유/다운로드가 막혀 있어 길게 눌러 저장으로 안내
+  if (isInAppBrowser()) { openImgModal(); return; }
+
+  const blob = await new Promise(r => shareCanvas.toBlob(r, 'image/png'));
+  const file = new File([blob], `aways-${typeKey}.png`, { type: 'image/png' });
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: `내 체형은 ${type.name}` });
+      return;
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+    }
+  }
+  if (isMobile()) { openImgModal(); return; }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `aways-${typeKey}.png`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  showToast('결과 카드가 저장됐어요');
+}
+
+// 친구 링크로 들어온 경우: ?from=W-Soft
+(function initFriend() {
+  const from = new URLSearchParams(window.location.search).get('from');
+  if (from && typeMap[from]) {
+    sessionStorage.setItem('friendType', from);
+    const fr = typeMap[from];
+    const b = document.getElementById('friendBanner');
+    const text = `<div>친구는 <strong>${josa(fr.name, '이', '가')}</strong> 나왔어요.<span class="fb-nick">"${fr.nickname}"</span>나도 같은 타입이면 옷장 메이트! 확인해볼까요? 👯</div>`;
+    b.innerHTML = text;
+    b.style.display = '';
+    // 친구 타입의 무드 사진이 있으면 배너에 함께 보여준다
+    loadMoodImage(from).then(img => {
+      if (!img) return;
+      b.classList.add('with-photo');
+      b.innerHTML = `<img src="${img.src}" alt="${fr.mood} 스타일 예시">` + text;
+    });
+  }
+})();
+
+// 한글 받침에 따라 조사 선택 (내추럴이 / 웨이브가)
+function josa(word, withBatchim, withoutBatchim) {
+  const code = word.charCodeAt(word.length - 1) - 0xAC00;
+  const has = code >= 0 && code <= 11171 && code % 28 !== 0;
+  return word + (has ? withBatchim : withoutBatchim);
+}
+
+function renderFriendCompare(myKey) {
+  const friend = sessionStorage.getItem('friendType');
+  const el = document.getElementById('friendCompare');
+  if (!friend || !typeMap[friend]) { el.innerHTML = ''; return; }
+  const me = typeMap[myKey], fr = typeMap[friend];
+  const sameDir = friend.split('-')[0] === myKey.split('-')[0];
+
+  if (friend === myKey) {
+    el.innerHTML = `<div class="mate-hit" style="--mate-color:${me.color}">
+      <div class="mate-hit-badge">👯 옷장 메이트 성공</div>
+      <div class="mate-hit-title">친구와 같은<br>${josa(me.name, '이에요', '예요')}!</div>
+      <div class="mate-hit-desc">어울리는 핏과 소재가 같아서 서로 옷을 바꿔 입어도 잘 어울려요. 인증 카드를 스토리에 올려보세요.</div>
+    </div>`;
+  } else if (sameDir) {
+    el.innerHTML = `<div class="friend-compare"><strong>반쪽 옷장 메이트</strong> · 친구는 ${fr.name}, 나는 ${me.name}.<br>실루엣은 같이 입어도 되지만, 어울리는 소재는 달라요.</div>`;
+  } else {
+    el.innerHTML = `<div class="friend-compare">친구는 <strong>${fr.name}</strong>, 나는 <strong>${me.name}</strong>. 어울리는 옷이 완전히 달라요!<br>다른 친구 중에 내 옷장 메이트가 있을지도 몰라요</div>`;
+  }
+}
+
+function shareResult() {
+  const typeKey = currentResult ? currentResult.typeKey : '';
+  const type = currentResult ? currentResult.type : null;
+  const shareText = type
+    ? `나는 "${type.name}" — ${type.nickname}래 👀\n나랑 같은 체형이면 옷 바꿔 입자! 너는 뭐 나와?`
+    : '나에게 맞는 옷, 체형부터 알아보기 👀';
+  // 친구가 들어오면 "친구는 ○○이 나왔어요" 배너가 뜨도록 결과 타입을 붙인다
+  // 타입별 공유 주소: 카톡·인스타 링크 미리보기에 친구의 결과 이미지가 뜨고, 누르면 /test?from=타입으로 이동
+  const shareUrl = window.location.origin + (typeKey ? `/r/${typeKey}` : '/test');
+  if (window.fbq) fbq('trackCustom', 'ShareResult', { method: 'link', content_name: typeKey });
+  track('share', { method: 'link', result_type: typeKey });
 
   // 모바일: Web Share API (카카오톡, 메시지, 인스타그램 DM 등 시스템 공유 시트)
   if (navigator.share) {
     navigator.share({
-      title: '체형진단 · 6가지 정밀 유형',
+      title: 'AWAYS 체형진단 · 6가지 체형 타입',
       text: shareText,
       url: shareUrl,
     }).catch(err => {
@@ -1285,7 +1999,7 @@ function shareResult() {
 function fallbackCopy(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => {
-      showToast('🔗 링크가 복사되었어요!');
+      showToast('링크가 복사되었어요!');
     }).catch(() => {
       legacyCopy(text);
     });
@@ -1304,7 +2018,7 @@ function legacyCopy(text) {
   textarea.select();
   try {
     document.execCommand('copy');
-    showToast('🔗 링크가 복사되었어요!');
+    showToast('링크가 복사되었어요!');
   } catch (e) {
     alert('링크 복사에 실패했어요. 브라우저를 확인해주세요.');
   }
