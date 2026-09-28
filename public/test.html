@@ -903,8 +903,8 @@ function track(name, params) {
         <div class="value-item">
           <div class="value-icon">✦</div>
           <div class="value-text">
-            <strong>추천 브랜드</strong><br>
-            12가지 큐레이션
+            <strong>쇼핑 체크리스트</strong><br>
+            핵심 아이템 12가지 · 추천 브랜드
           </div>
         </div>
         <div class="value-item">
@@ -937,8 +937,8 @@ function track(name, params) {
         <span class="cta-price">9,800<small>원</small></span>
       </div>
       <div class="cta-value">
-        <span>체형 분석</span><span>핏·실루엣 공식</span><span>소재·컬러 가이드</span>
-        <span>직장인 코디 공식 5가지</span><span>추천 브랜드 12곳</span><span>사계절 가이드</span>
+        <span>체형 분석</span><span>핏 공식 · 피해야 할 핏</span><span>네크라인 가이드</span><span>소재·컬러·패턴</span>
+        <span>직장인 코디 공식 5가지</span><span>액세서리 가이드</span><span>핵심 아이템 12가지 · 추천 브랜드</span><span>사계절 가이드 · Q&amp;A</span>
       </div>
       <div class="cta-anchor">안 맞아서 안 입는 옷 한 벌보다 저렴해요</div>
       <button class="cta-btn" id="ctaBtn" onclick="goToPayment()">내 타입 리포트 받기 →</button>
@@ -1790,20 +1790,13 @@ async function renderShareCard() {
   ctx.fillStyle = type.tint; ctx.fillRect(0, 0, W, H);
   ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
 
-  // 상단 (스토리 상단 UI 영역을 피해 260px 아래부터)
-  ctx.fillStyle = '#2B1217';
-  ctx.font = '700 34px "IBM Plex Sans KR", sans-serif';
-  ctx.fillText('AWAYS', W / 2, 300);
-  ctx.fillStyle = '#6E4A51';
-  ctx.font = '400 30px "IBM Plex Sans KR", sans-serif';
-  ctx.fillText('나의 체형 타입', W / 2, 350);
-
+  // 상단 문구 없이 사진이 카드의 시작점 (스토리 상단 UI 영역 아래부터)
   // 무드 사진이 있으면 사진 + 무드 태그, 없으면 타입 그래픽
   const moodImg = await loadMoodImage(typeKey);
   const hasPhoto = !!moodImg;
   if (hasPhoto) {
     // 전신 코디가 보이도록 세로형(3:4) 사진 칸
-    const px = 300, py = 360, pw = 480, ph = 640;
+    const px = 277, py = 300, pw = 526, ph = 700;
     drawCover(ctx, moodImg, px, py, pw, ph, 28);
     ctx.font = '600 28px "IBM Plex Sans KR", sans-serif';
     const tag = `${type.mood} 무드`;
@@ -1981,7 +1974,7 @@ function shareResult() {
   const typeKey = currentResult ? currentResult.typeKey : '';
   const type = currentResult ? currentResult.type : null;
   const shareText = type
-    ? `나는 "${type.name}" — ${type.nickname}래 👀\n나랑 같은 체형이면 옷 바꿔 입자! 너는 뭐 나와?`
+    ? `나는 ${josa(type.name, '이래', '래')} 👀 "${type.nickname}"\n나랑 같은 타입이면 옷 바꿔 입자. 너는 어떤 타입이야?`
     : '나에게 맞는 옷, 체형부터 알아보기 👀';
   // 친구가 들어오면 "친구는 ○○이 나왔어요" 배너가 뜨도록 결과 타입을 붙인다
   // 타입별 공유 주소: 카톡·인스타 링크 미리보기에 친구의 결과 이미지가 뜨고, 누르면 /test?from=타입으로 이동
