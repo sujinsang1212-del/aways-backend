@@ -113,9 +113,9 @@ async function sendEmail(email, bodyType, pdfBuffer) {
         <div style="background: #FFFFFF; border: 1px solid #E6D9D5; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
           <h3 style="font-size: 15px; color: #4A1C26; margin: 0 0 16px 0;">약 30페이지 리포트 구성</h3>
           <table style="width: 100%; font-size: 13px; color: #533A3F; line-height: 2;">
-            <tr><td>Ch.1</td><td>체형 분석 · 시그니처 3가지</td></tr>
-            <tr><td>Ch.2</td><td>핏 공식 · DO & DON'T · 네크라인</td></tr>
-            <tr><td>Ch.3</td><td>추천 소재 7종 · 컬러 가이드</td></tr>
+            <tr><td>Ch.1</td><td>내 타입의 시그니처 · 다른 타입과 비교</td></tr>
+            <tr><td>Ch.2</td><td>핏 공식 · 피해야 할 핏 · 네크라인</td></tr>
+            <tr><td>Ch.3</td><td>소재 7가지 · 피해야 할 소재 5가지 · 패턴 · 컬러</td></tr>
             <tr><td>Ch.4</td><td>코디 공식 5가지 · 액세서리</td></tr>
             <tr><td>Ch.5</td><td>핵심 아이템 12가지 · 추천 브랜드</td></tr>
             <tr><td>Ch.6</td><td>사계절 가이드 · Q&A · 옷장 자가진단</td></tr>
