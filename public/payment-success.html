@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>결제 처리 중 - AWAYS</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
-  --text: #1A1714; --muted: #8A8178;
-  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
-  --dark: #1A1714; --green: #4A7C59; --red: #B85450;
+  --bg: #F6EFEC; --surface: #FFFFFF; --border: #E6D9D5;
+  --text: #2B1217; --muted: #6E4A51;
+  --accent: #7A2E3A; --accent-light: #EBDCC7; --accent-dark: #4A1C26;
+  --dark: #2B1217; --green: #4A7C59; --red: #B85450;
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'IBM Plex Sans KR', sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -45,7 +45,7 @@ body {
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .processing-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 24px;
   margin-bottom: 12px;
 }
@@ -92,7 +92,7 @@ body {
   color: white; font-size: 36px;
 }
 .success-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 32px;
   margin-bottom: 12px;
 }
@@ -132,7 +132,7 @@ body {
   color: white; font-size: 36px;
 }
 .failed-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 28px;
   margin-bottom: 12px;
 }
@@ -168,6 +168,19 @@ body {
   border: 1px solid var(--border);
   color: var(--text);
 }
+
+/* ===== AWAYS 버건디 디자인 통일 ===== */
+:root{--text:#2B1217;--dark:#4A1C26;--wine:#4A1C26;--sand:#EBDCC7;--blush:#E8D2D5;}
+body{font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;word-break:keep-all;}
+em{font-style:normal;}
+
+.top-bar,.header{background:var(--wine)!important;border-bottom:none!important;}
+.top-bar .logo,.header .logo{font-family:'IBM Plex Sans KR',sans-serif!important;font-weight:700!important;letter-spacing:.06em;color:#fff!important;font-size:20px!important;}
+.step-indicator,.header-back{color:var(--blush)!important;}
+.start-btn,.btn-next,.btn-prev,.cta-btn,.pay-btn,.share-main,.share-link,.share-btn,.retry-btn,.home-btn{border-radius:28px!important;}
+.feel-btn{border-radius:22px!important;}
+h1,h2,.section-title,.page-title,.intro-title,.result-name,.success-title{letter-spacing:-0.01em;}
+
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -185,7 +198,15 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code --></head>
+<!-- End Meta Pixel Code --><!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKT4ZNNWVB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-SKT4ZNNWVB');
+</script>
+</head>
 <body>
 
 <div class="container">
@@ -366,8 +387,18 @@ async function confirmPayment() {
 
     // Meta 픽셀 구매 이벤트 (승인 성공 시에만)
     if (window.fbq && !sessionStorage.getItem('px_' + orderId)) {
-      fbq('track', 'Purchase', { value: Number(amount), currency: 'KRW' }, { eventID: orderId });
+      fbq('track', 'Purchase', { value: Number(amount), currency: 'KRW', content_name: bodyType || '', content_type: 'product' }, { eventID: orderId });
       sessionStorage.setItem('px_' + orderId, '1');
+    }
+    // GA4 구매 이벤트 (같은 주문은 한 번만)
+    if (window.gtag && !sessionStorage.getItem('ga_' + orderId)) {
+      gtag('event', 'purchase', {
+        transaction_id: orderId,
+        value: Number(amount),
+        currency: 'KRW',
+        items: [{ item_id: 'aways-report', item_name: 'AWAYS 체형 리포트', price: Number(amount), quantity: 1 }],
+      });
+      sessionStorage.setItem('ga_' + orderId, '1');
     }
 
     // Step 3: 리포트 생성 시뮬레이션
