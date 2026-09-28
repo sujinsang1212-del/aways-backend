@@ -6,21 +6,21 @@
 <title>개인정보처리방침 · AWAYS</title>
 <meta name="description" content="AWAYS 체형진단 서비스 개인정보처리방침">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F7F3EE; --surface: #FFFFFF; --border: #E8E2D9;
-  --text: #1A1714; --muted: #8A8178;
-  --accent: #B8956A; --accent-light: #F0E6D6; --accent-dark: #8C6840;
-  --dark: #1A1714;
+  --bg: #F6EFEC; --surface: #FFFFFF; --border: #E6D9D5;
+  --text: #2B1217; --muted: #6E4A51;
+  --accent: #7A2E3A; --accent-light: #EBDCC7; --accent-dark: #4A1C26;
+  --dark: #2B1217;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'IBM Plex Sans KR', sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.8;
@@ -39,7 +39,7 @@ body {
   justify-content: space-between;
 }
 .logo {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 20px;
   text-decoration: none;
   color: var(--text);
@@ -69,7 +69,7 @@ body {
   font-weight: 600;
 }
 .page-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: clamp(30px, 6vw, 42px);
   line-height: 1.3;
   margin-bottom: 12px;
@@ -105,7 +105,7 @@ body {
 .intro strong { color: var(--accent-dark); }
 
 .content h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 22px;
   margin-top: 36px;
   margin-bottom: 16px;
@@ -191,17 +191,39 @@ table th {
   gap: 16px;
   flex-wrap: wrap;
 }
+
+.section-eyebrow,.page-eyebrow,.fp-eyebrow,.cta-launch-badge{text-transform:none!important;letter-spacing:0.02em!important;}
+/* ===== AWAYS 버건디 디자인 통일 ===== */
+:root{--text:#2B1217;--dark:#4A1C26;--wine:#4A1C26;--sand:#EBDCC7;--blush:#E8D2D5;}
+body{font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;word-break:keep-all;}
+em{font-style:normal;}
+
+.top-bar,.header{background:var(--wine)!important;border-bottom:none!important;}
+.top-bar .logo,.header .logo{font-family:'IBM Plex Sans KR',sans-serif!important;font-weight:700!important;letter-spacing:.06em;color:#fff!important;font-size:20px!important;}
+.step-indicator,.header-back{color:var(--blush)!important;}
+.start-btn,.btn-next,.btn-prev,.cta-btn,.pay-btn,.share-main,.share-link,.share-btn,.retry-btn,.home-btn{border-radius:28px!important;}
+.feel-btn{border-radius:22px!important;}
+h1,h2,.section-title,.page-title,.intro-title,.result-name,.success-title{letter-spacing:-0.01em;}
+
 </style>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKT4ZNNWVB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-SKT4ZNNWVB');
+</script>
 </head>
 <body>
 
 <div class="header">
-  <a href="/" class="logo">체형진단</a>
+  <a href="/" class="logo">AWAYS</a>
   <a href="/" class="header-back">← 홈으로</a>
 </div>
 
 <section class="page-hero">
-  <div class="page-eyebrow">Privacy Policy</div>
+  <div class="page-eyebrow">개인정보 보호</div>
   <h1 class="page-title">개인정보처리방침</h1>
   <div class="page-meta">시행일: 2026년 1월 1일</div>
 </section>
@@ -233,7 +255,7 @@ table th {
         </tr>
         <tr>
           <td>자동수집</td>
-          <td>접속 IP, 쿠키, 접속 로그, 기기정보, 브라우저 종류</td>
+          <td>접속 IP, 쿠키, 접속 로그, 기기정보, 브라우저 종류, 진단 문항 응답 및 결과(개인 식별 불가능한 형태)</td>
           <td>서비스 이용 시</td>
         </tr>
         <tr>
@@ -350,6 +372,7 @@ table th {
     <p>회사는 이용자에게 맞춤형 서비스를 제공하기 위해 쿠키를 사용합니다.</p>
     <ol>
       <li><strong>쿠키 사용 목적:</strong> 접속 빈도 분석, 서비스 개선</li>
+      <li><strong>분석·광고 도구:</strong> 방문 통계와 광고 성과 측정을 위해 Google Analytics(Google LLC)와 Meta 픽셀(Meta Platforms, Inc.)을 사용하며, 이 과정에서 쿠키와 기기정보 등 개인을 직접 식별할 수 없는 정보가 수집될 수 있습니다.</li>
       <li><strong>쿠키 거부 방법:</strong> 웹브라우저 설정에서 쿠키 저장을 거부할 수 있습니다.
         <ul>
           <li>Chrome: 설정 → 개인정보 및 보안 → 쿠키</li>
