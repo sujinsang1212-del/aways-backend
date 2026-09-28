@@ -6,26 +6,26 @@
 <title>결제 - AWAYS</title>
 <script src="https://js.tosspayments.com/v2/standard"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F7F3EE;
+  --bg: #F6EFEC;
   --surface: #FFFFFF;
-  --border: #E8E2D9;
-  --text: #1A1714;
-  --muted: #8A8178;
-  --accent: #B8956A;
-  --accent-light: #F0E6D6;
-  --accent-dark: #8C6840;
-  --dark: #1A1714;
-  --tag: #EDE7DE;
+  --border: #E6D9D5;
+  --text: #2B1217;
+  --muted: #6E4A51;
+  --accent: #7A2E3A;
+  --accent-light: #EBDCC7;
+  --accent-dark: #4A1C26;
+  --dark: #2B1217;
+  --tag: #F1E7E3;
   --green: #4A7C59;
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'IBM Plex Sans KR', sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -46,7 +46,7 @@ body {
   justify-content: space-between;
   position: sticky; top: 0; z-index: 100;
 }
-.logo { font-family: 'DM Serif Display', serif; font-size: 18px; }
+.logo { font-family: 'Gowun Batang', serif; font-size: 18px; }
 .step-bar {
   font-size: 12px;
   color: var(--muted);
@@ -77,12 +77,12 @@ body {
   font-weight: 600;
 }
 .section-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 28px;
   line-height: 1.3;
   margin-bottom: 10px;
 }
-.section-title em { font-style: italic; color: var(--accent-dark); }
+.section-title em { font-style: normal; color: var(--accent-dark); }
 .section-desc {
   font-size: 14px;
   color: var(--muted);
@@ -148,7 +148,7 @@ body {
   margin-bottom: 16px;
 }
 .order-product {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 18px;
   margin-bottom: 4px;
 }
@@ -170,10 +170,10 @@ body {
   font-size: 13px;
   color: var(--muted);
   text-decoration: line-through;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .order-price .price-now {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 26px;
   color: var(--accent-dark);
   line-height: 1;
@@ -316,16 +316,16 @@ body {
 
 /* 테스트 모드 배너 */
 .test-banner {
-  background: #FFF8E1;
-  border: 1px solid #F0D080;
+  background: #F6EFEC;
+  border: 1px solid #EBDCC7;
   border-radius: 10px;
   padding: 12px 16px;
   margin-bottom: 24px;
   font-size: 12px;
-  color: #8A6810;
+  color: #4A1C26;
   line-height: 1.6;
 }
-.test-banner strong { color: #6A5008; }
+.test-banner strong { color: #4A1C26; }
 
 /* 성공 페이지 */
 .success-screen {
@@ -348,7 +348,7 @@ body {
   font-size: 36px;
 }
 .success-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 32px;
   margin-bottom: 12px;
 }
@@ -380,6 +380,20 @@ body {
 /* 화면 전환 */
 .screen { display: none; }
 .screen.active { display: block; }
+
+.section-eyebrow,.page-eyebrow,.fp-eyebrow,.cta-launch-badge{text-transform:none!important;letter-spacing:0.02em!important;}
+/* ===== AWAYS 버건디 디자인 통일 ===== */
+:root{--text:#2B1217;--dark:#4A1C26;--wine:#4A1C26;--sand:#EBDCC7;--blush:#E8D2D5;}
+body{font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;word-break:keep-all;}
+em{font-style:normal;}
+
+.top-bar,.header{background:var(--wine)!important;border-bottom:none!important;}
+.top-bar .logo,.header .logo{font-family:'IBM Plex Sans KR',sans-serif!important;font-weight:700!important;letter-spacing:.06em;color:#fff!important;font-size:20px!important;}
+.step-indicator,.header-back{color:var(--blush)!important;}
+.start-btn,.btn-next,.btn-prev,.cta-btn,.pay-btn,.share-main,.share-link,.share-btn,.retry-btn,.home-btn{border-radius:28px!important;}
+.feel-btn{border-radius:22px!important;}
+h1,h2,.section-title,.page-title,.intro-title,.result-name,.success-title{letter-spacing:-0.01em;}
+.step-dot{background:rgba(255,255,255,.3)!important}.step-dot.active,.step-dot.done{background:var(--sand)!important}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -397,11 +411,19 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code --></head>
+<!-- End Meta Pixel Code --><!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKT4ZNNWVB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-SKT4ZNNWVB');
+</script>
+</head>
 <body>
 
 <div class="top-bar">
-  <div class="logo">체형진단</div>
+  <div class="logo">AWAYS</div>
   <div class="step-bar">
     <span class="step-dot"></span>
     <span class="step-dot"></span>
@@ -414,27 +436,26 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 <div class="screen active" id="screen-payment">
   <div class="container">
 
-    <div class="section-eyebrow">Order Confirmation</div>
+    <div class="section-eyebrow">결제 전 확인</div>
     <h1 class="section-title">주문 <em>확인</em></h1>
     <p class="section-desc">선택하신 플랜과 정보를 확인한 후 결제를 진행해주세요.</p>
 
     <!-- 주문 요약 -->
     <div class="order-summary">
-      <div class="early-bird-badge">⚡ 런칭 기념 한정 · ₩5,000 할인</div>
+      <div class="early-bird-badge">7일 이내 환불 보장 · 결제 후 이메일 즉시 발송</div>
       <div class="order-head">
         <div>
           <div class="order-product" id="orderProduct">맞춤 스타일 가이드</div>
           <div class="order-product-tag" id="orderTag">프리미엄 리포트</div>
         </div>
         <div class="order-price" id="orderPrice">
-          <span class="price-orig">₩24,900</span>
-          <span class="price-now">₩19,900</span>
+          <span class="price-now">9,800원</span>
         </div>
       </div>
       <div class="order-features">
         <div class="order-features-title">포함 사항</div>
         <ul id="orderFeatures">
-          <li>체형 분석 리포트 (PDF, 22페이지)</li>
+          <li>체형 분석 리포트 (PDF, 약 30페이지)</li>
           <li>실루엣과 핏의 황금 공식</li>
           <li>소재·컬러·패턴 가이드</li>
           <li>직장인 코디 공식 5가지</li>
@@ -447,15 +468,15 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
     <!-- 신뢰 요소 -->
     <div class="trust-section">
       <div class="trust-card">
-        <div class="trust-icon">🔒</div>
+        <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A1C26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
         <div class="trust-text">안전결제<br><span>토스페이먼츠</span></div>
       </div>
       <div class="trust-card">
-        <div class="trust-icon">📅</div>
-        <div class="trust-text">7일 환불<br><span>무조건 보장</span></div>
+        <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A1C26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div>
+        <div class="trust-text">7일 이내<br><span>환불 보장</span></div>
       </div>
       <div class="trust-card">
-        <div class="trust-icon">📧</div>
+        <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A1C26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
         <div class="trust-text">즉시 발송<br><span>이메일 자동</span></div>
       </div>
     </div>
@@ -483,7 +504,7 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
 
     <!-- 결제 버튼 -->
     <button class="pay-btn" id="payBtn" onclick="requestPayment()">
-      <span id="payBtnText">₩19,900 결제하기</span>
+      <span id="payBtnText">9,800원 결제하기</span>
     </button>
 
     <div class="payment-notice">
@@ -520,7 +541,7 @@ src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
       </div>
       <div class="success-row">
         <span class="success-row-label">결제금액</span>
-        <span class="success-row-val" id="succAmount">₩19,900</span>
+        <span class="success-row-val" id="succAmount">9,800원</span>
       </div>
       <div class="success-row">
         <span class="success-row-label">발송 이메일</span>
@@ -546,14 +567,13 @@ const TOSS_CLIENT_KEY = 'live_gck_DnyRpQWGrN6jm5LREydlrKwv1M9E';
 const TOSS_CUSTOMER_KEY = generateCustomerKey();
 
 // ============================================================
-// 상품 정보 (단일 가격 · 얼리버드 19,900원)
+// 상품 정보 (단일 가격 9,800원)
 // ============================================================
 const PRODUCT = {
   name: '맞춤 스타일 가이드',
-  originalPrice: 24900,
-  price: 19900,
+  price: 9800,
   features: [
-    '체형 분석 리포트 (PDF, 22페이지)',
+    '체형 분석 리포트 (PDF, 약 30페이지)',
     '실루엣과 핏의 황금 공식',
     '소재·컬러·패턴 가이드',
     '직장인 코디 공식 5가지',
@@ -574,10 +594,11 @@ const productTag = typeName ? `${typeName} · 프리미엄 리포트` : '프리�
 document.getElementById('orderProduct').textContent = PRODUCT.name;
 document.getElementById('orderTag').textContent = productTag;
 document.getElementById('orderPrice').innerHTML = `
-  <span class="price-orig">₩${PRODUCT.originalPrice.toLocaleString()}</span>
-  <span class="price-now">₩${PRODUCT.price.toLocaleString()}</span>
+  <span class="price-now">${PRODUCT.price.toLocaleString()}원</span>
 `;
-document.getElementById('payBtnText').textContent = `₩${PRODUCT.price.toLocaleString()} 결제하기`;
+document.getElementById('payBtnText').textContent = `${PRODUCT.price.toLocaleString()}원 결제하기`;
+// Meta 픽셀: 결제 페이지 진입
+if (window.fbq) fbq('track', 'InitiateCheckout', { value: PRODUCT.price, currency: 'KRW', content_name: bodyType, num_items: 1 });
 const featuresEl = document.getElementById('orderFeatures');
 featuresEl.innerHTML = PRODUCT.features.map(f => `<li>${f}</li>`).join('');
 
@@ -633,6 +654,8 @@ window.addEventListener('DOMContentLoaded', initTossWidget);
 // 결제 요청
 // ============================================================
 async function requestPayment() {
+  // Meta 픽셀: 결제 버튼 클릭 (결제수단 입력 단계)
+  if (window.fbq) fbq('track', 'AddPaymentInfo', { value: PRODUCT.price, currency: 'KRW', content_name: bodyType });
   const email = document.getElementById('emailInput').value.trim();
 
   // 이메일 검증
@@ -708,7 +731,7 @@ function showSuccessScreen() {
 
   document.getElementById('succOrderId').textContent = lastOrder.orderId || '-';
   document.getElementById('succProduct').textContent = lastOrder.tierName || '-';
-  document.getElementById('succAmount').textContent = `₩${(lastOrder.amount || 0).toLocaleString()}`;
+  document.getElementById('succAmount').textContent = `${(lastOrder.amount || 0).toLocaleString()}원`;
   document.getElementById('succEmail').textContent = lastOrder.email || '-';
 
   document.getElementById('screen-payment').classList.remove('active');
