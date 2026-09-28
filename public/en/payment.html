@@ -1,63 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1018812814154877');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1018812814154877&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code --><!-- InitiateCheckout Event - User reached payment page -->
-<script>
-  fbq('track', 'InitiateCheckout', {
-    value: 29.00,
-    currency: 'USD'
-  });
-</script>
+<html lang="ko">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout · AWAYS</title>
+<title>결제 - AWAYS</title>
+<script src="https://js.tosspayments.com/v2/standard"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F7F3EE;
+  --bg: #F6EFEC;
   --surface: #FFFFFF;
-  --border: #E8E2D9;
-  --text: #1A1714;
-  --muted: #8A8178;
-  --accent: #B8956A;
-  --accent-light: #F0E6D6;
-  --accent-dark: #8C6840;
-  --dark: #1A1714;
-  --tag: #EDE7DE;
+  --border: #E6D9D5;
+  --text: #2B1217;
+  --muted: #6E4A51;
+  --accent: #7A2E3A;
+  --accent-light: #EBDCC7;
+  --accent-dark: #4A1C26;
+  --dark: #2B1217;
+  --tag: #F1E7E3;
   --green: #4A7C59;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'IBM Plex Sans KR', sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
   font-size: 16px;
-  -webkit-font-smoothing: antialiased;
 }
 
 @media (max-width: 600px) {
   body { font-size: 17px; }
 }
 
+/* 상단바 */
 .top-bar {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -67,7 +46,7 @@ body {
   justify-content: space-between;
   position: sticky; top: 0; z-index: 100;
 }
-.logo { font-family: 'DM Serif Display', serif; font-size: 18px; }
+.logo { font-family: 'Gowun Batang', serif; font-size: 18px; }
 .step-bar {
   font-size: 12px;
   color: var(--muted);
@@ -75,9 +54,14 @@ body {
   align-items: center;
   gap: 6px;
 }
-.step-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+.step-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+}
 .step-dot.active { background: var(--accent-dark); }
 
+/* 메인 컨테이너 */
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -93,13 +77,12 @@ body {
   font-weight: 600;
 }
 .section-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 28px;
   line-height: 1.3;
   margin-bottom: 10px;
-  letter-spacing: -0.01em;
 }
-.section-title em { font-style: italic; color: var(--accent-dark); }
+.section-title em { font-style: normal; color: var(--accent-dark); }
 .section-desc {
   font-size: 14px;
   color: var(--muted);
@@ -107,7 +90,7 @@ body {
   margin-bottom: 28px;
 }
 
-/* Order summary */
+/* 주문 요약 카드 */
 .order-summary {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -127,6 +110,7 @@ body {
   margin-bottom: 14px;
 }
 
+/* 신뢰 요소 카드 */
 .trust-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -140,41 +124,88 @@ body {
   padding: 14px 8px;
   text-align: center;
 }
-.trust-icon { font-size: 22px; margin-bottom: 6px; }
+.trust-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
 .trust-text {
-  font-size: 12px; color: var(--text);
-  font-weight: 600; line-height: 1.4;
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.4;
 }
-.trust-text span { font-weight: 400; color: var(--muted); font-size: 11px; }
-
+.trust-text span {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 11px;
+}
 .order-head {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
 }
-.order-product { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 4px; }
+.order-product {
+  font-family: 'Gowun Batang', serif;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
 .order-product-tag {
-  font-size: 12px; color: var(--muted);
-  display: inline-block; background: var(--tag); padding: 3px 8px; border-radius: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  display: inline-block;
+  background: var(--tag);
+  padding: 3px 8px;
+  border-radius: 10px;
 }
-.order-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-.order-price .price-orig { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+.order-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.order-price .price-orig {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: line-through;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
 .order-price .price-now {
-  font-family: 'DM Serif Display', serif;
-  font-size: 26px; color: var(--accent-dark); line-height: 1;
+  font-family: 'Gowun Batang', serif;
+  font-size: 26px;
+  color: var(--accent-dark);
+  line-height: 1;
 }
-.order-features { font-size: 13px; color: var(--muted); line-height: 1.75; }
+.order-features {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+}
 .order-features-title {
-  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--text); font-weight: 600; margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 .order-features li {
-  list-style: none; display: flex; gap: 6px; align-items: flex-start; padding: 2px 0;
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  padding: 2px 0;
 }
 .order-features li::before {
-  content: '✓'; color: var(--accent-dark); font-weight: bold; flex-shrink: 0;
+  content: '✓';
+  color: var(--accent-dark);
+  font-weight: bold;
+  flex-shrink: 0;
 }
 
-/* Email input */
+/* 이메일 입력 */
 .input-section {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -183,99 +214,211 @@ body {
   margin-bottom: 24px;
 }
 .input-label {
-  display: block; font-size: 14px; font-weight: 600;
-  margin-bottom: 10px; color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
 }
-.input-required { color: var(--accent-dark); margin-left: 4px; }
+.input-required {
+  color: var(--accent-dark);
+  margin-left: 4px;
+}
 .input-field {
-  width: 100%; padding: 15px 16px;
-  border: 1px solid var(--border); border-radius: 10px;
-  font-size: 15px; font-family: inherit; background: var(--bg);
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  background: var(--bg);
   transition: all 0.15s;
 }
 .input-field:focus {
-  outline: none; border-color: var(--accent-dark); background: var(--surface);
+  outline: none;
+  border-color: var(--accent-dark);
+  background: var(--surface);
 }
-.input-hint { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.6; }
-.input-error {
-  font-size: 13px; color: #C0392B; margin-top: 8px; display: none;
+.input-hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.6;
 }
-.input-error.show { display: block; }
 
-/* Payment methods preview */
-.payment-methods-preview {
+/* 결제수단 영역 */
+.payment-section {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 18px 22px;
+  padding: 22px;
   margin-bottom: 24px;
-  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
 }
-.pmp-label { font-size: 13px; color: var(--muted); }
-.pmp-icons { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.pmp-icon {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 11px;
+.payment-section-title {
+  font-size: 14px;
   font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+#payment-method, #agreement {
+  margin: 0 -10px;
 }
 
-/* Pay button */
+/* 약관 */
+.terms-box {
+  background: var(--tag);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* CTA 버튼 */
 .pay-btn {
-  display: block; width: 100%; padding: 18px;
-  background: var(--dark); color: white;
-  border: none; border-radius: 12px;
-  font-size: 16px; font-weight: 500;
-  cursor: pointer; font-family: inherit;
-  letter-spacing: 0.02em; transition: opacity 0.2s;
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
 }
-.pay-btn:hover:not(:disabled) { opacity: 0.85; }
-.pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.pay-btn .btn-spinner {
-  display: none;
-  width: 16px; height: 16px;
-  border: 2px solid rgba(255,255,255,0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  vertical-align: middle;
-  margin-right: 8px;
+.pay-btn:hover { opacity: 0.85; }
+.pay-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
-.pay-btn.loading .btn-spinner { display: inline-block; }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 .payment-notice {
-  margin-top: 16px; padding: 14px 18px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; font-size: 12px; color: var(--muted); line-height: 1.7;
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
 }
-.payment-notice-line { margin-bottom: 8px; }
+.payment-notice-line {
+  margin-bottom: 8px;
+}
 .payment-notice-line:last-child { margin-bottom: 0; }
-.payment-notice a { color: var(--accent-dark); text-decoration: underline; }
+.payment-notice a {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
 
-/* Test mode banner */
+/* 테스트 모드 배너 */
 .test-banner {
-  background: #FFF8E1;
-  border: 1px solid #F0D080;
+  background: #F6EFEC;
+  border: 1px solid #EBDCC7;
   border-radius: 10px;
   padding: 12px 16px;
   margin-bottom: 24px;
   font-size: 12px;
-  color: #8A6810;
+  color: #4A1C26;
   line-height: 1.6;
 }
-.test-banner strong { color: #6A5008; }
+.test-banner strong { color: #4A1C26; }
 
-.stripe-note {
-  display: flex; align-items: center; justify-content: center;
-  gap: 6px; margin-top: 12px;
-  font-size: 11px; color: var(--muted); letter-spacing: 0.02em;
+/* 성공 페이지 */
+.success-screen {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
 }
+.success-screen.active { display: block; }
+.success-icon {
+  width: 80px; height: 80px;
+  background: var(--green);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 36px;
+}
+.success-title {
+  font-family: 'Gowun Batang', serif;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.success-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+.success-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.success-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 13px;
+}
+.success-row:last-child { border-bottom: none; }
+.success-row-label { color: var(--muted); }
+.success-row-val { font-weight: 500; }
+
+/* 화면 전환 */
+.screen { display: none; }
+.screen.active { display: block; }
+
+.section-eyebrow,.page-eyebrow,.fp-eyebrow,.cta-launch-badge{text-transform:none!important;letter-spacing:0.02em!important;}
+/* ===== AWAYS 버건디 디자인 통일 ===== */
+:root{--text:#2B1217;--dark:#4A1C26;--wine:#4A1C26;--sand:#EBDCC7;--blush:#E8D2D5;}
+body{font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;word-break:keep-all;}
+em{font-style:normal;}
+
+.top-bar,.header{background:var(--wine)!important;border-bottom:none!important;}
+.top-bar .logo,.header .logo{font-family:'IBM Plex Sans KR',sans-serif!important;font-weight:700!important;letter-spacing:.06em;color:#fff!important;font-size:20px!important;}
+.step-indicator,.header-back{color:var(--blush)!important;}
+.start-btn,.btn-next,.btn-prev,.cta-btn,.pay-btn,.share-main,.share-link,.share-btn,.retry-btn,.home-btn{border-radius:28px!important;}
+.feel-btn{border-radius:22px!important;}
+h1,h2,.section-title,.page-title,.intro-title,.result-name,.success-title{letter-spacing:-0.01em;}
+.step-dot{background:rgba(255,255,255,.3)!important}.step-dot.active,.step-dot.done{background:var(--sand)!important}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1416204774046914');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1416204774046914&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code --><!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKT4ZNNWVB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-SKT4ZNNWVB');
+</script>
 </head>
 <body>
 
@@ -285,158 +428,253 @@ body {
     <span class="step-dot"></span>
     <span class="step-dot"></span>
     <span class="step-dot active"></span>
-    <span style="margin-left:6px;">Checkout</span>
+    <span style="margin-left:6px;">결제</span>
   </div>
 </div>
 
-<div class="container">
+<!-- ================ 결제 페이지 ================ -->
+<div class="screen active" id="screen-payment">
+  <div class="container">
 
-  <!-- Test mode banner — REMOVE WHEN GOING LIVE -->
-  <div class="test-banner" id="testBanner">
-    🧪 <strong>Test mode</strong> · No real charges will be made.<br>
-    Use card: <strong>4242 4242 4242 4242</strong> · any future date · any CVC
-  </div>
+    <div class="section-eyebrow">결제 전 확인</div>
+    <h1 class="section-title">주문 <em>확인</em></h1>
+    <p class="section-desc">선택하신 플랜과 정보를 확인한 후 결제를 진행해주세요.</p>
 
-  <div class="section-eyebrow">Order Confirmation</div>
-  <h1 class="section-title">Almost <em>there.</em></h1>
-  <p class="section-desc">Review your order, enter your email, and you're set.</p>
-
-  <!-- Order summary -->
-  <div class="order-summary">
-    <div class="early-bird-badge">⚡ LAUNCH OFFER · SAVE $10</div>
-    <div class="order-head">
-      <div>
-        <div class="order-product" id="orderProduct">Personalized Style Guide</div>
-        <div class="order-product-tag" id="orderTag">Premium Report</div>
+    <!-- 주문 요약 -->
+    <div class="order-summary">
+      <div class="early-bird-badge">7일 이내 환불 보장 · 결제 후 이메일 즉시 발송</div>
+      <div class="order-head">
+        <div>
+          <div class="order-product" id="orderProduct">맞춤 스타일 가이드</div>
+          <div class="order-product-tag" id="orderTag">프리미엄 리포트</div>
+        </div>
+        <div class="order-price" id="orderPrice">
+          <span class="price-now">9,800원</span>
+        </div>
       </div>
-      <div class="order-price">
-        <span class="price-orig">$39</span>
-        <span class="price-now">$29</span>
+      <div class="order-features">
+        <div class="order-features-title">포함 사항</div>
+        <ul id="orderFeatures">
+          <li>PDF 약 30페이지 · 결제 후 이메일로 바로 발송</li>
+          <li>내 타입의 시그니처 3가지 · 다른 타입과 비교</li>
+          <li>핏의 황금 공식 · 피해야 할 핏 · 네크라인 가이드</li>
+          <li>어울리는 소재 7가지 · 피해야 할 소재 5가지 · 패턴 · 베이스 컬러</li>
+          <li>직장인 코디 공식 5가지 · 액세서리 가이드</li>
+          <li>핵심 아이템 12가지 · 추천 브랜드</li>
+          <li>사계절 스타일링 · 자주 묻는 질문 · 옷장 자가진단</li>
+        </ul>
       </div>
     </div>
-    <div class="order-features">
-      <div class="order-features-title">What's Included</div>
-      <ul>
-        <li>22-page personalized PDF report</li>
-        <li>Silhouette & fit formulas</li>
-        <li>Fabric, color & pattern guide</li>
-        <li>5 everyday outfit formulas</li>
-        <li>Shopping checklist (12 brands)</li>
-        <li>Year-round styling guide</li>
-      </ul>
+
+    <!-- 신뢰 요소 -->
+    <div class="trust-section">
+      <div class="trust-card">
+        <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A1C26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <div class="trust-text">안전결제<br><span>토스페이먼츠</span></div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A1C26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div>
+        <div class="trust-text">7일 이내<br><span>환불 보장</span></div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A1C26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+        <div class="trust-text">즉시 발송<br><span>이메일 자동</span></div>
+      </div>
     </div>
+
+    <!-- 이메일 입력 -->
+    <div class="input-section">
+      <label class="input-label">
+        리포트를 받을 이메일<span class="input-required">*</span>
+      </label>
+      <input type="email" id="emailInput" class="input-field" placeholder="example@gmail.com" />
+      <div class="input-hint">결제 완료 후 입력하신 이메일로 PDF 리포트가 즉시 발송됩니다.</div>
+    </div>
+
+    <!-- 결제수단 영역 (토스페이먼츠 위젯이 여기에 렌더링됨) -->
+    <div class="payment-section">
+      <div class="payment-section-title">결제수단</div>
+      <div id="payment-method"></div>
+    </div>
+
+    <!-- 이용약관 영역 -->
+    <div class="payment-section">
+      <div class="payment-section-title">약관 동의</div>
+      <div id="agreement"></div>
+    </div>
+
+    <!-- 결제 버튼 -->
+    <button class="pay-btn" id="payBtn" onclick="requestPayment()">
+      <span id="payBtnText">9,800원 결제하기</span>
+    </button>
+
+    <div class="payment-notice">
+      <div class="payment-notice-line">
+        결제 진행 시 <a href="/terms" target="_blank">이용약관</a> 및 <a href="/privacy" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주합니다.
+      </div>
+      <div class="payment-notice-line">
+        ✓ 결제 후 입력한 이메일로 PDF 리포트가 즉시 발송됩니다<br>
+        ✓ 7일 이내 환불 신청 가능 · awaysbiz@gmail.com
+      </div>
+    </div>
+
   </div>
+</div>
 
-  <!-- Trust cards -->
-  <div class="trust-section">
-    <div class="trust-card">
-      <div class="trust-icon">🔒</div>
-      <div class="trust-text">Secure<br><span>Stripe checkout</span></div>
+<!-- ================ 성공 페이지 ================ -->
+<div class="screen" id="screen-success">
+  <div class="success-screen active">
+    <div class="success-icon">✓</div>
+    <h1 class="success-title">결제가 완료되었어요</h1>
+    <p class="success-desc">
+      입력하신 이메일로 상세 리포트가 발송되었습니다.<br>
+      메일이 보이지 않으면 스팸함을 확인해주세요.
+    </p>
+
+    <div class="success-card">
+      <div class="success-row">
+        <span class="success-row-label">주문번호</span>
+        <span class="success-row-val" id="succOrderId">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">상품</span>
+        <span class="success-row-val" id="succProduct">Premium Plan</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">결제금액</span>
+        <span class="success-row-val" id="succAmount">9,800원</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">발송 이메일</span>
+        <span class="success-row-val" id="succEmail">-</span>
+      </div>
+      <div class="success-row">
+        <span class="success-row-label">결제수단</span>
+        <span class="success-row-val" id="succMethod">카드</span>
+      </div>
     </div>
-    <div class="trust-card">
-      <div class="trust-icon">↩️</div>
-      <div class="trust-text">30-day<br><span>Money-back</span></div>
-    </div>
-    <div class="trust-card">
-      <div class="trust-icon">📧</div>
-      <div class="trust-text">Instant<br><span>Email delivery</span></div>
-    </div>
+
+    <button class="pay-btn" onclick="window.location.href='/'">홈으로 돌아가기</button>
   </div>
-
-  <!-- Email input -->
-  <div class="input-section">
-    <label class="input-label" for="emailInput">
-      Email address<span class="input-required">*</span>
-    </label>
-    <input type="email" id="emailInput" class="input-field" placeholder="you@example.com" autocomplete="email" />
-    <div class="input-hint">Your PDF report will be sent here right after checkout.</div>
-    <div class="input-error" id="emailError">Please enter a valid email address.</div>
-  </div>
-
-  <!-- Payment methods preview -->
-  <div class="payment-methods-preview">
-    <span class="pmp-label">Pay with:</span>
-    <div class="pmp-icons">
-      <span class="pmp-icon">💳 Card</span>
-      <span class="pmp-icon">PayPal</span>
-      <span class="pmp-icon">Apple Pay</span>
-      <span class="pmp-icon">Google Pay</span>
-    </div>
-  </div>
-
-  <!-- Pay button -->
-  <button class="pay-btn" id="payBtn" onclick="startCheckout()">
-    <span class="btn-spinner"></span>
-    <span class="btn-text" id="payBtnText">Pay $29 →</span>
-  </button>
-
-  <div class="payment-notice">
-    <div class="payment-notice-line">
-      By proceeding, you agree to our <a href="/en/terms" target="_blank">Terms</a> and <a href="/en/privacy" target="_blank">Privacy Policy</a>.
-    </div>
-    <div class="payment-notice-line">
-      ✓ Your PDF report is delivered instantly after payment<br>
-      ✓ 30-day money-back guarantee · awaysbiz@gmail.com
-    </div>
-  </div>
-
-  <div class="stripe-note">
-    🔒 Payments securely processed by Stripe
-  </div>
-
 </div>
 
 <script>
 // ============================================================
-// Backend API URL
+// 토스페이먼츠 결제위젯 연동 키 (클라이언트 키 · 공개되어도 되는 키)
+// AWAYS 본인 계정의 결제위젯 연동 키 (gck = 위젯 연동 키)
+// 시크릿 키(gsk)는 절대 여기 넣지 말 것 → Vercel 환경변수 TOSS_SECRET_KEY
 // ============================================================
-const BACKEND_URL = window.location.origin;
+const TOSS_CLIENT_KEY = 'live_gck_DnyRpQWGrN6jm5LREydlrKwv1M9E';
+const TOSS_CUSTOMER_KEY = generateCustomerKey();
 
 // ============================================================
-// Product info
+// 상품 정보 (단일 가격 9,800원)
 // ============================================================
 const PRODUCT = {
-  name: 'Personalized Style Guide',
-  originalPrice: 39,
-  price: 29,
-  currency: 'USD',
+  name: '맞춤 스타일 가이드',
+  price: 9800,
+  features: [
+    'PDF 약 30페이지 · 결제 후 이메일로 바로 발송',
+    '내 타입의 시그니처 3가지 · 다른 타입과 비교',
+    '핏의 황금 공식 · 피해야 할 핏 · 네크라인 가이드',
+    '어울리는 소재 7가지 · 피해야 할 소재 5가지 · 패턴 · 베이스 컬러',
+    '직장인 코디 공식 5가지 · 액세서리 가이드',
+    '핵심 아이템 12가지 · 추천 브랜드',
+    '사계절 스타일링 · 자주 묻는 질문 · 옷장 자가진단',
+  ]
 };
 
-// Body type from URL
+// URL 파라미터에서 체형 정보 가져오기
 const urlParams = new URLSearchParams(window.location.search);
 const bodyType = urlParams.get('bodyType') || '';
 const typeName = urlParams.get('typeName') || '';
 
-if (typeName) {
-  document.getElementById('orderTag').textContent = `${typeName} · Premium Report`;
-}
+// 체형명에 따른 상품 태그 생성
+const productTag = typeName ? `${typeName} · 프리미엄 리포트` : '프리미엄 리포트';
 
+// 주문 요약 표시
+document.getElementById('orderProduct').textContent = PRODUCT.name;
+document.getElementById('orderTag').textContent = productTag;
+document.getElementById('orderPrice').innerHTML = `
+  <span class="price-now">${PRODUCT.price.toLocaleString()}원</span>
+`;
+document.getElementById('payBtnText').textContent = `${PRODUCT.price.toLocaleString()}원 결제하기`;
+// Meta 픽셀: 결제 페이지 진입
+if (window.fbq) fbq('track', 'InitiateCheckout', { value: PRODUCT.price, currency: 'KRW', content_name: bodyType, num_items: 1 });
+const featuresEl = document.getElementById('orderFeatures');
+featuresEl.innerHTML = PRODUCT.features.map(f => `<li>${f}</li>`).join('');
+
+// 고유 주문번호 생성
 function generateOrderId() {
-  return `BT_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+  return `BT_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }
 
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+// 고유 customerKey 생성 (토스페이먼츠 식별용)
+function generateCustomerKey() {
+  return `customer_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }
 
 // ============================================================
-// Start Stripe Checkout
+// 토스페이먼츠 위젯 초기화
 // ============================================================
-async function startCheckout() {
-  const emailEl = document.getElementById('emailInput');
-  const errEl = document.getElementById('emailError');
-  const email = emailEl.value.trim();
+let widgets;
 
-  if (!isValidEmail(email)) {
-    errEl.classList.add('show');
-    emailEl.focus();
+async function initTossWidget() {
+  try {
+    const tossPayments = TossPayments(TOSS_CLIENT_KEY);
+    widgets = tossPayments.widgets({ customerKey: TOSS_CUSTOMER_KEY });
+
+    // 결제 금액 설정
+    await widgets.setAmount({
+      currency: 'KRW',
+      value: PRODUCT.price,
+    });
+
+    // 결제수단 위젯 렌더링
+    await widgets.renderPaymentMethods({
+      selector: '#payment-method',
+      variantKey: 'DEFAULT',
+    });
+
+    // 이용약관 위젯 렌더링
+    await widgets.renderAgreement({
+      selector: '#agreement',
+      variantKey: 'AGREEMENT',
+    });
+
+    console.log('✅ 토스페이먼츠 위젯 로드 완료');
+  } catch (error) {
+    console.error('위젯 초기화 실패:', error);
+    alert('결제 위젯을 불러오는 데 실패했어요. 페이지를 새로고침해주세요.');
+  }
+}
+
+// 페이지 로드 시 위젯 초기화
+window.addEventListener('DOMContentLoaded', initTossWidget);
+
+// ============================================================
+// 결제 요청
+// ============================================================
+async function requestPayment() {
+  // Meta 픽셀: 결제 버튼 클릭 (결제수단 입력 단계)
+  if (window.fbq) fbq('track', 'AddPaymentInfo', { value: PRODUCT.price, currency: 'KRW', content_name: bodyType });
+  const email = document.getElementById('emailInput').value.trim();
+
+  // 이메일 검증
+  if (!email || !email.includes('@')) {
+    alert('이메일을 정확히 입력해주세요.');
+    document.getElementById('emailInput').focus();
     return;
   }
-  errEl.classList.remove('show');
+
+  if (!widgets) {
+    alert('결제 위젯이 아직 로드되지 않았어요. 잠시 후 다시 시도해주세요.');
+    return;
+  }
 
   const orderId = generateOrderId();
 
-  // Save order info to sessionStorage (read on success page)
+  // 주문 정보를 sessionStorage에 임시 저장 (성공 페이지에서 사용)
   sessionStorage.setItem('lastOrder', JSON.stringify({
     orderId,
     email,
@@ -444,55 +682,70 @@ async function startCheckout() {
     typeName,
     productName: PRODUCT.name,
     amount: PRODUCT.price,
-    currency: PRODUCT.currency,
   }));
 
-  const payBtn = document.getElementById('payBtn');
-  const payBtnText = document.getElementById('payBtnText');
-  payBtn.disabled = true;
-  payBtn.classList.add('loading');
-  payBtnText.textContent = 'Redirecting to checkout...';
-
   try {
-    const response = await fetch(`${BACKEND_URL}/api/create-checkout-session`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        orderId,
-        bodyType,
-        typeName,
-      }),
+    await widgets.requestPayment({
+      orderId: orderId,
+      orderName: typeName ? `AWAYS - ${typeName} 리포트` : `AWAYS - ${PRODUCT.name}`,
+      customerEmail: email,
+      customerName: email.split('@')[0],
+      // 결제 성공/실패 시 리다이렉트 URL
+      // bodyType을 함께 실어 보내 승인 단계에서 PDF를 안정적으로 생성
+      successUrl: `${window.location.origin}/payment-success.html?bodyType=${encodeURIComponent(bodyType)}`,
+      failUrl: `${window.location.origin}/payment-success.html?status=fail`,
     });
-
-    const data = await response.json();
-
-    if (!response.ok || !data.url) {
-      throw new Error(data.error || 'Failed to create checkout session');
-    }
-
-    // Redirect to Stripe-hosted Checkout page
-    window.location.href = data.url;
-
   } catch (error) {
-    console.error('[Checkout error]', error);
-    alert(`Something went wrong: ${error.message}\n\nPlease try again or contact awaysbiz@gmail.com`);
-
-    payBtn.disabled = false;
-    payBtn.classList.remove('loading');
-    payBtnText.textContent = `Pay $${PRODUCT.price} →`;
+    // 사용자가 결제창을 닫은 경우 또는 에러
+    if (error.code === 'USER_CANCEL') {
+      console.log('사용자가 결제를 취소했어요.');
+    } else {
+      console.error('결제 에러:', error);
+      alert(`결제 중 오류가 발생했어요: ${error.message}`);
+    }
   }
 }
 
-// Enter key triggers checkout
-document.getElementById('emailInput').addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') startCheckout();
-});
+// ============================================================
+// 결제 결과 처리 (리다이렉트 후 페이지 로드 시 실행)
+// ============================================================
+function handlePaymentResult() {
+  const status = urlParams.get('status');
+  const paymentKey = urlParams.get('paymentKey');
+  const successOrderId = urlParams.get('orderId');
+  const amount = urlParams.get('amount');
 
-// Hide test banner once you go live
-if (window.STRIPE_LIVE === true) {
-  document.getElementById('testBanner').style.display = 'none';
+  if (status === 'success') {
+    // 실제 운영에서는 여기서 백엔드 API에 결제 승인 요청을 보내야 함
+    // POST /api/confirm-payment { paymentKey, orderId, amount }
+    // 백엔드에서 토스페이먼츠 시크릿 키로 승인 처리 후 응답
+
+    showSuccessScreen();
+  } else if (status === 'fail') {
+    const failCode = urlParams.get('code');
+    const failMessage = urlParams.get('message');
+    alert(`결제 실패: ${failMessage || '알 수 없는 오류'}\n코드: ${failCode}`);
+  }
 }
+
+function showSuccessScreen() {
+  const lastOrder = JSON.parse(sessionStorage.getItem('lastOrder') || '{}');
+
+  document.getElementById('succOrderId').textContent = lastOrder.orderId || '-';
+  document.getElementById('succProduct').textContent = lastOrder.tierName || '-';
+  document.getElementById('succAmount').textContent = `${(lastOrder.amount || 0).toLocaleString()}원`;
+  document.getElementById('succEmail').textContent = lastOrder.email || '-';
+
+  document.getElementById('screen-payment').classList.remove('active');
+  document.getElementById('screen-success').classList.add('active');
+
+  // 실제 운영 시: 여기서 백엔드 API에 이메일 발송 요청
+  // POST /api/send-report { email, tier, orderId }
+  console.log('📧 이메일 발송 트리거:', lastOrder);
+}
+
+// 페이지 로드 시 결제 결과 확인
+window.addEventListener('DOMContentLoaded', handlePaymentResult);
 </script>
 
 </body>
