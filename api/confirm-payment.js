@@ -94,44 +94,44 @@ async function sendEmail(email, bodyType, pdfBuffer) {
 
         <!-- 헤더 -->
         <div style="text-align: center; margin-bottom: 40px;">
-          <h1 style="font-size: 24px; color: #1A1714; margin-bottom: 8px; font-weight: 300; letter-spacing: 0.08em;">AWAYS</h1>
-          <p style="color: #8C6840; font-size: 11px; letter-spacing: 0.2em; margin: 0;">BODY TYPE STYLE GUIDE</p>
+          <h1 style="font-size: 24px; color: #2B1217; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.06em;">AWAYS</h1>
+          <p style="color: #4A1C26; font-size: 11px; letter-spacing: 0.2em; margin: 0;">체형 스타일 진단</p>
         </div>
 
         <!-- 메인 카드 -->
-        <div style="background: #F7F3EE; border-radius: 16px; padding: 32px; margin-bottom: 24px;">
-          <h2 style="font-size: 20px; color: #1A1714; margin: 0 0 16px 0; font-weight: 600;">
-            ${bodyTypeKr} 리포트가 준비되었습니다 ✨
+        <div style="background: #F6EFEC; border-radius: 16px; padding: 32px; margin-bottom: 24px;">
+          <h2 style="font-size: 20px; color: #2B1217; margin: 0 0 16px 0; font-weight: 600;">
+            ${bodyTypeKr} 리포트가 준비되었습니다
           </h2>
-          <p style="color: #6B6560; line-height: 1.8; font-size: 15px; margin: 0;">
+          <p style="color: #533A3F; line-height: 1.8; font-size: 15px; margin: 0;">
             AWAYS 체형진단 프리미엄 리포트가 완성되었습니다.<br>
             첨부된 PDF 파일을 다운로드하여 확인해주세요.
           </p>
         </div>
 
         <!-- 리포트 구성 -->
-        <div style="background: #FFFFFF; border: 1px solid #E8DFCC; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
-          <h3 style="font-size: 15px; color: #8C6840; margin: 0 0 16px 0;">📄 22페이지 리포트 구성</h3>
-          <table style="width: 100%; font-size: 13px; color: #6B6560; line-height: 2;">
-            <tr><td>✅ Ch.1</td><td>체형 분석 · 시그니처 3가지</td></tr>
-            <tr><td>✅ Ch.2</td><td>핏 공식 · DO & DON'T</td></tr>
-            <tr><td>✅ Ch.3</td><td>추천 소재 7종 · 컬러 가이드</td></tr>
-            <tr><td>✅ Ch.4</td><td>코디 공식 5가지 · 액세서리</td></tr>
-            <tr><td>✅ Ch.5</td><td>쇼핑 체크리스트 12개</td></tr>
-            <tr><td>✅ Ch.6</td><td>사계절 가이드 · Q&A</td></tr>
+        <div style="background: #FFFFFF; border: 1px solid #E6D9D5; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+          <h3 style="font-size: 15px; color: #4A1C26; margin: 0 0 16px 0;">약 30페이지 리포트 구성</h3>
+          <table style="width: 100%; font-size: 13px; color: #533A3F; line-height: 2;">
+            <tr><td>Ch.1</td><td>체형 분석 · 시그니처 3가지</td></tr>
+            <tr><td>Ch.2</td><td>핏 공식 · DO & DON'T</td></tr>
+            <tr><td>Ch.3</td><td>추천 소재 7종 · 컬러 가이드</td></tr>
+            <tr><td>Ch.4</td><td>코디 공식 5가지 · 액세서리</td></tr>
+            <tr><td>Ch.5</td><td>쇼핑 체크리스트 12개</td></tr>
+            <tr><td>Ch.6</td><td>사계절 가이드 · Q&A</td></tr>
           </table>
         </div>
 
         <!-- 안내 -->
-        <div style="background: #FFF8F0; border-radius: 12px; padding: 20px; margin-bottom: 32px;">
-          <p style="font-size: 13px; color: #B8956A; margin: 0; line-height: 1.8;">
-            💡 <strong>Tip:</strong> 리포트를 핸드폰에 저장해두면 쇼핑할 때 바로 참고할 수 있어요!
+        <div style="background: #F6EFEC; border-radius: 12px; padding: 20px; margin-bottom: 32px;">
+          <p style="font-size: 13px; color: #4A1C26; margin: 0; line-height: 1.8;">
+            <strong>Tip</strong> · 리포트를 핸드폰에 저장해두면 쇼핑할 때 바로 참고할 수 있어요!
           </p>
         </div>
 
         <!-- 푸터 -->
-        <div style="text-align: center; padding-top: 24px; border-top: 1px solid #E8DFCC;">
-          <p style="color: #A09A94; font-size: 11px; line-height: 1.8; margin: 0;">
+        <div style="text-align: center; padding-top: 24px; border-top: 1px solid #E6D9D5;">
+          <p style="color: #6E4A51; font-size: 11px; line-height: 1.8; margin: 0;">
             본 이메일은 AWAYS 체형진단 서비스에서 자동 발송되었습니다.<br>
             문의: awaysbiz@gmail.com
           </p>
@@ -174,6 +174,14 @@ export default async function handler(req, res) {
   // ========================================
   if (!paymentKey || !orderId || !amount) {
     return res.status(400).json({ error: '결제 정보(paymentKey, orderId, amount)가 누락되었습니다' });
+  }
+
+  // 결제 금액 검증: 브라우저에서 금액을 조작해 결제하는 것을 막는다.
+  // 가격을 바꿀 때는 payment.html의 PRODUCT.price와 이 값을 함께 바꿀 것.
+  const PRODUCT_PRICE = 9800;
+  if (Number(amount) !== PRODUCT_PRICE) {
+    console.error(`[금액 불일치] orderId: ${orderId}, amount: ${amount}`);
+    return res.status(400).json({ error: '결제 금액이 올바르지 않습니다' });
   }
 
   const TOSS_SECRET_KEY = process.env.TOSS_SECRET_KEY;
