@@ -48,46 +48,39 @@ img{max-width:100%;display:block}
 .header .btn{min-height:40px;padding:0 16px;font-size:14px}
 
 /* 히어로 */
-.hero{background:var(--wine);color:#fff;position:relative;overflow:hidden}
-.hero .wrap{position:relative;min-height:640px;display:grid;grid-template-columns:1fr;align-content:start;padding-top:34px;padding-bottom:48px}
-.hero-fit{position:absolute;left:-10px;bottom:120px;font-size:190px;font-weight:700;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(235,220,199,0.35);pointer-events:none;user-select:none}
-.hero-copy{position:relative;z-index:2;max-width:520px}
-.pill{display:inline-flex;align-items:center;gap:10px;background:var(--sand);color:var(--ink);border-radius:22px;padding:7px 8px 7px 16px;font-size:14px;font-weight:600}
-.pill-arrow{width:28px;height:28px;border-radius:50%;background:var(--wine);display:flex;align-items:center;justify-content:center}
-.hero h1{font-size:clamp(38px,8vw,60px);line-height:1.18;font-weight:700;letter-spacing:-0.02em;margin:18px 0 16px}
-.hero-sub{color:var(--blush);font-size:15px;line-height:1.75;max-width:170px}
+.hero{background:var(--wine);color:#fff;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"head head" "action photo" "facts facts";column-gap:14px;padding-top:36px;padding-bottom:0}
+.hero-head{grid-area:head}
+.hero h1{font-size:clamp(38px,8.6vw,60px);line-height:1.18;font-weight:700;letter-spacing:-0.02em;margin:0 0 14px}
+.hero-sub{color:var(--blush);font-size:15px;line-height:1.75;max-width:460px}
 .hero-sub strong{color:var(--sand);font-weight:600}
-.hero-cta{margin-top:26px;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;z-index:2;max-width:160px}
-.hero-cta .btn{width:100%;padding:0 10px}
-.hero-cta small{color:var(--blush);font-size:12px;padding-left:4px}
-.hero-photo{position:absolute;right:-30px;bottom:0;width:220px;height:420px;border-radius:110px 110px 0 0;overflow:hidden;background:var(--wine-2);z-index:1}
+.hero-action{grid-area:action;align-self:start;margin-top:26px;display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.hero-action .btn{width:100%;padding:0 12px}
+.hero-action small{color:var(--blush);font-size:12px;text-align:center}
+.hero-price{margin-top:12px;background:rgba(235,220,199,0.12);border:1px solid rgba(235,220,199,0.35);border-radius:16px;padding:14px 14px 15px;display:flex;flex-direction:column;gap:2px}
+.hero-price-label{font-size:12px;color:var(--blush)}
+.hero-price-num{font-size:13px;color:#fff}
+.hero-price-num b{font-size:22px;font-weight:700;letter-spacing:-0.01em;color:var(--sand);margin-right:2px}
+.hero-price-note{font-size:13px;line-height:1.55;color:#fff;margin-top:4px;padding-top:8px;border-top:1px solid rgba(235,220,199,0.25)}
+.hero-photo{grid-area:photo;align-self:end;margin-top:22px;margin-right:-20px;aspect-ratio:3/4.6;border-radius:999px 999px 0 0;overflow:hidden;background:var(--wine-2)}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.hero-bar{position:absolute;left:12px;right:12px;bottom:20px;display:flex;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.25);z-index:3;max-width:560px}
-.hero-bar div:first-child{background:#fff;color:var(--ink);padding:12px 14px;display:flex;flex-direction:column;justify-content:center}
-.hero-bar b{font-size:16px;letter-spacing:0.06em}
-.hero-bar span{font-size:11px;color:var(--muted)}
-.hero-bar div:last-child{flex:1;background:var(--sand);color:var(--ink);padding:10px 14px;display:flex;flex-direction:column;justify-content:center}
-.hero-bar div:last-child b{font-size:16px;letter-spacing:0}
+.hero-facts{grid-area:facts;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 -20px;padding:18px 20px 22px;background:rgba(0,0,0,0.14);border-top:1px solid rgba(235,220,199,0.2)}
+.hero-facts li{display:flex;flex-direction:column;gap:4px}
+.hero-facts b{font-size:26px;line-height:1;color:var(--sand);font-weight:700}
+.hero-facts span{font-size:13px;font-weight:600;color:#fff;line-height:1.4}
+.hero-facts em{display:block;font-style:normal;font-weight:400;font-size:11px;color:var(--blush);margin-top:2px}
 @media(min-width:900px){
-  .hero .wrap{min-height:640px;padding-top:80px}
-  .hero-sub{max-width:420px;font-size:17px}
-  .hero-cta{max-width:none;flex-direction:row;align-items:center}
-  .hero-cta .btn{width:auto;padding:0 32px}
-  .hero-photo{right:max(20px,calc((100% - 1080px) / 2 + 20px));width:380px;height:560px;border-radius:190px 190px 0 0}
-  .hero-fit{font-size:280px;left:auto;right:calc(max(20px,(100% - 1080px) / 2 + 20px) + 400px);bottom:-40px}
-  .hero-bar{left:max(20px,calc((100% - 1080px) / 2 + 20px));right:auto;width:480px}
-}
-
-
-.hero-facts{list-style:none;position:relative;z-index:2;margin-top:34px;max-width:170px;display:grid;gap:0}
-.hero-facts li{display:flex;align-items:baseline;gap:10px;padding:12px 0;border-top:1px solid rgba(235,220,199,0.28)}
-.hero-facts li:last-child{border-bottom:1px solid rgba(235,220,199,0.28)}
-.hero-facts b{font-size:30px;line-height:1;color:var(--sand);font-weight:700;min-width:40px}
-.hero-facts span{font-size:14px;font-weight:600;color:#fff;line-height:1.4}
-.hero-facts em{display:block;font-style:normal;font-weight:400;font-size:12px;color:var(--blush);margin-top:2px}
-@media(min-width:900px){
-  .hero-facts{max-width:560px;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:48px}
-  .hero-facts li,.hero-facts li:last-child{border-bottom:none;flex-direction:column;gap:6px}
+  .hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);grid-template-areas:"head photo" "action photo" "facts photo";column-gap:48px;padding-top:72px}
+  .hero-sub{font-size:17px}
+  .hero-action{flex-direction:row;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-top:30px}
+  .hero-action .btn{width:auto;padding:0 34px}
+  .hero-action small{text-align:left}
+  .hero-price{flex-basis:100%;flex-direction:row;align-items:baseline;gap:14px;max-width:520px;margin-top:6px}
+  .hero-price-note{margin:0;padding:0 0 0 14px;border-top:none;border-left:1px solid rgba(235,220,199,0.3)}
+  .hero-price-note br{display:none}
+  .hero-photo{margin:0;max-width:400px;justify-self:end;width:100%}
+  .hero-facts{margin:40px 0 0;padding:22px 0 44px;background:none;max-width:560px}
+  .hero-facts b{font-size:30px}
 }
 
 /* 신뢰 바 */
@@ -97,9 +90,6 @@ img{max-width:100%;display:block}
 .trust span{font-size:12px;color:var(--muted)}
 
 /* 문제 제기 */
-.problems{display:grid;gap:10px;margin-top:28px;max-width:560px}
-.problem{background:#fff;border-radius:14px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.65}
-.problem i{flex-shrink:0;width:8px;height:8px;border-radius:50%;background:var(--wine);margin-top:9px}
 
 /* 6컬러 */
 .types{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:28px}
@@ -107,8 +97,8 @@ img{max-width:100%;display:block}
 .type{border-radius:18px;color:#fff;padding:16px;min-height:120px;display:flex;flex-direction:column;justify-content:space-between}
 .type span{font-size:12px;opacity:0.88;line-height:1.5}
 .type b{font-size:18px;font-weight:700}
-.types-cta{margin-top:24px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.types-cta small{font-size:13px;color:var(--muted)}
+
+.types-bridge{margin-top:18px;font-size:15px;color:var(--wine);font-weight:600;line-height:1.6}
 
 /* 분석 원리 */
 .axes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:28px}
@@ -127,18 +117,48 @@ img{max-width:100%;display:block}
 .note{background:var(--blush);color:var(--ink);border-radius:14px;padding:16px 18px;font-size:14px;line-height:1.75;margin-top:24px}
 
 /* 결과 카드 · 옷장 메이트 */
-.card-demo{display:grid;gap:28px;margin-top:32px;align-items:center}
-@media(min-width:900px){.card-demo{grid-template-columns:320px 1fr}}
-.mock{width:210px;height:374px;margin:0 auto;border-radius:20px;background:#F8ECEF;box-shadow:0 18px 44px rgba(43,18,23,0.18);transform:rotate(-3deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px}
-.mock b{font-size:22px}
-.mock .nick{font-size:11px;font-weight:600;text-align:center}
-.mock .tags{display:flex;gap:4px}
-.mock .tags span{font-size:9px;background:#fff;color:var(--t-sw);padding:3px 7px;border-radius:10px}
-.mock .mate{margin-top:8px;font-size:10px;font-weight:700;color:#fff;background:var(--t-sw);padding:6px 10px;border-radius:12px}
-.mates{display:flex;gap:10px;margin-top:16px}
-.mates div{flex:1;border-radius:18px;background:var(--t-sw);color:#fff;padding:16px;display:flex;flex-direction:column;gap:4px}
-.mates span{font-size:12px;opacity:0.88}
-.mates b{font-size:16px}
+
+
+/* 옷장 메이트 */
+.mate-top{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.mate-top{grid-template-columns:1fr 1fr;gap:56px}}
+.mate-perks{list-style:none;display:grid;gap:10px;margin-top:22px}
+.mate-perks li{background:#fff;border-radius:14px;padding:14px 16px;display:grid;gap:2px}
+.mate-perks b{font-size:15px;color:var(--wine)}
+.mate-perks span{font-size:14px;color:var(--body);line-height:1.6}
+.mate-visual{position:relative;height:430px;max-width:360px;width:100%;margin:0 auto}
+.mv-card{position:absolute;left:0;top:0;width:200px;border-radius:22px;background:#F8ECEF;padding:14px 14px 16px;box-shadow:0 18px 44px rgba(43,18,23,0.18);transform:rotate(-4deg);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.mv-photo{width:100%;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--blush)}
+.mv-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.mv-name{font-size:19px;font-weight:700;margin-top:6px}
+.mv-nick{font-size:11px;font-weight:600;color:var(--body)}
+.mv-pill{margin-top:6px;font-size:10px;font-weight:700;color:#fff;background:var(--t-sw);padding:6px 10px;border-radius:12px}
+.mv-chat{position:absolute;right:0;bottom:6px;width:230px;background:#fff;border-radius:18px;padding:12px;box-shadow:0 14px 36px rgba(43,18,23,0.16);transform:rotate(2deg)}
+.mv-chat-from{font-size:11px;color:var(--muted);margin-bottom:8px}
+.mv-link{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.mv-link img{width:100%;aspect-ratio:1200/630;object-fit:cover;display:block}
+.mv-link-text{padding:8px 10px;display:grid;gap:2px}
+.mv-link-text b{font-size:12px}
+.mv-link-text span{font-size:11px;color:var(--muted)}
+.mv-badge{position:absolute;right:18px;top:40px;background:var(--wine);color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:22px;box-shadow:0 10px 24px rgba(43,18,23,0.25)}
+.mate-sub{margin-top:52px}
+.mate-levels{display:grid;gap:10px;margin-top:16px}
+@media(min-width:900px){.mate-levels{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.level{background:#fff;border-radius:16px;padding:18px;border:1px solid var(--line)}
+.level-best{border:2px solid var(--wine)}
+.level-pair{display:flex;margin-bottom:12px}
+.level-pair i{width:26px;height:26px;border-radius:50%;border:2px solid #fff}
+.level-pair i+i{margin-left:-8px}
+.level-name{font-size:17px;font-weight:700}
+.level-best .level-name{color:var(--wine)}
+.level-case{font-size:12px;color:var(--muted);margin:2px 0 8px}
+.level p{font-size:14px;color:var(--body);line-height:1.65}
+.mate-steps{list-style:none;display:grid;gap:10px;margin-top:40px;counter-reset:none}
+@media(min-width:900px){.mate-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mate-steps li{display:flex;gap:12px;align-items:flex-start}
+.mate-steps span{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--wine);color:var(--sand);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.mate-steps b{display:block;font-size:15px}
+.mate-steps em{display:block;font-style:normal;font-size:13px;color:var(--muted);margin-top:2px}
 
 /* 리포트 */
 .samples{display:flex;gap:12px;justify-content:center;margin:32px 0}
@@ -232,23 +252,27 @@ gtag('config', 'G-SKT4ZNNWVB');
 </header>
 
 <section class="hero">
-  <div class="wrap">
-    <div class="hero-copy">
-      <span class="pill">옷 사기 전에 확인하세요 <span class="pill-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EBDCC7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10"/><path d="M17 8v9H8"/></svg></span></span>
+  <div class="wrap hero-grid">
+    <div class="hero-head">
       <h1>내 체형부터<br>알고 쇼핑하세요</h1>
       <p class="hero-sub">같은 사이즈인데 안 맞는 이유, 체형에 있어요. <strong>옷을 입어본 경험으로 내 체형 타입을 찾아드려요.</strong></p>
     </div>
-    <div class="hero-cta">
+    <div class="hero-action">
       <a href="/test?start=1" id="heroCta" class="btn btn-sand">무료 진단 시작</a>
       <small>가입 없이 무료로 시작</small>
+      <div class="hero-price">
+        <span class="hero-price-label">진단 후 받는 맞춤 리포트</span>
+        <span class="hero-price-num"><b>9,800</b>원</span>
+        <span class="hero-price-note">안 맞아서 안 입는 옷 <br>한 벌보다 저렴해요</span>
+      </div>
     </div>
+    <div class="hero-photo"><img src="/images/model.jpg" alt="AWAYS 브랜드 모델" width="900" height="900"></div>
     <ul class="hero-facts">
-      <li><b>18</b><span>문항<em>체형 방향 9 · 텍스처 9</em></span></li>
-      <li><b>6</b><span>가지 체형 타입<em>방향 3 × 텍스처 2</em></span></li>
-      <li><b>30</b><span>페이지 분량 리포트<em>타입별 맞춤 스타일 가이드</em></span></li>
+      <li><b>18</b><span>문항<em>방향 9 · 텍스처 9</em></span></li>
+      <li><b>6</b><span>체형 타입<em>방향 3 × 텍스처 2</em></span></li>
+      <li><b>30</b><span>페이지 리포트<em>타입별 스타일 가이드</em></span></li>
     </ul>
   </div>
-  <div class="hero-photo"><img src="/images/model.jpg" alt="AWAYS 브랜드 모델" width="900" height="900"></div>
 </section>
 
 
@@ -268,7 +292,7 @@ gtag('config', 'G-SKT4ZNNWVB');
       <div class="axis"><small>기준 2</small><b>텍스처</b><p>하드 · 소프트. 몸의 라인이 선명한지, 부드러운지를 봐요.</p><em>McJimsey·Kibbe의 직선·곡선 이론 참고</em></div>
     </div>
 
-    <h3 class="sub-h">왜 "어깨 넓어요?"라고 묻지 않나요?</h3>
+    <h3 class="sub-h">왜 "어깨 넓어요?"라고 직접 묻지 않나요?</h3>
     <p class="lead">자기 체형을 정확히 아는 사람은 드물어요. 그래서 옷을 입어본 경험과 거울로 확인할 수 있는 것으로 간접 측정해요.</p>
     <div class="infer-list">
       <div class="infer"><div class="infer-q"><small>질문 예시</small>엄지와 중지로 반대쪽 손목을 감싸면 손가락이 닿지 않는다</div><div class="infer-a">뼈대가 굵고 단단한 편 · 하드 쪽 점수가 올라가요</div></div>
@@ -297,33 +321,68 @@ gtag('config', 'G-SKT4ZNNWVB');
       <div class="type" style="background:var(--t-hn)"><span>오버핏이 멋이 되는 사람</span><b>하드 내추럴</b></div>
       <div class="type" style="background:var(--t-sn)"><span>린넨이 제일 잘 어울리는 사람</span><b>소프트 내추럴</b></div>
     </div>
-    <div class="types-cta">
-      <a href="/test?start=1" class="btn btn-wine">내 타입 찾기 · 무료</a>
-      <small>18문항 · 무료 · 가입 없이 바로</small>
-    </div>
+    <p class="types-bridge">친구와 같은 색 카드가 나온다면, 그 친구가 바로 내 옷장 메이트예요.</p>
+
   </div>
 </section>
 
-<section class="sec sec-paper">
+<section class="sec sec-paper mate-sec" id="mate">
   <div class="wrap">
-    <h2 class="h2">같은 타입이 나오면<br>옷장 메이트</h2>
-    <div class="card-demo">
-      <div class="mock" aria-hidden="true">
-        <svg width="120" height="90" viewBox="0 0 120 90" fill="none" stroke="#9A5266" stroke-width="7" stroke-linecap="round"><path d="M5 25 C 25 5, 45 45, 60 25 S 95 5, 115 25"/><path d="M5 50 C 25 30, 45 70, 60 50 S 95 30, 115 50" opacity="0.7"/><path d="M5 75 C 25 55, 45 95, 60 75 S 95 55, 115 75" opacity="0.45"/></svg>
-        <b>소프트 웨이브</b>
-        <div class="nick">"원피스가 제일 잘 받는 사람"</div>
-        <div class="tags"><span>#러블리</span><span>#우아함</span></div>
-        <div class="mate">나랑 같은 체형이면 옷 바꿔 입자</div>
+    <div class="mate-top">
+      <div class="mate-copy">
+        <h2 class="h2">같은 타입 친구는<br>내 옷장 메이트예요</h2>
+        <p class="lead">체형 타입이 같으면 어울리는 핏과 소재도 같아요. 친구가 "이거 진짜 잘 샀다" 싶은 옷이 나에게도 잘 맞을 확률이 높고, 서로 옷을 바꿔 입어도 어색하지 않아요.</p>
+        <ul class="mate-perks">
+          <li><b>옷 바꿔 입기</b><span>같은 핏 공식이라 빌려 입어도 내 옷처럼 맞아요</span></li>
+          <li><b>믿고 따라 사기</b><span>친구의 성공템이 곧 나의 성공템이 돼요</span></li>
+          <li><b>같이 쇼핑하기</b><span>서로에게 어울리는 옷을 바로 골라줄 수 있어요</span></li>
+        </ul>
       </div>
-      <div>
-        <p class="lead" style="margin-top:0">진단이 끝나면 내 타입 카드가 나와요. 스토리에 올리거나 친구에게 보내서 누가 나랑 같은 타입인지 찾아보세요.</p>
-        <div class="mates">
-          <div><span>나</span><b>소프트 웨이브</b></div>
-          <div><span>친구</span><b>소프트 웨이브</b></div>
+      <div class="mate-visual" aria-hidden="true">
+        <div class="mv-card">
+          <div class="mv-photo"><img src="/images/mood/W-Soft.jpg" alt=""></div>
+          <div class="mv-name">소프트 웨이브</div>
+          <div class="mv-nick">"원피스가 제일 잘 받는 사람"</div>
+          <div class="mv-pill">나랑 같은 체형이면 옷 바꿔 입자</div>
         </div>
-        <p class="lead">같은 타입이면 어울리는 핏과 소재가 같아서 서로 옷을 바꿔 입어도 잘 어울려요.</p>
+        <div class="mv-chat">
+          <div class="mv-chat-from">친구에게 받은 링크</div>
+          <div class="mv-link">
+            <img src="/images/og/W-Soft.png" alt="">
+            <div class="mv-link-text"><b>친구는 소프트 웨이브래요</b><span>나는 어떤 체형일까?</span></div>
+          </div>
+        </div>
+        <div class="mv-badge">옷장 메이트 인증</div>
       </div>
     </div>
+
+    <h3 class="sub-h mate-sub">친구와 결과를 비교하면 이렇게 나와요</h3>
+    <div class="mate-levels">
+      <div class="level level-best">
+        <div class="level-pair"><i style="background:var(--t-sw)"></i><i style="background:var(--t-sw)"></i></div>
+        <div class="level-name">옷장 메이트</div>
+        <div class="level-case">타입까지 같을 때</div>
+        <p>핏도 소재도 같아요. 옷장을 공유해도 되는 사이예요.</p>
+      </div>
+      <div class="level">
+        <div class="level-pair"><i style="background:var(--t-sw)"></i><i style="background:var(--t-hw)"></i></div>
+        <div class="level-name">반쪽 옷장 메이트</div>
+        <div class="level-case">체형 방향만 같을 때</div>
+        <p>실루엣은 같이 입어도 되고, 어울리는 소재만 달라요.</p>
+      </div>
+      <div class="level">
+        <div class="level-pair"><i style="background:var(--t-sw)"></i><i style="background:var(--t-sh)"></i></div>
+        <div class="level-name">스타일 교환 친구</div>
+        <div class="level-case">체형 방향이 다를 때</div>
+        <p>어울리는 옷이 달라서, 서로에게 없는 코디를 추천해줄 수 있어요.</p>
+      </div>
+    </div>
+
+    <ol class="mate-steps">
+      <li><span>1</span><div><b>무료 진단으로 내 타입 카드 받기</b><em>결과가 나오면 내 타입 카드가 만들어져요</em></div></li>
+      <li><span>2</span><div><b>스토리나 카톡으로 공유하기</b><em>링크에는 내 결과가 미리보기로 떠요</em></div></li>
+      <li><span>3</span><div><b>친구가 진단하면 자동으로 비교</b><em>옷장 메이트인지 결과 화면에서 바로 알려줘요</em></div></li>
+    </ol>
   </div>
 </section>
 
@@ -354,20 +413,8 @@ gtag('config', 'G-SKT4ZNNWVB');
   </div>
 </section>
 
-<section class="sec sec-paper">
-  <div class="wrap">
-    <h2 class="h2">이런 경험,<br>한 번쯤 있으셨죠?</h2>
-    <p class="lead">옷장에 옷은 가득한데 입을 옷이 없는 이유. 단순한 코디 문제가 아니에요.</p>
-    <div class="problems">
-      <div class="problem"><i></i>사이즈는 맞는데 어깨가 자꾸 어색하게 떨어진다</div>
-      <div class="problem"><i></i>친구한테 잘 어울리는 옷이 나한테는 이상하게 보인다</div>
-      <div class="problem"><i></i>예쁜 옷을 사도 막상 입으면 만족스럽지 않다</div>
-      <div class="problem"><i></i>유튜브 체형 진단을 봐도 결과가 매번 달라서 헷갈린다</div>
-    </div>
-  </div>
-</section>
 
-<section class="sec" id="faq">
+<section class="sec sec-paper" id="faq">
   <div class="wrap" style="max-width:720px">
     <h2 class="h2" style="margin-bottom:12px">자주 묻는 질문</h2>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q"><span>리포트는 어떻게 받나요?</span><span class="faq-toggle" aria-hidden="true">+</span></div><div class="faq-a">결제 완료 후 입력하신 이메일로 PDF 다운로드 링크가 즉시 발송됩니다. 다운로드 링크는 30일간 유효해요. 안 보이면 스팸함을 확인해주세요.</div></div>
