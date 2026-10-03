@@ -222,6 +222,60 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
 .feel-btn { min-height: 44px; border: 1px solid var(--border); background: var(--bg); border-radius: 10px; font-family: inherit; font-size: 14px; color: var(--text); cursor: pointer; }
 .feel-btn:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
 .feel-thanks { font-size: 13px; color: var(--accent-dark); line-height: 1.7; word-break: keep-all; }
+
+/* ===== 리포트 잠금 미리보기 ===== */
+.locked-preview { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px 18px 20px; margin: 0 0 16px; }
+.lp-eyebrow { font-size: 12px; font-weight: 600; color: var(--wine); margin-bottom: 4px; }
+.lp-title { font-size: 19px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; word-break: keep-all; }
+.lp-sub { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 6px; word-break: keep-all; }
+.lp-block { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
+.lp-block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+.lp-block-title { font-size: 16px; font-weight: 700; word-break: keep-all; }
+.lp-block-meta { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.lp-row { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding: 12px 0; border-bottom: 1px dashed var(--border); align-items: center; }
+.lp-row:last-child { border-bottom: none; }
+.lp-row b { font-size: 14px; font-weight: 600; }
+.lp-row small { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
+.lp-row p { grid-column: 1 / -1; font-size: 13px; line-height: 1.65; color: var(--text); word-break: keep-all; }
+.lp-badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 12px; white-space: nowrap; }
+.lp-badge.best { background: var(--wine); color: #fff; }
+.lp-badge.ok { background: var(--sand); color: var(--wine); }
+.lp-badge.care { background: #F1E7E3; color: #7A2E3A; border: 1px solid #E6D9D5; }
+.lp-locked { cursor: pointer; }
+.lp-blur { filter: blur(5px); user-select: none; color: var(--muted); }
+.lp-lock { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--wine); white-space: nowrap; }
+.lp-formula { display: grid; grid-template-columns: 96px 1fr; gap: 12px; background: var(--bg); border-radius: 12px; padding: 12px; margin-bottom: 6px; }
+.lp-formula img { width: 96px; height: 128px; object-fit: cover; border-radius: 8px; display: block; }
+.lp-formula .occ { font-size: 11px; color: var(--muted); }
+.lp-formula .ttl { font-size: 15px; font-weight: 700; margin: 2px 0 4px; }
+.lp-formula .frm { font-size: 13px; font-weight: 600; color: var(--wine); line-height: 1.5; word-break: keep-all; }
+.lp-formula .why { grid-column: 1 / -1; font-size: 13px; line-height: 1.7; color: var(--text); word-break: keep-all; }
+.lp-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.lp-chip { font-size: 13px; padding: 6px 11px; border-radius: 14px; background: var(--bg); border: 1px solid var(--border); }
+.lp-chip.open { background: #FBF1F0; border-color: #EBCFCB; color: #7A2E3A; font-weight: 600; }
+.lp-tabs { display: flex; gap: 6px; overflow-x: auto; margin: 14px -18px 0; padding: 0 18px 4px; scrollbar-width: none; }
+.lp-tabs::-webkit-scrollbar { display: none; }
+.lp-tab { flex-shrink: 0; min-height: 38px; padding: 0 14px; border-radius: 19px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.lp-tab.active { background: var(--wine); color: #fff; border-color: var(--wine); }
+.lp-tab:focus-visible { outline: 2px solid var(--sand); outline-offset: 2px; }
+.lp-panel { margin-top: 14px; min-height: 240px; }
+.lp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lp-col-head { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.lp-col-head.good { color: #4A6B3F; }
+.lp-col-head.bad { color: #7A2E3A; }
+.lp-list { list-style: none; display: grid; gap: 6px; }
+.lp-list li { font-size: 13px; line-height: 1.5; padding: 7px 10px; border-radius: 10px; background: #F2F5EE; word-break: keep-all; }
+.lp-list.bad li { background: #FBF1F0; }
+.lp-list li.lp-more-li { background: none; color: var(--wine); font-weight: 600; font-size: 12px; display: flex; align-items: center; gap: 4px; padding: 4px 2px; }
+.lp-sw-lock { display: flex !important; align-items: center; justify-content: center; color: var(--muted); background: var(--bg) !important; border: 1px dashed var(--border); }
+.lp-swatches { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.lp-sw { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; text-align: center; }
+.lp-sw i { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); display: block; }
+.lp-brand { display: inline-block; font-size: 12px; padding: 3px 9px; margin: 0 4px 4px 0; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); }
+.lp-more { font-size: 12px; color: var(--muted); text-align: center; margin-top: 10px; }
+.lp-cta { width: 100%; margin-top: 20px; min-height: 52px; border: none; border-radius: 28px; background: var(--wine); color: #fff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
+.lp-cta:focus-visible { outline: 2px solid var(--sand); outline-offset: 3px; }
+
 .breakdown { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 18px 14px; margin: 0 0 16px; }
 .bd-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
 .bd-group + .bd-group { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
@@ -811,21 +865,6 @@ function track(name, params) {
       <div class="preview-title">✦ 당신의 체형 시그니처</div>
       <div id="previewItems"></div>
     </div>
-    <div class="share-block" id="shareBlock">
-      <div class="share-title">같은 타입 친구는 내 옷장 메이트예요 👯</div>
-      <div class="share-sub">카드를 스토리에 올리거나 친구에게 보내보세요.<br>친구가 진단하면 옷장 메이트인지 결과 화면에서 바로 비교돼요.</div>
-      <div id="friendCompare"></div>
-      <img class="share-preview" id="sharePreview" alt="내 체형 결과 카드">
-      <div class="share-actions">
-        <button class="share-main" onclick="shareCardImage()">이미지 저장 · 스토리 공유</button>
-        <button class="share-link" onclick="shareResult()">친구에게 보내서 옷장 메이트 찾기</button>
-      </div>
-      <div class="share-legend">
-        <div><b>옷장 메이트</b><span>타입까지 같을 때 · 핏도 소재도 같아요</span></div>
-        <div><b>반쪽 옷장 메이트</b><span>체형 방향만 같을 때 · 실루엣을 같이 입어요</span></div>
-        <div><b>스타일 교환 친구</b><span>방향이 다를 때 · 서로의 스타일을 구경하는 재미</span></div>
-      </div>
-    </div>
     <div class="report-preview-card">
       <!-- 후킹 헤드라인 -->
       <div class="report-hook">
@@ -858,6 +897,15 @@ function track(name, params) {
         결제 후 이메일로 즉시 발송 · 30일간 다운로드 가능
       </div>
     </div>
+    <div class="locked-preview" id="lockedPreview">
+      <div class="lp-eyebrow">리포트 미리보기</div>
+      <div class="lp-title" id="lpTitle"></div>
+      <div class="lp-sub">항목을 눌러 리포트에 실제로 들어 있는 내용을 미리 확인해보세요.</div>
+      <div class="lp-tabs" id="lpTabs" role="tablist"></div>
+      <div class="lp-panel" id="lpPanel"></div>
+      <button class="lp-cta" onclick="scrollToCta('button')">잠긴 내용까지 전부 보기 · 9,800원</button>
+    </div>
+
     <div class="cta-card" id="ctaCard">
       <div class="cta-launch-badge">약 30페이지 맞춤 스타일 가이드</div>
       <div class="cta-price-row">
@@ -869,6 +917,21 @@ function track(name, params) {
       <div class="share-row">
         <button class="share-btn" onclick="shareResult()">결과 공유하기</button>
         <button class="share-btn" onclick="retakeTest()">다시 진단하기</button>
+      </div>
+    </div>
+    <div class="share-block" id="shareBlock">
+      <div class="share-title">같은 타입 친구는 내 옷장 메이트예요 👯</div>
+      <div class="share-sub">카드를 스토리에 올리거나 친구에게 보내보세요.<br>친구가 진단하면 옷장 메이트인지 결과 화면에서 바로 비교돼요.</div>
+      <div id="friendCompare"></div>
+      <img class="share-preview" id="sharePreview" alt="내 체형 결과 카드">
+      <div class="share-actions">
+        <button class="share-main" onclick="shareCardImage()">이미지 저장 · 스토리 공유</button>
+        <button class="share-link" onclick="shareResult()">친구에게 보내서 옷장 메이트 찾기</button>
+      </div>
+      <div class="share-legend">
+        <div><b>옷장 메이트</b><span>타입까지 같을 때 · 핏도 소재도 같아요</span></div>
+        <div><b>반쪽 옷장 메이트</b><span>체형 방향만 같을 때 · 실루엣을 같이 입어요</span></div>
+        <div><b>스타일 교환 친구</b><span>방향이 다를 때 · 서로의 스타일을 구경하는 재미</span></div>
       </div>
     </div>
   </div>
@@ -1551,6 +1614,7 @@ function showFinalResult() {
   ['feelStep2', 'feelThanks'].forEach(id => document.getElementById(id).style.display = 'none');
   renderShareCard();
   renderMoodCard(typeKey, type);
+  renderLockedPreview(typeKey, type);
   renderFriendCompare(typeKey);
   document.getElementById('scoreDirection').textContent = dirLabels[dir];
   document.getElementById('scoreTexture').textContent = (getTexture(score) === 'H' ? '하드' : '소프트');
@@ -1912,6 +1976,111 @@ function renderFriendCompare(myKey) {
   } else {
     el.innerHTML = `<div class="friend-compare"><strong>스타일 교환 친구</strong> · 친구는 ${fr.name}, 나는 ${me.name}.<br>어울리는 옷이 달라서 서로의 스타일을 구경하는 재미가 있어요. 다른 친구 중에 옷장 메이트가 있을지도 몰라요.</div>`;
   }
+}
+
+const REPORT_PREVIEW = {"S-H": {"fit": {"good": ["샤프한 H라인", "정장형 슬랙스, 스키니진"], "goodN": 10, "bad": ["꽉 끼는 피티드", "강한 페플럼·랩"], "badN": 10}, "neck": [{"name": "각진 V넥 (깊은)", "open": true, "verdict": "매우 좋음", "reason": "직선의 강함과 골격감을 살림", "good": true}, {"name": "정장 카라, 각진 카라", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "터틀넥, 하이넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "스퀘어 넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "둥근 라운드넥", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "랩 카라, 부드러운 카라", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "큰 퍼프 슬리브, 러플", "open": true, "verdict": "피하기", "reason": "도시적 시크함과 충돌", "good": false}], "mat": {"good": [["탄탄한 울", "구조감 있는 두께, 깔끔한 핏"], ["샤프한 가죽", "강하고 모던한 인상"]], "goodN": 7, "bad": ["흐물한 시폰"], "badN": 5}, "pat": {"good": ["모노톤 스트라이프"], "goodN": 5, "bad": ["로맨틱 플로럴"], "badN": 5, "colors": [["Black", "#1A1A1A"], ["Pure White", "#FFFFFF"], ["Charcoal", "#3B3B3B"]], "colorN": 6}, "acc": [{"label": "목걸이", "desc": "기하학적 펜던트", "text": "기하학적이고 모던한 디자인 이 가장 잘 어울려요."}, {"label": "가방", "desc": "", "text": ""}, {"label": "신발", "desc": "", "text": ""}], "brand": {"count": 10, "items": [{"name": "각진 카라 셔츠", "brands": ["COS", "시스템", "에잇세컨즈", "자라"]}, {"name": "슬림 터틀넥", "brands": ["유니클로", "COS", "시스템", "타임"]}, {"name": "매트 실크 블라우스", "brands": []}, {"name": "정장형 화이트 셔츠", "brands": []}, {"name": "정장형 일자 슬랙스", "brands": []}, {"name": "H라인 펜슬 스커트", "brands": []}, {"name": "스키니진", "brands": []}, {"name": "레더 팬츠", "brands": []}, {"name": "정장형 블레이저", "brands": []}, {"name": "샤프한 트렌치 코트", "brands": []}, {"name": "레더 자켓", "brands": []}, {"name": "롱 코트 (모직)", "brands": []}]}}, "S-Soft": {"fit": {"good": ["스트레이트 H라인", "일자 슬랙스, 스키니진"], "goodN": 10, "bad": ["꽉 끼는 피티드", "강한 페플럼"], "badN": 10}, "neck": [{"name": "라운드 넥 (적당한 크기)", "open": true, "verdict": "매우 좋음", "reason": "가장 단정하고 미니멀한 인상", "good": true}, {"name": "보트넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "크루넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "스퀘어 넥 (작게)", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "깊은 V넥", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "랩 카라", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "큰 퍼프 슬리브", "open": true, "verdict": "피하기", "reason": "단정함과 충돌", "good": false}], "mat": {"good": [["부드러운 코튼", "단정하면서 자연스럽게 떨어짐"], ["캐시미어", "고급스럽고 부드러운 텍스처"]], "goodN": 7, "bad": ["거친 린넨 (구김 강한)"], "badN": 5}, "pat": {"good": ["가는 핀 스트라이프 (세로)"], "goodN": 5, "bad": ["빈티지 페이즐리"], "badN": 5, "colors": [["Beige", "#E8DFCC"], ["Cream", "#F5EFE7"], ["Dusty Pink", "#D4A4A4"]], "colorN": 6}, "acc": [{"label": "목걸이", "desc": "심플한 펜던트", "text": "심플하고 미니멀한 디자인 이 가장 잘 어울려요."}, {"label": "가방", "desc": "", "text": ""}, {"label": "신발", "desc": "", "text": ""}], "brand": {"count": 12, "items": [{"name": "기본 라운드 니트", "brands": ["유니클로", "COS", "시스템", "아워레가시"]}, {"name": "화이트 셔츠 (스트레이트)", "brands": ["COS", "유니클로", "에잇세컨즈", "자라"]}, {"name": "실크 블라우스", "brands": []}, {"name": "캐시미어 니트", "brands": []}, {"name": "일자 슬랙스", "brands": []}, {"name": "스트레이트 진", "brands": []}, {"name": "일자 미디 스커트", "brands": []}, {"name": "부드러운 와이드 슬랙스", "brands": []}, {"name": "스트레이트 트렌치 코트", "brands": []}, {"name": "얇은 트위드 자켓", "brands": []}, {"name": "스트레이트 블레이저", "brands": []}, {"name": "H라인 셔츠 원피스", "brands": []}]}}, "W-H": {"fit": {"good": ["구조적인 피티드 상의", "샤프한 페플럼, 강한 라인"], "goodN": 10, "bad": ["흐물한 저지, 부드러운 새틴", "너무 헐렁한 박시·오버사이즈"], "badN": 10}, "neck": [{"name": "각진 V넥", "open": true, "verdict": "매우 좋음", "reason": "샤프한 골격감과 잘 어울림", "good": true}, {"name": "정장 카라", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "스퀘어 넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "하이넥, 터틀넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "둥근 라운드 넥", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "큰 퍼프 슬리브 / 러플 카라", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "오프숄더, 보트넥", "open": true, "verdict": "피하기", "reason": "각진 어깨가 너무 강조됨", "good": false}], "mat": {"good": [["탄탄한 울", "구조감 있는 두께, 깔끔한 핏"], ["트위드", "빳빳한 텍스처, 클래식한 느낌"]], "goodN": 7, "bad": ["흐물한 저지·모달"], "badN": 5}, "pat": {"good": ["모노톤 스트라이프 (블랙·화이트)"], "goodN": 5, "bad": ["로맨틱 플로럴, 빈티지 꽃"], "badN": 5, "colors": [["Black", "#1A1A1A"], ["Charcoal", "#3B3B3B"], ["Wine", "#7B2D3F"]], "colorN": 6}, "acc": [{"label": "목걸이", "desc": "기하학적 펜던트", "text": "너무 작거나 부드러운 펜던트보다 기하학적인 디자인의 펜던트나 두꺼운 체인 이 잘 어울려요."}, {"label": "가방", "desc": "", "text": ""}, {"label": "신발", "desc": "", "text": ""}], "brand": {"count": 12, "items": [{"name": "각진 카라 셔츠", "brands": ["COS", "시스템", "에잇세컨즈", "자라"]}, {"name": "페플럼 톱", "brands": ["시스템", "마쥬", "산드로", "자라"]}, {"name": "실크 캐미솔 (매트)", "brands": []}, {"name": "탄탄한 니트", "brands": []}, {"name": "펜슬 스커트", "brands": []}, {"name": "테일러드 일자 슬랙스", "brands": []}, {"name": "스트레이트 진", "brands": []}, {"name": "레더 팬츠", "brands": []}, {"name": "테일러드 블레이저", "brands": []}, {"name": "롱 트렌치 코트", "brands": []}, {"name": "레더 자켓", "brands": []}, {"name": "구조적 셔츠 원피스", "brands": []}]}}, "W-Soft": {"fit": {"good": ["잘록한 허리를 강조하는 핏", "A라인, 플레어, 머메이드 실루엣"], "goodN": 10, "bad": ["박시핏·오버사이즈", "직선적인 H라인"], "badN": 10}, "neck": [{"name": "라운드 넥", "open": true, "verdict": "매우 좋음", "reason": "부드러운 곡선이 어깨선과 자연스럽게 이어짐", "good": true}, {"name": "V넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "스퀘어 넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "하트 넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "터틀넥", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "보트 넥", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "각진 카라", "open": true, "verdict": "피하기", "reason": "부드러운 어깨선과 충돌해 어색함", "good": false}], "mat": {"good": [["실크 / 새틴", "드레이프감, 자연스러운 광택"], ["저지", "부드러운 신축성, 몸에 흐름"]], "goodN": 7, "bad": ["두꺼운 코튼"], "badN": 5}, "pat": {"good": ["작은 플로럴 (꽃 무늬)"], "goodN": 5, "bad": ["큰 체크 (특히 가로)"], "badN": 5, "colors": [["Beige", "#E8DFCC"], ["Dusty Rose", "#D4A4A4"], ["Navy", "#2C3E50"]], "colorN": 6}, "acc": [{"label": "목걸이", "desc": "가는 체인", "text": "가는 체인의 짧은 목걸이가 가장 잘 어울려요."}, {"label": "가방", "desc": "", "text": ""}, {"label": "신발", "desc": "", "text": ""}], "brand": {"count": 17, "items": [{"name": "랩 블라우스", "brands": ["COS", "유니클로", "로우클래식", "앤더슨벨"]}, {"name": "피티드 니트", "brands": ["유니클로", "앤더슨벨", "아워레가시", "시스템"]}, {"name": "페플럼 톱", "brands": []}, {"name": "실크 캐미솔", "brands": []}, {"name": "하이웨이스트 슬랙스", "brands": []}, {"name": "A라인 미디 스커트", "brands": []}, {"name": "하이웨이스트 와이드진", "brands": []}, {"name": "펜슬 스커트", "brands": []}, {"name": "소프트 블레이저", "brands": []}, {"name": "벨티드 트렌치코트", "brands": []}, {"name": "랩 원피스", "brands": []}, {"name": "셔츠 원피스", "brands": []}]}}, "N-H": {"fit": {"good": ["오버사이즈, 박시핏", "와이드 진, 카고 팬츠"], "goodN": 10, "bad": ["꽉 끼는 피티드", "작은 디테일의 옷"], "badN": 10}, "neck": [{"name": "V넥 (깊은 V)", "open": true, "verdict": "매우 좋음", "reason": "골격감을 부드럽게 흐리고 길어 보이게 함", "good": true}, {"name": "오픈 카라", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "스쿱넥 (깊은 라운드)", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "헨리넥, 카프탄 넥", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "터틀넥 (꽉 끼는)", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "작은 라운드넥", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "크리스털 디테일 카라", "open": true, "verdict": "피하기", "reason": "임팩트와 정돈됨이 충돌", "good": false}], "mat": {"good": [["두꺼운 데님", "워시드, 빈티지한 텍스처"], ["거친 트위드", "보헤미안 텍스처, 빈티지"]], "goodN": 7, "bad": ["광택 강한 새틴"], "badN": 5}, "pat": {"good": ["빈티지 페이즐리, 보헤미안"], "goodN": 5, "bad": ["작고 정확한 도트"], "badN": 5, "colors": [["Dark Brown", "#5C3A28"], ["Charcoal", "#3B3B3B"], ["Mustard", "#B8861B"]], "colorN": 6}, "acc": [{"label": "목걸이", "desc": "빈티지 펜던트", "text": "빈티지 펜던트, 자연 소재(우드, 스톤, 가죽)의 목걸이 가 가장 잘 어울려요."}, {"label": "가방", "desc": "", "text": ""}, {"label": "신발", "desc": "", "text": ""}], "brand": {"count": 11, "items": [{"name": "오버사이즈 셔츠", "brands": ["COS", "유니클로", "아워레가시", "앤더슨벨"]}, {"name": "오버사이즈 니트", "brands": ["유니클로", "시스템", "아워레가시", "마쥬"]}, {"name": "빈티지 티셔츠", "brands": []}, {"name": "롱 카디건", "brands": []}, {"name": "와이드 진", "brands": []}, {"name": "카고 팬츠", "brands": []}, {"name": "맥시 스커트", "brands": []}, {"name": "코듀로이 와이드 팬츠", "brands": []}, {"name": "오버사이즈 트렌치 코트", "brands": []}, {"name": "거친 트위드 자켓", "brands": []}, {"name": "빈티지 데님 자켓", "brands": []}, {"name": "롱 셔츠 원피스", "brands": []}]}}, "N-Soft": {"fit": {"good": ["여유 있게 흐르는 라인", "드롭 숄더, 자연스러운 어깨"], "goodN": 10, "bad": ["꽉 끼는 피티드 (특히 가슴)", "강한 어깨 패드 재킷"], "badN": 10}, "neck": [{"name": "V넥", "open": true, "verdict": "매우 좋음", "reason": "골격을 부드럽게 흐리고 길어 보이게 함", "good": true}, {"name": "오픈 카라", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "스쿱넥 (깊은 라운드)", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "슬라이드 카라", "open": false, "verdict": "", "reason": "", "good": true}, {"name": "터틀넥", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "보트 넥", "open": false, "verdict": "", "reason": "", "good": false}, {"name": "너무 작은 라운드", "open": true, "verdict": "피하기", "reason": "골격이 부각되어 어색함", "good": false}], "mat": {"good": [["린넨", "자연스러운 텍스처, 통기성 좋음"], ["슬러브 코튼", "거친 듯 부드러운 결, 자연스러운 핏"]], "goodN": 7, "bad": ["광택 강한 새틴"], "badN": 5}, "pat": {"good": ["자연스러운 스트라이프 (세로)"], "goodN": 5, "bad": ["너무 작고 정확한 도트"], "badN": 5, "colors": [["Camel", "#C19A6B"], ["Coffee", "#8B6F47"], ["Olive", "#6B7A4C"]], "colorN": 6}, "acc": [{"label": "목걸이", "desc": "자연 소재 펜던트", "text": "너무 작거나 정형화된 펜던트보다 자연 소재 펜던트(우드, 스톤)나 미디엄 길이의 자연스러운 체인 이 잘 어울려요."}, {"label": "가방", "desc": "", "text": ""}, {"label": "신발", "desc": "", "text": ""}], "brand": {"count": 13, "items": [{"name": "린넨 셔츠", "brands": ["COS", "유니클로", "아워레가시", "앤더슨벨"]}, {"name": "슬러브 코튼 티셔츠", "brands": ["유니클로", "에잇세컨즈", "앤더슨벨", "아베크엘"]}, {"name": "부드러운 울 스웨터", "brands": []}, {"name": "롱 카디건 / 베스트", "brands": []}, {"name": "와이드 진", "brands": []}, {"name": "테일러드 와이드 슬랙스", "brands": []}, {"name": "린넨 와이드 팬츠", "brands": []}, {"name": "롱 미디 스커트", "brands": []}, {"name": "오버사이즈 자켓", "brands": []}, {"name": "롱 트렌치 코트", "brands": []}, {"name": "셔츠 원피스", "brands": []}, {"name": "롱 원피스", "brands": []}]}}};
+
+const LOCK_SVG = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+const BLUR = ['██████', '████ ███', '███ █████', '█████ ██'];
+// 잠긴 항목은 최대 3줄만 흐리게 보여주고 나머지는 개수로 표시 (탭 높이를 짧게 유지)
+const blurList = (n, offset) => {
+  if (n <= 0) return '';
+  const shown = Math.min(n, 3);
+  let h = Array.from({ length: shown }, (_, i) => `<li class="lp-locked" onclick="scrollToCta(currentTab)"><span class="lp-blur">${BLUR[(i + offset) % 4]}</span></li>`).join('');
+  if (n > shown) h += `<li class="lp-locked lp-more-li" onclick="scrollToCta(currentTab)">${LOCK_SVG} ${n - shown}개 더</li>`;
+  return h;
+};
+const lockTag = `<span class="lp-lock">${LOCK_SVG} 리포트에서</span>`;
+const PREVIEW_TABS = [
+  { id: 'neck', label: '네크라인' },
+  { id: 'mat', label: '소재' },
+  { id: 'pat', label: '패턴·컬러' },
+  { id: 'acc', label: '액세서리' },
+  { id: 'brand', label: '추천 브랜드' },
+];
+let currentTab = 'neck';
+let previewType = null;
+
+function renderTabPanel(tab) {
+  const d = REPORT_PREVIEW[previewType]; if (!d) return '';
+  if (tab === 'fit') {
+    return `<div class="lp-cols">
+      <div><div class="lp-col-head good">어울리는 핏 · ${d.fit.goodN}가지</div><ul class="lp-list">${d.fit.good.map(x => `<li>${x}</li>`).join('')}${blurList(d.fit.goodN - d.fit.good.length, 0)}</ul></div>
+      <div><div class="lp-col-head bad">안 어울리는 핏 · ${d.fit.badN}가지</div><ul class="lp-list bad">${d.fit.bad.map(x => `<li>${x}</li>`).join('')}${blurList(d.fit.badN - d.fit.bad.length, 2)}</ul></div>
+    </div>`;
+  }
+  if (tab === 'neck') {
+    return d.neck.map(r => r.open
+      ? `<div class="lp-row"><b>${r.name}</b><span class="lp-badge ${r.good ? 'best' : 'care'}">${r.verdict}</span><p>${r.reason}</p></div>`
+      : `<div class="lp-row lp-locked" onclick="scrollToCta('neck')"><b>${r.name}</b>${lockTag}</div>`).join('');
+  }
+  if (tab === 'mat') {
+    return `<div class="lp-col-head good">잘 어울리는 소재 TOP ${d.mat.goodN}</div>
+      ${d.mat.good.map(m => `<div class="lp-row"><b>${m[0]}</b><span></span><p>${m[1]}</p></div>`).join('')}
+      <ul class="lp-list">${blurList(d.mat.goodN - d.mat.good.length, 1)}</ul>
+      <div class="lp-col-head bad" style="margin-top:14px">피해야 할 소재 TOP ${d.mat.badN}</div>
+      <ul class="lp-list bad">${d.mat.bad.map(x => `<li>${x}</li>`).join('')}${blurList(d.mat.badN - d.mat.bad.length, 3)}</ul>`;
+  }
+  if (tab === 'pat') {
+    return `<div class="lp-cols">
+      <div><div class="lp-col-head good">어울리는 패턴</div><ul class="lp-list">${d.pat.good.map(x => `<li>${x}</li>`).join('')}${blurList(d.pat.goodN - d.pat.good.length, 0)}</ul></div>
+      <div><div class="lp-col-head bad">피해야 할 패턴</div><ul class="lp-list bad">${d.pat.bad.map(x => `<li>${x}</li>`).join('')}${blurList(d.pat.badN - d.pat.bad.length, 1)}</ul></div>
+    </div>
+    <div class="lp-col-head" style="margin-top:14px">베이스 컬러 ${d.pat.colorN}가지</div>
+    <div class="lp-swatches">${d.pat.colors.map(c => `<div class="lp-sw"><i style="background:${c[1]}"></i><span>${c[0]}</span></div>`).join('')}${Array.from({ length: d.pat.colorN - d.pat.colors.length }, () => `<div class="lp-sw lp-locked" onclick="scrollToCta('pat')"><i class="lp-sw-lock">${LOCK_SVG}</i><span class="lp-blur">████</span></div>`).join('')}</div>`;
+  }
+  if (tab === 'acc') {
+    return d.acc.map(a => a.desc
+      ? `<div class="lp-row"><b>${a.label}</b><span class="lp-badge ok">${a.desc}</span><p>${a.text}</p></div>`
+      : `<div class="lp-row lp-locked" onclick="scrollToCta('acc')"><b>${a.label}</b>${lockTag}<p class="lp-blur">████ ███ ██████ ████</p></div>`).join('');
+  }
+  if (tab === 'brand') {
+    return `<div class="lp-col-head">핵심 아이템 ${d.brand.items.length}가지 · 추천 브랜드 ${d.brand.count}곳</div>` +
+      d.brand.items.slice(0, 6).map(it => it.brands.length
+        ? `<div class="lp-row"><b>${it.name}</b><span></span><p>${it.brands.map(b => `<span class="lp-brand">${b}</span>`).join('')}</p></div>`
+        : `<div class="lp-row lp-locked" onclick="scrollToCta('brand')"><b>${it.name}</b>${lockTag}<p class="lp-blur">████ · ██████ · ███</p></div>`).join('') +
+      `<div class="lp-more">외 ${d.brand.items.length - 6}개 아이템은 리포트에서</div>`;
+  }
+  return '';
+}
+
+function selectPreviewTab(tab, fromClick) {
+  currentTab = tab;
+  document.querySelectorAll('.lp-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.getElementById('lpPanel').innerHTML = renderTabPanel(tab);
+  if (fromClick) track('preview_tab', { tab, result_type: previewType });
+}
+
+function renderLockedPreview(typeKey, type) {
+  if (!REPORT_PREVIEW[typeKey]) return;
+  previewType = typeKey;
+  document.getElementById('lpTitle').textContent = `${type.name} 리포트에는 이런 것도 있어요`;
+  document.getElementById('lpTabs').innerHTML = PREVIEW_TABS.map(t => `<button class="lp-tab" data-tab="${t.id}" onclick="selectPreviewTab('${t.id}', true)">${t.label}</button>`).join('');
+  selectPreviewTab('neck', false);
+  observeFunnelViews();
+}
+
+function scrollToCta(from) {
+  track('click_locked', { section: from, result_type: currentResult ? currentResult.typeKey : '' });
+  document.getElementById('ctaCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// 결과 화면에서 미리보기·가격 카드가 실제로 보였는지 기록 (결과당 1회)
+let funnelObserver = null;
+function observeFunnelViews() {
+  if (!('IntersectionObserver' in window)) return;
+  if (funnelObserver) funnelObserver.disconnect();
+  const seen = {};
+  funnelObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting || seen[e.target.id]) return;
+      seen[e.target.id] = true;
+      const rt = currentResult ? currentResult.typeKey : '';
+      if (e.target.id === 'lockedPreview') track('view_preview', { result_type: rt });
+      if (e.target.id === 'ctaCard') track('view_price', { result_type: rt });
+    });
+  }, { threshold: 0.4 });
+  ['lockedPreview', 'ctaCard'].forEach(id => { const el = document.getElementById(id); if (el) funnelObserver.observe(el); });
 }
 
 function shareResult() {
