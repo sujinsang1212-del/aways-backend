@@ -181,6 +181,7 @@ em{font-style:normal;}
 .feel-btn{border-radius:22px!important;}
 h1,h2,.section-title,.page-title,.intro-title,.result-name,.success-title{letter-spacing:-0.01em;}
 
+.report-delay-note{background:#FBF1F0;border:1px solid #EBCFCB;color:#7A2E3A;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.7;margin-bottom:16px;word-break:keep-all}.report-delay-note a{color:#4A1C26;font-weight:700}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -305,7 +306,13 @@ const amount = params.get('amount');
 const bodyTypeFromUrl = params.get('bodyType');   // successUrl에 함께 실어 보낸 값
 
 // sessionStorage에서 추가 정보 가져오기 (결제 페이지에서 저장한 값)
-const lastOrder = JSON.parse(sessionStorage.getItem('lastOrder') || '{}');
+// 같은 탭이면 sessionStorage, 카카오페이 등 앱 전환 후 새 탭으로 돌아온 경우엔 localStorage 백업을 사용
+let lastOrder = {};
+try {
+  const fromSession = JSON.parse(sessionStorage.getItem('lastOrder') || '{}');
+  const fromLocal = JSON.parse(localStorage.getItem('aways_order_' + params.get('orderId')) || '{}');
+  lastOrder = (fromSession.orderId === params.get('orderId')) ? fromSession : (fromLocal.orderId ? fromLocal : fromSession);
+} catch (e) {}
 
 // bodyType은 URL 우선, 없으면 sessionStorage 백업
 const bodyType = bodyTypeFromUrl || lastOrder.bodyType || '';
@@ -406,15 +413,23 @@ async function confirmPayment() {
     await sleep(1000);
     updateStep(3, 'done');
 
-    // Step 4: 이메일 발송
+    // Step 4: 이메일 발송 (서버가 실제로 보냈는지 기준으로 표시)
     updateStep(4, 'active');
     await sleep(800);
     updateStep(4, 'done');
     await sleep(400);
+    try { localStorage.removeItem('aways_order_' + orderId); } catch (e) {}
+    if (!data.reportSent) {
+      if (window.gtag) gtag('event', 'report_send_failed', { result_type: bodyType || '' });
+      const note = document.createElement('div');
+      note.className = 'report-delay-note';
+      note.innerHTML = '결제는 정상 완료됐어요. 다만 리포트 메일 발송이 확인되지 않았어요.<br>주문번호와 함께 <a href="mailto:awaysbiz@gmail.com">awaysbiz@gmail.com</a>으로 연락 주시면 바로 보내드릴게요.';
+      document.getElementById('success').prepend(note);
+    }
 
     // 성공 화면 표시
     document.getElementById('succOrderId').textContent = orderId;
-    document.getElementById('succProduct').textContent = lastOrder.tierName || 'Premium Plan';
+    document.getElementById('succProduct').textContent = lastOrder.typeName ? `${lastOrder.typeName} 리포트` : '맞춤 스타일 리포트';
     document.getElementById('succAmount').textContent = `₩${Number(amount).toLocaleString()}`;
     document.getElementById('succEmail').textContent = lastOrder.email || '-';
     document.getElementById('succMethod').textContent = data.method || '카드';
