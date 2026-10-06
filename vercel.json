@@ -12,6 +12,10 @@
     "api/lemon-webhook.js": {
       "memory": 256,
       "maxDuration": 10
+    },
+    "api/send-result.js": {
+      "memory": 256,
+      "maxDuration": 10
     }
   },
   "rewrites": [
