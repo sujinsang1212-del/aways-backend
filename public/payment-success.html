@@ -381,6 +381,9 @@ async function confirmPayment() {
         amount: Number(amount),
         email: lastOrder.email,
         bodyType: bodyType,
+        // 메타 전환 API 매칭용 쿠키 (픽셀이 만든 값)
+        fbp: (document.cookie.match(/(?:^|; )_fbp=([^;]+)/) || [])[1] || '',
+        fbc: (document.cookie.match(/(?:^|; )_fbc=([^;]+)/) || [])[1] || '',
       }),
     });
 
