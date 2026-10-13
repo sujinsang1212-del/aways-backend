@@ -7,6 +7,7 @@
 import { Resend } from 'resend';
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -154,6 +155,53 @@ async function sendEmail(email, bodyType, pdfBuffer) {
 // ============================================================
 // API Handler
 // ============================================================
+// ============================================================
+// 메타 전환 API: 서버에서 직접 구매 이벤트 전송
+// 브라우저 픽셀과 같은 event_id(주문번호)를 써서 메타가 중복 없이 합쳐요.
+// 필요 환경변수: META_CAPI_TOKEN  (없으면 이 단계는 건너뜀)
+// 선택 환경변수: META_PIXEL_ID, META_TEST_EVENT_CODE (테스트 이벤트 확인용)
+// ============================================================
+const META_API_VERSION = 'v25.0';
+const sha256 = (v) => crypto.createHash('sha256').update(String(v).trim().toLowerCase()).digest('hex');
+
+async function sendMetaPurchase({ orderId, amount, email, bodyType, ip, ua, fbp, fbc, sourceUrl }) {
+  const token = process.env.META_CAPI_TOKEN;
+  if (!token) return { skipped: true };
+  const pixelId = process.env.META_PIXEL_ID || '1416204774046914';
+  const userData = { client_ip_address: ip || undefined, client_user_agent: ua || undefined };
+  if (email) userData.em = [sha256(email)];
+  if (fbp) userData.fbp = fbp;
+  if (fbc) userData.fbc = fbc;
+  const payload = {
+    data: [{
+      event_name: 'Purchase',
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: orderId,
+      action_source: 'website',
+      event_source_url: sourceUrl || 'https://awaysbiz.com/payment-success.html',
+      user_data: userData,
+      custom_data: { value: Number(amount), currency: 'KRW', content_name: bodyType || '', content_type: 'product' },
+    }],
+  };
+  if (process.env.META_TEST_EVENT_CODE) payload.test_event_code = process.env.META_TEST_EVENT_CODE;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 4000);
+  try {
+    const r = await fetch(`https://graph.facebook.com/${META_API_VERSION}/${pixelId}/events?access_token=${encodeURIComponent(token)}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: ctrl.signal,
+    });
+    const out = await r.json().catch(() => ({}));
+    if (!r.ok) console.error('[전환 API 실패]', out);
+    else console.log(`[전환 API 전송] orderId: ${orderId}, events_received: ${out.events_received}`);
+    return out;
+  } catch (e) {
+    console.error('[전환 API 오류]', e.message);
+    return { error: e.message };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -163,7 +211,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { paymentKey, orderId, amount, email, bodyType } = req.body;
+  const { paymentKey, orderId, amount, email, bodyType, fbp, fbc } = req.body;
 
   // 진단 페이지에서 온 체형 값을 리포트 키로 변환 (예: 'S-Soft' → 'soft-straight')
   const bodyTypeKey = normalizeBodyType(bodyType);
@@ -248,6 +296,14 @@ export default async function handler(req, res) {
     } else {
       console.warn(`[리포트 건너뜀] 인식할 수 없는 체형 값 (orderId: ${orderId}, email: ${email}, bodyType: ${bodyType})`);
     }
+
+    // 메타 전환 API (실패해도 결제·리포트에는 영향 없음)
+    await sendMetaPurchase({
+      orderId, amount, email, bodyType, fbp, fbc,
+      ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim(),
+      ua: req.headers['user-agent'] || '',
+      sourceUrl: req.headers['referer'] || '',
+    });
 
     // ========================================
     // 3. 성공 응답 (결제 승인 완료 기준)
