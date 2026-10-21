@@ -226,7 +226,7 @@ export default async function handler(req, res) {
 
   // 결제 금액 검증: 브라우저에서 금액을 조작해 결제하는 것을 막는다.
   // 가격을 바꿀 때는 payment.html의 PRODUCT.price와 이 값을 함께 바꿀 것.
-  const PRODUCT_PRICE = 9800;
+  const PRODUCT_PRICE = 19800;
   if (Number(amount) !== PRODUCT_PRICE) {
     console.error(`[금액 불일치] orderId: ${orderId}, amount: ${amount}`);
     return res.status(400).json({ error: '결제 금액이 올바르지 않습니다' });
@@ -267,7 +267,10 @@ export default async function handler(req, res) {
     console.log(`[결제 승인 성공] orderId: ${orderId}, amount: ${amount}`);
 
     // 결제수단 라벨 (성공 화면 표시용)
-    const methodLabel = tossData.method || '카드';
+    // 결제수단: 간편결제는 토스가 '카드'로 표시하는 경우가 있어, 간편결제사를 따로 확인
+    const easyPayProvider = (tossData.easyPay && tossData.easyPay.provider) || '';
+    const methodLabel = easyPayProvider ? `${easyPayProvider}${tossData.method && tossData.method !== '간편결제' ? ` (${tossData.method})` : ''}` : (tossData.method || '카드');
+    console.log(`[결제수단] method: ${tossData.method}, easyPay: ${easyPayProvider || '-'}`);
 
     // ========================================
     // 2. 리포트 생성 + 이메일 발송 (승인 성공 후 부가 단계)
@@ -314,6 +317,7 @@ export default async function handler(req, res) {
       orderId,
       bodyType: bodyTypeKey || bodyType,
       method: methodLabel,
+      easyPay: easyPayProvider,
       reportSent,
       emailId,
     });
