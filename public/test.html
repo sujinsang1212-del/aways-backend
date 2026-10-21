@@ -763,7 +763,10 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1416204774046914');
+fbq('init', '1416204774046914', (function () {
+  // 고급 매칭: 진단 때 입력한 이메일이 있으면 함께 전달 (픽셀이 암호화해서 보냄)
+  try { var e = localStorage.getItem('aways_email'); return e ? { em: e.trim().toLowerCase() } : {}; } catch (x) { return {}; }
+})());
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
@@ -912,14 +915,14 @@ function track(name, params) {
           </ul>
 
         </div>
-        <button class="story-btn" onclick="continueStory()">이어서 읽기 · 9,800원</button>
+        <button class="story-btn" onclick="continueStory()">이어서 읽기 · 19,800원</button>
       </div>
     </div>
 
     <div class="cta-card" id="ctaCard">
       <div class="cta-launch-badge">약 30페이지 맞춤 스타일 가이드</div>
       <div class="cta-price-row">
-        <span class="cta-price">9,800<small>원</small></span>
+        <span class="cta-price">19,800<small>원</small></span>
       </div>
       <div class="cta-anchor">안 맞아서 안 입는 옷 한 벌보다 저렴해요</div>
       <button class="cta-btn" id="ctaBtn" onclick="goToPayment()">내 타입 리포트 받기 →</button>
@@ -965,7 +968,7 @@ function track(name, params) {
     <div class="fp-left">
       <span class="fp-eyebrow">30p 맞춤 리포트 · 7일 환불 보장</span>
       <div class="fp-price-row">
-        <span class="fp-price">9,800<small>원</small></span>
+        <span class="fp-price">19,800<small>원</small></span>
       </div>
     </div>
     <div class="fp-right">
@@ -1629,6 +1632,7 @@ function submitGateEmail() {
   const marketing = document.getElementById('gateMarketing').checked;
   try { localStorage.setItem('aways_email', email); localStorage.setItem('aways_marketing', marketing ? 'yes' : 'no'); } catch (e) {}
   track('email_capture', { marketing_consent: marketing ? 'yes' : 'no' });
+  if (window.fbq) fbq('init', '1416204774046914', { em: email.toLowerCase() });  // 고급 매칭 갱신
   // 결과 메일 발송 요청 (응답을 기다리지 않고 바로 결과를 보여준다)
   try {
     const typeKey = getFinalType(getScore());
@@ -1720,7 +1724,7 @@ function showScreen(id) {
 
 function goToPayment() {
   const result = JSON.parse(sessionStorage.getItem('bodyTypeResult') || '{}');
-  track('begin_checkout', { result_type: result.typeKey || '', value: 9800, currency: 'KRW' });
+  track('begin_checkout', { result_type: result.typeKey || '', value: 19800, currency: 'KRW' });
   // 결제 페이지로 체형 정보 전달
   const params = new URLSearchParams({
     bodyType: result.typeKey || '',
