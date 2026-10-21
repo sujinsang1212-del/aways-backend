@@ -284,7 +284,7 @@ function reminderEmail(key, t) {
       </td></tr>
       <tr><td style="padding:18px 28px 8px;" align="center">
         <div style="font-size:13px;color:#6E4A51;margin-bottom:12px;">피해야 할 목선과 나머지 베이스 컬러 ${t.colorCount - t.colorsOpen.length}가지는 리포트에서 알려드려요</div>
-        <a href="${paymentUrl(key, t, 'reminder_d1')}" style="display:block;background:#4A1C26;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:16px;border-radius:28px;">이어서 읽기 · 9,800원</a>
+        <a href="${paymentUrl(key, t, 'reminder_d1')}" style="display:block;background:#4A1C26;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:16px;border-radius:28px;">이어서 읽기 · 19,800원</a>
         <p style="margin:10px 0 0;font-size:12px;color:#8A747A;">약 30페이지 ${t.name} 리포트 · 7일 이내 환불 보장</p>
       </td></tr>
       <tr><td style="padding:22px 28px 26px;border-top:1px solid #E6D9D5;">
