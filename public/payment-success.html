@@ -193,7 +193,10 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1416204774046914');
+fbq('init', '1416204774046914', (function () {
+  // 고급 매칭: 진단 때 입력한 이메일이 있으면 함께 전달 (픽셀이 암호화해서 보냄)
+  try { var e = localStorage.getItem('aways_email'); return e ? { em: e.trim().toLowerCase() } : {}; } catch (x) { return {}; }
+})());
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
@@ -353,6 +356,11 @@ async function confirmPayment() {
   // 토스 failUrl로 돌아온 경우: 에러 코드/메시지를 그대로 보여준다
   if (params.get('status') === 'fail' || params.get('code')) {
     const failMessage = params.get('message');
+    // 휴대폰 결제창에서 취소·실패하면 이 페이지로 돌아온다 → 원인 코드를 기록
+    const failCode = params.get('code') || 'unknown';
+    const failType = failCode === 'PAY_PROCESS_CANCELED' ? 'user_cancel' : 'error';
+    if (window.gtag) gtag('event', 'payment_fail', { fail_type: failType, error_code: failCode, error_message: (failMessage || '').slice(0, 90), result_type: params.get('bodyType') || '' });
+    if (window.fbq) fbq('trackCustom', 'PaymentFail', { fail_type: failType, error_code: failCode });
     showFailed(failMessage || '결제가 취소되었거나 실패했어요.');
     return;
   }
@@ -406,6 +414,7 @@ async function confirmPayment() {
         transaction_id: orderId,
         value: Number(amount),
         currency: 'KRW',
+        payment_type: (data && data.easyPay) ? data.easyPay : ((data && data.method) || ''),
         items: [{ item_id: 'aways-report', item_name: 'AWAYS 체형 리포트', price: Number(amount), quantity: 1 }],
       });
       sessionStorage.setItem('ga_' + orderId, '1');
