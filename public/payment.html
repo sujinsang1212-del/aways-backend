@@ -420,7 +420,10 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1416204774046914');
+fbq('init', '1416204774046914', (function () {
+  // 고급 매칭: 진단 때 입력한 이메일이 있으면 함께 전달 (픽셀이 암호화해서 보냄)
+  try { var e = localStorage.getItem('aways_email'); return e ? { em: e.trim().toLowerCase() } : {}; } catch (x) { return {}; }
+})());
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
@@ -463,7 +466,7 @@ gtag('config', 'G-SKT4ZNNWVB');
           <div class="order-product-tag" id="orderTag">약 30페이지 PDF</div>
         </div>
         <div class="order-price" id="orderPrice">
-          <span class="price-now">9,800원</span>
+          <span class="price-now">19,800원</span>
         </div>
       </div>
       <details class="order-features">
@@ -518,7 +521,7 @@ gtag('config', 'G-SKT4ZNNWVB');
     <!-- 결제 버튼 -->
     <div class="pay-bar">
       <div class="pay-bar-inner">
-        <div class="pay-bar-price"><small>소프트 웨이브 리포트</small><b>9,800원</b></div>
+        <div class="pay-bar-price"><small>소프트 웨이브 리포트</small><b>19,800원</b></div>
         <button class="pay-btn" id="payBtn" onclick="requestPayment()">
           <span id="payBtnText">결제하기</span>
         </button>
@@ -558,7 +561,7 @@ gtag('config', 'G-SKT4ZNNWVB');
       </div>
       <div class="success-row">
         <span class="success-row-label">결제금액</span>
-        <span class="success-row-val" id="succAmount">9,800원</span>
+        <span class="success-row-val" id="succAmount">19,800원</span>
       </div>
       <div class="success-row">
         <span class="success-row-label">발송 이메일</span>
@@ -584,11 +587,11 @@ const TOSS_CLIENT_KEY = 'live_gck_DnyRpQWGrN6jm5LREydlrKwv1M9E';
 const TOSS_CUSTOMER_KEY = generateCustomerKey();
 
 // ============================================================
-// 상품 정보 (단일 가격 9,800원)
+// 상품 정보 (단일 가격 19,800원)
 // ============================================================
 const PRODUCT = {
   name: '맞춤 스타일 가이드',
-  price: 9800,
+  price: 19800,
   features: [
     '피해야 할 소재 5가지',
     '옷의 핏과 네크라인 가이드',
@@ -730,7 +733,7 @@ async function requestPayment() {
       // 결제 성공/실패 시 리다이렉트 URL
       // bodyType을 함께 실어 보내 승인 단계에서 PDF를 안정적으로 생성
       successUrl: `${window.location.origin}/payment-success.html?bodyType=${encodeURIComponent(bodyType)}`,
-      failUrl: `${window.location.origin}/payment-success.html?status=fail`,
+      failUrl: `${window.location.origin}/payment-success.html?status=fail&bodyType=${encodeURIComponent(bodyType)}`,
     });
   } catch (error) {
     // 사용자가 결제창을 닫은 경우 또는 에러
