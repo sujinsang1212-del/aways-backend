@@ -235,7 +235,10 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1416204774046914');
+fbq('init', '1416204774046914', (function () {
+  // 고급 매칭: 진단 때 입력한 이메일이 있으면 함께 전달 (픽셀이 암호화해서 보냄)
+  try { var e = localStorage.getItem('aways_email'); return e ? { em: e.trim().toLowerCase() } : {}; } catch (x) { return {}; }
+})());
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
@@ -418,7 +421,7 @@ gtag('config', 'G-SKT4ZNNWVB');
     </div>
     <div class="price">
       <small>맞춤 스타일 리포트</small>
-      <div class="num"><b>9,800</b><span>원</span></div>
+      <div class="num"><b>19,800</b><span>원</span></div>
       <p>안 맞아서 안 입는 옷 한 벌보다 저렴해요<br>7일 이내 환불 보장 · 결제 후 이메일 즉시 발송</p>
       <a href="/test?start=1" class="btn btn-sand">무료 진단부터 시작</a>
     </div>
