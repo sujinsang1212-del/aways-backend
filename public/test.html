@@ -919,6 +919,7 @@ function track(name, params) {
             <li>패턴 · 베이스 컬러 가이드</li>
             <li>추천 코디 및 액세서리 가이드</li>
             <li>핵심 아이템 12가지와 추천 브랜드</li>
+            <li>사계절 스타일링 · 옷장 자가진단</li>
           </ul>
 
         </div>
@@ -1736,7 +1737,7 @@ function showFinalResult() {
   document.querySelector('#screen-result .result-hero').style.background = type.color;
   currentResult = { typeKey, type, score };
   // 검증용: 결과 타입, 1·2위 점수 차, '잘 모르겠어요' 수
-  (function () {
+  if (!window.__viewMode) (function () {
     const dirs = [score.S, score.W, score.N].sort((a, b) => b - a);
     const unsure = answers.filter((a, qi) => a !== null && Object.keys(questions[qi].options[a].score).length === 0).length;
     track('test_complete', {
@@ -1776,7 +1777,7 @@ function showFinalResult() {
   if (hookEl) hookEl.textContent = type.name;
   const ctaBtn = document.getElementById('ctaBtn');
   if (ctaBtn) ctaBtn.textContent = `${type.name} 리포트 받기 →`;
-   if (window.fbq) fbq('track', 'CompleteRegistration', { content_name: typeKey }, { eventID: 'cr_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8) });
+   if (window.fbq && !window.__viewMode) fbq('track', 'CompleteRegistration', { content_name: typeKey }, { eventID: 'cr_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8) });
   document.getElementById('stepLabel').textContent = '진단 완료';
   showScreen('screen-result');
 
@@ -2367,6 +2368,20 @@ function hideFloatingPay() {
     floatingPayObserver = null;
   }
 }
+
+// 결과 메일의 '내 결과 다시 보기' 링크: ?view=타입
+(function initView() {
+  const v = new URLSearchParams(window.location.search).get('view');
+  if (!v || !typeMap[v]) return;
+  // 해당 타입이 나오는 대표 응답으로 결과 화면을 다시 그린다 (진단 완료로는 집계하지 않음)
+  const DIR = { S: [0,1,1,0,0,0,0,0,0], W: [2,0,0,1,1,1,1,1,1], N: [1,2,2,2,2,2,2,2,2] };
+  const TEX = { H: [3,0,0,0,0,0,0,0,0], Soft: [0,3,3,3,3,3,3,3,3] };
+  const [d, t] = v.split('-');
+  window.__viewMode = true;
+  answers = DIR[d].concat(TEX[t === 'H' ? 'H' : 'Soft']);
+  showFinalResult();
+  track('result_revisit', { result_type: v });
+})();
 
 // URL에 ?start=1 이 있으면 인트로 화면 건너뛰고 바로 첫 질문으로
 if (new URLSearchParams(window.location.search).get('start') === '1') {
