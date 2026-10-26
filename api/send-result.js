@@ -238,14 +238,15 @@ function resultEmail(key, t) {
         <div style="font-size:13px;color:rgba(255,255,255,0.85);margin-top:10px;">${t.sub}</div>
       </td></tr>
       <tr><td><img src="${SITE}/images/mood/${key}.jpg" width="520" alt="${t.name} 스타일 예시" style="display:block;width:100%;height:auto;"></td></tr>
-      <tr><td style="padding:26px 28px 6px;">
+      <tr><td style="padding:26px 28px 10px;">
         <div style="font-size:12px;font-weight:700;color:${t.color};margin-bottom:6px;">${t.name}인 당신에게</div>
         <div style="font-size:22px;font-weight:700;line-height:1.4;color:#2B1217;margin-bottom:14px;word-break:keep-all;">${stripTags(st.title)}</div>
-        <p style="margin:0 0 14px;font-size:15px;line-height:1.8;color:#6E4A51;">${st.hook}</p>
-        <p style="margin:0 0 14px;font-size:15px;line-height:1.8;color:#2B1217;">옷이 잘못된 게 아니에요. <b>체형과 반대 방향의 옷</b>이었기 때문이에요.</p>
-        <p style="margin:0 0 14px;font-size:15px;line-height:1.8;color:#2B1217;">${boldColor(st.weapon, t.color)}</p>
-        <p style="margin:0 0 14px;font-size:15px;line-height:1.8;color:#2B1217;">${boldColor(st.proof, t.color)}</p>
-        <p style="margin:0 0 18px;font-size:15px;line-height:1.8;color:#2B1217;">${boldColor(st.material, t.color)}</p>
+        <p style="margin:0 0 6px;font-size:15px;line-height:1.8;color:#6E4A51;">${st.hook}</p>
+        <p style="margin:0 0 18px;font-size:15px;line-height:1.8;color:#2B1217;">그 이유와 ${t.name}에게 맞는 옷은 결과 화면에서 확인할 수 있어요.</p>
+      </td></tr>
+      <tr><td style="padding:0 28px 8px;" align="center">
+        <a href="${SITE}/test?view=${key}&utm_source=email&utm_medium=email&utm_campaign=result_email" style="display:block;background:#4A1C26;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:16px;border-radius:28px;">내 결과에서 이유 확인하기</a>
+        <p style="margin:10px 0 0;font-size:12px;color:#8A747A;">${t.name} 결과 화면으로 이동해요</p>
       </td></tr>
       <tr><td style="padding:22px 28px 26px;border-top:1px solid #E6D9D5;">
         <p style="margin:0 0 10px;font-size:12px;color:#8A747A;line-height:1.7;">이 메일은 awaysbiz.com에서 체형 진단을 마치고 결과 받기를 요청하셔서 보내드렸어요.</p>
