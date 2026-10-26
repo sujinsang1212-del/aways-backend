@@ -8,6 +8,7 @@ import { Resend } from 'resend';
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { kv, kvEnabled, newGiftCode, GIFT_TTL_SEC, GIFT_PRICE } from '../lib/kv.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -83,7 +84,7 @@ function loadPDF(bodyType) {
 // ============================================================
 // 이메일 발송 (Resend + PDF 첨부)
 // ============================================================
-async function sendEmail(email, bodyType, pdfBuffer) {
+async function sendEmail(email, bodyType, pdfBuffer, giftUrl = null) {
   const bodyTypeKr = BODY_TYPE_KR[bodyType] || bodyType;
 
   const { data, error } = await resend.emails.send({
@@ -109,6 +110,15 @@ async function sendEmail(email, bodyType, pdfBuffer) {
             첨부된 PDF 파일을 다운로드하여 확인해주세요.
           </p>
         </div>
+
+        ${giftUrl ? `
+        <!-- 친구 선물 링크 -->
+        <div style="background: #FBF1F0; border: 1px solid #EBCFCB; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+          <p style="font-size: 15px; color: #7A2E3A; font-weight: 700; margin: 0 0 8px 0;">🎁 친구에게 보낼 선물 링크</p>
+          <p style="font-size: 13px; color: #533A3F; line-height: 1.8; margin: 0 0 14px 0;">친구가 이 링크로 진단을 마치면, 친구 체형에 맞는 리포트가 친구 이메일로 바로 발송돼요.<br>링크는 <b>30일 동안, 한 번만</b> 사용할 수 있어요.</p>
+          <a href="${giftUrl}" style="display: block; background: #4A1C26; color: #ffffff; text-decoration: none; text-align: center; font-weight: 700; font-size: 15px; padding: 14px; border-radius: 24px;">선물 링크 열기</a>
+          <p style="font-size: 12px; color: #6E4A51; margin: 10px 0 0 0; word-break: break-all;">${giftUrl}</p>
+        </div>` : ''}
 
         <!-- 리포트 구성 -->
         <div style="background: #FFFFFF; border: 1px solid #E6D9D5; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
@@ -227,8 +237,10 @@ export default async function handler(req, res) {
   // 결제 금액 검증: 브라우저에서 금액을 조작해 결제하는 것을 막는다.
   // 가격을 바꿀 때는 payment.html의 PRODUCT.price와 이 값을 함께 바꿀 것.
   const PRODUCT_PRICE = 19800;
-  if (Number(amount) !== PRODUCT_PRICE) {
-    console.error(`[금액 불일치] orderId: ${orderId}, amount: ${amount}`);
+  const wantsGift = req.body.gift === true;
+  const expected = wantsGift ? PRODUCT_PRICE + GIFT_PRICE : PRODUCT_PRICE;
+  if (Number(amount) !== expected) {
+    console.error(`[금액 불일치] orderId: ${orderId}, amount: ${amount}, gift: ${wantsGift}`);
     return res.status(400).json({ error: '결제 금액이 올바르지 않습니다' });
   }
 
@@ -276,6 +288,27 @@ export default async function handler(req, res) {
     // 2. 리포트 생성 + 이메일 발송 (승인 성공 후 부가 단계)
     //    여기서 실패해도 결제는 이미 승인됐으므로 200을 돌려준다.
     // ========================================
+    // 친구 선물 옵션: 선물 코드 생성 (같은 주문은 한 번만)
+    let giftUrl = null;
+    let giftError = false;
+    if (wantsGift) {
+      try {
+        if (!kvEnabled()) throw new Error('KV 미설정');
+        let code = await kv(['GET', `gift-order:${orderId}`]);
+        if (!code) {
+          code = newGiftCode();
+          const created = await kv(['SET', `gift-order:${orderId}`, code, 'NX', 'EX', GIFT_TTL_SEC]);
+          if (created !== 'OK') code = await kv(['GET', `gift-order:${orderId}`]);
+          else await kv(['SET', `gift:${code}`, JSON.stringify({ orderId, at: new Date().toISOString() }), 'EX', GIFT_TTL_SEC]);
+        }
+        giftUrl = `https://awaysbiz.com/?gift=${code}`;
+        console.log(`[선물 코드 생성] orderId: ${orderId}, code: ${code}`);
+      } catch (e) {
+        giftError = true;
+        console.error(`[선물 코드 생성 실패 · 결제는 승인됨] orderId: ${orderId}`, e.message);
+      }
+    }
+
     let reportSent = false;
     let emailId = null;
 
@@ -286,7 +319,7 @@ export default async function handler(req, res) {
         console.log(`[PDF 준비 완료] ${(pdfBuffer.length / 1024 / 1024).toFixed(1)}MB`);
 
         console.log(`[이메일 발송] to: ${email}`);
-        const emailResult = await sendEmail(email, bodyTypeKey, pdfBuffer);
+        const emailResult = await sendEmail(email, bodyTypeKey, pdfBuffer, giftUrl);
         emailId = emailResult?.id;
         reportSent = true;
         console.log(`[이메일 발송 완료] id: ${emailId}`);
@@ -320,6 +353,9 @@ export default async function handler(req, res) {
       easyPay: easyPayProvider,
       reportSent,
       emailId,
+      gift: wantsGift,
+      giftUrl,
+      giftError,
     });
 
   } catch (err) {

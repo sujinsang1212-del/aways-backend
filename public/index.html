@@ -78,6 +78,34 @@ img{max-width:100%;display:block}
 /* 친구 공유 링크 배너 */
 .friend-hero{background:var(--paper);border-bottom:1px solid var(--line)}
 .friend-hero[hidden]{display:none}
+.gift-hero{background:#FBF1F0;border-bottom:1px solid #EBCFCB;text-align:center}
+.gift-hero[hidden]{display:none}
+.gift-hero [hidden]{display:none!important}
+.gift-inner{padding:36px 20px 32px;max-width:520px;margin:0 auto}
+.gift-emoji{font-size:40px;line-height:1;margin-bottom:10px}
+.gift-label{font-size:13px;font-weight:700;color:#7A2E3A;margin-bottom:6px}
+.gift-title{font-family:'Gowun Batang',serif;font-size:24px;font-weight:700;line-height:1.4;color:var(--ink);margin-bottom:10px;word-break:keep-all}
+.gift-desc{font-size:15px;line-height:1.7;color:var(--body);margin:0 0 18px;word-break:keep-all}
+.gift-desc b{color:#7A2E3A}
+.gift-btn{display:inline-flex;min-width:240px;justify-content:center}
+.gift-known-link{display:block;margin:14px auto 0;background:none;border:none;font-family:inherit;font-size:14px;color:#7A2E3A;text-decoration:underline;cursor:pointer;padding:6px}
+.gift-known{margin-top:18px;background:#fff;border:1px solid #EBCFCB;border-radius:16px;padding:20px 16px;text-align:left}
+.gift-known[hidden],.gift-known-done[hidden]{display:none}
+.gk-pre{font-size:13px;font-weight:600;color:#7A2E3A;margin-bottom:4px}
+.gk-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.gk-hint{font-size:13px;line-height:1.6;color:var(--body);margin-bottom:12px;word-break:keep-all}
+.gk-types{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.gk-type{min-height:46px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;position:relative}
+.gk-type.on{border-color:var(--wine);background:var(--wine);color:#fff}
+.gk-type small{display:block;font-size:10.5px;font-weight:500;opacity:.8}
+.gk-input{width:100%;min-height:50px;border:1px solid var(--line);border-radius:12px;padding:0 14px;font-family:inherit;font-size:16px;margin-bottom:4px;box-sizing:border-box}
+.gk-error{min-height:18px;font-size:13px;color:#7A2E3A;margin-bottom:8px}
+.gift-known .gift-btn{width:100%;border:none;cursor:pointer;font-family:inherit}
+.gift-known .gift-btn:disabled{opacity:.6}
+.gk-privacy{font-size:12px;color:var(--body);text-align:center;margin-top:10px}
+.gk-privacy a{color:var(--body)}
+.gift-known-done{margin-top:18px;background:#fff;border:1px solid #EBCFCB;border-radius:16px;padding:20px 16px;font-size:15px;line-height:1.7;color:var(--ink);word-break:keep-all}
+.gift-known-done b{color:#7A2E3A}
 .friend-inner{display:flex;gap:16px;align-items:center;padding-top:22px;padding-bottom:22px}
 .friend-photo{flex-shrink:0;width:96px;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--blush)}
 .friend-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
@@ -272,6 +300,30 @@ gtag('config', 'G-SKT4ZNNWVB');
       <div class="friend-ask">나도 같은 타입이면 옷장 메이트! 확인해볼까요? 👯</div>
       <a href="/test?start=1" class="btn btn-wine friend-btn" id="friendCta">나도 진단하기</a>
     </div>
+  </div>
+</section>
+
+<!-- 선물 링크(/?gift=코드)로 들어왔을 때만 보이는 배너 -->
+<section class="gift-hero" id="giftHero" hidden>
+  <div class="wrap gift-inner">
+    <div class="gift-emoji" aria-hidden="true">🎁</div>
+    <div class="gift-label" id="giftLabel">친구가 보낸 선물</div>
+    <div class="gift-title" id="giftTitle">체형 스타일 리포트를 선물받았어요</div>
+    <p class="gift-desc" id="giftDesc">18문항 진단을 마치면, 내 체형에 맞는 약 30페이지 리포트가 이메일로 <b>무료로</b> 발송돼요.</p>
+    <a href="/test?start=1" class="btn btn-wine gift-btn" id="giftCta">선물 받으러 진단하기</a>
+    <button class="gift-known-link" id="giftKnownLink" onclick="openKnownType()">이미 진단해서 내 타입을 알아요</button>
+
+    <div class="gift-known" id="giftKnown" hidden>
+      <div class="gk-pre">혹시 검사를 이미 했다면?</div>
+      <div class="gk-title">내 체형 타입을 골라주세요</div>
+      <div class="gk-hint" id="gkHint">선택한 타입의 리포트가 발송돼요. 타입이 확실하지 않다면 진단을 추천해요.</div>
+      <div class="gk-types" id="gkTypes"></div>
+      <input type="email" class="gk-input" id="gkEmail" placeholder="리포트를 받을 이메일" autocomplete="email" inputmode="email">
+      <div class="gk-error" id="gkError"></div>
+      <button class="btn btn-wine gift-btn" id="gkBtn" onclick="redeemKnownType()">이 타입으로 리포트 받기</button>
+      <div class="gk-privacy">입력한 이메일은 리포트 발송에 사용돼요. <a href="/privacy" target="_blank">개인정보처리방침</a></div>
+    </div>
+    <div class="gift-known-done" id="giftKnownDone" hidden></div>
   </div>
 </section>
 
@@ -493,6 +545,85 @@ window.addEventListener('scroll', () => {
   box.style.setProperty('--friend-color', t.color);
   box.hidden = false;
   if (window.gtag) gtag('event', 'friend_landing', { friend_type: from });
+})();
+
+// 선물받은 사람이 이미 타입을 아는 경우: 타입 선택 → 바로 리포트 발송
+const GK_TYPES = [
+  ['S-H', '하드 스트레이트'], ['S-Soft', '소프트 스트레이트'],
+  ['W-H', '하드 웨이브'], ['W-Soft', '소프트 웨이브'],
+  ['N-H', '하드 내추럴'], ['N-Soft', '소프트 내추럴'],
+];
+let gkSelected = '';
+function openKnownType() {
+  let last = '', email = '';
+  try { last = localStorage.getItem('aways_last_type') || ''; email = localStorage.getItem('aways_email') || ''; } catch (e) {}
+  gkSelected = GK_TYPES.some(t => t[0] === last) ? last : '';
+  document.getElementById('gkTypes').innerHTML = GK_TYPES.map(([k, n]) =>
+    `<button type="button" class="gk-type${k === gkSelected ? ' on' : ''}" data-k="${k}" onclick="pickKnownType('${k}')">${n}${k === last ? '<small>지난 진단 결과</small>' : ''}</button>`).join('');
+  if (last && gkSelected) document.getElementById('gkHint').textContent = '이 브라우저에 남아 있는 지난 진단 결과를 미리 선택해뒀어요. 다른 타입이면 바꿔주세요.';
+  if (email) document.getElementById('gkEmail').value = email;
+  document.getElementById('giftKnown').hidden = false;
+  document.getElementById('giftKnownLink').hidden = true;
+  if (window.gtag) gtag('event', 'gift_known_type_open', { has_last: last ? 'yes' : 'no' });
+}
+function pickKnownType(k) {
+  gkSelected = k;
+  document.querySelectorAll('.gk-type').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+  document.getElementById('gkError').textContent = '';
+}
+async function redeemKnownType() {
+  const err = document.getElementById('gkError');
+  const email = document.getElementById('gkEmail').value.trim();
+  let code = ''; try { code = localStorage.getItem('aways_gift') || ''; } catch (e) {}
+  if (!gkSelected) { err.textContent = '체형 타입을 골라주세요.'; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = '이메일 주소를 다시 확인해주세요.'; return; }
+  if (!code) { err.textContent = '선물 링크를 다시 열어주세요.'; return; }
+  const btn = document.getElementById('gkBtn'); btn.disabled = true; btn.textContent = '리포트 보내는 중…';
+  let d = { success: false, state: 'error' };
+  try {
+    const r = await fetch('/api/gift', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'redeem', code, email, typeKey: gkSelected }) });
+    d = await r.json();
+  } catch (e) {}
+  const name = (GK_TYPES.find(t => t[0] === gkSelected) || [])[1] || '';
+  if (d.success) {
+    try { localStorage.removeItem('aways_gift'); localStorage.setItem('aways_email', email); } catch (e) {}
+    if (window.gtag) gtag('event', 'gift_redeem', { result_type: gkSelected, via: 'known_type' });
+    document.getElementById('giftKnown').hidden = true;
+    document.getElementById('giftCta').hidden = true;
+    const done = document.getElementById('giftKnownDone');
+    done.innerHTML = `🎁 <b>${name} 리포트</b>를 <b>${email}</b>로 보냈어요.<br>메일이 안 보이면 스팸함도 확인해주세요.`;
+    done.hidden = false;
+    return;
+  }
+  if (window.gtag) gtag('event', 'gift_redeem_failed', { result_type: gkSelected, via: 'known_type', state: d.state || 'error' });
+  btn.disabled = false; btn.textContent = '이 타입으로 리포트 받기';
+  err.textContent = (d.state === 'used' || d.state === 'invalid')
+    ? '이미 사용됐거나 만료된 선물 링크예요.'
+    : '리포트를 보내지 못했어요. 잠시 후 다시 시도해주세요.';
+}
+
+// 선물 링크로 들어온 경우: /?gift=코드
+(function () {
+  const code = (new URLSearchParams(location.search).get('gift') || '').toUpperCase();
+  if (!/^[A-Z0-9]{10}$/.test(code)) return;
+  const box = document.getElementById('giftHero');
+  const fh = document.getElementById('friendHero'); if (fh) fh.hidden = true;
+  fetch('/api/gift?action=check&code=' + code).then(r => r.json()).then(d => {
+    if (d.state === 'valid') {
+      try { localStorage.setItem('aways_gift', code); } catch (e) {}
+      box.hidden = false;
+      if (window.gtag) gtag('event', 'gift_landing', { state: 'valid' });
+    } else {
+      document.getElementById('giftLabel').textContent = '선물 링크 안내';
+      document.getElementById('giftTitle').textContent = d.state === 'used' ? '이미 사용된 선물 링크예요' : '사용할 수 없는 선물 링크예요';
+      document.getElementById('giftDesc').innerHTML = '선물 링크는 30일 동안, 한 번만 사용할 수 있어요.<br>체형 진단은 지금도 무료로 해볼 수 있어요.';
+      document.getElementById('giftCta').textContent = '무료로 진단하기';
+      document.getElementById('giftKnownLink').hidden = true;
+      box.hidden = false;
+      try { localStorage.removeItem('aways_gift'); } catch (e) {}
+      if (window.gtag) gtag('event', 'gift_landing', { state: d.state || 'invalid' });
+    }
+  }).catch(() => {});
 })();
 </script>
 </body>

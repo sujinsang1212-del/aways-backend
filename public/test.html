@@ -259,6 +259,13 @@ body { font-family: 'IBM Plex Sans KR', sans-serif; background: var(--bg); color
 .eg-privacy a { color: var(--muted); }
 .eg-skip { margin-top: 26px; background: none; border: none; font-family: inherit; font-size: 12px; color: #A8959A; text-decoration: underline; cursor: pointer; padding: 6px; }
 
+
+/* ===== 선물받은 사람 ===== */
+.gift-done #ctaCard, .gift-done .story-btn, .gift-done .story-next, .gift-done #floatingPay, .gift-done .story-cliff-cta { display: none !important; }
+.gift-notice { background: #FBF1F0; border: 1.5px solid #EBCFCB; border-radius: 16px; padding: 16px 18px; margin: 0 0 14px; font-size: 14px; line-height: 1.7; color: var(--text); word-break: keep-all; }
+.gift-notice b { color: #7A2E3A; }
+.gift-notice button { margin-top: 10px; min-height: 40px; padding: 0 16px; border: none; border-radius: 20px; background: var(--wine); color: #fff; font-family: inherit; font-weight: 700; cursor: pointer; }
+
 .retake-link { text-align: center; margin: 4px 0 24px; }
 .retake-link button { background: none; border: none; color: var(--muted); font-family: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 8px; }
 .feel-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin: 0 0 16px; text-align: center; }
@@ -866,16 +873,16 @@ function track(name, params) {
 <!-- 결과 직전 이메일 입력 -->
 <div class="screen" id="screen-email">
   <div class="email-gate">
-    <div class="eg-eyebrow">분석 완료</div>
-    <h2 class="eg-title">체형 타입이 나왔어요</h2>
+    <div class="eg-eyebrow" id="egEyebrow">분석 완료</div>
+    <h2 class="eg-title" id="egTitle">체형 타입이 나왔어요</h2>
     <div class="eg-teaser" aria-hidden="true"><span>당신은</span><b>████ ████</b></div>
-    <p class="eg-sub">결과를 받아볼 이메일을 입력해주세요.<br>나중에 쇼핑할 때 다시 꺼내볼 수 있어요.</p>
+    <p class="eg-sub" id="egSub">결과를 받아볼 이메일을 입력해주세요.<br>나중에 쇼핑할 때 다시 꺼내볼 수 있어요.</p>
     <input type="email" id="gateEmail" class="eg-input" placeholder="example@gmail.com" autocomplete="email" inputmode="email">
     <div class="eg-error" id="gateError"></div>
     <label class="eg-consent"><input type="checkbox" id="gateMarketing"> <span>(선택) 체형별 스타일 팁과 리포트 소식을 이메일로 받을게요</span></label>
-    <button class="eg-btn" onclick="submitGateEmail()">결과 보기</button>
+    <button class="eg-btn" id="egBtn" onclick="submitGateEmail()">결과 보기</button>
     <div class="eg-privacy">입력한 이메일은 진단 결과 발송에 사용돼요. <a href="/privacy" target="_blank">개인정보처리방침</a></div>
-    <button class="eg-skip" onclick="skipGateEmail()">이메일 없이 결과 보기</button>
+    <button class="eg-skip" id="egSkip" onclick="skipGateEmail()">이메일 없이 결과 보기</button>
   </div>
 </div>
 
@@ -1612,17 +1619,66 @@ function renderBreakdown(score) {
 
 
 // ===== 결과 직전 이메일 입력 =====
+function getGiftCode() {
+  try { const c = localStorage.getItem('aways_gift') || ''; return /^[A-Z0-9]{10}$/.test(c) ? c : ''; } catch (e) { return ''; }
+}
+
 function showEmailGate() {
   let saved = '';
   try { saved = localStorage.getItem('aways_email') || ''; } catch (e) {}
-  // 이미 이메일을 남긴 사람은 바로 결과로
-  if (saved) { showFinalResult(); return; }
+  const gift = getGiftCode();
+  // 선물받은 사람은 리포트를 받을 이메일이 꼭 필요하므로 항상 이 화면을 보여준다
+  if (saved && !gift) { showFinalResult(); return; }
+  if (gift) {
+    document.getElementById('egEyebrow').textContent = '🎁 선물 받기';
+    document.getElementById('egTitle').textContent = '선물받은 리포트를 보내드릴게요';
+    document.getElementById('egSub').innerHTML = '리포트를 받을 이메일을 입력해주세요.<br>결과와 함께 내 체형 리포트가 바로 발송돼요.';
+    document.getElementById('egBtn').textContent = '결과 보고 리포트 받기';
+    document.getElementById('egSkip').style.display = 'none';
+    if (saved) document.getElementById('gateEmail').value = saved;
+  }
   document.getElementById('stepLabel').textContent = '분석 완료';
   showScreen('screen-email');
-  track('email_gate_view', {});
+  track('email_gate_view', { gift: gift ? 'yes' : 'no' });
 }
 
-function submitGateEmail() {
+async function redeemGift(code, email, typeKey) {
+  try {
+    const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 20000);
+    const r = await fetch('/api/gift', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'redeem', code, email, typeKey }), signal: ctrl.signal });
+    clearTimeout(t);
+    return await r.json();
+  } catch (e) { return { success: false, state: 'error' }; }
+}
+
+function renderGiftNotice() {
+  const g = window.__giftResult; if (!g) return;
+  const screen = document.getElementById('screen-result');
+  const old = document.getElementById('giftNotice'); if (old) old.remove();
+  const box = document.createElement('div'); box.className = 'gift-notice'; box.id = 'giftNotice';
+  if (g.state === 'redeemed') {
+    document.body.classList.add('gift-done');
+    box.innerHTML = `🎁 선물받은 <b>${g.typeName} 리포트</b>를 <b>${g.email}</b>로 보냈어요.<br>메일이 안 보이면 스팸함도 확인해주세요.`;
+  } else if (g.state === 'used' || g.state === 'invalid') {
+    document.body.classList.remove('gift-done');
+    box.innerHTML = '선물 링크가 이미 사용됐거나 만료돼서 리포트를 보내지 못했어요. 선물한 친구에게 확인해주세요.';
+  } else {
+    document.body.classList.add('gift-done');
+    box.innerHTML = '리포트를 보내는 중 문제가 생겼어요. 다시 시도해주세요.<br><button onclick="retryGift()">리포트 다시 받기</button><div style="font-size:12px;color:var(--muted);margin-top:6px;">계속 안 되면 awaysbiz@gmail.com으로 알려주세요.</div>';
+  }
+  const hero = screen.querySelector('.result-hero');
+  hero.parentNode.insertBefore(box, hero);
+}
+
+async function retryGift() {
+  const g = window.__giftResult; const code = getGiftCode(); if (!g || !code) return;
+  const d = await redeemGift(code, g.email, g.typeKey);
+  window.__giftResult = { ...g, state: d.state || 'error' };
+  if (d.success) { try { localStorage.removeItem('aways_gift'); } catch (e) {} track('gift_redeem', { result_type: g.typeKey, retry: 'yes' }); }
+  renderGiftNotice();
+}
+
+async function submitGateEmail() {
   const el = document.getElementById('gateEmail');
   const email = el.value.trim();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -1633,9 +1689,25 @@ function submitGateEmail() {
   try { localStorage.setItem('aways_email', email); localStorage.setItem('aways_marketing', marketing ? 'yes' : 'no'); } catch (e) {}
   track('email_capture', { marketing_consent: marketing ? 'yes' : 'no' });
   if (window.fbq) fbq('init', '1416204774046914', { em: email.toLowerCase() });  // 고급 매칭 갱신
+  const typeKey = getFinalType(getScore());
+
+  // 선물받은 사람: 결과 메일 대신 리포트를 바로 발송
+  const gift = getGiftCode();
+  if (gift) {
+    const btn = document.getElementById('egBtn');
+    btn.disabled = true; btn.textContent = '리포트 보내는 중…';
+    const d = await redeemGift(gift, email, typeKey);
+    window.__giftResult = { state: d.state || 'error', email, typeKey, typeName: (typeMap[typeKey] || {}).name || '' };
+    if (d.success) { try { localStorage.removeItem('aways_gift'); } catch (e) {} track('gift_redeem', { result_type: typeKey }); }
+    else track('gift_redeem_failed', { result_type: typeKey, state: d.state || 'error' });
+    if (d.state === 'used' || d.state === 'invalid') { try { localStorage.removeItem('aways_gift'); } catch (e) {} }
+    showFinalResult();
+    renderGiftNotice();
+    return;
+  }
+
   // 결과 메일 발송 요청 (응답을 기다리지 않고 바로 결과를 보여준다)
   try {
-    const typeKey = getFinalType(getScore());
     fetch('/api/send-result', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, typeKey, marketing }), keepalive: true,
@@ -1655,6 +1727,7 @@ function showFinalResult() {
   const typeKey = getFinalType(score);
   const type = typeMap[typeKey];
   const dir = getDirection(score);
+  try { localStorage.setItem('aways_last_type', typeKey); } catch (e) {}  // 선물 받을 때 '지난 진단 결과'로 사용
 
   document.getElementById('resultName').innerHTML = `<span>${type.name}</span>`;
   document.getElementById('resultSub').textContent = type.sub;

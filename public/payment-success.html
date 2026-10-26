@@ -182,6 +182,11 @@ em{font-style:normal;}
 h1,h2,.section-title,.page-title,.intro-title,.result-name,.success-title{letter-spacing:-0.01em;}
 
 .report-delay-note{background:#FBF1F0;border:1px solid #EBCFCB;color:#7A2E3A;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.7;margin-bottom:16px;word-break:keep-all}.report-delay-note a{color:#4A1C26;font-weight:700}
+.gift-card{background:#FBF1F0;border:1.5px solid #EBCFCB;border-radius:16px;padding:20px;margin:0 0 20px;text-align:left}
+.gift-card-title{font-size:16px;font-weight:700;color:#7A2E3A;margin-bottom:8px}
+.gift-card-desc{font-size:13px;line-height:1.7;color:#533A3F;margin:0 0 12px;word-break:keep-all}
+.gift-link{font-size:13px;background:#fff;border:1px solid #E6D9D5;border-radius:10px;padding:10px 12px;word-break:break-all;color:#2B1217;margin-bottom:12px}
+.gift-btns{display:flex;gap:8px}.gift-btns .btn{flex:1;margin:0}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -270,6 +275,17 @@ gtag('config', 'G-SKT4ZNNWVB');
       <div class="success-row">
         <span class="success-row-label">결제수단</span>
         <span class="success-row-val" id="succMethod">-</span>
+      </div>
+    </div>
+
+    <!-- 친구 선물 링크 -->
+    <div class="gift-card" id="giftCard" style="display:none">
+      <div class="gift-card-title">🎁 친구에게 보낼 선물 링크</div>
+      <p class="gift-card-desc">친구가 이 링크로 진단을 마치면, 친구 체형에 맞는 리포트가 친구 이메일로 바로 발송돼요. 링크는 <b>30일 동안, 한 번만</b> 쓸 수 있어요. 같은 링크를 리포트 메일에도 넣어드렸어요.</p>
+      <div class="gift-link" id="giftLink"></div>
+      <div class="gift-btns">
+        <button class="btn" onclick="shareGift()">친구에게 보내기</button>
+        <button class="btn outline" onclick="copyGift()" id="giftCopyBtn">링크 복사</button>
       </div>
     </div>
 
@@ -389,6 +405,7 @@ async function confirmPayment() {
         amount: Number(amount),
         email: lastOrder.email,
         bodyType: bodyType,
+        gift: params.get('gift') === '1' || lastOrder.gift === true,
         // 메타 전환 API 매칭용 쿠키 (픽셀이 만든 값)
         fbp: (document.cookie.match(/(?:^|; )_fbp=([^;]+)/) || [])[1] || '',
         fbc: (document.cookie.match(/(?:^|; )_fbc=([^;]+)/) || [])[1] || '',
@@ -415,6 +432,7 @@ async function confirmPayment() {
         value: Number(amount),
         currency: 'KRW',
         payment_type: (data && data.easyPay) ? data.easyPay : ((data && data.method) || ''),
+        gift: (data && data.gift) ? 'yes' : 'no',
         items: [{ item_id: 'aways-report', item_name: 'AWAYS 체형 리포트', price: Number(amount), quantity: 1 }],
       });
       sessionStorage.setItem('ga_' + orderId, '1');
@@ -446,12 +464,40 @@ async function confirmPayment() {
     document.getElementById('succEmail').textContent = lastOrder.email || '-';
     document.getElementById('succMethod').textContent = data.method || '카드';
 
+    // 친구 선물 링크
+    if (data.giftUrl) {
+      window.__giftUrl = data.giftUrl;
+      document.getElementById('giftLink').textContent = data.giftUrl;
+      document.getElementById('giftCard').style.display = '';
+      document.getElementById('succProduct').textContent += ' + 친구 선물';
+    } else if (data.gift && data.giftError) {
+      const note = document.createElement('div');
+      note.className = 'report-delay-note';
+      note.innerHTML = '결제는 정상 완료됐어요. 다만 친구 선물 링크를 만드는 중 문제가 생겼어요.<br>주문번호와 함께 <a href="mailto:awaysbiz@gmail.com">awaysbiz@gmail.com</a>으로 연락 주시면 바로 보내드릴게요.';
+      document.getElementById('success').prepend(note);
+    }
+
     showScreen('success');
 
   } catch (error) {
     console.error('[결제 승인 실패]', error);
     showFailed(error.message);
   }
+}
+
+// 선물 링크 공유·복사
+async function shareGift() {
+  const url = window.__giftUrl; if (!url) return;
+  if (window.gtag) gtag('event', 'gift_share', { method: navigator.share ? 'share' : 'copy' });
+  const text = '내가 체형 리포트를 선물했어! 18문항 진단하면 네 체형에 맞는 스타일 리포트가 메일로 바로 와 🎁';
+  if (navigator.share) { try { await navigator.share({ title: 'AWAYS 체형 리포트 선물', text, url }); return; } catch (e) { if (e.name === 'AbortError') return; } }
+  copyGift();
+}
+function copyGift() {
+  const url = window.__giftUrl; if (!url) return;
+  const done = () => { const b = document.getElementById('giftCopyBtn'); b.textContent = '복사됐어요'; setTimeout(() => b.textContent = '링크 복사', 2000); };
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(done).catch(() => prompt('아래 링크를 복사해주세요', url));
+  else prompt('아래 링크를 복사해주세요', url);
 }
 
 // 1초 = 1000ms

@@ -290,6 +290,18 @@ body {
   transition: opacity 0.2s;
 }
 .pay-btn:hover { opacity: 0.85; }
+
+/* 친구 선물 옵션 */
+.gift-option { display: flex; gap: 12px; align-items: flex-start; background: #FBF1F0; border: 1.5px solid #EBCFCB; border-radius: 14px; padding: 16px; margin: 0 0 16px; cursor: pointer; }
+.gift-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.gift-box { width: 22px; height: 22px; border-radius: 6px; border: 2px solid #C9A9AE; background: #fff; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; }
+.gift-option input:checked + .gift-box { background: var(--wine); border-color: var(--wine); }
+.gift-option input:checked + .gift-box::after { content: '✓'; color: #fff; font-size: 14px; font-weight: 700; }
+.gift-option input:focus-visible + .gift-box { outline: 2px solid var(--wine); outline-offset: 2px; }
+.gift-option.on { border-color: var(--wine); }
+.gift-text b { display: block; font-size: 15px; color: var(--text); margin-bottom: 4px; }
+.gift-text b em { font-style: normal; color: #7A2E3A; }
+.gift-text small { display: block; font-size: 12.5px; line-height: 1.6; color: var(--muted); word-break: keep-all; }
 /* 포함 사항 접기 */
 details.order-features summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
 details.order-features summary::-webkit-details-marker { display: none; }
@@ -481,6 +493,16 @@ gtag('config', 'G-SKT4ZNNWVB');
       </details>
     </div>
 
+    <!-- 친구 선물 옵션 -->
+    <label class="gift-option" id="giftOption" style="display:none">
+      <input type="checkbox" id="giftCheck" onchange="toggleGift(this.checked)">
+      <span class="gift-box" aria-hidden="true"></span>
+      <span class="gift-text">
+        <b>🎁 친구 리포트 함께 선물하기 <em>+9,900원</em></b>
+        <small>결제 후 받는 선물 링크로 친구가 진단하면, 친구 체형에 맞는 리포트가 친구 이메일로 바로 발송돼요. (30일 안에 1회 사용)</small>
+      </span>
+    </label>
+
     <!-- 이메일 입력 -->
     <div class="input-section">
       <label class="input-label">
@@ -623,6 +645,39 @@ if (window.fbq) fbq('track', 'InitiateCheckout', { value: PRODUCT.price, currenc
 const featuresEl = document.getElementById('orderFeatures');
 featuresEl.innerHTML = PRODUCT.features.map(f => `<li>${f}</li>`).join('');
 
+// ============================================================
+// 친구 선물 옵션
+// ============================================================
+const GIFT_PRICE = 9900;
+let giftOn = false;
+const totalPrice = () => PRODUCT.price + (giftOn ? GIFT_PRICE : 0);
+
+function renderPrice() {
+  const t = totalPrice().toLocaleString();
+  document.getElementById('orderPrice').innerHTML = giftOn
+    ? `<span class="price-now">${t}원</span><div style="font-size:12px;color:var(--muted);margin-top:2px;">친구 선물 포함</div>`
+    : `<span class="price-now">${t}원</span>`;
+  document.getElementById('payBtnText').textContent = `${t}원 결제하기`;
+  document.querySelector('.pay-bar-price b').textContent = `${t}원`;
+  document.querySelector('.pay-bar-price small').textContent = (typeName ? `${typeName} 리포트` : '맞춤 스타일 리포트') + (giftOn ? ' + 친구 선물' : '');
+}
+
+async function toggleGift(on) {
+  giftOn = on;
+  document.getElementById('giftOption').classList.toggle('on', on);
+  renderPrice();
+  if (widgets) { try { await widgets.setAmount({ currency: 'KRW', value: totalPrice() }); } catch (e) { console.error(e); } }
+  if (window.gtag) gtag('event', 'gift_option_toggle', { checked: on ? 'yes' : 'no', result_type: bodyType });
+}
+
+// 선물 기능이 준비돼 있을 때만 옵션을 보여준다
+fetch('/api/gift?action=status').then(r => r.json()).then(d => {
+  if (d.enabled) {
+    document.getElementById('giftOption').style.display = '';
+    if (window.gtag) gtag('event', 'gift_option_view', { result_type: bodyType });
+  }
+}).catch(() => {});
+
 // 고유 주문번호 생성
 function generateOrderId() {
   return `BT_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -646,7 +701,7 @@ async function initTossWidget() {
     // 결제 금액 설정
     await widgets.setAmount({
       currency: 'KRW',
-      value: PRODUCT.price,
+      value: totalPrice(),
     });
 
     // 결제수단 위젯 렌더링
@@ -694,7 +749,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ============================================================
 async function requestPayment() {
   // Meta 픽셀: 결제 버튼 클릭 (결제수단 입력 단계)
-  if (window.fbq) fbq('track', 'AddPaymentInfo', { value: PRODUCT.price, currency: 'KRW', content_name: bodyType });
+  if (window.fbq) fbq('track', 'AddPaymentInfo', { value: totalPrice(), currency: 'KRW', content_name: bodyType });
   const email = document.getElementById('emailInput').value.trim();
   if (window.gtag) gtag('event', 'add_payment_info', { result_type: bodyType, email_valid: email.includes('@') ? 'yes' : 'no' });
 
@@ -719,7 +774,8 @@ async function requestPayment() {
     bodyType,
     typeName,
     productName: PRODUCT.name,
-    amount: PRODUCT.price,
+    amount: totalPrice(),
+    gift: giftOn,
   });
   sessionStorage.setItem('lastOrder', orderInfo);
   try { localStorage.setItem('aways_order_' + orderId, orderInfo); } catch (e) {}
@@ -727,12 +783,12 @@ async function requestPayment() {
   try {
     await widgets.requestPayment({
       orderId: orderId,
-      orderName: typeName ? `AWAYS - ${typeName} 리포트` : `AWAYS - ${PRODUCT.name}`,
+      orderName: (typeName ? `AWAYS - ${typeName} 리포트` : `AWAYS - ${PRODUCT.name}`) + (giftOn ? ' + 친구 선물' : ''),
       customerEmail: email,
       customerName: email.split('@')[0],
       // 결제 성공/실패 시 리다이렉트 URL
       // bodyType을 함께 실어 보내 승인 단계에서 PDF를 안정적으로 생성
-      successUrl: `${window.location.origin}/payment-success.html?bodyType=${encodeURIComponent(bodyType)}`,
+      successUrl: `${window.location.origin}/payment-success.html?bodyType=${encodeURIComponent(bodyType)}${giftOn ? '&gift=1' : ''}`,
       failUrl: `${window.location.origin}/payment-success.html?status=fail&bodyType=${encodeURIComponent(bodyType)}`,
     });
   } catch (error) {
