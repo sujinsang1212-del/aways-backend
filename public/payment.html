@@ -250,17 +250,17 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 22px;
-  margin-bottom: 24px;
+  padding: 4px 0 2px;
+  margin-bottom: 16px;
+  overflow: hidden;
 }
+.agreement-divider { height: 1px; background: var(--border); margin: 0 22px; }
 .payment-section-title {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 16px;
 }
-#payment-method, #agreement {
-  margin: 0 -10px;
-}
+#payment-method, #agreement { margin: 0; }
 
 /* 약관 */
 .terms-box {
@@ -489,6 +489,7 @@ gtag('config', 'G-SKT4ZNNWVB');
           <li>패턴 · 베이스 컬러 가이드</li>
           <li>추천 코디 및 액세서리 가이드</li>
           <li>핵심 아이템 12가지와 추천 브랜드</li>
+          <li>사계절 스타일링 · 옷장 자가진단</li>
         </ul>
       </details>
     </div>
@@ -512,6 +513,13 @@ gtag('config', 'G-SKT4ZNNWVB');
       <div class="input-hint">결제가 끝나면 이 이메일로 리포트를 보내드려요.</div>
     </div>
 
+    <!-- 결제수단 + 약관 동의 (토스페이먼츠 위젯이 여기에 렌더링됨) -->
+    <div class="payment-section">
+      <div id="payment-method"></div>
+      <div class="agreement-divider"></div>
+      <div id="agreement"></div>
+    </div>
+
     <!-- 신뢰 요소 -->
     <div class="trust-section">
       <div class="trust-card">
@@ -526,18 +534,6 @@ gtag('config', 'G-SKT4ZNNWVB');
         <div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A1C26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
         <div class="trust-text">즉시 발송<br><span>이메일 자동</span></div>
       </div>
-    </div>
-
-    <!-- 결제수단 영역 (토스페이먼츠 위젯이 여기에 렌더링됨) -->
-    <div class="payment-section">
-      <div class="payment-section-title">결제수단</div>
-      <div id="payment-method"></div>
-    </div>
-
-    <!-- 이용약관 영역 -->
-    <div class="payment-section">
-      <div class="payment-section-title">약관 동의</div>
-      <div id="agreement"></div>
     </div>
 
     <!-- 결제 버튼 -->
@@ -620,6 +616,7 @@ const PRODUCT = {
     '패턴 · 베이스 컬러 가이드',
     '추천 코디 및 액세서리 가이드',
     '핵심 아이템 12가지와 추천 브랜드',
+    '사계절 스타일링 · 옷장 자가진단',
   ]
 };
 
